@@ -1,0 +1,29 @@
+{
+  "name": "evo-immo",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "predev": "node ../../cadc/kit/sync.mjs",
+    "dev": "next dev --port 4300",
+    "prebuild": "node ../../cadc/kit/sync.mjs",
+    "build": "next build",
+    "prestart": "node ../../cadc/kit/sync.mjs",
+    "start": "next start --port 4300",
+    "prelint": "node ../../cadc/kit/sync.mjs",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "@cadc/kit": "file:../../cadc/kit",
+    "next": "16.4.3",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.4.3",
+    "typescript": "^5"
+  }
+}
