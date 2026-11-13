@@ -1,0 +1,259 @@
+/* Ce qui est propre aux écrans de la boutique. Le socle CADC porte le reste. */
+
+.cadc-dateau {
+  background: var(--cadc-encre-2);
+  color: var(--cadc-argent);
+}
+
+.cadc-dateau__rangee {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding-block: 7px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.marche {
+  display: grid;
+  gap: 18px;
+}
+
+.marche__tete {
+  display: grid;
+  gap: 8px;
+}
+
+.marche__tete h1 {
+  font-size: clamp(1.7rem, 7vw, 2.4rem);
+}
+
+.marche__tete p {
+  color: var(--cadc-encre-2);
+  max-width: 56ch;
+}
+
+.portails {
+  display: grid;
+  gap: 10px;
+}
+
+.portail {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  padding: 14px 16px;
+  border: 1px solid var(--cadc-ligne);
+  border-left: 5px solid var(--cadc-acier);
+  border-radius: 14px;
+  background: var(--cadc-feuille);
+}
+
+.portail__reste {
+  font-family: var(--cadc-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.9rem;
+  color: var(--cadc-encre-2);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.portail__reste strong {
+  display: block;
+  font-size: 1.15rem;
+  color: var(--cadc-encre);
+}
+
+/* Une commande livrée se lit autrement qu'une neuve. */
+.commande--livree {
+  border-left: 5px solid var(--cadc-vert);
+}
+
+.commande--annulee,
+.ouvrier--sorti {
+  opacity: 0.72;
+}
+
+/* La page publique : les annonces en cartes, lisibles sur un téléphone. */
+.annonces-grille {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.annonce {
+  display: grid;
+  gap: 8px;
+  align-content: start;
+  padding: 16px;
+  border: 1px solid var(--cadc-ligne);
+  border-radius: 14px;
+  background: var(--cadc-feuille);
+}
+
+.annonce__cat {
+  color: var(--cadc-acier);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.annonce__titre {
+  font-size: 1.05rem;
+  line-height: 1.25;
+}
+
+.annonce__prix {
+  font-family: var(--cadc-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.annonce__description {
+  margin: 0;
+  color: var(--cadc-encre-2);
+  font-size: 0.9rem;
+}
+
+.annonce__lieu {
+  color: var(--cadc-encre-3);
+  font-size: 0.84rem;
+}
+
+/* Le total du mois, posé comme une souche : c'est le nombre qu'on discute. */
+.souche {
+  display: grid;
+  gap: 6px;
+  padding: 20px;
+  border-radius: 16px;
+  background: var(--cadc-encre);
+  color: var(--cadc-papier-2);
+}
+
+.souche__legende {
+  color: var(--cadc-brume);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.souche__valeur {
+  font-family: var(--cadc-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: clamp(1.9rem, 8vw, 2.8rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.souche__aide {
+  color: var(--cadc-argent);
+  font-size: 0.92rem;
+}
+
+/* Un chargement qui ne promet pas une ligne droite. */
+.attente {
+  display: grid;
+  gap: 12px;
+  padding-block: 8px;
+}
+
+.attente span {
+  display: block;
+  height: 15px;
+  border-radius: 8px;
+  background: var(--cadc-acier-pale);
+  animation: attente-pale 1.3s ease-in-out infinite;
+}
+
+@keyframes attente-pale {
+  0%,
+  100% { opacity: 0.45; }
+  50% { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .attente span { animation: none; opacity: 0.8; }
+}
+
+.entree {
+  display: grid;
+  gap: 26px;
+}
+
+.entree__hero {
+  display: grid;
+  gap: 18px;
+  padding-block: 26px;
+}
+
+.entree__hero h1 {
+  font-size: clamp(2rem, 9vw, 3.4rem);
+  max-width: 24ch;
+}
+
+.entree__chapo {
+  color: var(--cadc-encre-2);
+  font-size: 1.05rem;
+  max-width: 54ch;
+}
+
+.entree__gestes {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.entree__geste {
+  padding: 16px;
+  border: 1px solid var(--cadc-ligne);
+  border-radius: 14px;
+  background: var(--cadc-feuille);
+}
+
+.entree__geste-num {
+  color: var(--cadc-acier);
+  font-family: var(--cadc-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.entree__geste h3 {
+  margin-block: 6px 8px;
+  font-size: 1.3rem;
+}
+
+.entree__geste p {
+  color: var(--cadc-encre-2);
+  font-size: 0.95rem;
+}
+
+.seance {
+  display: grid;
+  gap: 22px;
+  padding-block: 26px;
+}
+
+@media (max-width: 560px) {
+  .portail {
+    grid-template-columns: 1fr;
+  }
+
+  .portail__reste {
+    text-align: left;
+  }
+}
