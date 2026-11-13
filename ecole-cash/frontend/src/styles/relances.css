@@ -1,0 +1,105 @@
+.entete-relance {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.palier {
+  display: inline-grid;
+  place-items: center;
+  width: 1.7rem;
+  height: 1.7rem;
+  border: 1px solid currentColor;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  font-weight: 500;
+  flex: none;
+}
+
+.relance-ligne {
+  display: grid;
+  grid-template-columns: 2rem 1.6fr 1fr auto auto;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.85rem;
+  border: 1px solid var(--rule);
+  background: var(--sheet-bright);
+}
+
+.relance-ligne--due {
+  border-left: 4px solid var(--stamp);
+  background: var(--stamp-wash);
+}
+
+.relance-ligne--faite {
+  color: var(--ink-soft);
+}
+
+.relance-ligne--morte {
+  border-style: dashed;
+  background: var(--paper);
+  color: var(--ink-faint);
+}
+
+.relance-ligne__qui {
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+
+.relance-ligne__qui small {
+  display: block;
+  font-weight: 400;
+  font-size: 0.7rem;
+  color: var(--ink-faint);
+}
+
+.relance-ligne__texte {
+  color: var(--ink-soft);
+  font-size: 0.76rem;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.relance-ligne__date {
+  text-align: right;
+  font-size: 0.78rem;
+  white-space: nowrap;
+}
+
+.relance-ligne__date small {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.relances-liste {
+  display: grid;
+  gap: 0.6rem;
+  margin-top: 1.1rem;
+}
+
+.apercu {
+  margin-top: 1.5rem;
+  display: grid;
+  gap: 1.2rem;
+}
+
+@media (max-width: 900px) {
+  .relance-ligne {
+    grid-template-columns: 2rem 1fr auto;
+    gap: 0.5rem 0.8rem;
+  }
+
+  .relance-ligne__texte {
+    grid-column: 2 / -1;
+  }
+}

@@ -1,0 +1,268 @@
+/* L'entrée : présentation publique et ouverture de séance. */
+
+.entree {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.entree > main {
+  flex: 1;
+  padding-block: 1.4rem 2rem;
+  display: grid;
+  gap: clamp(2.4rem, 5vw, 4rem);
+}
+
+.entree__nav {
+  margin-left: auto;
+}
+
+.entree__accueil {
+  /* Deux colonnes volontairement inégales : la promesse pèse plus lourd. */
+  display: grid;
+  grid-template-columns: 1.35fr 0.75fr;
+  gap: clamp(1.6rem, 4vw, 3.2rem);
+  align-items: start;
+  padding-top: clamp(1.4rem, 3vw, 2.6rem);
+}
+
+.entree__accueil h1 {
+  margin-top: 0.8rem;
+  font-size: clamp(2.5rem, 5.4vw, 4.4rem);
+}
+
+.entree__chapo {
+  max-width: 58ch;
+  margin-top: 1rem;
+  color: var(--encre-douce);
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.entree__prix {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  font-family: var(--serif);
+  font-size: 1.5rem;
+}
+
+.entree__prix small {
+  color: var(--encre-lointaine);
+  font-family: var(--mono);
+  font-size: 0.56rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* La carte du cahier, posée en biais comme une feuille du jour. */
+.entree__carte {
+  padding: 1rem 1.1rem 1.1rem;
+  transform: rotate(-1.2deg);
+}
+
+.entree__carte-tete,
+.entree__carte-pied {
+  color: var(--encre-lointaine);
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.entree__dictee {
+  margin-top: 0.7rem;
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  line-height: 1.25;
+}
+
+.entree__ecritures {
+  list-style: none;
+  margin: 0.9rem 0 0;
+  padding: 0;
+}
+
+.entree__ecritures li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.8rem;
+  padding-block: 0.4rem;
+  border-bottom: 1px solid var(--regrais);
+  font-size: 0.8rem;
+}
+
+.entree__ecritures li:last-child {
+  border-bottom: 0;
+}
+
+.entree__carte-pied {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.6rem;
+  margin-top: 0.9rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--encre);
+}
+
+.entree__gestes {
+  display: grid;
+  /* Quatre pistes, aucune pareille. */
+  grid-template-columns: 1.15fr 0.9fr 1.05fr 0.8fr;
+  gap: 1.2rem;
+  margin: 1.1rem 0 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: geste;
+}
+
+.entree__geste {
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--encre);
+}
+
+.entree__geste-num {
+  color: var(--brique);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+}
+
+.entree__geste h3 {
+  margin-top: 0.4rem;
+  font-size: 1.28rem;
+}
+
+.entree__geste p {
+  margin-top: 0.5rem;
+  color: var(--encre-douce);
+  font-size: 0.83rem;
+  line-height: 1.6;
+}
+
+.entree__liste {
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.entree__liste li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  color: var(--encre-douce);
+  font-size: 0.85rem;
+  line-height: 1.55;
+}
+
+.entree__liste svg {
+  flex: none;
+  margin-top: 0.18rem;
+  color: var(--brique);
+}
+
+/* La porte de la séance. */
+.seance {
+  display: grid;
+  grid-template-columns: 1.1fr 0.85fr;
+  gap: clamp(1.6rem, 4vw, 3rem);
+  align-items: start;
+  padding-block: clamp(1.6rem, 4vw, 3rem);
+}
+
+.seance h1 {
+  margin-top: 0.8rem;
+  font-size: clamp(2.1rem, 4.6vw, 3.4rem);
+}
+
+.seance__chapo {
+  max-width: 52ch;
+  margin-top: 1rem;
+  color: var(--encre-douce);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+.seance__reste {
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 1.4rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--regrais);
+  color: var(--encre-lointaine);
+  font-family: var(--mono);
+  font-size: 0.56rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.seance__form {
+  padding: 1.2rem 1.25rem 1.35rem;
+}
+
+.seance__form .pile-champs {
+  gap: 1rem;
+}
+
+.comptes-demo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  margin-top: 0.2rem;
+}
+
+.comptes-demo__bouton {
+  display: grid;
+  gap: 0.15rem;
+  padding: 0.55rem 0.65rem;
+  border: 1px solid var(--regrais-fort);
+  background: var(--feuille-nette);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color 140ms ease,
+    background-color 140ms ease;
+}
+
+.comptes-demo__bouton:hover {
+  border-color: var(--encre);
+  background: var(--sable-clair);
+}
+
+.comptes-demo__role {
+  color: var(--encre-lointaine);
+  font-family: var(--mono);
+  font-size: 0.52rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.comptes-demo__adresse {
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+@media (max-width: 980px) {
+  .entree__accueil,
+  .seance {
+    grid-template-columns: 1fr;
+  }
+
+  .entree__gestes {
+    grid-template-columns: 1.15fr 0.9fr;
+  }
+
+  .entree__carte {
+    transform: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .entree__gestes,
+  .comptes-demo {
+    grid-template-columns: 1fr;
+  }
+}

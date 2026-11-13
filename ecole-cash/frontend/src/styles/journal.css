@@ -1,0 +1,167 @@
+.journal {
+  display: grid;
+  gap: 1.5rem;
+  padding-top: 1.2rem;
+}
+
+.tiroir-volet {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.jour-ligne {
+  display: grid;
+  grid-template-columns: 8.5rem 1fr auto auto auto;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.75rem 0.85rem;
+  border: 1px solid var(--rule);
+  background: var(--sheet-bright);
+  font-size: 0.82rem;
+}
+
+.jour-ligne--ecart {
+  border-left: 4px solid var(--stamp);
+}
+
+.jour-ligne--net {
+  border-left: 4px solid var(--moss);
+}
+
+.jour-ligne--ouverte {
+  border-left: 4px solid var(--gold);
+  background: var(--paper);
+}
+
+.jour-ligne__date {
+  font-weight: 600;
+}
+
+.jour-ligne__date small {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  font-weight: 500;
+}
+
+.jour-ligne__detail {
+  color: var(--ink-faint);
+  font-size: 0.72rem;
+}
+
+.jour-ligne__valeur {
+  text-align: right;
+}
+
+.jour-ligne__valeur small {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.ecart-valeur--négatif,
+.ecart-valeur--positif {
+  color: var(--stamp);
+}
+
+.ecart-valeur--nul {
+  color: var(--moss);
+}
+
+.comptage {
+  display: grid;
+  gap: 1rem;
+}
+
+.comptage__resume {
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--ink);
+  background: var(--paper);
+}
+
+.comptage__resume dl {
+  margin: 0;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.comptage__resume div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.82rem;
+}
+
+.comptage__resume dt {
+  color: var(--ink-faint);
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.comptage__resume dd {
+  margin: 0;
+}
+
+.feuilles {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--ink);
+}
+
+.feuille {
+  background: var(--sheet);
+  padding: 1rem 1rem 1.1rem;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.feuille h3 {
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.feuille p {
+  color: var(--ink-soft);
+  font-size: 0.76rem;
+  line-height: 1.5;
+}
+
+.feuille a {
+  justify-self: start;
+  margin-top: 0.3rem;
+}
+
+@media (max-width: 1000px) {
+  .tiroir-volet {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .jour-ligne {
+    grid-template-columns: 1fr auto;
+    gap: 0.4rem 0.8rem;
+  }
+
+  .jour-ligne__detail {
+    grid-column: 1 / -1;
+  }
+
+  .feuilles {
+    grid-template-columns: 1fr;
+  }
+}

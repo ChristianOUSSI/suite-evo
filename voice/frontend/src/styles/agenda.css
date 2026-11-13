@@ -1,0 +1,138 @@
+.reglages-guichet {
+  margin: 0;
+  font-size: 13px;
+  color: var(--encre-douce);
+  font-family: var(--mono);
+  align-self: end;
+  padding-bottom: 9px;
+}
+
+.guichets {
+  display: grid;
+  gap: 10px;
+}
+
+.guichet {
+  border: 1px solid var(--rule-douce);
+  background: #0f1418;
+  padding: 12px 14px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.guichet.actif {
+  border-color: #4a5f74;
+  background: #12181e;
+}
+
+.guichet .nom {
+  font-family: var(--serie);
+  font-size: 17px;
+  margin: 0;
+  color: var(--encre);
+}
+
+.guichet .tenue {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mousse);
+  margin: 4px 0 0;
+}
+
+.guichet .prochaine {
+  font-size: 12px;
+  color: var(--ambre);
+  margin: 2px 0 0;
+}
+
+.guichet button {
+  margin-top: 10px;
+  align-self: flex-start;
+}
+
+.guichet.neuf {
+  border-style: dashed;
+  border-color: var(--rule);
+  background: none;
+}
+
+.reglage-guichet {
+  border-top: 1px solid var(--rule);
+  margin-top: 16px;
+  padding-top: 14px;
+}
+
+.quatre-champs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0 12px;
+}
+
+.jours-regles {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.jour-regle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px dotted var(--rule-douce);
+  padding-bottom: 5px;
+  font-size: 14px;
+  color: var(--encre-douce);
+}
+
+.jour-regle.actif {
+  color: var(--encre);
+}
+
+.jour-regle .case {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-transform: capitalize;
+}
+
+.jour-regle .case input {
+  accent-color: var(--ambre);
+}
+
+.jour-regle .heures {
+  display: flex;
+  gap: 6px;
+}
+
+.jour-regle input[type="time"] {
+  background: #0d1115;
+  border: 1px solid var(--rule);
+  color: var(--encre-douce);
+  font-family: var(--mono);
+  font-size: 12px;
+  padding: 4px 6px;
+  border-radius: 2px;
+}
+
+.tete-note {
+  max-width: 24ch;
+  font-size: 13px;
+  color: var(--encre-douce);
+}
+
+.tenir {
+  display: inline-flex;
+  gap: 6px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 1320px) {
+  .quatre-champs {
+    grid-template-columns: 1fr 1fr;
+  }
+}

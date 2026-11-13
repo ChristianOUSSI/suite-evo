@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="ÉCOLE CASH">
+  <rect width="64" height="64" fill="#e7ebe3"/>
+  <g fill="none" stroke="#12312a" stroke-width="3" stroke-linecap="square">
+    <rect x="8" y="26" width="48" height="30"/>
+    <path d="M16 26V13h20v13"/>
+    <path d="M16 19h20"/>
+    <path d="M8 37h48"/>
+    <path d="M26 47h12"/>
+  </g>
+  <path d="M46 32h8" stroke="#9e3b2c" stroke-width="3" stroke-linecap="square"/>
+</svg>

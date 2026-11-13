@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="evo-tontine, CODE AXIS DIGITAL CAMEROON">
+  <rect width="64" height="64" fill="#0e1d2b"/>
+  <g fill="none" stroke="#8fb6d9" stroke-width="2.2" stroke-linecap="square">
+    <circle cx="34" cy="30" r="19"/>
+    <path d="M20 22 10 30l10 8"/>
+    <path d="M44 40V20h-8"/>
+    <path d="M44 20l7-7"/>
+  </g>
+  <g fill="#c7d8e8">
+    <ellipse cx="34" cy="24" rx="8" ry="3"/>
+    <path d="M26 24v4c0 1.7 3.6 3 8 3s8-1.3 8-3v-4c0 1.7-3.6 3-8 3s-8-1.3-8-3z"/>
+    <path d="M26 30v4c0 1.7 3.6 3 8 3s8-1.3 8-3v-4c0 1.7-3.6 3-8 3s-8-1.3-8-3z"/>
+  </g>
+</svg>

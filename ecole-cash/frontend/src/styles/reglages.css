@@ -1,0 +1,348 @@
+/* Les réglages : une feuille de classeur, un jeu de cases par section. */
+
+.bande-ancrage {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem 1.15rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--ink);
+}
+
+.bande-ancrage a {
+  color: var(--ink-soft);
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  font-weight: 500;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding-bottom: 0.15rem;
+  border-bottom: 1px solid transparent;
+}
+
+.bande-ancrage a:hover {
+  color: var(--stamp);
+  border-bottom-color: var(--stamp);
+}
+
+.reglages-bilan {
+  border-left-width: 3px;
+}
+
+.bilan-grille {
+  display: grid;
+  /* Six cases, mais de largeurs inégales : la feuille n'est pas un damier. */
+  grid-template-columns: 1.15fr 0.8fr 0.9fr 1.25fr 1.1fr 0.7fr;
+  gap: 0.9rem 1.2rem;
+  margin: 1.1rem 0 0;
+}
+
+.bilan-grille div {
+  padding: 0.6rem 0.7rem;
+  border-top: 1px solid var(--ink);
+  background: var(--paper);
+}
+
+.bilan-grille dt {
+  color: var(--ink-faint);
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  font-weight: 500;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.bilan-grille dd {
+  margin: 0.3rem 0 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.regle-note {
+  max-width: 78ch;
+  margin-top: 0.9rem;
+  color: var(--ink-soft);
+  font-size: 0.78rem;
+  line-height: 1.6;
+}
+
+.reglages-form {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.regle-jeu {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  /* Un fieldset refuse par défaut de descendre sous sa plus large cellule. */
+  min-inline-size: 0;
+  scroll-margin-top: 6.5rem;
+}
+
+.regle-jeu legend {
+  display: block;
+  margin-bottom: 0.85rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--rule-strong);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.field__aide--tard {
+  color: var(--stamp);
+  font-weight: 500;
+}
+
+.rails {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr 1fr 0.9fr 1.2fr;
+  gap: 0.4rem 1.1rem;
+  margin-top: 0.5rem;
+}
+
+.tons {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 0.7rem;
+  margin: 0.9rem 0 1.1rem;
+}
+
+.ton,
+.role {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid var(--rule);
+  background: var(--sheet-bright);
+  cursor: pointer;
+  user-select: none;
+}
+
+.ton input,
+.role input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.ton__marque,
+.role__marque {
+  position: relative;
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 0.85rem;
+  height: 0.85rem;
+  margin-top: 0.18rem;
+  border: 1px solid var(--rule-strong);
+  background: var(--sheet);
+}
+
+.ton__marque::after,
+.role__marque::after {
+  content: "";
+  width: 0.34rem;
+  height: 0.34rem;
+  background: var(--ink);
+  opacity: 0;
+}
+
+.ton input:checked ~ .ton__marque,
+.role input:checked ~ .role__marque {
+  border-color: var(--ink);
+}
+
+.ton input:checked ~ .ton__marque::after,
+.role input:checked ~ .role__marque::after {
+  opacity: 1;
+}
+
+.ton input:focus-visible ~ .ton__marque,
+.role input:focus-visible ~ .role__marque {
+  outline: 2px solid var(--stamp);
+  outline-offset: 3px;
+}
+
+.ton__texte,
+.role__texte {
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.ton__texte strong,
+.role__texte strong {
+  display: block;
+  font-weight: 600;
+}
+
+.ton__texte small,
+.role__texte small {
+  display: block;
+  margin-top: 0.15rem;
+  color: var(--ink-faint);
+  font-size: 0.72rem;
+  line-height: 1.45;
+}
+
+.ton--choisi,
+.role--choisi {
+  border-color: var(--ink);
+  background: var(--moss-wash);
+}
+
+.roles {
+  display: grid;
+  gap: 0.55rem;
+  margin-top: 0.2rem;
+}
+
+.equipe__liste {
+  display: grid;
+  gap: 0;
+  margin: 1rem 0 1.1rem;
+  list-style: none;
+  padding: 0;
+}
+
+.equipe__ligne {
+  display: grid;
+  grid-template-columns: 2.25rem 1fr auto;
+  align-items: center;
+  gap: 0.8rem;
+  padding-block: 0.6rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.equipe__ligne:last-child {
+  border-bottom: 0;
+}
+
+.equipe__texte {
+  font-size: 0.86rem;
+  font-weight: 500;
+}
+
+.equipe__texte small {
+  display: block;
+  margin-top: 0.1rem;
+  color: var(--ink-faint);
+  font-weight: 400;
+  font-size: 0.7rem;
+  letter-spacing: -0.01em;
+}
+
+.equipe__form {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 0.9rem;
+  padding: 1rem;
+  border: 1px solid var(--ink);
+  background: var(--paper);
+  box-shadow: 4px 4px 0 var(--paper-dark);
+  margin-bottom: 1rem;
+}
+
+.equipe__form .field:last-of-type {
+  grid-column: 1 / -1;
+}
+
+.equipe__form .form-actions {
+  grid-column: 1 / -1;
+}
+
+.feuilles {
+  display: grid;
+  gap: 0;
+  margin: 0.9rem 0 1.1rem;
+  padding: 0;
+  list-style: none;
+}
+
+.feuille-ligne {
+  display: grid;
+  grid-template-columns: 8.5rem 1fr 9rem;
+  align-items: baseline;
+  gap: 1rem;
+  padding-block: 0.62rem;
+  border-bottom: 1px dashed var(--rule-strong);
+}
+
+.feuille-ligne:last-child {
+  border-bottom: 0;
+}
+
+.feuille-ligne__titre {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--ink);
+  font-size: 0.84rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule-strong);
+  padding-bottom: 0.1rem;
+}
+
+.feuille-ligne__titre:hover {
+  color: var(--stamp);
+  border-bottom-color: var(--stamp);
+}
+
+.feuille-ligne__cols {
+  color: var(--ink-soft);
+  font-size: 0.76rem;
+  line-height: 1.5;
+}
+
+.feuille-ligne__nom {
+  color: var(--ink-faint);
+  font-size: 0.62rem;
+  letter-spacing: -0.02em;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 1080px) {
+  .bilan-grille {
+    grid-template-columns: 1.15fr 0.9fr 1.25fr;
+  }
+
+  .rails {
+    grid-template-columns: 1.1fr 1fr 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .bilan-grille {
+    grid-template-columns: 1fr 0.8fr;
+  }
+
+  .rails,
+  .tons,
+  .equipe__form {
+    grid-template-columns: 1fr;
+  }
+
+  .feuille-ligne {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+
+  .feuille-ligne__nom {
+    text-align: left;
+  }
+
+  .equipe__ligne {
+    grid-template-columns: 2rem 1fr auto;
+    gap: 0.5rem;
+  }
+}

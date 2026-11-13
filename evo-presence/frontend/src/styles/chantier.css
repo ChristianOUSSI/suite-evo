@@ -1,0 +1,140 @@
+/* Ce qui est propre aux écrans du chantier. Le socle CADC porte le reste,
+   globals.css porte les places, les états et la feuille de paie. */
+
+.cadc-dateau {
+  background: var(--cadc-encre-2);
+  color: var(--cadc-argent);
+}
+
+.cadc-dateau__rangee {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding-block: 7px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.chantier {
+  display: grid;
+  gap: 18px;
+}
+
+.chantier__tete {
+  display: grid;
+  gap: 8px;
+}
+
+.chantier__tete h1 {
+  font-size: clamp(1.7rem, 7vw, 2.4rem);
+}
+
+.chantier__tete p {
+  color: var(--cadc-encre-2);
+  max-width: 56ch;
+}
+
+/* Le tableau du matin : un chantier par carte, la place libre en évidence. */
+.portails {
+  display: grid;
+  gap: 10px;
+}
+
+.portail {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  padding: 14px 16px;
+  border: 1px solid var(--cadc-ligne);
+  border-left: 5px solid var(--cadc-acier);
+  border-radius: 14px;
+  background: var(--cadc-feuille);
+  text-decoration: none;
+  color: inherit;
+}
+
+.portail--clos {
+  border-left-color: var(--cadc-ligne-forte);
+  background: var(--cadc-papier-2);
+  color: var(--cadc-encre-2);
+}
+
+.portail--fini {
+  border-left-color: var(--cadc-vert);
+}
+
+.portail__nom {
+  font-weight: 700;
+  font-size: 1.02rem;
+}
+
+.portail__nom small {
+  display: block;
+  margin-top: 2px;
+  color: var(--cadc-encre-3);
+  font-weight: 500;
+  font-size: 0.84rem;
+}
+
+.portail__reste {
+  font-family: var(--cadc-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.9rem;
+  color: var(--cadc-encre-2);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.portail__reste strong {
+  display: block;
+  font-size: 1.15rem;
+  color: var(--cadc-encre);
+}
+
+/* La fiche ouvrier repliée dans la liste : la ligne entière reste cliquable. */
+.ouvrier--sorti {
+  opacity: 0.72;
+}
+
+/* La feuille de paie : les états du mois se lisent d'un coup d'œil. */
+.etats-ligne {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.etats-ligne span {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--cadc-encre-3);
+  letter-spacing: 0.02em;
+}
+
+/* Le bulletin public, tel qu'on le montre à un ouvrier qui doute. */
+.verif {
+  display: grid;
+  gap: 18px;
+}
+
+.montre__sous {
+  display: block;
+  margin-top: 2px;
+  color: var(--cadc-encre-3);
+  font-weight: 500;
+  font-size: 0.84rem;
+}
+
+@media (max-width: 560px) {
+  .portail {
+    grid-template-columns: 1fr;
+  }
+
+  .portail__reste {
+    text-align: left;
+  }
+}

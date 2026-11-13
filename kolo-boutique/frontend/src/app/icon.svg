@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="KOLO BOUTIQUE">
+  <rect width="64" height="64" fill="#ece4d8"/>
+  <g fill="none" stroke="#2a1e18" stroke-width="3" stroke-linecap="square">
+    <path d="M8 20h48"/>
+    <path d="M8 20 14 10h36l6 10"/>
+    <path d="M18 20v32"/>
+    <path d="M46 20v32"/>
+    <path d="M12 52h40"/>
+    <path d="M26 28h12"/>
+    <path d="M32 28v10"/>
+    <path d="M26 42h12"/>
+  </g>
+  <path d="M20 15h6M30 15h6M40 15h4" stroke="#a2472b" stroke-width="3" stroke-linecap="square"/>
+</svg>

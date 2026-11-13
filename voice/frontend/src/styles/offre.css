@@ -1,0 +1,320 @@
+.offre {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 28px 26px 96px;
+}
+
+.entete {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--rule-douce);
+}
+
+.marque {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.marque b {
+  font-family: var(--serie);
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.marque span {
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--encre-lointaine);
+}
+
+.entete nav {
+  display: flex;
+  gap: 18px;
+  align-items: baseline;
+  font-size: 14px;
+}
+
+.entete nav a {
+  color: var(--encre-douce);
+  text-decoration: none;
+}
+
+.entete nav a:hover {
+  color: var(--ambre);
+}
+
+.ouverture {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 46px;
+  padding: 54px 0 40px;
+  align-items: start;
+}
+
+.ouverture h1 {
+  font-size: clamp(38px, 5vw, 60px);
+  line-height: 1.04;
+  max-width: 18ch;
+}
+
+.ouverture .chapeau {
+  font-size: 17px;
+  color: var(--encre-douce);
+  max-width: 52ch;
+  margin: 22px 0 0;
+}
+
+.ouverture .rappel {
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+.poste-carte {
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--ambre);
+  background: var(--nuit-claire);
+  padding: 20px 22px 16px;
+}
+
+.poste-carte h2 {
+  font-size: 15px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-family: var(--texte);
+  color: var(--encre-lointaine);
+  font-weight: 700;
+}
+
+.appel-fil {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.appel-fil > div {
+  display: grid;
+  grid-template-columns: 58px 1fr;
+  gap: 14px;
+  align-items: baseline;
+}
+
+.appel-fil dt {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ambre);
+  letter-spacing: 0.04em;
+}
+
+.appel-fil dd {
+  margin: 0;
+  font-family: var(--serie);
+  font-size: 16px;
+  line-height: 1.45;
+  color: #eef3f7;
+}
+
+.appel-fil .appelant dt {
+  color: var(--mousse);
+}
+
+.appel-fil .appelant dd {
+  font-style: italic;
+  color: var(--encre-douce);
+}
+
+.chiffres {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+  padding: 26px 0 4px;
+  border-top: 1px solid var(--rule-douce);
+  border-bottom: 1px solid var(--rule-douce);
+}
+
+.chiffres div {
+  padding: 8px 0 12px;
+}
+
+.chiffres b {
+  display: block;
+  font-family: var(--mono);
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--mousse);
+  line-height: 1.1;
+}
+
+.chiffres span {
+  font-size: 13px;
+  color: var(--encre-lointaine);
+}
+
+.section {
+  padding: 62px 0 0;
+}
+
+.section h2 {
+  font-size: 31px;
+  max-width: 26ch;
+}
+
+.section .intro {
+  color: var(--encre-douce);
+  max-width: 60ch;
+  margin: 12px 0 0;
+}
+
+.metiers {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 22px 26px;
+  margin-top: 34px;
+}
+
+.metier {
+  grid-column: span 5;
+  border-top: 1px solid var(--rule);
+  padding-top: 14px;
+}
+
+.metier:nth-child(2),
+.metier:nth-child(3) {
+  grid-column: span 4;
+}
+
+.metier:nth-child(5) {
+  grid-column: span 7;
+}
+
+.metier h3 {
+  font-size: 19px;
+}
+
+.metier p {
+  margin: 8px 0 0;
+  font-size: 14px;
+  color: var(--encre-douce);
+}
+
+.metier .doigt {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ambre);
+}
+
+.tarifs {
+  margin-top: 30px;
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 14px;
+}
+
+.tarifs caption {
+  text-align: left;
+  font-size: 13px;
+  color: var(--encre-lointaine);
+  padding-bottom: 10px;
+}
+
+.tarifs th,
+.tarifs td {
+  border-bottom: 1px solid var(--rule-douce);
+  padding: 13px 14px 13px 0;
+  text-align: left;
+  vertical-align: top;
+}
+
+.tarifs thead th {
+  font-family: var(--texte);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--encre-lointaine);
+}
+
+.tarifs td.chiffrage {
+  font-family: var(--mono);
+  color: var(--ambre);
+  white-space: nowrap;
+}
+
+.tarifs tbody th {
+  font-family: var(--serie);
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.tarifs .complet {
+  background: #131a20;
+}
+
+.demo {
+  margin-top: 44px;
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--mousse);
+  padding: 20px 24px;
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 26px;
+  align-items: start;
+  background: var(--nuit-claire);
+}
+
+.demo h2 {
+  font-size: 22px;
+}
+
+.demo p {
+  margin: 0;
+  color: var(--encre-douce);
+  font-size: 14px;
+}
+
+.demo .identifiants {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--encre);
+  border-top: 1px dashed var(--rule);
+  padding-top: 10px;
+  margin-top: 12px;
+}
+
+.pied {
+  margin-top: 72px;
+  padding-top: 18px;
+  border-top: 1px solid var(--rule-douce);
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  font-size: 13px;
+  color: var(--encre-lointaine);
+}
+
+@media (max-width: 900px) {
+  .ouverture,
+  .demo {
+    grid-template-columns: 1fr;
+  }
+
+  .metier,
+  .metier:nth-child(2),
+  .metier:nth-child(3),
+  .metier:nth-child(5) {
+    grid-column: span 12;
+  }
+
+  .entete {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

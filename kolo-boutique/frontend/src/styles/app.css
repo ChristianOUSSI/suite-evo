@@ -1,0 +1,288 @@
+/* Le chantier du comptoir : fronton, rail de navigation, compte, pied. */
+
+.comptoir-chantier {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.fronton {
+  border-bottom: 1px solid var(--encre);
+  background: var(--feuille);
+}
+
+.fronton__rangee {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  min-height: 4.6rem;
+  padding-block: 0.7rem;
+  flex-wrap: wrap;
+}
+
+.marque {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  text-decoration: none;
+}
+
+.marque__signe {
+  width: 2.3rem;
+  height: 2.3rem;
+  flex: none;
+  color: var(--encre);
+}
+
+.marque:hover .marque__signe {
+  color: var(--brique);
+}
+
+.marque__texte {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.marque__nom {
+  font-family: var(--serif);
+  font-size: 1.32rem;
+  letter-spacing: 0.01em;
+}
+
+.marque__sous {
+  margin-top: 0.12rem;
+  color: var(--encre-lointaine);
+  font-family: var(--mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.nav-comptoir {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex: 1;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.nav-comptoir__lien {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.42rem 0.6rem;
+  color: var(--encre-douce);
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition:
+    color 140ms ease,
+    border-color 140ms ease,
+    background-color 140ms ease;
+}
+
+.nav-comptoir__lien:hover {
+  color: var(--encre);
+  border-color: var(--regrais);
+}
+
+.nav-comptoir__lien.est-active {
+  color: var(--feuille);
+  background: var(--encre);
+  border-color: var(--encre);
+}
+
+.compte {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-left: auto;
+}
+
+.compte__texte {
+  text-align: right;
+  line-height: 1.2;
+}
+
+.compte__nom {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.compte__meta {
+  display: block;
+  margin-top: 0.14rem;
+  color: var(--encre-lointaine);
+  font-family: var(--mono);
+  font-size: 0.52rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.avatar {
+  display: grid;
+  place-items: center;
+  width: 2.15rem;
+  height: 2.15rem;
+  flex: none;
+  background: var(--feuille-nette);
+  border: 1px solid var(--encre);
+  color: var(--encre);
+  font-family: var(--serif);
+  font-size: 0.84rem;
+}
+
+.lien-sortie {
+  padding: 0;
+  border: 0;
+  border-bottom: 1px solid transparent;
+  background: none;
+  color: var(--encre-lointaine);
+  font-family: var(--mono);
+  font-size: 0.56rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.lien-sortie:hover {
+  color: var(--brique);
+  border-bottom-color: var(--brique);
+}
+
+.dateau {
+  border-bottom: 1px solid var(--regrais);
+  background: var(--sable-clair);
+}
+
+.dateau__rangee {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 0.42rem;
+  color: var(--encre-lointaine);
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.dateau__pastille {
+  display: inline-block;
+  width: 0.4rem;
+  height: 0.4rem;
+  margin-right: 0.4rem;
+  background: var(--brique);
+  vertical-align: middle;
+}
+
+.chantier {
+  flex: 1;
+  padding-bottom: 2rem;
+}
+
+.pied-comptoir {
+  border-top: 1px solid var(--encre);
+  padding-block: 1.1rem 1.6rem;
+  color: var(--encre-lointaine);
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pied-comptoir__rangee {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem 1.6rem;
+  flex-wrap: wrap;
+}
+
+.incident {
+  padding-block: clamp(3rem, 8vw, 5.5rem);
+}
+
+.incident h1 {
+  margin-top: 0.8rem;
+  font-size: clamp(2rem, 4.2vw, 3.1rem);
+}
+
+.incident > p {
+  max-width: 54ch;
+  margin-top: 0.9rem;
+  color: var(--encre-douce);
+  font-size: 0.92rem;
+}
+
+.incident .note-bas {
+  margin-top: 1.1rem;
+}
+
+.incident .acts {
+  margin-top: 1.5rem;
+}
+
+.rang-pile {
+  display: grid;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+
+.chargement {
+  display: grid;
+  place-items: center;
+  gap: 1rem;
+  min-height: 58vh;
+  text-align: center;
+}
+
+.chargement__note {
+  color: var(--encre-lointaine);
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 980px) {
+  .fronton__rangee {
+    gap: 0.8rem;
+  }
+
+  .nav-comptoir {
+    order: 3;
+    width: 100%;
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--regrais);
+    scrollbar-width: none;
+  }
+
+  .nav-comptoir::-webkit-scrollbar {
+    display: none;
+  }
+
+  .compte {
+    margin-left: auto;
+  }
+}
+
+@media (max-width: 720px) {
+  .compte__texte {
+    display: none;
+  }
+
+  .dateau__rangee {
+    font-size: 0.5rem;
+  }
+}

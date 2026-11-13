@@ -1,0 +1,257 @@
+.jumelee {
+  display: grid;
+  /* La caisse du jour commande la page ; le reste suit. */
+  grid-template-columns: 1.5fr 1fr 0.8fr;
+  gap: 1.5rem;
+  align-items: stretch;
+}
+
+.semaine {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5rem;
+  height: 9rem;
+  margin-top: 1.1rem;
+  padding-bottom: 1.2rem;
+  border-bottom: 1px solid var(--ink);
+}
+
+.semaine__jour {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.3rem;
+  flex: 1;
+  height: 100%;
+  position: relative;
+}
+
+.semaine__total {
+  font-size: 0.55rem;
+  color: var(--ink-faint);
+  letter-spacing: -0.02em;
+}
+
+.semaine__barre {
+  width: 100%;
+  min-height: 3px;
+  background: var(--rule-strong);
+  border: 1px solid var(--ink);
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.semaine__especes {
+  width: 100%;
+  background: var(--ink);
+}
+
+.semaine__lettre {
+  position: absolute;
+  bottom: -1.15rem;
+  font-size: 0.55rem;
+  color: var(--ink-faint);
+  letter-spacing: 0.08em;
+}
+
+.compte {
+  display: grid;
+  gap: 0.8rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.compte__case {
+  padding: 0.7rem 0.1rem;
+  border-top: 2px solid var(--ink);
+}
+
+.compte__valeur {
+  font-family: var(--serif);
+  font-size: clamp(1.7rem, 3vw, 2.4rem);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.025em;
+  line-height: 1;
+}
+
+.compte__valeur--alerte {
+  color: var(--stamp);
+}
+
+.compte__legende {
+  display: block;
+  margin-top: 0.35rem;
+  color: var(--ink-faint);
+  font-family: var(--mono);
+  font-size: 0.54rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.fente {
+  height: 0.7rem;
+  background: var(--gold-wash);
+  border: 1px solid var(--ink);
+  border-top: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.fente__regle {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: var(--moss);
+}
+
+.tiroir__ecart {
+  margin-top: 0.9rem;
+  padding: 0.7rem 0.8rem;
+  border-left: 2px solid var(--stamp);
+  background: var(--stamp-wash);
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.tiroir__ecart--net {
+  border-left-color: var(--moss);
+  background: var(--moss-wash);
+}
+
+.tiroir__ferme {
+  margin-top: 0.9rem;
+  color: var(--ink-faint);
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.recus,
+.retards,
+.echeances-a-suivre {
+  display: grid;
+  gap: 0.7rem;
+  margin-top: 1.1rem;
+}
+
+.recu-ligne {
+  display: grid;
+  grid-template-columns: 5.2rem 1fr auto auto;
+  align-items: baseline;
+  gap: 0.9rem;
+  padding-block: 0.6rem;
+  border-bottom: 1px solid var(--rule);
+  font-size: 0.82rem;
+}
+
+.recu-ligne:last-child {
+  border-bottom: 0;
+}
+
+.recu-ligne__numero {
+  font-size: 0.68rem;
+  color: var(--ink-faint);
+  letter-spacing: -0.02em;
+}
+
+.recu-ligne__eleve {
+  font-weight: 500;
+}
+
+.recu-ligne__eleve small {
+  display: block;
+  color: var(--ink-faint);
+  font-size: 0.68rem;
+  font-weight: 400;
+}
+
+.tableau-ecole {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.1rem;
+  font-size: 0.82rem;
+}
+
+.tableau-ecole th {
+  padding: 0.5rem 0.6rem;
+  border-bottom: 1px solid var(--ink);
+  color: var(--ink-faint);
+  font-family: var(--mono);
+  font-size: 0.53rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.tableau-ecole td {
+  padding: 0.65rem 0.6rem;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: baseline;
+}
+
+.tableau-ecole th:nth-child(n + 3),
+.tableau-ecole td:nth-child(n + 3) {
+  text-align: right;
+}
+
+.tableau-ecole td.chiffre {
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+.tableau-ecole tr:hover td {
+  background: var(--paper);
+}
+
+.tableau-ecole th.nom-classe {
+  text-align: left;
+  letter-spacing: 0;
+  text-transform: none;
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.pied-de-page-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 1080px) {
+  .jumelee {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .jumelee {
+    grid-template-columns: 1fr;
+  }
+
+  .recu-ligne {
+    grid-template-columns: 1fr auto;
+    gap: 0.4rem 0.8rem;
+  }
+
+  .recu-ligne__numero {
+    grid-column: 1 / -1;
+  }
+
+  .tableau-ecole {
+    font-size: 0.76rem;
+  }
+
+  .tableau-ecole th,
+  .tableau-ecole td {
+    padding-inline: 0.35rem;
+  }
+}

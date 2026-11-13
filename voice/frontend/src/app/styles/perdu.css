@@ -1,0 +1,38 @@
+.perdu {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 clamp(20px, 8vw, 120px);
+  max-width: 640px;
+}
+
+.perdu .code {
+  font-family: var(--mono);
+  font-size: 15px;
+  letter-spacing: 0.3em;
+  color: var(--ambre);
+  margin: 0 0 16px;
+}
+
+.perdu h1 {
+  font-family: var(--serie);
+  font-size: clamp(32px, 4.4vw, 48px);
+  font-weight: 400;
+  line-height: 1.1;
+  margin: 0 0 18px;
+}
+
+.perdu .dit {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--encre-douce);
+  max-width: 44ch;
+  margin: 0 0 26px;
+}
+
+.perdu .issues {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}

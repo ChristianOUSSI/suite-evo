@@ -1,0 +1,130 @@
+.reglages-voisins {
+  display: grid;
+  grid-template-columns: 1.28fr 0.72fr;
+  gap: 22px;
+  align-items: start;
+}
+
+.canals {
+  display: grid;
+  gap: 10px;
+  margin: 4px 0 16px;
+}
+
+.canal {
+  display: grid;
+  grid-template-columns: 18px 132px 1fr;
+  gap: 10px;
+  align-items: baseline;
+  border-bottom: 1px dotted var(--rule-douce);
+  padding-bottom: 9px;
+  font-size: 13px;
+  color: var(--encre-lointaine);
+}
+
+.canal b {
+  font-family: var(--texte);
+  font-size: 14px;
+  color: var(--encre);
+  font-weight: 700;
+}
+
+.canal input {
+  accent-color: var(--mousse);
+  width: 15px;
+  height: 15px;
+}
+
+.facture {
+  font-size: 13px;
+  color: var(--encre-douce);
+  border-left: 3px solid var(--ambre);
+  padding-left: 12px;
+  margin: 0 0 16px;
+}
+
+.apercu {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.compte {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 18px;
+  margin: 0 0 6px;
+}
+
+.compte div {
+  border-bottom: 1px solid var(--rule-douce);
+  padding-bottom: 8px;
+}
+
+.compte dt {
+  font-size: 12px;
+  color: var(--encre-lointaine);
+}
+
+.compte dd {
+  margin: 2px 0 0;
+  font-family: var(--mono);
+  font-size: 22px;
+  color: var(--encre);
+}
+
+.numerotes p {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2px 12px;
+  margin: 0 0 10px;
+  font-size: 13px;
+}
+
+.numerotes b {
+  font-family: var(--serie);
+  font-size: 15px;
+  color: var(--encre);
+  font-weight: 400;
+}
+
+.numerotes span:nth-child(3) {
+  grid-column: 1 / -1;
+}
+
+.equipe {
+  display: grid;
+  gap: 9px;
+  margin-bottom: 8px;
+}
+
+.tenu {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 3px 14px;
+  align-items: baseline;
+  border-bottom: 1px solid var(--rule-douce);
+  padding-bottom: 8px;
+  font-size: 14px;
+  color: var(--encre);
+}
+
+.tenu.moi {
+  border-left: 2px solid var(--ambre);
+  padding-left: 11px;
+}
+
+.tenu .role {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--mousse);
+}
+
+@media (max-width: 1180px) {
+  .reglages-voisins {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,153 @@
+.reponses {
+  display: grid;
+  gap: 1px;
+  background: var(--rule-douce);
+  border: 1px solid var(--rule);
+}
+
+.reponse {
+  display: grid;
+  grid-template-columns: 30px 1fr 116px;
+  gap: 14px;
+  align-items: baseline;
+  text-align: left;
+  background: #0f1418;
+  border: 0;
+  color: var(--encre-douce);
+  padding: 12px 14px;
+  cursor: pointer;
+}
+
+.reponse:hover {
+  background: #131a20;
+}
+
+.reponse.choisie {
+  background: #17212a;
+  box-shadow: inset 2px 0 0 var(--ambre);
+}
+
+.reponse .num {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--encre-lointaine);
+}
+
+.reponse .quoi {
+  font-family: var(--serie);
+  font-size: 16px;
+  line-height: 1.35;
+  color: var(--encre);
+  display: block;
+}
+
+.reponse .suite {
+  display: block;
+  font-family: var(--texte);
+  font-size: 12px;
+  color: var(--encre-lointaine);
+  margin-top: 3px;
+}
+
+.reponse .frappe {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ambre);
+  text-align: right;
+  display: block;
+}
+
+.reponse .domaine {
+  display: block;
+  color: var(--encre-lointaine);
+  font-family: var(--texte);
+  font-size: 11px;
+  margin-top: 2px;
+}
+
+.essai {
+  margin-top: 16px;
+  padding: 13px 15px;
+  border: 1px solid var(--rule);
+  background: #0f1418;
+  font-size: 14px;
+}
+
+.essai.juste {
+  border-left: 3px solid var(--mousse);
+}
+
+.essai.faux {
+  border-left: 3px solid var(--rouille);
+}
+
+.essai p {
+  margin: 0 0 8px;
+}
+
+.essai p:last-child {
+  margin-bottom: 0;
+}
+
+.dictee-echo {
+  font-family: var(--serie);
+  font-size: 16px;
+  line-height: 1.42;
+  color: var(--encre);
+}
+
+.mots {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--encre-lointaine);
+  letter-spacing: 0.03em;
+}
+
+.occupe {
+  font-size: 13px;
+  color: var(--ambre);
+  border-bottom: 1px solid var(--rule-douce);
+  padding-bottom: 10px;
+  margin: 0 0 14px;
+}
+
+.trous {
+  display: grid;
+  gap: 1px;
+  background: var(--rule-douce);
+  border: 1px solid var(--rule);
+}
+
+.trou {
+  display: grid;
+  grid-template-columns: 40px 1fr auto;
+  gap: 14px;
+  align-items: baseline;
+  background: var(--papier);
+  padding: 11px 13px;
+}
+
+.trou.qui-revient {
+  background: #fbf4e6;
+}
+
+.compteur-trou {
+  font-family: var(--mono);
+  font-size: 18px;
+  color: var(--rouille);
+}
+
+.trou .quoi {
+  display: grid;
+  gap: 3px;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.trou .suite {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--encre-lointaine);
+  letter-spacing: 0.02em;
+}

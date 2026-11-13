@@ -1,0 +1,15 @@
+{
+  "name": "@cadc/kit",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Le socle partagé des produits CODE AXIS DIGITAL CAMEROON : thème, langues, règles du Cameroun.",
+  "type": "module",
+  "main": "./index.js",
+  "exports": {
+    ".": { "types": "./index.d.ts", "default": "./index.js" },
+    "./theme.css": "./theme.css",
+    "./i18n": { "types": "./i18n.d.ts", "default": "./i18n.js" },
+    "./cameroun": { "types": "./cameroun.d.ts", "default": "./cameroun.js" }
+  },
+  "files": ["index.js", "index.d.ts", "i18n.js", "i18n.d.ts", "cameroun.js", "cameroun.d.ts", "theme.css", "sync.mjs", "fonts"]
+}

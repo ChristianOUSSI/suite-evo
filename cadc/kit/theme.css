@@ -1,0 +1,530 @@
+/* CODE AXIS DIGITAL CAMEROON · socle partagé
+   Palette reprise des logos : encre marine, acier, argent. Le fond de travail
+   reste pâle et lisible, le blanc ne sert que de texte sur surface sombre.
+   Tout est pensé pour un téléphone à 25 000 F tenu par une personne de 60 ans. */
+
+:root {
+  /* Encres et papiers */
+  --cadc-nuit: #0b1218;
+  --cadc-encre: #0e1d2b;
+  --cadc-encre-2: #1d3346;
+  --cadc-encre-3: #3c556e;
+  --cadc-acier: #2f6da3;
+  --cadc-acier-clair: #4f8cc0;
+  --cadc-acier-pale: #dbe8f3;
+  --cadc-argent: #c7d8e8;
+  --cadc-brume: #9db2c6;
+
+  --cadc-papier: #e9eef3;
+  --cadc-papier-2: #f2f6f9;
+  --cadc-feuille: #f7fafc;
+  --cadc-ligne: #c2d0dc;
+  --cadc-ligne-forte: #8fa6b8;
+
+  /* Couleurs d'état, jamais de violet ni de dégradé décoratif */
+  --cadc-vert: #1c6b4a;
+  --cadc-vert-lave: #d6e9df;
+  --cadc-orange: #a85a1e;
+  --cadc-orange-lave: #f3e2d0;
+  --cadc-rouge: #a33a34;
+  --cadc-rouge-lave: #f2dcd9;
+  --cadc-or: #7a6320;
+  --cadc-or-lave: #ece2c8;
+
+  /* Typographie : 17 px de base, pas 16. Les chiffres sont tabulaires. */
+  --cadc-texte: 17px;
+  --cadc-sans: "Public Sans", "Segoe UI", Arial, sans-serif;
+  --cadc-titre: "Instrument Serif", "Times New Roman", serif;
+  --cadc-mono: "Red Hat Mono", ui-monospace, "Courier New", monospace;
+
+  /* Rythme */
+  --cadc-p: 16px;
+  --cadc-rayon: 10px;
+  --cadc-cible: 48px;
+  --cadc-gabarit: 1100px;
+}
+
+/* Trois tailles de texte, choisies par l'utilisateur et mémorisées. */
+html[data-texte="normal"] { --cadc-texte: 17px; }
+html[data-texte="grand"] { --cadc-texte: 19px; }
+html[data-texte="tres-grand"] { --cadc-texte: 22px; }
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--cadc-papier);
+  color: var(--cadc-encre);
+  font-family: var(--cadc-sans);
+  font-size: var(--cadc-texte);
+  line-height: 1.55;
+}
+
+h1, h2, h3, h4 {
+  margin: 0;
+  font-family: var(--cadc-titre);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+p { margin: 0; }
+a { color: inherit; }
+button { font: inherit; }
+
+:focus-visible {
+  outline: 3px solid var(--cadc-acier);
+  outline-offset: 2px;
+}
+
+::selection { background: var(--cadc-encre); color: var(--cadc-papier-2); }
+
+/* ---------- ossature ---------- */
+
+.cadc-gabarit {
+  width: min(var(--cadc-gabarit), calc(100% - 24px));
+  margin-inline: auto;
+}
+
+.cadc-gabarit--etroit { width: min(680px, calc(100% - 24px)); margin-inline: auto; }
+
+.cadc-pile { display: grid; gap: var(--cadc-p); }
+.cadc-pile--serree { gap: 10px; }
+.cadc-pile--large { gap: 24px; }
+
+.cadc-app { display: flex; flex-direction: column; min-height: 100vh; }
+.cadc-corps { flex: 1; padding-block: 20px 32px; }
+
+/* Barre du bas : c'est là que le pouce tombe sur un téléphone. */
+.cadc-rail {
+  position: sticky;
+  bottom: 0;
+  z-index: 20;
+  background: var(--cadc-encre);
+  border-top: 1px solid var(--cadc-encre-2);
+  padding: 6px 8px calc(6px + env(safe-area-inset-bottom));
+}
+
+.cadc-rail__interieur {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.cadc-rail__interieur::-webkit-scrollbar { display: none; }
+
+.cadc-rail__lien {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  min-height: 54px;
+  padding: 7px 10px;
+  border-radius: var(--cadc-rayon);
+  color: var(--cadc-argent);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.cadc-rail__lien:hover { background: var(--cadc-encre-2); color: #fff; }
+.cadc-rail__lien[aria-current="page"] { background: var(--cadc-acier); color: #fff; }
+
+/* Bandeau du haut : marque + langues + compte. */
+.cadc-bandeau {
+  background: var(--cadc-feuille);
+  border-bottom: 1px solid var(--cadc-ligne);
+}
+
+.cadc-bandeau__rangee {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 60px;
+  flex-wrap: wrap;
+}
+
+.cadc-marque {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: var(--cadc-cible);
+  text-decoration: none;
+}
+
+.cadc-marque__signe { width: 38px; height: 38px; flex: none; color: var(--cadc-encre); }
+.cadc-marque__texte { display: flex; flex-direction: column; line-height: 1.15; }
+.cadc-marque__nom { font-family: var(--cadc-titre); font-size: 1.22rem; }
+.cadc-marque__sous {
+  color: var(--cadc-encre-3);
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+/* ---------- boutons ---------- */
+
+.cadc-bouton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: var(--cadc-cible);
+  padding: 11px 18px;
+  border: 1px solid var(--cadc-encre);
+  border-radius: var(--cadc-rayon);
+  background: var(--cadc-feuille);
+  color: var(--cadc-encre);
+  font-size: 0.98rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.cadc-bouton:hover { background: var(--cadc-acier-pale); }
+.cadc-bouton:disabled { opacity: 0.45; cursor: not-allowed; }
+
+.cadc-bouton--premier {
+  background: var(--cadc-encre);
+  border-color: var(--cadc-encre);
+  color: var(--cadc-papier-2);
+}
+.cadc-bouton--premier:hover { background: var(--cadc-acier); border-color: var(--cadc-acier); color: #fff; }
+
+.cadc-bouton--acier {
+  background: var(--cadc-acier);
+  border-color: var(--cadc-acier);
+  color: #fff;
+}
+.cadc-bouton--acier:hover { background: var(--cadc-encre); border-color: var(--cadc-encre); }
+
+.cadc-bouton--doux { border-color: transparent; background: transparent; color: var(--cadc-encre-3); }
+.cadc-bouton--doux:hover { background: var(--cadc-acier-pale); color: var(--cadc-encre); }
+
+.cadc-bouton--danger {
+  background: var(--cadc-rouge);
+  border-color: var(--cadc-rouge);
+  color: #fff;
+}
+.cadc-bouton--danger:hover { background: #86291f; border-color: #86291f; }
+
+.cadc-bouton--large { width: 100%; }
+.cadc-bouton--grand { min-height: 56px; font-size: 1.06rem; padding-inline: 22px; }
+.cadc-bouton--petit { min-height: 42px; padding: 5px 13px; font-size: 0.9rem; font-weight: 600; }
+
+/* ---------- champs ---------- */
+
+.cadc-champ { display: grid; gap: 6px; }
+
+.cadc-champ > label,
+.cadc-champ__titre {
+  color: var(--cadc-encre-2);
+  font-size: 0.86rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.cadc-champ input,
+.cadc-champ select,
+.cadc-champ textarea,
+.cadc-saisie {
+  width: 100%;
+  min-height: var(--cadc-cible);
+  padding: 12px 13px;
+  border: 1px solid var(--cadc-ligne-forte);
+  border-radius: var(--cadc-rayon);
+  background: #fff;
+  color: var(--cadc-encre);
+  font-size: 1rem;
+}
+
+.cadc-champ textarea { min-height: 96px; resize: vertical; }
+
+.cadc-champ input:focus,
+.cadc-champ select:focus,
+.cadc-champ textarea:focus,
+.cadc-saisie:focus {
+  outline: none;
+  border-color: var(--cadc-acier);
+  box-shadow: 0 0 0 3px var(--cadc-acier-pale);
+}
+
+.cadc-champ input[aria-invalid="true"] { border-color: var(--cadc-rouge); }
+
+.cadc-champ__aide { color: var(--cadc-encre-3); font-size: 0.84rem; }
+.cadc-champ__tord { color: var(--cadc-rouge); font-size: 0.84rem; font-weight: 600; }
+
+/* Le +237 est une bordure du champ, pas un caractère que l'on frappe. */
+.cadc-champ__prefixe {
+  display: flex;
+  align-items: stretch;
+  min-height: var(--cadc-cible);
+  border: 1px solid var(--cadc-ligne-forte);
+  border-radius: var(--cadc-rayon);
+  background: #fff;
+  overflow: hidden;
+}
+.cadc-champ__prefixe:focus-within { border-color: var(--cadc-acier); box-shadow: 0 0 0 3px var(--cadc-acier-pale); }
+.cadc-champ__prefixe > span {
+  display: grid;
+  place-items: center;
+  padding-inline: 12px;
+  background: var(--cadc-papier-2);
+  color: var(--cadc-encre-3);
+  font-family: var(--cadc-mono);
+  font-size: 0.86rem;
+  font-weight: 700;
+  border-right: 1px solid var(--cadc-ligne);
+}
+.cadc-champ__prefixe input { flex: 1; border: 0; border-radius: 0; min-height: 46px; }
+.cadc-champ__prefixe input:focus { outline: none; box-shadow: none; }
+
+.cadc-grille { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.cadc-acts { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+
+/* Cases et choix, dessinées à la main mais jamais minuscules. */
+.cadc-choix {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  min-height: var(--cadc-cible);
+  padding: 10px 0;
+  cursor: pointer;
+  user-select: none;
+}
+.cadc-choix input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+.cadc-choix__boite {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  margin-top: 1px;
+  flex: none;
+  border: 2px solid var(--cadc-ligne-forte);
+  border-radius: 7px;
+  background: #fff;
+}
+.cadc-choix__boite::after {
+  content: "";
+  width: 11px;
+  height: 6px;
+  border-left: 2.5px solid #fff;
+  border-bottom: 2.5px solid #fff;
+  transform: translateY(-2px) rotate(-45deg);
+  opacity: 0;
+}
+.cadc-choix input:checked + .cadc-choix__boite { background: var(--cadc-acier); border-color: var(--cadc-acier); }
+.cadc-choix input:checked + .cadc-choix__boite::after { opacity: 1; }
+.cadc-choix input:focus-visible + .cadc-choix__boite { outline: 3px solid var(--cadc-acier); outline-offset: 3px; }
+.cadc-choix__texte { font-size: 0.98rem; }
+.cadc-choix__texte small { display: block; margin-top: 2px; color: var(--cadc-encre-3); font-size: 0.84rem; }
+
+/* Un groupe de choix garde son titre : « Rythme », « Rails ouverts ». Le
+   fieldset est la seule façon de le dire à un lecteur d'écran. */
+.cadc-ensemble {
+  display: grid;
+  gap: 2px;
+  margin: 0;
+  padding: 12px 14px 14px;
+  border: 1px solid var(--cadc-ligne);
+  border-radius: 14px;
+  background: var(--cadc-papier-2);
+}
+.cadc-ensemble legend {
+  padding-inline: 6px;
+  color: var(--cadc-encre-2);
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+/* Cartes, feuilles, états */
+.cadc-carte {
+  background: var(--cadc-feuille);
+  border: 1px solid var(--cadc-ligne);
+  border-radius: 14px;
+  padding: 18px;
+}
+.cadc-carte--pleine { background: var(--cadc-encre); border-color: var(--cadc-encre); color: var(--cadc-papier-2); }
+.cadc-carte--premiere { border-left: 4px solid var(--cadc-acier); }
+
+.cadc-tete {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--cadc-ligne);
+  margin-bottom: 14px;
+}
+.cadc-tete h2 { font-size: 1.45rem; }
+.cadc-tete__cote { color: var(--cadc-encre-3); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+
+.cadc-ligne {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding-block: 11px;
+  border-bottom: 1px solid var(--cadc-ligne);
+}
+.cadc-ligne:last-child { border-bottom: 0; }
+.cadc-ligne__nom { font-weight: 600; }
+.cadc-ligne__nom small { display: block; margin-top: 2px; color: var(--cadc-encre-3); font-weight: 400; font-size: 0.82rem; }
+.cadc-ligne__valeur { font-family: var(--cadc-mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* Une liste de lignes, sans puces : la puce ne sert à rien quand chaque
+   ligne tient déjà dans son propre souffle. */
+ul.cadc-liste, ol.cadc-liste { margin: 0; padding: 0; list-style: none; }
+
+.cadc-vide {
+  padding: 28px 18px;
+  border: 1px dashed var(--cadc-ligne-forte);
+  border-radius: 14px;
+  background: var(--cadc-papier-2);
+  text-align: center;
+}
+.cadc-vide h3 { font-size: 1.3rem; margin-bottom: 6px; }
+.cadc-vide p { color: var(--cadc-encre-3); max-width: 42ch; margin-inline: auto; }
+
+/* Indicateurs chiffrés */
+.cadc-stats { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+.cadc-stat { padding: 14px; border: 1px solid var(--cadc-ligne); border-radius: 12px; background: var(--cadc-papier-2); }
+.cadc-stat__legende { color: var(--cadc-encre-3); font-size: 0.76rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+.cadc-stat__valeur { display: block; margin-top: 4px; font-family: var(--cadc-mono); font-variant-numeric: tabular-nums; font-size: 1.45rem; font-weight: 700; letter-spacing: -0.03em; }
+.cadc-stat__aide { display: block; margin-top: 3px; color: var(--cadc-encre-3); font-size: 0.82rem; }
+.cadc-stat--vert .cadc-stat__valeur { color: var(--cadc-vert); }
+.cadc-stat--rouge .cadc-stat__valeur { color: var(--cadc-rouge); }
+
+/* Messages */
+.cadc-note { padding: 13px 15px; border-left: 4px solid var(--cadc-or); border-radius: 8px; background: var(--cadc-or-lave); font-size: 0.95rem; }
+.cadc-note--vert { border-left-color: var(--cadc-vert); background: var(--cadc-vert-lave); }
+.cadc-note--rouge { border-left-color: var(--cadc-rouge); background: var(--cadc-rouge-lave); }
+.cadc-note--acier { border-left-color: var(--cadc-acier); background: var(--cadc-acier-pale); }
+
+.cadc-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.cadc-badge--vert { color: var(--cadc-vert); background: var(--cadc-vert-lave); }
+.cadc-badge--rouge { color: var(--cadc-rouge); background: var(--cadc-rouge-lave); }
+.cadc-badge--orange { color: var(--cadc-orange); background: var(--cadc-orange-lave); }
+.cadc-badge--acier { color: var(--cadc-acier); background: var(--cadc-acier-pale); }
+.cadc-badge--doux { color: var(--cadc-encre-3); background: var(--cadc-papier-2); }
+
+/* Filtres et onglets, pensés pour le pouce */
+.cadc-onglets { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: none; }
+.cadc-onglets::-webkit-scrollbar { display: none; }
+.cadc-onglet {
+  flex: none;
+  min-height: 44px;
+  padding: 9px 15px;
+  border: 1px solid var(--cadc-ligne-forte);
+  border-radius: 999px;
+  background: var(--cadc-feuille);
+  color: var(--cadc-encre-2);
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.cadc-onglet:hover { border-color: var(--cadc-acier); }
+.cadc-onglet[aria-current="true"] { background: var(--cadc-encre); border-color: var(--cadc-encre); color: var(--cadc-papier-2); }
+
+/* Choix de langue et de taille de texte */
+.cadc-langues { display: inline-flex; gap: 4px; padding: 4px; border: 1px solid var(--cadc-ligne); border-radius: 999px; background: var(--cadc-papier-2); margin-left: auto; }
+.cadc-langue {
+  min-width: 48px;
+  min-height: var(--cadc-cible);
+  padding: 6px 12px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--cadc-encre-3);
+  font-size: 0.86rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+.cadc-langue[aria-pressed="true"] { background: var(--cadc-encre); color: #fff; }
+
+.cadc-texte-taille { display: inline-flex; align-items: center; gap: 6px; color: var(--cadc-encre-3); font-size: 0.78rem; font-weight: 700; }
+.cadc-texte-taille button { min-width: var(--cadc-cible); min-height: var(--cadc-cible); border: 1px solid var(--cadc-ligne-forte); border-radius: 8px; background: var(--cadc-feuille); cursor: pointer; font-weight: 700; }
+.cadc-texte-taille button[aria-pressed="true"] { background: var(--cadc-acier); border-color: var(--cadc-acier); color: #fff; }
+
+/* Tableaux : ils deviennent des fiches sur téléphone */
+.cadc-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+.cadc-table th { padding: 9px 10px; border-bottom: 2px solid var(--cadc-encre); text-align: left; font-size: 0.76rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--cadc-encre-3); }
+.cadc-table td { padding: 12px 10px; border-bottom: 1px solid var(--cadc-ligne); vertical-align: top; }
+.cadc-table .cadc-droite { text-align: right; font-family: var(--cadc-mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.cadc-table caption { text-align: left; color: var(--cadc-encre-3); font-size: 0.84rem; padding-bottom: 8px; }
+
+.cadc-signe { display: inline-flex; vertical-align: middle; }
+
+.cadc-pied { border-top: 1px solid var(--cadc-ligne); padding-block: 16px 22px; color: var(--cadc-encre-3); font-size: 0.8rem; }
+.cadc-pied__rangee { display: flex; flex-wrap: wrap; gap: 8px 18px; justify-content: space-between; align-items: baseline; }
+
+.cadc-demo {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--cadc-encre-3);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.cadc-eviter {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 90;
+  transform: translateY(-200%);
+  padding: 12px 16px;
+  border-radius: 8px;
+  background: var(--cadc-encre);
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+}
+.cadc-eviter:focus { transform: none; }
+
+/* ---------- téléphones plus grands, puis tablette ---------- */
+
+@media (max-width: 700px) {
+  .cadc-table thead { display: none; }
+  .cadc-table, .cadc-table tbody, .cadc-table tr, .cadc-table td { display: block; width: 100%; }
+  .cadc-table tr { margin-bottom: 10px; border: 1px solid var(--cadc-ligne); border-radius: 12px; background: var(--cadc-feuille); padding: 6px 12px; }
+  .cadc-table td { border: 0; padding: 7px 0; display: flex; justify-content: space-between; gap: 14px; align-items: baseline; }
+  .cadc-table td::before { content: attr(data-col); color: var(--cadc-encre-3); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; }
+  .cadc-table .cadc-droite { text-align: right; }
+  .cadc-bandeau__rangee { min-height: 56px; }
+  .cadc-marque__signe { width: 32px; height: 32px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  html { scroll-behavior: auto; }
+}
+
+@media print {
+  .cadc-rail, .cadc-bandeau, .cadc-pied { display: none; }
+  body { background: #fff; }
+}

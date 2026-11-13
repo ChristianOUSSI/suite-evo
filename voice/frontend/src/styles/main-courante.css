@@ -1,0 +1,95 @@
+.mots {
+  display: grid;
+  gap: 12px;
+}
+
+.mot {
+  border: 1px solid var(--rule-douce);
+  border-left: 3px solid var(--rule);
+  background: #0f1418;
+  padding: 13px 15px 14px;
+}
+
+.mot.depasse {
+  border-left-color: var(--rouille);
+  background: #141317;
+}
+
+.entete-mot {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.entete-mot .qui {
+  font-family: var(--serie);
+  font-size: 17px;
+  color: var(--encre);
+}
+
+.entete-mot .tel {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--encre-douce);
+}
+
+.entete-mot .poste {
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--encre-lointaine);
+}
+
+.mot .quoi {
+  font-family: var(--serie);
+  font-size: 16px;
+  line-height: 1.45;
+  color: var(--encre);
+  margin: 0 0 8px;
+}
+
+.promesse {
+  font-size: 12px;
+  color: var(--encre-lointaine);
+  margin: 0;
+}
+
+.promesse .retard {
+  color: var(--rouille);
+  font-weight: 700;
+}
+
+.mot .tenu {
+  font-size: 13px;
+  color: var(--mousse);
+  border-top: 1px dotted var(--rule-douce);
+  margin: 9px 0 0;
+  padding-top: 8px;
+}
+
+.actions-mot {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.tenue-finale {
+  border-top: 1px dotted var(--rule-douce);
+  margin-top: 12px;
+  padding-top: 12px;
+}
+
+.tenue-finale .champ-ligne {
+  margin-bottom: 10px;
+}
+
+.fenetres a.retard {
+  color: var(--rouille);
+}
+
+.fenetres a.retard.active {
+  color: var(--rouille);
+  border-bottom-color: var(--rouille);
+}

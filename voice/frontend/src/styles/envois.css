@@ -1,0 +1,64 @@
+.enveloppe {
+  grid-template-columns: 1.62fr 0.58fr;
+}
+
+.canaux {
+  margin-top: 8px;
+  gap: 14px;
+}
+
+.canaux a {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.corps {
+  font-size: 13px;
+  color: var(--encre-douce);
+  max-width: 44ch;
+}
+
+.sujet {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ambre);
+  letter-spacing: 0.04em;
+  margin-bottom: 3px;
+}
+
+.comptage {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--encre-lointaine);
+  margin: -6px 0 12px;
+  text-align: right;
+}
+
+.tournee {
+  border-left: 3px solid #2f4a3a;
+}
+
+.reglage {
+  font-size: 13px;
+  margin: 0 0 14px;
+  padding: 9px 12px;
+  border: 1px dashed var(--rule);
+}
+
+.reglage.auto {
+  color: #cde6bd;
+  border-color: #456237;
+}
+
+.reglage.manuel {
+  color: #f7d9a5;
+  border-color: #6d4c17;
+}
+
+@media (max-width: 1240px) {
+  .enveloppe {
+    grid-template-columns: 1fr;
+  }
+}

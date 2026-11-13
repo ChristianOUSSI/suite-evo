@@ -1,0 +1,907 @@
+/* KOLO BOUTIQUE · l'identité du comptoir
+   Papier de sable chaud, encre de caisse marron, brique pour ce qui alerte,
+   vert de rayon pour ce qui est tenu. Tracé à la main, pistes inégales. */
+
+@font-face {
+  font-family: "Instrument Serif";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/instrument-serif-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF,
+    U+FFFD;
+}
+
+@font-face {
+  font-family: "Instrument Serif";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/instrument-serif-italic-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF,
+    U+FFFD;
+}
+
+@font-face {
+  font-family: "Public Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/publicsans-400-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF,
+    U+FFFD;
+}
+
+@font-face {
+  font-family: "Public Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/fonts/publicsans-500-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF,
+    U+FFFD;
+}
+
+@font-face {
+  font-family: "Public Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/fonts/publicsans-600-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF,
+    U+FFFD;
+}
+
+@font-face {
+  font-family: "Public Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/publicsans-700-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF,
+    U+FFFD;
+}
+
+@font-face {
+  font-family: "Red Hat Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/redhatmono-400-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF,
+    U+FFFD;
+}
+
+@font-face {
+  font-family: "Red Hat Mono";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/fonts/redhatmono-500-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF,
+    U+FFFD;
+}
+
+@font-face {
+  font-family: "Red Hat Mono";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/redhatmono-700-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF,
+    U+FFFD;
+}
+
+:root {
+  --sable: #ece4d8;
+  --sable-fonce: #ded3c3;
+  --sable-clair: #f5f0e8;
+  /* Aucune surface claire ne dépasse 0,95 de luminance : le papier du comptoir
+     ne doit jamais éblouir, même en plein soleil sur un écran de téléphone. */
+  --feuille: #f6f1e7;
+  --feuille-nette: #fbf8f2;
+  --encre: #2a1e18;
+  --encre-douce: #55433a;
+  --encre-lointaine: #6a564a;
+  --regrais: #c3b49f;
+  --regrais-fort: #9b8a76;
+  --brique: #a2472b;
+  --brique-fonce: #7a3118;
+  --brique-lave: #f2dfd5;
+  --rayon: #3c6b4c;
+  --rayon-lave: #dde9dc;
+  --indigo: #2f4858;
+  --indigo-lave: #dbe3e6;
+  --or: #8a6a1f;
+  --or-lave: #eee4c9;
+  --serif: "Instrument Serif", "Times New Roman", serif;
+  --sans: "Public Sans", "Segoe UI", Arial, sans-serif;
+  --mono: "Red Hat Mono", "Courier New", monospace;
+  --gabarit: 1140px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--sable);
+  color: var(--encre);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  font-family: var(--serif);
+  font-weight: 400;
+  letter-spacing: -0.015em;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  font: inherit;
+}
+
+::selection {
+  background: var(--encre);
+  color: var(--feuille);
+}
+
+.skip-link {
+  position: fixed;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 100;
+  transform: translateY(-160%);
+  padding: 0.6rem 0.9rem;
+  background: var(--encre);
+  color: var(--feuille);
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  transform: none;
+}
+
+.gabarit {
+  width: min(var(--gabarit), calc(100% - 64px));
+  margin-inline: auto;
+}
+
+.gabarit-etroit {
+  width: min(880px, calc(100% - 64px));
+  margin-inline: auto;
+}
+
+.vitre {
+  display: grid;
+  gap: 1.4rem;
+  padding-top: 1.2rem;
+}
+
+/* Un empilement de feuilles, espacé serré. */
+.vitre-serre {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.display {
+  font-family: var(--serif);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+}
+
+.chiffre {
+  font-family: var(--serif);
+  font-style: italic;
+}
+
+.mono {
+  font-family: var(--mono);
+}
+
+.sou {
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.03em;
+}
+
+.tete-page {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  padding-block: clamp(1.8rem, 3.6vw, 3rem) clamp(1.2rem, 2.2vw, 1.8rem);
+}
+
+.tete-page__principal {
+  max-width: 720px;
+}
+
+.tete-page h1 {
+  margin-top: 0.7rem;
+  font-size: clamp(2.3rem, 4.4vw, 3.9rem);
+}
+
+.tete-page__entree {
+  max-width: 62ch;
+  margin-top: 0.9rem;
+  color: var(--encre-douce);
+  font-size: 0.97rem;
+  line-height: 1.6;
+}
+
+.tete-page__cote {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  padding-bottom: 0.3rem;
+}
+
+.sur-titre {
+  display: inline-block;
+  padding: 0.22rem 0.56rem 0.16rem;
+  border: 1px solid currentColor;
+  border-left-width: 3px;
+  color: var(--encre-douce);
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.sur-titre--nu {
+  padding: 0;
+  border: 0;
+}
+
+.sur-titre--pale {
+  color: var(--sable-fonce);
+}
+
+.insigne {
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--encre-lointaine);
+}
+
+.tete-feuille {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.4rem;
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid var(--encre);
+}
+
+.tete-feuille h2 {
+  font-size: clamp(1.5rem, 2.2vw, 2rem);
+}
+
+.tete-feuille__cote {
+  color: var(--encre-lointaine);
+  font-family: var(--mono);
+  font-size: 0.56rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* La feuille posée sur le sable : bord d'encre, coin droit, ombre pleine. */
+.feuille {
+  background: var(--feuille);
+  border: 1px solid var(--encre);
+  position: relative;
+}
+
+.feuille--decalee {
+  box-shadow: 5px 5px 0 var(--sable-fonce);
+}
+
+.bloc {
+  padding: 1.15rem 1.25rem 1.35rem;
+}
+
+.bloc--serre {
+  padding: 0.85rem 0.95rem 0.95rem;
+}
+
+.ligne-reglure {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.8rem;
+  padding-block: 0.48rem;
+  border-bottom: 1px solid var(--regrais);
+}
+
+.ligne-reglure:last-child {
+  border-bottom: 0;
+}
+
+.ligne-reglure__nom {
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.ligne-reglure__valeur {
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.8rem;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+.bouton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 2.85rem;
+  padding: 0.6rem 1.05rem;
+  border: 1px solid var(--encre);
+  border-radius: 0;
+  background: transparent;
+  color: var(--encre);
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color 150ms ease,
+    color 150ms ease,
+    border-color 150ms ease;
+}
+
+.bouton:hover {
+  background: var(--encre);
+  color: var(--feuille);
+}
+
+.bouton:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.bouton__fleche {
+  display: inline-flex;
+  transition: transform 150ms ease;
+}
+
+.bouton:hover .bouton__fleche {
+  transform: translateX(2px);
+}
+
+.bouton--encre {
+  background: var(--encre);
+  border-color: var(--encre);
+  color: var(--feuille);
+}
+
+.bouton--encre:hover {
+  background: var(--brique);
+  border-color: var(--brique);
+  color: var(--feuille-nette);
+}
+
+.bouton--brique {
+  background: var(--brique);
+  border-color: var(--brique);
+  color: var(--feuille-nette);
+}
+
+.bouton--brique:hover {
+  background: var(--encre);
+  border-color: var(--encre);
+  color: var(--feuille);
+}
+
+.bouton--doux {
+  border-color: transparent;
+  color: var(--encre-douce);
+  padding-inline: 0.5rem;
+}
+
+.bouton--doux:hover {
+  background: transparent;
+  border-color: transparent;
+  color: var(--brique);
+}
+
+.bouton--petit {
+  min-height: 2.2rem;
+  padding: 0.32rem 0.68rem;
+  font-size: 0.72rem;
+}
+
+.bouton--large {
+  width: 100%;
+}
+
+.lien-simple {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border-bottom: 1px solid var(--regrais-fort);
+  color: var(--encre);
+  font-size: 0.82rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition:
+    color 150ms ease,
+    border-color 150ms ease;
+}
+
+.lien-simple:hover {
+  color: var(--brique);
+  border-bottom-color: var(--brique);
+}
+
+.champ {
+  display: flex;
+  flex-direction: column;
+  gap: 0.36rem;
+}
+
+.champ > label,
+.champ__titre {
+  color: var(--encre-douce);
+  font-family: var(--mono);
+  font-size: 0.56rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.champ input,
+.champ select,
+.champ textarea,
+.saisie {
+  width: 100%;
+  min-height: 2.75rem;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid var(--regrais-fort);
+  border-radius: 0;
+  background: var(--feuille-nette);
+  color: var(--encre);
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  line-height: 1.4;
+  transition:
+    border-color 140ms ease,
+    background-color 140ms ease;
+}
+
+.champ textarea {
+  min-height: 5.5rem;
+  resize: vertical;
+}
+
+.champ input:focus,
+.champ select:focus,
+.champ textarea:focus,
+.saisie:focus {
+  outline: none;
+  border-color: var(--encre);
+}
+
+.champ input::placeholder,
+.champ textarea::placeholder {
+  color: var(--encre-lointaine);
+}
+
+.champ__aide {
+  color: var(--encre-lointaine);
+  font-size: 0.72rem;
+  line-height: 1.5;
+}
+
+/* Le +237 est une bordure de champ, pas un caractère saisi. */
+.champ__prefixe {
+  display: flex;
+  align-items: stretch;
+  border: 1px solid var(--regrais-fort);
+  background: var(--feuille-nette);
+}
+
+.champ__prefixe:focus-within {
+  border-color: var(--encre);
+}
+
+.champ__prefixe > span {
+  display: grid;
+  place-items: center;
+  padding-inline: 0.6rem;
+  color: var(--encre-lointaine);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  border-right: 1px solid var(--regrais);
+  white-space: nowrap;
+}
+
+.champ__prefixe input {
+  flex: 1;
+  border: 0;
+  background: transparent;
+}
+
+.champ__prefixe input:focus {
+  outline: none;
+}
+
+.champ--lecture {
+  color: var(--encre-douce);
+  background: var(--sable-clair);
+}
+
+.champ__aide--tard {
+  color: var(--brique);
+  font-weight: 500;
+}
+
+.champ__nombre {
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.grille-champs {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr 0.85fr;
+  gap: 0.95rem;
+}
+
+.grille-champs .champ--plein {
+  grid-column: 1 / -1;
+}
+
+.pile-champs {
+  display: grid;
+  gap: 0.95rem;
+}
+
+.acts {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 0.3rem;
+}
+
+.note-bas {
+  padding: 0.68rem 0.8rem;
+  border-left: 2px solid var(--or);
+  background: var(--or-lave);
+  color: var(--encre);
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.note-bas--tard {
+  border-left-color: var(--brique);
+  background: var(--brique-lave);
+}
+
+.note-bas--tenu {
+  border-left-color: var(--rayon);
+  background: var(--rayon-lave);
+}
+
+.cochet {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  padding-block: 0.3rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.cochet input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.cochet__boite {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 1.05rem;
+  height: 1.05rem;
+  margin-top: 0.1rem;
+  flex: none;
+  border: 1px solid var(--regrais-fort);
+  background: var(--feuille-nette);
+}
+
+.cochet__boite::after {
+  content: "";
+  width: 0.45rem;
+  height: 0.25rem;
+  border-left: 1.5px solid var(--feuille);
+  border-bottom: 1.5px solid var(--feuille);
+  transform: translateY(-1px) rotate(-45deg);
+  opacity: 0;
+}
+
+.cochet input:checked + .cochet__boite {
+  background: var(--encre);
+  border-color: var(--encre);
+}
+
+.cochet input:checked + .cochet__boite::after {
+  opacity: 1;
+}
+
+.cochet input:focus-visible + .cochet__boite {
+  outline: 2px solid var(--brique);
+  outline-offset: 3px;
+}
+
+.cochet__texte {
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.cochet__texte small {
+  display: block;
+  margin-top: 0.08rem;
+  color: var(--encre-lointaine);
+  font-size: 0.72rem;
+  line-height: 1.45;
+}
+
+.separe {
+  height: 1px;
+  border: 0;
+  margin: 0;
+  background: var(--regrais);
+}
+
+.separe--encre {
+  background: var(--encre);
+}
+
+.vide {
+  padding: 2.3rem 1.4rem;
+  border: 1px dashed var(--regrais-fort);
+  background: rgba(251, 248, 242, 0.55);
+  text-align: center;
+}
+
+.vide h3 {
+  margin-top: 0.45rem;
+  font-size: 1.4rem;
+}
+
+.vide p {
+  max-width: 44ch;
+  margin: 0.5rem auto 1rem;
+  color: var(--encre-douce);
+  font-size: 0.85rem;
+}
+
+/* Le tampon du comptoir, dessiné en CSS. */
+.tampon {
+  display: inline-block;
+  padding: 0.32rem 0.58rem;
+  border: 1px solid currentColor;
+  box-shadow:
+    inset 0 0 0 2px var(--feuille),
+    inset 0 0 0 3px currentColor;
+  color: var(--brique);
+  font-family: var(--mono);
+  font-size: 0.56rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  line-height: 1.4;
+  text-transform: uppercase;
+  transform: rotate(-2deg);
+  opacity: 0.94;
+}
+
+.tampon--encre {
+  color: var(--encre);
+}
+
+.tampon--rayon {
+  color: var(--rayon);
+}
+
+.tampon--droit {
+  transform: none;
+}
+
+.etiquette {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.28rem;
+  border: 1px solid currentColor;
+  padding: 0.14rem 0.4rem;
+  color: var(--encre-douce);
+  font-family: var(--mono);
+  font-size: 0.52rem;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.etiquette--dictee {
+  color: var(--indigo);
+  background: var(--indigo-lave);
+}
+
+.etiquette--rayon {
+  color: var(--rayon);
+  background: var(--rayon-lave);
+}
+
+.etiquette--alerte {
+  color: var(--brique);
+  background: var(--brique-lave);
+}
+
+.etiquette--douce {
+  color: var(--encre-lointaine);
+  border-color: var(--regrais);
+}
+
+.pied-page {
+  margin-top: clamp(3rem, 6vw, 5rem);
+  border-top: 1px solid var(--encre);
+  padding-block: 1.6rem 2.2rem;
+}
+
+.pied-page__rangee {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.pied-page__note {
+  max-width: 34ch;
+  color: var(--encre-douce);
+  font-size: 0.75rem;
+  line-height: 1.6;
+}
+
+.pied-page__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.2rem;
+  justify-content: flex-end;
+  color: var(--encre-lointaine);
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.mention-demo {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  color: var(--encre-lointaine);
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.06em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.mention-demo svg {
+  flex: none;
+  transform: translateY(2px);
+}
+
+@media (max-width: 980px) {
+  .grille-champs {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .gabarit,
+  .gabarit-etroit {
+    width: min(100% - 32px, var(--gabarit));
+  }
+
+  .tete-page {
+    display: block;
+    padding-top: 1.6rem;
+  }
+
+  .tete-page h1 {
+    font-size: clamp(2.1rem, 9vw, 3.1rem);
+  }
+
+  .tete-page__cote {
+    justify-content: flex-start;
+    margin-top: 1.1rem;
+  }
+
+  .tete-feuille {
+    display: block;
+  }
+
+  .tete-feuille__cote {
+    margin-top: 0.5rem;
+    white-space: normal;
+  }
+
+  .grille-champs {
+    grid-template-columns: 1fr;
+  }
+
+  .pied-page__rangee {
+    display: block;
+  }
+
+  .pied-page__meta {
+    justify-content: flex-start;
+    margin-top: 1.1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

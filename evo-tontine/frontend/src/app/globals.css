@@ -1,0 +1,406 @@
+/* Ce qui est propre à evo-tontine. Le socle CADC (theme.css) porte tout le
+   reste : palette, boutons, champs, cartes, rail du bas, tailles de texte. */
+
+/* Public Sans et Red Hat Mono sont des fontes variables : un seul fichier
+   couvre 100 à 900, et un gras vrai remplace la graisse simulée.
+   U+202F est la finesse qui sépare les milliers en français : sans elle, le
+   chiffre s'affiche dans une fonte de repli et le montant se disloque. */
+
+@font-face {
+  font-family: "Public Sans";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/fonts/publicsans-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+00A0, U+2000-206F,
+    U+202F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Red Hat Mono";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/fonts/redhatmono-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+00A0, U+2000-206F,
+    U+202F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Instrument Serif";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/instrument-serif-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+00A0, U+2000-206F,
+    U+202F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Instrument Serif";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/instrument-serif-italic-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+00A0, U+2000-206F,
+    U+202F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* Le pot, en grand : c'est le nombre que tout le cercle regarde. */
+.pot {
+  display: grid;
+  gap: 6px;
+  padding: 20px;
+  border-radius: 16px;
+  background: var(--cadc-encre);
+  color: var(--cadc-papier-2);
+}
+
+.pot__legende {
+  color: var(--cadc-brume);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pot__valeur {
+  font-family: var(--cadc-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: clamp(2rem, 8vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.pot__aide {
+  color: var(--cadc-argent);
+  font-size: 0.92rem;
+}
+
+/* La jauge de ce qui est rentré. */
+.jauge {
+  height: 12px;
+  border-radius: 999px;
+  background: var(--cadc-papier);
+  border: 1px solid var(--cadc-ligne);
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+.jauge__plein {
+  height: 100%;
+  background: var(--cadc-acier);
+}
+
+.jauge__plein--complet {
+  background: var(--cadc-vert);
+}
+
+/* Le tirage, présenté comme ce qu'il est : un calcul que chacun peut refaire. */
+.tirage {
+  display: grid;
+  gap: 12px;
+  padding: 18px;
+  border: 1px solid var(--cadc-ligne);
+  border-radius: 14px;
+  background: var(--cadc-papier-2);
+}
+
+.tirage__nom {
+  font-family: var(--cadc-titre);
+  font-size: clamp(1.8rem, 7vw, 2.6rem);
+  line-height: 1.05;
+}
+
+.tirage__etiquette {
+  color: var(--cadc-encre-3);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.tirage__date {
+  color: var(--cadc-encre-2);
+  font-size: 0.9rem;
+}
+
+.tirage__algorithme {
+  color: var(--cadc-encre-2);
+  font-size: 0.88rem;
+  max-width: 62ch;
+}
+
+.tirage__graine {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: var(--cadc-feuille);
+  border: 1px dashed var(--cadc-ligne-forte);
+  font-family: var(--cadc-mono);
+  font-size: 0.82rem;
+  overflow-wrap: anywhere;
+}
+
+.tirage__preuve {
+  display: grid;
+  gap: 6px;
+  color: var(--cadc-encre-2);
+  font-size: 0.86rem;
+}
+
+/* La liste des membres, en fiches et non en tableau : lisible sur un petit écran. */
+.fiches {
+  display: grid;
+  gap: 10px;
+}
+
+.fiche {
+  display: grid;
+  gap: 8px;
+  padding: 14px;
+  border: 1px solid var(--cadc-ligne);
+  border-radius: 14px;
+  background: var(--cadc-feuille);
+}
+
+.fiche--retard {
+  border-color: var(--cadc-rouge);
+  background: var(--cadc-rouge-lave);
+}
+
+.fiche--paye {
+  border-color: var(--cadc-vert);
+}
+
+/* Un membre sorti reste dans le cahier : la fiche se fane, elle ne disparaît pas. */
+.fiche--sorti {
+  border-style: dashed;
+  background: var(--cadc-papier-2);
+  color: var(--cadc-encre-2);
+}
+
+.fiche__tete {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.fiche__nom {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.fiche__nom small {
+  display: block;
+  margin-top: 2px;
+  color: var(--cadc-encre-3);
+  font-weight: 500;
+  font-size: 0.8rem;
+}
+
+.fiche__chiffres {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.fiche__chiffre {
+  padding: 8px;
+  border-radius: 10px;
+  background: var(--cadc-papier-2);
+  text-align: center;
+}
+
+.fiche__chiffre span {
+  display: block;
+  color: var(--cadc-encre-3);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.fiche__chiffre strong {
+  display: block;
+  margin-top: 3px;
+  font-family: var(--cadc-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.fiche--retard .fiche__chiffre {
+  background: var(--cadc-feuille);
+}
+
+/* Le reçu de remise, tel qu'on le montre au membre. */
+.montre {
+  display: grid;
+  gap: 14px;
+  padding: 22px;
+  border: 2px solid var(--cadc-encre);
+  border-radius: 16px;
+  background: var(--cadc-feuille);
+  text-align: center;
+}
+
+.montre__code {
+  display: block;
+  padding: 12px;
+  border-radius: 10px;
+  background: var(--cadc-encre);
+  color: #fff;
+  font-family: var(--cadc-mono);
+  font-size: clamp(1.4rem, 7vw, 2rem);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+.montre__preuve {
+  display: grid;
+  gap: 8px;
+  padding-block: 4px;
+}
+
+.montre__sous {
+  display: block;
+  margin-top: 2px;
+  color: var(--cadc-encre-3);
+  font-family: var(--cadc-sans);
+  font-size: 0.82rem;
+  font-weight: 500;
+}
+
+/* Un code public se lit à voix haute : on l'écrit en capitales espacées. */
+.verif__saisie {
+  font-family: var(--cadc-mono);
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.montre__ligne {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  text-align: left;
+  font-size: 0.95rem;
+}
+
+.montre__ligne span:first-child {
+  color: var(--cadc-encre-3);
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* Le logo de marque, posé tel que livré. */
+/* Un chargement qui ne promet pas une ligne droite : le cercle s'ouvre par
+   blocs inégaux, comme il se lit. */
+.attente {
+  display: grid;
+  gap: 12px;
+  padding-block: 8px;
+}
+
+.attente span {
+  display: block;
+  height: 15px;
+  border-radius: 8px;
+  background: var(--cadc-acier-pale);
+  animation: attente-pale 1.3s ease-in-out infinite;
+}
+
+@keyframes attente-pale {
+  0%,
+  100% { opacity: 0.45; }
+  50% { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .attente span { animation: none; opacity: 0.8; }
+}
+
+.marque__photo {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--cadc-ligne);
+  flex: none;
+}
+
+.entree {
+  display: grid;
+  gap: 26px;
+}
+
+.entree__hero {
+  display: grid;
+  gap: 18px;
+  padding-block: 26px;
+}
+
+.entree__hero h1 {
+  font-size: clamp(2rem, 9vw, 3.4rem);
+  max-width: 22ch;
+}
+
+.entree__chapo {
+  color: var(--cadc-encre-2);
+  font-size: 1.05rem;
+  max-width: 54ch;
+}
+
+.entree__gestes {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.entree__geste {
+  padding: 16px;
+  border: 1px solid var(--cadc-ligne);
+  border-radius: 14px;
+  background: var(--cadc-feuille);
+}
+
+.entree__geste-num {
+  color: var(--cadc-acier);
+  font-family: var(--cadc-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.entree__geste h3 {
+  margin-block: 6px 8px;
+  font-size: 1.3rem;
+}
+
+.entree__geste p {
+  color: var(--cadc-encre-2);
+  font-size: 0.95rem;
+}
+
+.seance {
+  display: grid;
+  gap: 22px;
+  padding-block: 26px;
+}
+
+.seance__cartes {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}

@@ -1,0 +1,131 @@
+/* Ce qui est propre à l'écran du cercle. Le socle CADC porte le reste. */
+
+.cadc-dateau {
+  background: var(--cadc-encre-2);
+  color: var(--cadc-argent);
+}
+
+.cadc-dateau__rangee {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding-block: 7px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.cercle {
+  display: grid;
+  gap: 18px;
+}
+
+.cercle__tete {
+  display: grid;
+  gap: 8px;
+}
+
+.cercle__tete h1 {
+  font-size: clamp(1.7rem, 7vw, 2.4rem);
+}
+
+.cercle__tete p {
+  color: var(--cadc-encre-2);
+  max-width: 56ch;
+}
+
+.cercle__deux {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: start;
+}
+
+.cercle__file {
+  display: grid;
+  gap: 10px;
+}
+
+.cercle__note {
+  padding: 12px 14px;
+  border-left: 4px solid var(--cadc-acier);
+  background: var(--cadc-acier-pale);
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+/* Le mot que le cercle s'est donné, écrit une fois, lu à chaque ouverture. */
+/* Une ligne de tour : le numéro, la date, le pot, l'état. La grille est
+   inégale à dessein, le numéro doit rester petit et le nom respirer. */
+.rangee {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 14px;
+  border: 1px solid var(--cadc-ligne);
+  border-radius: 14px;
+  background: var(--cadc-feuille);
+  text-decoration: none;
+}
+
+.rangee:hover { border-color: var(--cadc-ligne-forte); }
+
+.rangee__numero {
+  font-family: var(--cadc-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--cadc-acier);
+  text-align: center;
+}
+
+.rangee__nom {
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.rangee__nom small {
+  display: block;
+  margin-top: 2px;
+  color: var(--cadc-encre-3);
+  font-weight: 500;
+  font-size: 0.84rem;
+}
+
+.rangee__montant {
+  font-family: var(--cadc-mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+@media (max-width: 560px) {
+  .rangee {
+    grid-template-columns: 40px minmax(0, 1fr) auto;
+    grid-template-areas:
+      "num nom montant"
+      "num etat etat";
+    row-gap: 6px;
+  }
+  .rangee__numero { grid-area: num; align-self: start; }
+  .rangee__nom { grid-area: nom; }
+  .rangee__montant { grid-area: montant; text-align: right; }
+  .rangee > :last-child { grid-area: etat; justify-self: start; }
+}
+
+.cercle__mot {
+  font-family: var(--cadc-titre);
+  font-style: italic;
+  font-size: 1.15rem;
+  line-height: 1.45;
+  color: var(--cadc-encre-2);
+}
+
+@media (max-width: 760px) {
+  .cercle__deux {
+    grid-template-columns: 1fr;
+  }
+}

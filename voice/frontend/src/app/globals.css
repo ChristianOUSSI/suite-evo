@@ -1,0 +1,160 @@
+@font-face {
+  font-family: "Newsreader";
+  src: url("/fonts/newsreader-latin.woff2") format("woff2");
+  font-weight: 400 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Newsreader";
+  src: url("/fonts/newsreader-italic-latin.woff2") format("woff2");
+  font-weight: 400 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Karla";
+  src: url("/fonts/karla-latin.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Space Mono";
+  src: url("/fonts/spacemono-400-latin.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Space Mono";
+  src: url("/fonts/spacemono-700-latin.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --nuit: #10151a;
+  --nuit-claire: #161d24;
+  --guichet: #1c242c;
+  --rule: #2a3540;
+  --rule-douce: #222c35;
+  --encre: #e3e9ee;
+  --encre-douce: #9db0bf;
+  --encre-lointaine: #6d8091;
+  --ambre: #f0a63c;
+  --mousse: #85ab6d;
+  --rouille: #c9613f;
+  --serie: "Newsreader", Georgia, serif;
+  --texte: "Karla", "Segoe UI", sans-serif;
+  --mono: "Space Mono", ui-monospace, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--nuit);
+  color: var(--encre);
+  font-family: var(--texte);
+  font-size: 15px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--serie);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+input,
+select,
+textarea,
+button {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.chiffre {
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.bouton {
+  background: var(--ambre);
+  color: #1a1206;
+  border: 0;
+  border-radius: 3px;
+  padding: 11px 18px;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  font-family: var(--texte);
+}
+
+.bouton:hover {
+  filter: brightness(1.1);
+}
+
+.bouton.sobre:hover {
+  filter: none;
+  border-color: var(--ambre);
+  color: var(--ambre);
+}
+
+.bouton:disabled {
+  opacity: 0.55;
+  cursor: progress;
+}
+
+.bouton.petit {
+  padding: 6px 11px;
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 2px;
+}
+
+.bouton.sobre {
+  background: transparent;
+  color: var(--encre);
+  border: 1px solid var(--rule);
+  font-weight: 500;
+}
+
+.bouton.mousse {
+  background: var(--mousse);
+  color: #10160c;
+}
+
+.visuel {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
