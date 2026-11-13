@@ -10,3 +10,4 @@ __pycache__/
 !.env.example
 nul
 *.log
+tsconfig.tsbuildinfo
