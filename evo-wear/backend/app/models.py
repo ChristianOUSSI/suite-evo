@@ -4,7 +4,7 @@ from __future__ import annotations
 
 Une boutique camerounais vend des pagnes, des robes, des chemises :
 chaque taille et chaque couleur est une ligne de stock. La vente
-descend le stock, porte son client et sa date — le stock ne ment
+descend le stock, porte son client et sa date - le stock ne ment
 jamais : on ne vend pas ce qu'on n'a pas.
 """
 

@@ -5,7 +5,7 @@ import { creerTraducteur, type Dictionnaire } from "@cadc/kit/i18n";
  * Le backend rend des nombres, des dates ISO et des clés stables.
  */
 export const DICTEE: Dictionnaire = {
-  "marque.slogan": { fr: "le pagne, la robe, la taille — la boutique que la cliente suit seule", en: "the wax print, the dress, the size — the boutique the client follows alone" },
+  "marque.slogan": { fr: "le pagne, la robe, la taille - la boutique que la cliente suit seule", en: "the wax print, the dress, the size - the boutique the client follows alone" },
   "nav.accueil": { fr: "L'accueil", en: "The desk" },
   "nav.articles": { fr: "Les articles", en: "Items" },
   "nav.clients": { fr: "Les clientes", en: "Clients" },
@@ -17,14 +17,14 @@ export const DICTEE: Dictionnaire = {
   "texte.label": { fr: "Taille du texte", en: "Text size" },
   "meta.titre": { fr: "evo-wear | le pagne, la robe, la taille", en: "evo-wear | the wax print, the dress, the size" },
   "meta.description": {
-    fr: "La boutique d'un prêt-à-porter camerounais : articles, tailles, couleurs, stock — et un catalogue public à envoyer sur WhatsApp.",
-    en: "The boutique of a Cameroonian ready-to-wear shop: items, sizes, colours, stock — and a public catalogue to send on WhatsApp.",
+    fr: "La boutique d'un prêt-à-porter camerounais : articles, tailles, couleurs, stock - et un catalogue public à envoyer sur WhatsApp.",
+    en: "The boutique of a Cameroonian ready-to-wear shop: items, sizes, colours, stock - and a public catalogue to send on WhatsApp.",
   },
 
   "entree.titre": { fr: "La boutique, sans le cahier", en: "The boutique, without the notebook" },
   "entree.chapo": {
-    fr: "evo-wear tient le stock : chaque article avec sa taille, sa couleur, son prix — et une page publique où la cliente lit les articles en stock sans compte.",
-    en: "evo-wear keeps the stock: every item with its size, colour and price — and a public page where the client reads items in stock with no account.",
+    fr: "evo-wear tient le stock : chaque article avec sa taille, sa couleur, son prix - et une page publique où la cliente lit les articles en stock sans compte.",
+    en: "evo-wear keeps the stock: every item with its size, colour and price - and a public page where the client reads items in stock with no account.",
   },
   "entree.ouvrir": { fr: "Ouvrir la boutique", en: "Open the boutique" },
   "entree.slogan": { fr: "un téléphone au comptoir", en: "one phone at the counter" },
@@ -34,7 +34,7 @@ export const DICTEE: Dictionnaire = {
   "geste.2.titre": { fr: "La vente qui descend", en: "The sale that comes down" },
   "geste.2.texte": { fr: "En stock, vendue, épuisée : le stock descend à la vente, se réapprovisionne, et la vente porte sa cliente et sa date.", en: "In stock, sold, empty: the stock drops on sale, restocks, and the sale keeps its client and date." },
   "geste.3.titre": { fr: "Le catalogue public", en: "The public catalogue" },
-  "geste.3.texte": { fr: "La cliente lit les articles sur /catalogue — sans compte, sans appel, à envoyer sur WhatsApp.", en: "The client reads the items on /catalogue — no account, no call, ready for WhatsApp." },
+  "geste.3.texte": { fr: "La cliente lit les articles sur /catalogue - sans compte, sans appel, à envoyer sur WhatsApp.", en: "The client reads the items on /catalogue - no account, no call, ready for WhatsApp." },
   "geste.4.titre": { fr: "Relire le mois", en: "Read the month" },
   "geste.4.texte": { fr: "Ventes et stock : recalculé à la demande, exporté en CSV.", en: "Sales and stock: recomputed on request, exported to CSV." },
   "entree.exige": { fr: "Ce que le produit demande", en: "What the product needs" },
@@ -64,7 +64,7 @@ export const DICTEE: Dictionnaire = {
   "accueil.stock": { fr: "Valeur du stock", en: "Stock value" },
   "accueil.nouveau": { fr: "Nouvel article", en: "New item" },
   "accueil.catalogue": { fr: "Le catalogue public", en: "The public catalogue" },
-  "accueil.catalogue-aide": { fr: "La page où la cliente lit les articles en stock — à envoyer sur WhatsApp.", en: "The page where the client reads items in stock — to send on WhatsApp." },
+  "accueil.catalogue-aide": { fr: "La page où la cliente lit les articles en stock - à envoyer sur WhatsApp.", en: "The page where the client reads items in stock - to send on WhatsApp." },
 
   "articles.titre": { fr: "Les articles du stock", en: "The stock items" },
   "articles.chapo": { fr: "Chaque article : le nom, la catégorie, la taille, la couleur, le stock, les prix. Le statut se change d'un geste.", en: "Every item: name, category, size, colour, stock, prices. The status changes in one move." },
@@ -116,7 +116,7 @@ export const DICTEE: Dictionnaire = {
   "type.evenement": { fr: "Événement", en: "Event" },
 
   "catalogue.titre": { fr: "Les articles en stock", en: "Items in stock" },
-  "catalogue.chapo": { fr: "Les articles en stock, leurs prix — sans compte. À envoyer sur WhatsApp.", en: "The items in stock, their prices — no account needed. Ready for WhatsApp." },
+  "catalogue.chapo": { fr: "Les articles en stock, leurs prix - sans compte. À envoyer sur WhatsApp.", en: "The items in stock, their prices - no account needed. Ready for WhatsApp." },
   "catalogue.vide": { fr: "Rien en stock pour l'instant.", en: "Nothing in stock yet." },
   "catalogue.chez": { fr: "chez", en: "at" },
   "catalogue.contact": { fr: "Contacter la boutique", en: "Contact the boutique" },

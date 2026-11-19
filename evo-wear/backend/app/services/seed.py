@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-"""La démo de la boutique : articles de prêt-à-porter et clientes — déterministe."""
+"""La démo de la boutique : articles de prêt-à-porter et clientes - déterministe."""
 
 import random
 from datetime import date

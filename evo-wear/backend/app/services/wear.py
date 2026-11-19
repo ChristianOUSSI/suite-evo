@@ -3,7 +3,7 @@ from __future__ import annotations
 """La boutique : les articles de prêt-à-porter, les clientes.
 
 Chaque taille et chaque couleur est une ligne de stock. La vente
-descend le stock, porte sa cliente et sa date — le stock ne ment
+descend le stock, porte sa cliente et sa date - le stock ne ment
 jamais.
 """
 
@@ -253,7 +253,7 @@ def recap(db: Session, organisation: Organisation, periode: str) -> dict:
         par_categorie[un.categorie] = par_categorie.get(un.categorie, 0) + 1
     par_couleur: dict[str, int] = {}
     for un in vendus:
-        cle = un.couleur or "—"
+        cle = un.couleur or "-"
         par_couleur[cle] = par_couleur.get(cle, 0) + un.quantite_vendue
 
     return {

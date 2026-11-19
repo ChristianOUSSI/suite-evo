@@ -26,7 +26,7 @@ const VIDE = {
 type Vente = { article: Article; quantite: number; client_id: string };
 
 /**
- * Les articles de la boutique : une fiche par article — le nom, la
+ * Les articles de la boutique : une fiche par article - le nom, la
  * catégorie, la taille, la couleur, le stock, les prix. Vendre descend
  * le stock et porte sa cliente ; réapprovisionner le remonte.
  */
@@ -236,7 +236,7 @@ export function ArticlesGerant({ articles, clients, langue }: Props) {
                   <label className="cadc-champ">
                     <span className="cadc-champ__titre">{t("articles.client")}</span>
                     <select value={vente.client_id} onChange={(e) => setVente({ ...vente, client_id: e.target.value })}>
-                      <option value="">—</option>
+                      <option value="">-</option>
                       {clients.map((unClient) => (
                         <option key={unClient.id} value={unClient.id}>{unClient.nom}</option>
                       ))}
