@@ -24,7 +24,7 @@ const VIDE = {
  * Les demandes des clients : chaque contact a son canal et son suivi.
  * Le statut avance : nouvelle → contactée → visite → convertie ou perdue.
  * Un client qui demande « le bien de Bonapriso » sans le nommer reste
- * enregistré — le bien est optionnel.
+ * enregistré - le bien est optionnel.
  */
 export function DemandesGerant({ demandes, biens, langue }: Props) {
   const routeur = useRouter();
@@ -141,10 +141,10 @@ export function DemandesGerant({ demandes, biens, langue }: Props) {
             <label className="cadc-champ">
               <span className="cadc-champ__titre">{t("demandes.bien")}</span>
               <select value={form.bien_id} onChange={(e) => setForm({ ...form, bien_id: e.target.value })}>
-                <option value="">—</option>
+                <option value="">-</option>
                 {biens.map((un) => (
                   <option key={un.id} value={un.id}>
-                    {un.titre || `${t(`type.${un.type}`)} — ${un.quartier || un.ville}`} · {f.court(un.prix)}
+                    {un.titre || `${t(`type.${un.type}`)} - ${un.quartier || un.ville}`} · {f.court(un.prix)}
                   </option>
                 ))}
               </select>

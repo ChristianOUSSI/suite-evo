@@ -6,11 +6,11 @@ Trois règles :
 
 1. Le statut du bien se change à la main et se lit partout : disponible,
    en négociation, loué, vendu, retiré. Les compteurs se recalculent à la
-   lecture — aucune colonne à désynchroniser.
+   lecture - aucune colonne à désynchroniser.
 2. Une demande garde son canal : téléphone, WhatsApp, panneau, bouche à
    oreille. C'est le canal qui dit où l'agence doit être présente.
 3. Une visite a une issue : à venir, conclue, absente, refusée. Le passé
-   ne se réécrit pas — on ajoute une ligne, on ne corrige pas l'histoire.
+   ne se réécrit pas - on ajoute une ligne, on ne corrige pas l'histoire.
 """
 
 import re

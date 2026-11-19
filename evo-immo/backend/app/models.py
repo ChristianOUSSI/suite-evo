@@ -25,7 +25,7 @@ def _maintenant_naif() -> datetime:
 
 # L'agence immobilière : ses biens, ses demandes, ses visites.
 # Le statut du bien se change à la main ; les compteurs se recalculent
-# à la lecture. Chaque demande garde son canal — téléphone, WhatsApp,
+# à la lecture. Chaque demande garde son canal - téléphone, WhatsApp,
 # visite du dimanche.
 
 ROLES = ("responsable", "agent")

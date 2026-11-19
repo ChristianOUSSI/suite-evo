@@ -23,7 +23,7 @@ const VIDE = {
 
 /**
  * Les visites programmées : le bien, le jour, l'heure, le client.
- * L'issue se note après — conclue, absente, refusée — et le passé
+ * L'issue se note après - conclue, absente, refusée - et le passé
  * ne se réécrit pas.
  */
 export function VisitesGerant({ visites, biens, langue }: Props) {
@@ -89,10 +89,10 @@ export function VisitesGerant({ visites, biens, langue }: Props) {
             <label className="cadc-champ">
               <span className="cadc-champ__titre">{t("visites.bien")}</span>
               <select value={form.bien_id} onChange={(e) => setForm({ ...form, bien_id: e.target.value })}>
-                <option value="">—</option>
+                <option value="">-</option>
                 {disponibles.map((un) => (
                   <option key={un.id} value={un.id}>
-                    {un.titre || `${t(`type.${un.type}`)} — ${un.quartier || un.ville}`}
+                    {un.titre || `${t(`type.${un.type}`)} - ${un.quartier || un.ville}`}
                   </option>
                 ))}
               </select>
@@ -148,7 +148,7 @@ export function VisitesGerant({ visites, biens, langue }: Props) {
             <span className="cadc-ligne__nom">
               {visite.client_nom || t("visites.client")}
               <small>
-                {f.jourDate(visite.date)} · {visite.heure} · {t(`type.${visite.type}`)} — {visite.quartier}
+                {f.jourDate(visite.date)} · {visite.heure} · {t(`type.${visite.type}`)} - {visite.quartier}
                 {visite.client_telephone_display ? ` · ${visite.client_telephone_display}` : ""}
                 {visite.note ? ` · ${visite.note}` : ""}
               </small>

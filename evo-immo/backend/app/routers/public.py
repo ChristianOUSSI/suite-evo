@@ -11,7 +11,7 @@ def annonces() -> dict:
     """La page publique : les biens disponibles de chaque agence.
 
     Aucun compte n'est demandé : le client qui a reçu le lien lit les
-    annonces — jamais les propriétaires, jamais les demandes.
+    annonces - jamais les propriétaires, jamais les demandes.
     """
     with SessionLocal() as db:
         from sqlalchemy import select

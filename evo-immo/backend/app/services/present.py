@@ -61,7 +61,7 @@ def bien_dict(bien: Bien, detail: bool = False) -> dict:
 
 def _titre_par_defaut(bien: Bien) -> str:
     lieu = bien.quartier or bien.ville
-    return f"{bien.type.capitalize()} — {lieu}".strip(" —")
+    return f"{bien.type.capitalize()} - {lieu}".strip(" -")
 
 
 def annonce_dict(bien: Bien) -> dict:

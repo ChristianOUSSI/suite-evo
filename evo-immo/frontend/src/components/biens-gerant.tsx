@@ -29,7 +29,7 @@ const VIDE = {
 /**
  * Les biens de l'agence : une fiche par bien, son prix, son propriétaire,
  * son statut. L'agent fiche le bien du jour ; le responsable seul touche
- * au prix et au propriétaire — le reste se suit.
+ * au prix et au propriétaire - le reste se suit.
  */
 export function BiensGerant({ biens, langue }: Props) {
   const routeur = useRouter();
@@ -189,7 +189,7 @@ export function BiensGerant({ biens, langue }: Props) {
         {affiches.map((bien) => (
           <li className={`cadc-ligne${bien.statut === "disponible" ? " eleve--dette" : ""}${bien.statut === "retire" ? " ouvrier--sorti" : ""}`} key={bien.id}>
             <span className="cadc-ligne__nom">
-              {bien.titre || `${t(`type.${bien.type}`)} — ${bien.quartier || bien.ville}`}
+              {bien.titre || `${t(`type.${bien.type}`)} - ${bien.quartier || bien.ville}`}
               <small>
                 {t(`type.${bien.type}`)} · {bien.ville}{bien.quartier ? `, ${bien.quartier}` : ""}
                 {bien.surface_m2 ? ` · ${bien.surface_m2} ${t("biens.m2")}` : ""}

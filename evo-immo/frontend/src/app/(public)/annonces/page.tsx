@@ -20,8 +20,8 @@ export async function generateMetadata(): Promise<Metadata> {
     title: langue === "en" ? "Listings" : "Les annonces",
     description:
       langue === "en"
-        ? "Available properties from the agency — no account needed."
-        : "Les biens disponibles de l'agence — aucun compte demandé.",
+        ? "Available properties from the agency - no account needed."
+        : "Les biens disponibles de l'agence - aucun compte demandé.",
   };
 }
 
@@ -75,7 +75,7 @@ export default async function PageAnnonces() {
               {annonces.map((un) => (
                 <li className="cadc-ligne" key={un.id}>
                   <span className="cadc-ligne__nom">
-                    {un.titre || `${t(`type.${un.type}`)} — ${un.quartier || un.ville}`}
+                    {un.titre || `${t(`type.${un.type}`)} - ${un.quartier || un.ville}`}
                     <small>
                       {t(`type.${un.type}`)} · {un.ville}{un.quartier ? `, ${un.quartier}` : ""}
                       {un.surface_m2 ? ` · ${un.surface_m2} m²` : ""}

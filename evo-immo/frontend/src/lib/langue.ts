@@ -5,7 +5,7 @@ import { creerTraducteur, type Dictionnaire } from "@cadc/kit/i18n";
  * Le backend rend des nombres, des dates ISO et des clés stables.
  */
 export const DICTEE: Dictionnaire = {
-  "marque.slogan": { fr: "le bien, le client, la visite — l'annonce que le client vérifie seul", en: "the property, the client, the visit — the listing the client checks alone" },
+  "marque.slogan": { fr: "le bien, le client, la visite - l'annonce que le client vérifie seul", en: "the property, the client, the visit - the listing the client checks alone" },
   "nav.accueil": { fr: "L'accueil", en: "The desk" },
   "nav.biens": { fr: "Les biens", en: "Properties" },
   "nav.demandes": { fr: "Les demandes", en: "Requests" },
@@ -18,22 +18,22 @@ export const DICTEE: Dictionnaire = {
   "texte.label": { fr: "Taille du texte", en: "Text size" },
   "meta.titre": { fr: "evo-immo | le bien, le client, la visite", en: "evo-immo | the property, the client, the visit" },
   "meta.description": {
-    fr: "Le registre d'une agence immobilière camerounaise : biens, demandes, visites, annonces publiques à partager — sans cahier papier ni doublon.",
-    en: "The register of a Cameroonian real estate agency: properties, requests, visits, public listings to share — no paper book, no duplicate.",
+    fr: "Le registre d'une agence immobilière camerounaise : biens, demandes, visites, annonces publiques à partager - sans cahier papier ni doublon.",
+    en: "The register of a Cameroonian real estate agency: properties, requests, visits, public listings to share - no paper book, no duplicate.",
   },
 
   "entree.titre": { fr: "L'agence, sans le cahier papier", en: "The agency, without the paper book" },
   "entree.chapo": {
-    fr: "evo-immo tient le registre : chaque bien avec son prix et son propriétaire, chaque demande avec son canal, chaque visite avec son issue — et une page publique à envoyer sur WhatsApp.",
-    en: "evo-immo keeps the register: every property with its price and owner, every request with its channel, every visit with its outcome — and a public page to send on WhatsApp.",
+    fr: "evo-immo tient le registre : chaque bien avec son prix et son propriétaire, chaque demande avec son canal, chaque visite avec son issue - et une page publique à envoyer sur WhatsApp.",
+    en: "evo-immo keeps the register: every property with its price and owner, every request with its channel, every visit with its outcome - and a public page to send on WhatsApp.",
   },
   "entree.ouvrir": { fr: "Ouvrir le registre", en: "Open the register" },
   "entree.slogan": { fr: "un téléphone à l'agence", en: "one phone at the agency" },
   "geste.titre": { fr: "Quatre gestes de l'agence", en: "Four moves for the agency" },
   "geste.1.titre": { fr: "Ficher le bien en une minute", en: "File the property in a minute" },
-  "geste.1.texte": { fr: "Type, quartier, prix, propriétaire : le bien se range, le statut se suit — disponible, en négociation, vendu, retiré.", en: "Type, area, price, owner: the property files itself, the status is followed — available, negotiating, sold, withdrawn." },
+  "geste.1.texte": { fr: "Type, quartier, prix, propriétaire : le bien se range, le statut se suit - disponible, en négociation, vendu, retiré.", en: "Type, area, price, owner: the property files itself, the status is followed - available, negotiating, sold, withdrawn." },
   "geste.2.titre": { fr: "Ne jamais perdre une demande", en: "Never lose a request" },
-  "geste.2.texte": { fr: "Téléphone, WhatsApp, panneau, bouche à oreille : chaque contact a son canal et son suivi — nouvelle, contactée, visite, convertie.", en: "Phone, WhatsApp, sign, word of mouth: every contact has its channel and its follow-up — new, contacted, visit, converted." },
+  "geste.2.texte": { fr: "Téléphone, WhatsApp, panneau, bouche à oreille : chaque contact a son canal et son suivi - nouvelle, contactée, visite, convertie.", en: "Phone, WhatsApp, sign, word of mouth: every contact has its channel and its follow-up - new, contacted, visit, converted." },
   "geste.3.titre": { fr: "L'annonce publique", en: "The public listing" },
   "geste.3.texte": { fr: "Une page /annonces sans compte : le client la reçoit sur WhatsApp, lit le prix et le quartier, et appelle.", en: "A /annonces page with no account: the client gets it on WhatsApp, reads the price and area, and calls." },
   "geste.4.titre": { fr: "Relire le mois", en: "Read the month" },
@@ -66,10 +66,10 @@ export const DICTEE: Dictionnaire = {
   "accueil.demande": { fr: "Nouvelle demande", en: "New request" },
   "accueil.visite": { fr: "Planifier une visite", en: "Plan a visit" },
   "accueil.annonces": { fr: "Les annonces publiques", en: "The public listings" },
-  "accueil.annonces-aide": { fr: "La page que le client ouvre sans compte — à envoyer sur WhatsApp.", en: "The page the client opens with no account — to send on WhatsApp." },
+  "accueil.annonces-aide": { fr: "La page que le client ouvre sans compte - à envoyer sur WhatsApp.", en: "The page the client opens with no account - to send on WhatsApp." },
 
   "biens.titre": { fr: "Les biens de l'agence", en: "The agency properties" },
-  "biens.chapo": { fr: "Chaque fiche : le type, le quartier, le prix, le propriétaire. Le statut se change d'un geste — disponible, en négociation, vendu, retiré.", en: "Every file: the type, the area, the price, the owner. The status changes in one move — available, negotiating, sold, withdrawn." },
+  "biens.chapo": { fr: "Chaque fiche : le type, le quartier, le prix, le propriétaire. Le statut se change d'un geste - disponible, en négociation, vendu, retiré.", en: "Every file: the type, the area, the price, the owner. The status changes in one move - available, negotiating, sold, withdrawn." },
   "biens.nouveau": { fr: "Nouveau bien", en: "New property" },
   "biens.disponibles": { fr: "Disponibles seulement", en: "Available only" },
   "biens.type": { fr: "Type", en: "Type" },
@@ -102,7 +102,7 @@ export const DICTEE: Dictionnaire = {
   "statut.retire": { fr: "Retiré", en: "Withdrawn" },
 
   "demandes.titre": { fr: "Les demandes des clients", en: "The clients' requests" },
-  "demandes.chapo": { fr: "Chaque contact : le client, son canal, le bien demandé. Le statut avance — nouvelle, contactée, visite, convertie ou perdue.", en: "Every contact: the client, their channel, the property asked for. The status moves — new, contacted, visit, converted or lost." },
+  "demandes.chapo": { fr: "Chaque contact : le client, son canal, le bien demandé. Le statut avance - nouvelle, contactée, visite, convertie ou perdue.", en: "Every contact: the client, their channel, the property asked for. The status moves - new, contacted, visit, converted or lost." },
   "demandes.nouveau": { fr: "Nouvelle demande", en: "New request" },
   "demandes.ouvertes": { fr: "À traiter", en: "To handle" },
   "demandes.client": { fr: "Client", en: "Client" },
