@@ -14,7 +14,7 @@ type Props = { versements: Versement[]; eleves: Eleve[]; langue: string };
 const MOYENS: Moyen[] = ["especes", "mtn_money", "orange_money", "nexttel_money", "virement", "autre"];
 
 /**
- * La caisse des frais : l'élève, le montant, le moyen — le reçu sort tout
+ * La caisse des frais : l'élève, le montant, le moyen - le reçu sort tout
  * de suite avec son code de dix signes. Annuler ne l'efface pas.
  */
 export function EncaisserGerant({ versements, eleves, langue }: Props) {
@@ -90,7 +90,7 @@ export function EncaisserGerant({ versements, eleves, langue }: Props) {
           <label className="cadc-champ">
             <span className="cadc-champ__titre">{t("caisse.eleve")}</span>
             <select value={eleveId} onChange={(e) => setEleveId(e.target.value)}>
-              <option value="">—</option>
+              <option value="">-</option>
               {eleves.map((un) => (
                 <option key={un.id} value={un.id}>
                   {un.nom} · {un.classe} · {t("eleves.reste")} {f.fcfa(un.reste)}
@@ -173,7 +173,7 @@ export function EncaisserGerant({ versements, eleves, langue }: Props) {
                   </button>
                 </span>
               ) : (
-                <span className="cadc-badge cadc-badge--doux">—</span>
+                <span className="cadc-badge cadc-badge--doux">-</span>
               )}
             </span>
           </li>

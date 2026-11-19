@@ -15,7 +15,7 @@ const VIDE = { nom: "", titulaire: "", frais_annuels: 50000, note: "" };
 
 /**
  * Les classes de l'école : le titulaire, les frais annuels. Le responsable
- * seul y touche — une classe mal nommée est une caisse qui ne rentre pas.
+ * seul y touche - une classe mal nommée est une caisse qui ne rentre pas.
  */
 export function ClassesGerant({ classes, langue, responsable }: Props) {
   const routeur = useRouter();
@@ -109,7 +109,7 @@ export function ClassesGerant({ classes, langue, responsable }: Props) {
             <span className="cadc-ligne__nom">
               {classe.nom}
               <small>
-                {classe.titulaire || "—"}
+                {classe.titulaire || "-"}
                 {classe.note ? ` · ${classe.note}` : ""}
               </small>
             </span>

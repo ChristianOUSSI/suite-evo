@@ -8,7 +8,7 @@ Trois règles :
    la lecture : attendu − somme des versements non annulés.
 2. Chaque versement porte un code de reçu unique, dérivé d'un secret serveur :
    il ne se devine pas, il ne se forge pas, il ne livre que le versement
-   qu'il désigne — ni les autres élèves, ni les autres classes.
+   qu'il désigne - ni les autres élèves, ni les autres classes.
 3. Annuler un versement ne l'efface pas : il garde sa ligne, le reste remonte
    tout seul. On ne réécrit pas le passé.
 """

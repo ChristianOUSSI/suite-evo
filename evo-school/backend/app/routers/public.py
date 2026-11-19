@@ -11,7 +11,7 @@ def recu(code: str) -> dict:
     """Le reçu vérifiable : un code, un versement, rien d'autre.
 
     Aucun compte n'est demandé : le parent qui doute tape le code du reçu
-    et lit le montant, l'élève, le jour — jamais le reste de l'école.
+    et lit le montant, l'élève, le jour - jamais le reste de l'école.
     """
     with SessionLocal() as db:
         versement = ecole.recu_par_code(db, code)

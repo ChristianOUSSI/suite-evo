@@ -17,14 +17,14 @@ export const DICTEE: Dictionnaire = {
   "texte.label": { fr: "Taille du texte", en: "Text size" },
   "meta.titre": { fr: "evo-school | qui a payé, combien, le reçu qui le prouve", en: "evo-school | who paid, how much, the receipt that proves it" },
   "meta.description": {
-    fr: "Le cahier des frais d'une école camerounaise : qui a payé, combien, le reçu vérifiable — sans cahier papier ni file au bureau.",
-    en: "The fee book of a Cameroonian school: who paid, how much, the verifiable receipt — no paper book, no queue at the office.",
+    fr: "Le cahier des frais d'une école camerounaise : qui a payé, combien, le reçu vérifiable - sans cahier papier ni file au bureau.",
+    en: "The fee book of a Cameroonian school: who paid, how much, the verifiable receipt - no paper book, no queue at the office.",
   },
 
   "entree.titre": { fr: "L'école, sans le cahier papier des frais", en: "The school, without the paper fee book" },
   "entree.chapo": {
-    fr: "evo-school tient le cahier des frais : qui a payé, combien, le reçu que le parent vérifie seul — et le mois que l'école relit.",
-    en: "evo-school keeps the fee book: who paid, how much, the receipt the parent checks alone — and the month the school re-reads.",
+    fr: "evo-school tient le cahier des frais : qui a payé, combien, le reçu que le parent vérifie seul - et le mois que l'école relit.",
+    en: "evo-school keeps the fee book: who paid, how much, the receipt the parent checks alone - and the month the school re-reads.",
   },
   "entree.ouvrir": { fr: "Ouvrir le cahier", en: "Open the book" },
   "entree.slogan": { fr: "un téléphone au bureau", en: "one phone at the office" },

@@ -56,7 +56,7 @@ export default async function PageRecu({
                   </div>
                   <div className="cadc-ligne">
                     <dt className="cadc-ligne__nom">{t("verifier.moyen")}</dt>
-                    <dd className="cadc-ligne__valeur">{recu.moyen ? t(`moyen.${recu.moyen}`) : "—"}</dd>
+                    <dd className="cadc-ligne__valeur">{recu.moyen ? t(`moyen.${recu.moyen}`) : "-"}</dd>
                   </div>
                   <div className="cadc-ligne">
                     <dt className="cadc-ligne__nom">{t("verifier.eleve")}</dt>
@@ -68,15 +68,15 @@ export default async function PageRecu({
                   </div>
                   <div className="cadc-ligne">
                     <dt className="cadc-ligne__nom">{t("verifier.parent")}</dt>
-                    <dd className="cadc-ligne__valeur">{recu.parent || "—"}</dd>
+                    <dd className="cadc-ligne__valeur">{recu.parent || "-"}</dd>
                   </div>
                   <div className="cadc-ligne">
                     <dt className="cadc-ligne__nom">{t("verifier.date")}</dt>
-                    <dd className="cadc-ligne__valeur">{recu.date ? f.date(recu.date) : "—"}</dd>
+                    <dd className="cadc-ligne__valeur">{recu.date ? f.date(recu.date) : "-"}</dd>
                   </div>
                   <div className="cadc-ligne">
                     <dt className="cadc-ligne__nom">{t("verifier.periode")}</dt>
-                    <dd className="cadc-ligne__valeur">{recu.periode ? f.moisDe(recu.periode) : "—"}</dd>
+                    <dd className="cadc-ligne__valeur">{recu.periode ? f.moisDe(recu.periode) : "-"}</dd>
                   </div>
                 </dl>
                 <p className="cadc-note">

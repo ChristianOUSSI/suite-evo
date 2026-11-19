@@ -100,7 +100,7 @@ export function ElevesGerant({ eleves, classes, langue, responsable }: Props) {
             <label className="cadc-champ">
               <span className="cadc-champ__titre">{t("classes.nom")}</span>
               <select value={form.classe_id} onChange={(e) => setForm({ ...form, classe_id: e.target.value })}>
-                <option value="">—</option>
+                <option value="">-</option>
                 {classesActives.map((un) => (
                   <option key={un.id} value={un.id}>{un.nom}</option>
                 ))}
