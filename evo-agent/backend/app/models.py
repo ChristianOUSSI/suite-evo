@@ -2,7 +2,7 @@ from __future__ import annotations
 
 """L'agent autonome : les tâches confiées et leurs exécutions.
 
-On confie un objectif à l'agent — rédiger, résumer, chercher,
+On confie un objectif à l'agent - rédiger, résumer, chercher,
 automatiser. En mode démo, l'exécution se fait ici, sur la machine :
 le journal garde qui a demandé quoi, quand, et ce qui est revenu.
 """

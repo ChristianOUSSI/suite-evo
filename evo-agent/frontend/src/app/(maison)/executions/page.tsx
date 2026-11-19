@@ -48,7 +48,7 @@ export default async function PageExecutions() {
             {execution.debut_le ? (
               <div className="appel__lieu">
                 {t("executions.debut")} {f.heure(execution.debut_le)} ·{" "}
-                {t("executions.fin")} {execution.fin_le ? f.heure(execution.fin_le) : "—"}
+                {t("executions.fin")} {execution.fin_le ? f.heure(execution.fin_le) : "-"}
               </div>
             ) : (
               <div className="appel__lieu">{t("executions.manuel")}</div>

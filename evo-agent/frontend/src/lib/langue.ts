@@ -5,7 +5,7 @@ import { creerTraducteur, type Dictionnaire } from "@cadc/kit/i18n";
  * Le backend rend des nombres, des dates ISO et des clés stables.
  */
 export const DICTEE: Dictionnaire = {
-  "marque.slogan": { fr: "la tâche, l'exécution, le journal — l'agent que l'équipe suit seul", en: "the task, the run, the journal — the agent the team follows alone" },
+  "marque.slogan": { fr: "la tâche, l'exécution, le journal - l'agent que l'équipe suit seul", en: "the task, the run, the journal - the agent the team follows alone" },
   "nav.accueil": { fr: "L'accueil", en: "The desk" },
   "nav.taches": { fr: "Les tâches", en: "Tasks" },
   "nav.executions": { fr: "Le journal", en: "The journal" },
@@ -17,14 +17,14 @@ export const DICTEE: Dictionnaire = {
   "texte.label": { fr: "Taille du texte", en: "Text size" },
   "meta.titre": { fr: "evo-agent | la tâche, l'exécution, le journal", en: "evo-agent | the task, the run, the journal" },
   "meta.description": {
-    fr: "L'agent IA autonome d'une organisation camerounaise : file de tâches, exécutions journalisées — et rien qui ne quitte la machine en mode démo.",
-    en: "The autonomous AI agent of a Cameroonian organisation: task queue, journalised runs — and nothing leaves the machine in demo mode.",
+    fr: "L'agent IA autonome d'une organisation camerounaise : file de tâches, exécutions journalisées - et rien qui ne quitte la machine en mode démo.",
+    en: "The autonomous AI agent of a Cameroonian organisation: task queue, journalised runs - and nothing leaves the machine in demo mode.",
   },
 
   "entree.titre": { fr: "L'agent, sans le nuage", en: "The agent, without the cloud" },
   "entree.chapo": {
-    fr: "evo-agent tient la file : chaque tâche avec son type, sa priorité, son statut — et un journal qui garde chaque exécution.",
-    en: "evo-agent keeps the queue: every task with its type, priority, status — and a journal that keeps every run.",
+    fr: "evo-agent tient la file : chaque tâche avec son type, sa priorité, son statut - et un journal qui garde chaque exécution.",
+    en: "evo-agent keeps the queue: every task with its type, priority, status - and a journal that keeps every run.",
   },
   "entree.ouvrir": { fr: "Ouvrir l'agent", en: "Open the agent" },
   "entree.slogan": { fr: "un téléphone au comptoir", en: "one phone at the counter" },
@@ -81,7 +81,7 @@ export const DICTEE: Dictionnaire = {
   "taches.lancer": { fr: "Lancer", en: "Launch" },
   "taches.lancement": { fr: "Lancement…", en: "Launching…" },
   "taches.terminer": { fr: "Clôturer", en: "Close" },
-  "taches.resultat-aide": { fr: "Le résultat ou l'erreur qui clôt la tâche — la main humaine garde la trace.", en: "The result or the error that closes the task — the human hand keeps the trace." },
+  "taches.resultat-aide": { fr: "Le résultat ou l'erreur qui clôt la tâche - la main humaine garde la trace.", en: "The result or the error that closes the task - the human hand keeps the trace." },
   "taches.par": { fr: "par", en: "by" },
   "taches.aide": { fr: "Lancer exécute l'agent en mode démo : le résultat est déterministe, rien ne quitte la machine. La tâche terminée ne se relance pas.", en: "Launching runs the agent in demo mode: the result is deterministic, nothing leaves the machine. A finished task cannot be relaunched." },
 

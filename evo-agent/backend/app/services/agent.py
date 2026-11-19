@@ -22,7 +22,7 @@ from .present import execution_dict, tache_dict
 
 RESULTATS_PAR_TYPE = {
     "recherche": "Recherche menée : les sources locales ont été croisées. Les points clés sont listés dans les détails.",
-    "redaction": "Texte rédigé : plan, introduction, développement, conclusion — prêt à relire.",
+    "redaction": "Texte rédigé : plan, introduction, développement, conclusion - prêt à relire.",
     "resume": "Résumé produit : les faits essentiels en une page, sans perte du sens.",
     "analyse": "Analyse rendue : forces, faiblesses, opportunités et risques identifiés.",
     "automatisation": "Automatisation préparée : les étapes sont séquencées et vérifiables une par une.",
