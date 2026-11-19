@@ -61,6 +61,7 @@ export type Piece = {
 export type Catalogue = {
   bijouterie: Organisation | null;
   pieces: Piece[];
+  lien?: string;
 };
 
 export type Etat = {

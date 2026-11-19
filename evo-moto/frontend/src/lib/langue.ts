@@ -139,6 +139,7 @@ export const DICTEE: Dictionnaire = {
   "catalogue.vide": { fr: "Aucune moto en vente pour l'instant.", en: "No bike for sale yet." },
   "catalogue.chez": { fr: "chez", en: "at" },
   "catalogue.contact": { fr: "Contacter le garage", en: "Contact the garage" },
+  "catalogue.partager": { fr: "Envoyer sur WhatsApp", en: "Send on WhatsApp" },
 
   "recap.titre": { fr: "Le mois de l'atelier", en: "The workshop month" },
   "recap.chapo": { fr: "Ventes et réparations : recalculé à la demande.", en: "Sales and repairs: recomputed on request." },

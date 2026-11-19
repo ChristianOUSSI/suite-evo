@@ -133,6 +133,7 @@ export const DICTEE: Dictionnaire = {
   "pub.stock": { fr: "en stock", en: "in stock" },
   "pub.rupture": { fr: "épuisé", en: "sold out" },
   "pub.appeler": { fr: "Appeler la boutique", en: "Call the shop" },
+  "pub.partager": { fr: "Envoyer sur WhatsApp", en: "Send on WhatsApp" },
   "pub.boutique": { fr: "La boutique", en: "The shop" },
   "pub.cat-choix": { fr: "Toutes les catégories", en: "All categories" },
 

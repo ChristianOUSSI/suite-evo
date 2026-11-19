@@ -75,6 +75,20 @@ export default async function PageCatalogue() {
               ))}
             </ul>
           )}
+          { catalogue?.lien ? (
+            <p className="cadc-note">
+              <a
+                className="cadc-bouton cadc-bouton--doux"
+                href={`https://wa.me/?text=${encodeURIComponent(
+                  `${ bijouterie?.nom ?? "evo-bijou" } - ${pieces.length} ${langue === "en" ? "items" : "articles"} : ${catalogue?.lien}`,
+                )}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {t("catalogue.partager")}
+              </a>
+            </p>
+          ) : null}
         </div>
       </main>
     </div>

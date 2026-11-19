@@ -75,6 +75,7 @@ export type AnnoncePublique = {
 export type BoutiquePublique = {
   boutique: Organisation | null;
   annonces: AnnoncePublique[];
+  lien?: string;
 };
 
 export type Commande = {

@@ -62,6 +62,7 @@ export type Article = {
 export type Catalogue = {
   boutique: Organisation | null;
   articles: Article[];
+  lien?: string;
 };
 
 export type Etat = {

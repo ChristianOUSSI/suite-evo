@@ -78,6 +78,7 @@ export type Reparation = {
 export type Catalogue = {
   garage: Organisation | null;
   motos: Moto[];
+  lien?: string;
 };
 
 export type Etat = {

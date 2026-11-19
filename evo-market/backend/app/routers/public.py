@@ -1,4 +1,6 @@
 from fastapi import APIRouter
+
+from ..config import settings
 from sqlalchemy import select
 
 from ..database import SessionLocal
@@ -22,4 +24,5 @@ def annonces() -> dict:
         return {
             "boutique": present.organisation_dict(organisation),
             "annonces": market.annonces_publiques(db, organisation),
+            "lien": f"{settings.public_base_url}/annonces",
         }

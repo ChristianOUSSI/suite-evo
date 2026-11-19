@@ -148,6 +148,7 @@ export const DICTEE: Dictionnaire = {
   "catalogue.pieces": { fr: "Les pièces", en: "The parts" },
   "catalogue.chez": { fr: "chez", en: "at" },
   "catalogue.contact": { fr: "Contacter le garage", en: "Contact the garage" },
+  "catalogue.partager": { fr: "Envoyer sur WhatsApp", en: "Send on WhatsApp" },
 
   "recap.titre": { fr: "Le mois du garage", en: "The garage month" },
   "recap.chapo": { fr: "Ventes de voitures et de pièces : recalculé à la demande.", en: "Car and part sales: recomputed on request." },

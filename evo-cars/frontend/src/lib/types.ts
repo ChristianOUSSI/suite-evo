@@ -80,6 +80,7 @@ export type Catalogue = {
   garage: Organisation | null;
   voitures: Voiture[];
   pieces: Piece[];
+  lien?: string;
 };
 
 export type Etat = {

@@ -105,6 +105,20 @@ export default async function PageAnnoncesPubliques({
               </a>
             </div>
           ) : null}
+          { corps.lien ? (
+            <p className="cadc-note">
+              <a
+                className="cadc-bouton cadc-bouton--doux"
+                href={`https://wa.me/?text=${encodeURIComponent(
+                  `${ boutique?.nom ?? "evo-market" } - ${annonces.length} ${langue === "en" ? "items" : "articles"} : ${corps.lien}`,
+                )}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {t("pub.partager")}
+              </a>
+            </p>
+          ) : null}
         </div>
       </main>
     </div>

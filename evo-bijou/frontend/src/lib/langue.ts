@@ -117,6 +117,7 @@ export const DICTEE: Dictionnaire = {
   "catalogue.vide": { fr: "La vitrine est vide pour l'instant.", en: "The showcase is empty for now." },
   "catalogue.chez": { fr: "chez", en: "at" },
   "catalogue.contact": { fr: "Contacter la bijouterie", en: "Contact the jeweller" },
+  "catalogue.partager": { fr: "Envoyer sur WhatsApp", en: "Send on WhatsApp" },
 
   "recap.titre": { fr: "Le mois de la vitrine", en: "The showcase month" },
   "recap.chapo": { fr: "Ventes, marge, par matière : recalculé à la demande.", en: "Sales, margin, by material: recomputed on request." },

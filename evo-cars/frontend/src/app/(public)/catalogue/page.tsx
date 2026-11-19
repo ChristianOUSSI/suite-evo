@@ -105,6 +105,20 @@ export default async function PageCatalogue() {
               ) : null}
             </>
           )}
+          { catalogue?.lien ? (
+            <p className="cadc-note">
+              <a
+                className="cadc-bouton cadc-bouton--doux"
+                href={`https://wa.me/?text=${encodeURIComponent(
+                  `${ garage?.nom ?? "evo-cars" } - ${voitures.length + pieces.length} ${langue === "en" ? "items" : "articles"} : ${catalogue?.lien}`,
+                )}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {t("catalogue.partager")}
+              </a>
+            </p>
+          ) : null}
         </div>
       </main>
     </div>

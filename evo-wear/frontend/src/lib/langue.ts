@@ -120,6 +120,7 @@ export const DICTEE: Dictionnaire = {
   "catalogue.vide": { fr: "Rien en stock pour l'instant.", en: "Nothing in stock yet." },
   "catalogue.chez": { fr: "chez", en: "at" },
   "catalogue.contact": { fr: "Contacter la boutique", en: "Contact the boutique" },
+  "catalogue.partager": { fr: "Envoyer sur WhatsApp", en: "Send on WhatsApp" },
 
   "recap.titre": { fr: "Le mois de la boutique", en: "The boutique month" },
   "recap.chapo": { fr: "Ventes et stock : recalculé à la demande.", en: "Sales and stock: recomputed on request." },
