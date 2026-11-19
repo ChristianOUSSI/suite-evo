@@ -27,7 +27,6 @@ export default async function PageAccueil() {
   ]);
 
   const aujourdhui = etat.jour;
-  const demain = f.dansJours(1);
   const arrivees = sejours.sejours.filter(
     (un) => (un.statut_effectif ?? un.statut) !== "en_cours" && un.arrivee <= aujourdhui && un.depart > aujourdhui,
   );

@@ -20,7 +20,7 @@ const AUJOURD_HUI = () => new Date().toISOString().slice(0, 10);
 
 /**
  * Le cahier des séjours : la réservation, puis les gestes du séjour.
- * Une chambre occupée ne se propose jamais deux fois — le backend refuse,
+ * Une chambre occupée ne se propose jamais deux fois - le backend refuse,
  * l'écran propose les chambres libres pour les dates demandées.
  */
 export function SejoursGerant({ sejours, chambres, clients, langue }: Props) {
@@ -121,7 +121,7 @@ export function SejoursGerant({ sejours, chambres, clients, langue }: Props) {
                   setLibres(null);
                 }}
               >
-                <option value="">—</option>
+                <option value="">-</option>
                 {chambresActives.map((un) => (
                   <option key={un.id} value={un.id}>
                     {un.numero} · {t(`type.${un.type}`)} · {f.fcfa(un.prix_par_nuit)}/{t("recap.nuits").slice(0, 5)}
@@ -182,7 +182,7 @@ export function SejoursGerant({ sejours, chambres, clients, langue }: Props) {
                   value={form.client_id}
                   onChange={(e) => setForm({ ...form, client_id: e.target.value })}
                 >
-                  <option value="">— {t("clients.nouveau")} —</option>
+                  <option value="">- {t("clients.nouveau")} -</option>
                   {clientsActifs.map((un) => (
                     <option key={un.id} value={un.id}>
                       {un.nom}

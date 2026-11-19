@@ -132,7 +132,7 @@ export function ChambresGerant({ chambres, langue, responsable }: Props) {
               {chambre.actif ? (
                 <span className="cadc-badge cadc-badge--vert">{t("chambres.actives")}</span>
               ) : (
-                <span className="cadc-badge cadc-badge--doux">—</span>
+                <span className="cadc-badge cadc-badge--doux">-</span>
               )}
               {responsable ? (
                 <span className="cadc-acts">

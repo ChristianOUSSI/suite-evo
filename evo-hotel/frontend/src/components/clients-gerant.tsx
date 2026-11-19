@@ -110,7 +110,7 @@ export function ClientsGerant({ clients, langue }: Props) {
               </small>
               <small>
                 {client.sejours > 0 ? `${client.sejours} ${t("clients.sejours")}` : t("clients.jamais")}
-                {!client.actif ? ` · —` : ""}
+                {!client.actif ? ` · -` : ""}
               </small>
             </span>
             <span className="cadc-ligne__valeur">

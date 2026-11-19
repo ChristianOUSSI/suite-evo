@@ -27,7 +27,7 @@ def _maintenant_naif() -> datetime:
 
 # Réservation hôtelière : la maison, ses chambres, ses clients, et une ligne
 # par séjour. Le statut se décide à l'écriture, la disponibilité se vérifie
-# à la lecture — une chambre ne se loue pas deux fois au même soir.
+# à la lecture - une chambre ne se loue pas deux fois au même soir.
 
 TYPES_CHAMBRE = ("standard", "deluxe", "suite", "familiale")
 STATUTS = ("confirmee", "en_cours", "terminee", "annulee")

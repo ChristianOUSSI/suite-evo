@@ -23,8 +23,8 @@ export const DICTEE: Dictionnaire = {
 
   "entree.titre": { fr: "La réception, sans le cahier papier", en: "The front desk, without the paper book" },
   "entree.chapo": {
-    fr: "evo-hotel tient le cahier des chambres : qui dort où ce soir, qui arrive demain, ce que le mois a rapporté — et la feuille que le comptable demande.",
-    en: "evo-hotel keeps the room book: who sleeps where tonight, who arrives tomorrow, what the month earned — and the sheet the accountant asks for.",
+    fr: "evo-hotel tient le cahier des chambres : qui dort où ce soir, qui arrive demain, ce que le mois a rapporté - et la feuille que le comptable demande.",
+    en: "evo-hotel keeps the room book: who sleeps where tonight, who arrives tomorrow, what the month earned - and the sheet the accountant asks for.",
   },
   "entree.ouvrir": { fr: "Ouvrir le cahier", en: "Open the book" },
   "entree.slogan": { fr: "un téléphone à la réception", en: "one phone at the desk" },

@@ -25,7 +25,7 @@ export default async function PageClients() {
     <div className="cadc-gabarit hotel">
       <div className="hotel__tete">
         <span className="cadc-badge cadc-badge--acier">
-          {liste.actifs} {t("clients.nom").toLowerCase()} · {liste.total - liste.actifs} —
+          {liste.actifs} {t("clients.nom").toLowerCase()} · {liste.total - liste.actifs} -
         </span>
         <h1>{t("clients.titre")}</h1>
         <p>{t("clients.chapo")}</p>
