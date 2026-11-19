@@ -12,7 +12,7 @@ export const dynamic = "force-dynamic";
 export async function generateMetadata(): Promise<Metadata> {
   const langue = await langueCourante();
   return {
-    title: langue === "en" ? "Open the site" : "Ouvrir le chantier",
+    title: langue === "en" ? "Open the site" : "Ouvrir le presence",
   };
 }
 

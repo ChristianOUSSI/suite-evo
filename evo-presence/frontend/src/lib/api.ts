@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 
-import { ErreurChantier } from "./errors";
+import { ErreurPresence } from "./errors";
 
 const API_ORIGIN = process.env.EVO_PRESENCE_API_URL ?? "http://127.0.0.1:8700";
 const NOM_COOKIE = "evo_presence_session";
@@ -31,10 +31,10 @@ export async function lire<T>(path: string, langue = "fr"): Promise<T> {
       cache: "no-store",
     });
   } catch {
-    throw new ErreurChantier(
+    throw new ErreurPresence(
       langue === "en"
         ? "The book is not answering. Check that the API is running."
-        : "Le chantier ne répond pas. Vérifie que l'API est démarrée.",
+        : "Le presence ne répond pas. Vérifie que l'API est démarrée.",
       503,
     );
   }
@@ -47,7 +47,7 @@ export async function lire<T>(path: string, langue = "fr"): Promise<T> {
   }
 
   if (!reponse.ok) {
-    throw new ErreurChantier(
+    throw new ErreurPresence(
       texteDans((payload as { detail?: unknown })?.detail, langue) ||
         (langue === "en"
           ? "This page could not be read."
@@ -62,7 +62,7 @@ export async function lireOuRien<T>(path: string, langue = "fr"): Promise<T | nu
   try {
     return await lire<T>(path, langue);
   } catch (erreur) {
-    if (erreur instanceof ErreurChantier && erreur.status === 404) {
+    if (erreur instanceof ErreurPresence && erreur.status === 404) {
       return null;
     }
     throw erreur;

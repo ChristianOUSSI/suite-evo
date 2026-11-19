@@ -23,8 +23,8 @@ export default async function PageJournal() {
   const journal = await lire<Journal>("/journal?jours=30", langue);
 
   return (
-    <div className="cadc-gabarit chantier">
-      <div className="chantier__tete">
+    <div className="cadc-gabarit presence">
+      <div className="presence__tete">
         <span className="cadc-badge cadc-badge--acier">
           {journal.lignes.length} {t("commun.pointages")}
         </span>

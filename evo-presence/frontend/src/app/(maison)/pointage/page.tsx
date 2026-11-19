@@ -27,8 +27,8 @@ export default async function PagePointage() {
   const fini = etat.a_pointer === 0 && etat.effectif > 0;
 
   return (
-    <div className="cadc-gabarit chantier">
-      <div className="chantier__tete">
+    <div className="cadc-gabarit presence">
+      <div className="presence__tete">
         <span className="cadc-badge cadc-badge--acier">{f.jourDate(etat.jour)}</span>
         <h1>{t("pointage.titre")}</h1>
         <p>{t("pointage.chapo")}</p>

@@ -40,8 +40,8 @@ export default async function PageRecap({
   const resume = await lire<Recap>(`/recap?periode=${periode}&tous=${tous ? "true" : "false"}`, langue);
 
   return (
-    <div className="cadc-gabarit chantier">
-      <div className="chantier__tete">
+    <div className="cadc-gabarit presence">
+      <div className="presence__tete">
         <span className="cadc-badge cadc-badge--acier">{t("nav.recap")}</span>
         <h1>{t("recap.titre")}</h1>
         <p>{t("recap.chapo")}</p>

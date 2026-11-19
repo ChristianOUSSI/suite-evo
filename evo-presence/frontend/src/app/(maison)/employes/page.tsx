@@ -23,8 +23,8 @@ export default async function PageEmployes() {
   const responsable = session.user.role === "responsable";
 
   return (
-    <div className="cadc-gabarit chantier">
-      <div className="chantier__tete">
+    <div className="cadc-gabarit presence">
+      <div className="presence__tete">
         <span className="cadc-badge cadc-badge--acier">
           {liste.actifs} {t("employes.dans")} · {liste.total - liste.actifs} {t("employes.sorti")}
         </span>

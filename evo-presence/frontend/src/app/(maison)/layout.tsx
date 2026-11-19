@@ -5,16 +5,16 @@ import { Bascules } from "@/components/bascules";
 import { EcranIncident } from "@/components/ecran-incident";
 import { NomProduit } from "@/components/marque";
 import { Rail } from "@/components/rail";
-import { ErreurChantier } from "@/lib/errors";
+import { ErreurPresence } from "@/lib/errors";
 import { langueCourante, seance } from "@/lib/session";
 import { traduire } from "@/lib/langue";
 import type { Seance } from "@/lib/types";
 
-import "../../styles/chantier.css";
+import "../../styles/presence.css";
 
 export const dynamic = "force-dynamic";
 
-export default async function ChantierLayout({ children }: { children: ReactNode }) {
+export default async function PresenceLayout({ children }: { children: ReactNode }) {
   const langue = await langueCourante();
   const t = traduire(langue).t;
 
@@ -28,7 +28,7 @@ export default async function ChantierLayout({ children }: { children: ReactNode
       <EcranIncident
         langue={langue}
         t={t}
-        message={erreur instanceof ErreurChantier ? erreur.message : undefined}
+        message={erreur instanceof ErreurPresence ? erreur.message : undefined}
       />
     );
   }

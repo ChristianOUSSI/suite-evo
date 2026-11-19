@@ -21,7 +21,7 @@ export default async function PageVerif() {
 
   return (
     <div className="cadc-gabarit--etroit cadc-pile verif">
-      <div className="chantier__tete">
+      <div className="presence__tete">
         <span className="cadc-badge cadc-badge--acier">CODE AXIS DIGITAL CAMEROON</span>
         <h1>{t("bulletin.titre")}</h1>
         <p>{t("bulletin.chapo")}</p>

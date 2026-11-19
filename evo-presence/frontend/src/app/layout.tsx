@@ -45,7 +45,7 @@ export default async function Racine({ children }: { children: ReactNode }) {
     <html lang={langue} data-texte="normal">
       <head>
         {/* La taille du texte se relit avant la première peinture : un chef de
-            chantier qui agrandit la police ne doit pas la perdre en changeant
+            presence qui agrandit la police ne doit pas la perdre en changeant
             d'écran. */}
         <script
           dangerouslySetInnerHTML={{

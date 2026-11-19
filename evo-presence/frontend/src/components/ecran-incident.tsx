@@ -3,7 +3,7 @@ import Link from "next/link";
 import { NomProduit } from "./marque";
 
 /**
- * La porte du chantier se lit dans la layout : une page d'erreur ne peut pas
+ * La porte du presence se lit dans la layout : une page d'erreur ne peut pas
  * rattraper la layout de son propre segment. Sans cet écran, une API éteinte
  * montre l'écran du framework, en anglais, à une trésorière.
  */
@@ -29,7 +29,7 @@ export function EcranIncident({
           <h1 style={{ fontSize: "clamp(1.8rem,7vw,2.6rem)" }}>
             {langue === "en"
               ? "The book is not answering."
-              : "Le chantier ne répond pas."}
+              : "Le presence ne répond pas."}
           </h1>
           <p style={{ color: "var(--cadc-encre-2)" }}>
             {message ??

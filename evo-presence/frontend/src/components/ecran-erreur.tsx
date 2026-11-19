@@ -2,12 +2,12 @@
 
 import Link from "next/link";
 
-import { ErreurChantier } from "@/lib/errors";
+import { ErreurPresence } from "@/lib/errors";
 import { traduire } from "@/lib/langue";
 import { useLangueChoisie } from "@/lib/preferences";
 
 /**
- * L'écran d'erreur des pages du chantier.
+ * L'écran d'erreur des pages du presence.
  *
  * Deux règles, apprises sur le terrain. La première : ne jamais afficher le
  * texte brut d'une erreur du framework, c'est de l'anglais machine pour une
@@ -24,7 +24,7 @@ export function EcranErreur({
   const langue = useLangueChoisie();
   const t = traduire(langue).t;
   const message =
-    error instanceof ErreurChantier
+    error instanceof ErreurPresence
       ? error.message
       : langue === "en"
         ? "The page could not be read. Nothing was written."

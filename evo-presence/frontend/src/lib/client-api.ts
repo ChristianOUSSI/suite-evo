@@ -1,4 +1,4 @@
-import { ErreurChantier } from "./errors";
+import { ErreurPresence } from "./errors";
 
 type Methode = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
 
@@ -32,10 +32,10 @@ export async function ecrire<T>(
       credentials: "same-origin",
     });
   } catch {
-    throw new ErreurChantier(
+    throw new ErreurPresence(
       langue === "en"
         ? "The book is not answering. Check your connection and that the API is running."
-        : "Le chantier ne répond pas. Vérifie ta connexion et que l'API est démarrée.",
+        : "Le presence ne répond pas. Vérifie ta connexion et que l'API est démarrée.",
       503,
     );
   }
@@ -54,13 +54,13 @@ export async function ecrire<T>(
   if (!reponse.ok) {
     const detail = (payload as { detail?: unknown })?.detail;
     const texte = renduJson ? choisir(detail, langue) : "";
-    throw new ErreurChantier(
+    throw new ErreurPresence(
       texte ||
         (reponse.status === 500 || reponse.status === 502 ||
         reponse.status === 503 || reponse.status === 504
           ? langue === "en"
             ? "The book is not answering. Check that the API is running."
-            : "Le chantier ne répond pas. Vérifie que l'API est démarrée."
+            : "Le presence ne répond pas. Vérifie que l'API est démarrée."
           : langue === "en"
             ? "The book did not accept this."
             : "Le cahier n'a pas accepté cette écriture."),

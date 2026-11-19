@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 
 import { traduire } from "@/lib/langue";
 import { ecrire } from "@/lib/client-api";
-import { ErreurChantier } from "@/lib/errors";
+import { ErreurPresence } from "@/lib/errors";
 import type { Compte, CompteEntree, Role } from "@/lib/types";
 
 const ROLES: Role[] = ["responsable", "agent"];
@@ -20,7 +20,7 @@ type Props = {
  * Qui tient le cahier.
  *
  * Le rôle décide des gestes, pas l'adresse : l'agent qui pointe au portail
- * ouvre le même chantier que la patronne, avec moins de portes.
+ * ouvre le même presence que la patronne, avec moins de portes.
  */
 export function Comptes({ comptes, langue, responsable }: Props) {
   const routeur = useRouter();
@@ -42,7 +42,7 @@ export function Comptes({ comptes, langue, responsable }: Props) {
       setChamp({ nom: "", email: "", mot_de_passe: "", role: "agent" });
       routeur.refresh();
     } catch (e) {
-      setErreur(e instanceof ErreurChantier ? e.message : t("commun.horsLigne"));
+      setErreur(e instanceof ErreurPresence ? e.message : t("commun.horsLigne"));
       setEnCours(false);
     }
   }

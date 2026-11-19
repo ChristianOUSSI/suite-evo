@@ -39,7 +39,7 @@ export default async function PageBulletin({
   if (!bulletin) {
     return (
       <div className="cadc-gabarit--etroit cadc-pile verif">
-        <div className="chantier__tete">
+        <div className="presence__tete">
           <span className="cadc-badge cadc-badge--rouge">{t("commun.demo")}</span>
           <h1>{t("bulletin.introuvable")}</h1>
         </div>
@@ -57,7 +57,7 @@ export default async function PageBulletin({
 
   return (
     <div className="cadc-gabarit--etroit cadc-pile verif">
-      <div className="chantier__tete">
+      <div className="presence__tete">
         <span className="cadc-badge cadc-badge--vert">{t("bulletin.valide")}</span>
         <h1>{bulletin.nom}</h1>
         <p>{bulletin.service}</p>

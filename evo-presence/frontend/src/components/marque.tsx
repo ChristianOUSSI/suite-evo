@@ -8,7 +8,7 @@ type MarqueProps = {
 /**
  * Le signe CADC repris des logos livrés : le disque, la flèche qui entre à
  * gauche, celle qui sort en haut. Tracé à la main, pas de photo dans le rail :
- * sur une connexion de chantier, un SVG pèse quelques centaines d'octets.
+ * sur une connexion de presence, un SVG pèse quelques centaines d'octets.
  */
 export function MarqueCadc({ titre, className }: MarqueProps) {
   return (

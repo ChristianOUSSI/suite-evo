@@ -26,7 +26,7 @@ export default async function PageReglages() {
 
   return (
     <div className="cadc-gabarit cadc-pile">
-      <div className="chantier__tete">
+      <div className="presence__tete">
         <span className="cadc-badge cadc-badge--acier">
           {t("reglages.comptes")} · {comptes.length}
         </span>
