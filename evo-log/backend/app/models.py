@@ -30,8 +30,8 @@ def aujourdhui_defaut() -> date:
 
 # Le transporteur : ses colis, ses agents, ses expéditeurs.
 # Chaque colis porte un numéro de suivi à dix signes, lisible par le
-# destinataire sans compte. Le statut avance à la main — reçu, en transit,
-# arrivé, distribué, retourné — et le passé ne se réécrit pas.
+# destinataire sans compte. Le statut avance à la main - reçu, en transit,
+# arrivé, distribué, retourné - et le passé ne se réécrit pas.
 
 ROLES = ("responsable", "agent")
 GENRES = ("document", "colis", "valise", "electromenager", "palette", "autre")

@@ -30,8 +30,8 @@ const VIDE = {
 
 /**
  * Les colis du transporteur : une fiche par envoi, son numéro de suivi,
- * son trajet, ses frais, son statut. Le statut avance d'un geste —
- * reçu, en transit, arrivé, distribué, retourné, annulé — et la date
+ * son trajet, ses frais, son statut. Le statut avance d'un geste -
+ * reçu, en transit, arrivé, distribué, retourné, annulé - et la date
  * de livraison se pose toute seule.
  */
 export function ColisGerant({ colis, langue }: Props) {

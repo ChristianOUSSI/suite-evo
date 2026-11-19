@@ -5,7 +5,7 @@ from __future__ import annotations
 Trois règles :
 
 1. Le numéro de suivi est unique et se dicte au téléphone : dix signes,
-   alphabet sans I, O, 0 ni 1. Il sert deux fois — à l'agent pour retrouver
+   alphabet sans I, O, 0 ni 1. Il sert deux fois - à l'agent pour retrouver
    le colis, au destinataire pour le suivre sur /suivi.
 2. Le statut avance à la main : reçu → en transit → arrivé → distribué.
    Retourné et annulé existent pour la vie réelle ; distribué pose la date

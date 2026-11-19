@@ -5,7 +5,7 @@ import { creerTraducteur, type Dictionnaire } from "@cadc/kit/i18n";
  * Le backend rend des nombres, des dates ISO et des clés stables.
  */
 export const DICTEE: Dictionnaire = {
-  "marque.slogan": { fr: "le colis, le numéro, le statut — le suivi que le destinataire vérifie seul", en: "the parcel, the number, the status — the tracking the recipient checks alone" },
+  "marque.slogan": { fr: "le colis, le numéro, le statut - le suivi que le destinataire vérifie seul", en: "the parcel, the number, the status - the tracking the recipient checks alone" },
   "nav.accueil": { fr: "L'accueil", en: "The desk" },
   "nav.colis": { fr: "Les colis", en: "Parcels" },
   "nav.recap": { fr: "Le mois", en: "The month" },
@@ -16,14 +16,14 @@ export const DICTEE: Dictionnaire = {
   "texte.label": { fr: "Taille du texte", en: "Text size" },
   "meta.titre": { fr: "evo-log | le colis, le numéro, le statut", en: "evo-log | the parcel, the number, the status" },
   "meta.description": {
-    fr: "Le registre d'un transporteur camerounais : colis, numéros de suivi, statuts, suivi public — sans cahier papier ni colis perdu.",
-    en: "The register of a Cameroonian carrier: parcels, tracking numbers, statuses, public tracking — no paper book, no lost parcel.",
+    fr: "Le registre d'un transporteur camerounais : colis, numéros de suivi, statuts, suivi public - sans cahier papier ni colis perdu.",
+    en: "The register of a Cameroonian carrier: parcels, tracking numbers, statuses, public tracking - no paper book, no lost parcel.",
   },
 
   "entree.titre": { fr: "Le transporteur, sans le cahier papier", en: "The carrier, without the paper book" },
   "entree.chapo": {
-    fr: "evo-log tient le registre : chaque colis avec son numéro de suivi à dix signes, chaque statut qui avance — reçu, en transit, arrivé, distribué — et une page publique que le destinataire ouvre sans compte.",
-    en: "evo-log keeps the register: every parcel with its ten-character tracking number, every status that moves — received, in transit, arrived, delivered — and a public page the recipient opens with no account.",
+    fr: "evo-log tient le registre : chaque colis avec son numéro de suivi à dix signes, chaque statut qui avance - reçu, en transit, arrivé, distribué - et une page publique que le destinataire ouvre sans compte.",
+    en: "evo-log keeps the register: every parcel with its ten-character tracking number, every status that moves - received, in transit, arrived, delivered - and a public page the recipient opens with no account.",
   },
   "entree.ouvrir": { fr: "Ouvrir le registre", en: "Open the register" },
   "entree.slogan": { fr: "un téléphone au comptoir", en: "one phone at the counter" },
@@ -33,7 +33,7 @@ export const DICTEE: Dictionnaire = {
   "geste.2.titre": { fr: "Le statut qui avance", en: "The status that moves" },
   "geste.2.texte": { fr: "Reçu → en transit → arrivé → distribué : chaque geste est un tap, la date de livraison se pose toute seule.", en: "Received → in transit → arrived → delivered: every move is a tap, the delivery date sets itself." },
   "geste.3.titre": { fr: "Le suivi public", en: "The public tracking" },
-  "geste.3.texte": { fr: "Le destinataire tape son numéro sur /suivi : le statut, le trajet, les dates — sans compte, sans file, sans appel.", en: "The recipient types their number on /suivi: status, route, dates — no account, no queue, no call." },
+  "geste.3.texte": { fr: "Le destinataire tape son numéro sur /suivi : le statut, le trajet, les dates - sans compte, sans file, sans appel.", en: "The recipient types their number on /suivi: status, route, dates - no account, no queue, no call." },
   "geste.4.titre": { fr: "Relire le mois", en: "Read the month" },
   "geste.4.texte": { fr: "Dépôts, distributions, encaissé, par trajet : recalculé à la demande, exporté en CSV.", en: "Check-ins, deliveries, collected, by route: recomputed on request, exported to CSV." },
   "entree.exige": { fr: "Ce que le produit demande", en: "What the product needs" },
@@ -62,7 +62,7 @@ export const DICTEE: Dictionnaire = {
   "accueil.reste": { fr: "À percevoir", en: "Still to collect" },
   "accueil.ajouter": { fr: "Nouveau colis", en: "New parcel" },
   "accueil.suivi": { fr: "Le suivi public", en: "The public tracking" },
-  "accueil.suivi-aide": { fr: "La page que le destinataire ouvre sans compte — à envoyer sur WhatsApp.", en: "The page the recipient opens with no account — to send on WhatsApp." },
+  "accueil.suivi-aide": { fr: "La page que le destinataire ouvre sans compte - à envoyer sur WhatsApp.", en: "The page the recipient opens with no account - to send on WhatsApp." },
 
   "colis.titre": { fr: "Les colis du transporteur", en: "The carrier's parcels" },
   "colis.chapo": { fr: "Chaque envoi : l'expéditeur, le destinataire, le trajet, les frais, le numéro de suivi. Le statut se change d'un geste.", en: "Every shipment: the sender, the recipient, the route, the fee, the tracking number. The status changes in one move." },
