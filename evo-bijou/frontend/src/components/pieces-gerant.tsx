@@ -26,7 +26,7 @@ const VIDE = {
 };
 
 /**
- * Les pièces de la vitrine : une fiche par bijou — la référence, la
+ * Les pièces de la vitrine : une fiche par bijou - la référence, la
  * matière, le poids, le carat, les prix. Le statut se change d'un
  * geste ; la vente porte son client et sa date, rien ne s'efface.
  */
@@ -123,7 +123,7 @@ export function PiecesGerant({ pieces, clients, langue }: Props) {
               <span className="cadc-champ__titre">{t("pieces.carat")}</span>
               <select value={form.carat} onChange={(e) => setForm({ ...form, carat: e.target.value })}>
                 {CARATS.map((un) => (
-                  <option key={un} value={un}>{un === "" ? "—" : `${un} ct`}</option>
+                  <option key={un} value={un}>{un === "" ? "-" : `${un} ct`}</option>
                 ))}
               </select>
             </label>

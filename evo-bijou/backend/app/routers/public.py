@@ -12,7 +12,7 @@ router = APIRouter(prefix="/public", tags=["public"])
 def catalogue() -> dict:
     """Le catalogue public : les pièces en vitrine, rien d'autre.
 
-    Le visiteur lit la fiche sans compte — ni l'acheteur, ni les
+    Le visiteur lit la fiche sans compte - ni l'acheteur, ni les
     clients, ni le prix d'achat, ni ce qui est réservé ou vendu.
     """
     with SessionLocal() as db:

@@ -5,7 +5,7 @@ import { creerTraducteur, type Dictionnaire } from "@cadc/kit/i18n";
  * Le backend rend des nombres, des dates ISO et des clés stables.
  */
 export const DICTEE: Dictionnaire = {
-  "marque.slogan": { fr: "la pièce, le carat, le prix — la vitrine que le client lit seul", en: "the piece, the carat, the price — the showcase the client reads alone" },
+  "marque.slogan": { fr: "la pièce, le carat, le prix - la vitrine que le client lit seul", en: "the piece, the carat, the price - the showcase the client reads alone" },
   "nav.accueil": { fr: "L'accueil", en: "The desk" },
   "nav.pieces": { fr: "Les pièces", en: "Pieces" },
   "nav.clients": { fr: "Les clients", en: "Clients" },
@@ -17,14 +17,14 @@ export const DICTEE: Dictionnaire = {
   "texte.label": { fr: "Taille du texte", en: "Text size" },
   "meta.titre": { fr: "evo-bijou | la pièce, le carat, le prix", en: "evo-bijou | the piece, the carat, the price" },
   "meta.description": {
-    fr: "La vitrine d'une bijouterie camerounaise : pièces, carat, poids, prix — et un catalogue public à envoyer sur WhatsApp.",
-    en: "The showcase of a Cameroonian jeweller: pieces, carat, weight, price — and a public catalogue to send on WhatsApp.",
+    fr: "La vitrine d'une bijouterie camerounaise : pièces, carat, poids, prix - et un catalogue public à envoyer sur WhatsApp.",
+    en: "The showcase of a Cameroonian jeweller: pieces, carat, weight, price - and a public catalogue to send on WhatsApp.",
   },
 
   "entree.titre": { fr: "La vitrine, sans le carnet", en: "The showcase, without the notebook" },
   "entree.chapo": {
-    fr: "evo-bijou tient la vitrine : chaque pièce avec sa référence, sa matière, son poids, son carat, son prix — et une page publique où le client lit le catalogue sans compte.",
-    en: "evo-bijou keeps the showcase: every piece with its reference, material, weight, carat, price — and a public page where the client reads the catalogue with no account.",
+    fr: "evo-bijou tient la vitrine : chaque pièce avec sa référence, sa matière, son poids, son carat, son prix - et une page publique où le client lit le catalogue sans compte.",
+    en: "evo-bijou keeps the showcase: every piece with its reference, material, weight, carat, price - and a public page where the client reads the catalogue with no account.",
   },
   "entree.ouvrir": { fr: "Ouvrir la vitrine", en: "Open the showcase" },
   "entree.slogan": { fr: "une vitrine au téléphone", en: "one showcase on the phone" },
@@ -34,7 +34,7 @@ export const DICTEE: Dictionnaire = {
   "geste.2.titre": { fr: "Le statut qui bouge", en: "The status that moves" },
   "geste.2.texte": { fr: "En vitrine, réservé, vendu, retiré : chaque changement garde sa date et son client.", en: "On display, reserved, sold, withdrawn: every change keeps its date and its client." },
   "geste.3.titre": { fr: "Le catalogue public", en: "The public catalogue" },
-  "geste.3.texte": { fr: "Le client lit les pièces en vitrine sur /catalogue — sans compte, sans appel, à envoyer sur WhatsApp.", en: "The client reads the pieces on display on /catalogue — no account, no call, ready for WhatsApp." },
+  "geste.3.texte": { fr: "Le client lit les pièces en vitrine sur /catalogue - sans compte, sans appel, à envoyer sur WhatsApp.", en: "The client reads the pieces on display on /catalogue - no account, no call, ready for WhatsApp." },
   "geste.4.titre": { fr: "Relire le mois", en: "Read the month" },
   "geste.4.texte": { fr: "Ventes, marge, par matière : recalculé à la demande, exporté en CSV.", en: "Sales, margin, by material: recomputed on request, exported to CSV." },
   "entree.exige": { fr: "Ce que le produit demande", en: "What the product needs" },
@@ -64,7 +64,7 @@ export const DICTEE: Dictionnaire = {
   "accueil.mois": { fr: "Vendu ce mois", en: "Sold this month" },
   "accueil.nouveau": { fr: "Nouvelle pièce", en: "New piece" },
   "accueil.catalogue": { fr: "Le catalogue public", en: "The public catalogue" },
-  "accueil.catalogue-aide": { fr: "La page où le client lit les pièces en vitrine — à envoyer sur WhatsApp.", en: "The page where the client reads the pieces on display — to send on WhatsApp." },
+  "accueil.catalogue-aide": { fr: "La page où le client lit les pièces en vitrine - à envoyer sur WhatsApp.", en: "The page where the client reads the pieces on display - to send on WhatsApp." },
 
   "pieces.titre": { fr: "Les pièces de la vitrine", en: "The showcase pieces" },
   "pieces.chapo": { fr: "Chaque pièce : la référence, la matière, le poids, le carat, les prix, le statut. La vente se note d'un geste.", en: "Every piece: the reference, material, weight, carat, prices, status. The sale is logged in one move." },
@@ -113,7 +113,7 @@ export const DICTEE: Dictionnaire = {
   "type.collectionneur": { fr: "Collectionneur", en: "Collector" },
 
   "catalogue.titre": { fr: "Le catalogue de la vitrine", en: "The showcase catalogue" },
-  "catalogue.chapo": { fr: "Les pièces en vitrine, leurs prix — sans compte. À envoyer sur WhatsApp.", en: "The pieces on display, their prices — no account needed. Ready for WhatsApp." },
+  "catalogue.chapo": { fr: "Les pièces en vitrine, leurs prix - sans compte. À envoyer sur WhatsApp.", en: "The pieces on display, their prices - no account needed. Ready for WhatsApp." },
   "catalogue.vide": { fr: "La vitrine est vide pour l'instant.", en: "The showcase is empty for now." },
   "catalogue.chez": { fr: "chez", en: "at" },
   "catalogue.contact": { fr: "Contacter la bijouterie", en: "Contact the jeweller" },

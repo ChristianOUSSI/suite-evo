@@ -8,7 +8,7 @@ Trois règles :
    Le statut se change d'un geste ; le passé ne se réécrit pas.
 2. Une pièce vendue garde son client, son prix de vente et sa date :
    la vente est une date, pas un commentaire.
-3. Le catalogue public ne montre que ce qui est en vitrine —
+3. Le catalogue public ne montre que ce qui est en vitrine -
    ni l'acheteur, ni les clients, ni le prix d'achat.
 """
 
