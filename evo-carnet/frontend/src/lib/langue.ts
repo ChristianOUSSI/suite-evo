@@ -102,6 +102,7 @@ export const DICTEE: Dictionnaire = {
   "partage.categorie": { fr: "Catégorie", en: "Category" },
   "partage.maj": { fr: "modifiée le", en: "edited on" },
   "partage.retour": { fr: "Le carnet de", en: "The notebook of" },
+  "partage.envoyer": { fr: "Envoyer cette note sur WhatsApp", en: "Send this note on WhatsApp" },
 
   "recap.titre": { fr: "Le mois du carnet", en: "The notebook month" },
   "recap.chapo": { fr: "Notes écrites et catégories : recalculé à la demande.", en: "Notes written and categories: recomputed on request." },

@@ -61,6 +61,20 @@ export default async function PagePartage({ params }: { params: Promise<{ code: 
                 </span>
               </div>
               <p style={{ whiteSpace: "pre-wrap" }}>{note.contenu}</p>
+              {partage?.lien ? (
+                <p className="cadc-note">
+                  <a
+                    className="cadc-bouton cadc-bouton--doux cadc-bouton--petit"
+                    href={`https://wa.me/?text=${encodeURIComponent(
+                      `${note.titre} - ${carnet?.nom ?? "evo-carnet"} : ${partage.lien}`,
+                    )}`}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {t("partage.envoyer")}
+                  </a>
+                </p>
+              ) : null}
               <p className="cadc-note">
                 {t("partage.retour")} {carnet?.nom ?? ""}
                 {carnet?.telephone ? (

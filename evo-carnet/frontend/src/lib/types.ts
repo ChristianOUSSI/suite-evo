@@ -47,6 +47,7 @@ export type Carnet = {
 export type NotePartagee = {
   note: Omit<Note, "code_partage" | "lien">;
   carnet: Organisation;
+  lien?: string;
 };
 
 export type Etat = {

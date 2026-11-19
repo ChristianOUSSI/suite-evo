@@ -2,6 +2,7 @@ from fastapi import APIRouter
 from sqlalchemy import select
 from fastapi import HTTPException
 
+from ..config import settings
 from ..database import SessionLocal
 from ..models import Note, Organisation
 from ..services import carnet as domaine
@@ -37,4 +38,5 @@ def note_partagee(code: str) -> dict:
         return {
             "note": present.note_dict(note, public=True),
             "carnet": present.organisation_dict(note.organisation),
+            "lien": f"{settings.public_base_url}/partage/{code}",
         }
