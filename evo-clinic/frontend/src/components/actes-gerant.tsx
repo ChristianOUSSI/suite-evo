@@ -29,7 +29,7 @@ const MOTIFS = [
 const VIDE = { patient_id: "", motif: MOTIFS[0], diagnostic: "", traitement: "", montant: 5000 };
 
 /**
- * Les actes de la clinique : une consultation par ligne — motif, diagnostic,
+ * Les actes de la clinique : une consultation par ligne - motif, diagnostic,
  * traitement, prix figé. L'agent consigne ; seul le responsable annule.
  */
 export function ActesGerant({ actes, patients, langue, responsable }: Props) {
@@ -94,7 +94,7 @@ export function ActesGerant({ actes, patients, langue, responsable }: Props) {
             <label className="cadc-champ">
               <span className="cadc-champ__titre">{t("actes.patient")}</span>
               <select value={form.patient_id} onChange={(e) => setForm({ ...form, patient_id: e.target.value })}>
-                <option value="">—</option>
+                <option value="">-</option>
                 {patientsActifs.map((un) => (
                   <option key={un.id} value={un.id}>{un.nom}</option>
                 ))}

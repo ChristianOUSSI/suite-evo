@@ -8,7 +8,7 @@ Trois règles :
    la lecture : somme des actes non annulés − somme des paiements non annulés.
 2. Chaque paiement porte un code de reçu unique, dérivé d'un secret serveur :
    il ne se devine pas, il ne se forge pas, il ne livre que le paiement
-   qu'il désigne — ni les autres patients, ni les autres actes.
+   qu'il désigne - ni les autres patients, ni les autres actes.
 3. Annuler un acte ou un paiement ne l'efface pas : il garde sa ligne, le
    reste remonte tout seul. On ne réécrit pas le passé.
 """
@@ -281,7 +281,7 @@ def recap(db: Session, organisation: Organisation, periode: str) -> dict:
 
     par_motif: dict[str, dict] = {}
     for un in actes_mois:
-        cle = un.motif or "—"
+        cle = un.motif or "-"
         if cle not in par_motif:
             par_motif[cle] = {"motif": cle, "actes": 0, "montant": 0}
         par_motif[cle]["actes"] += 1

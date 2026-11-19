@@ -56,7 +56,7 @@ export default async function PageRecu({
                   </div>
                   <div className="cadc-ligne">
                     <dt className="cadc-ligne__nom">{t("verifier.moyen")}</dt>
-                    <dd className="cadc-ligne__valeur">{recu.moyen ? t(`moyen.${recu.moyen}`) : "—"}</dd>
+                    <dd className="cadc-ligne__valeur">{recu.moyen ? t(`moyen.${recu.moyen}`) : "-"}</dd>
                   </div>
                   <div className="cadc-ligne">
                     <dt className="cadc-ligne__nom">{t("verifier.patient")}</dt>
@@ -70,7 +70,7 @@ export default async function PageRecu({
                   ) : null}
                   <div className="cadc-ligne">
                     <dt className="cadc-ligne__nom">{t("verifier.date")}</dt>
-                    <dd className="cadc-ligne__valeur">{recu.date ? f.date(recu.date) : "—"}</dd>
+                    <dd className="cadc-ligne__valeur">{recu.date ? f.date(recu.date) : "-"}</dd>
                   </div>
                   {recu.note ? (
                     <div className="cadc-ligne">

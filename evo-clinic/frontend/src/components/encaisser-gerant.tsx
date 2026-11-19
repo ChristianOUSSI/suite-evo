@@ -14,7 +14,7 @@ type Props = { paiements: Paiement[]; patients: Patient[]; langue: string; respo
 const MOYENS: Moyen[] = ["especes", "mtn_money", "orange_money", "nexttel_money", "virement", "assurance", "autre"];
 
 /**
- * La caisse de la clinique : le patient, le montant, le moyen — le reçu
+ * La caisse de la clinique : le patient, le montant, le moyen - le reçu
  * sort tout de suite avec son code de dix signes. Annuler ne l'efface pas.
  */
 export function EncaisserGerant({ paiements, patients, langue, responsable }: Props) {
@@ -90,7 +90,7 @@ export function EncaisserGerant({ paiements, patients, langue, responsable }: Pr
           <label className="cadc-champ">
             <span className="cadc-champ__titre">{t("actes.patient")}</span>
             <select value={patientId} onChange={(e) => setPatientId(e.target.value)}>
-              <option value="">—</option>
+              <option value="">-</option>
               {patients.filter((un) => un.actif).map((un) => (
                 <option key={un.id} value={un.id}>
                   {un.nom} · {un.dus > 0 ? `${t("patients.dus")} ${f.fcfa(un.dus)}` : t("patients.rien")}

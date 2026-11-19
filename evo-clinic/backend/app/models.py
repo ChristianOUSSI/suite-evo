@@ -94,7 +94,7 @@ class Patient(Base):
 
 
 class Acte(Base):
-    """Un acte : la consultation du jour — motif, diagnostic, traitement, prix."""
+    """Un acte : la consultation du jour - motif, diagnostic, traitement, prix."""
 
     __tablename__ = "actes"
 

@@ -11,7 +11,7 @@ def recu(code: str) -> dict:
     """Le reçu vérifiable : un code, un paiement, rien d'autre.
 
     Aucun compte n'est demandé : le patient qui doute tape le code du reçu
-    et lit le montant, le nom, le jour — jamais le reste de la clinique.
+    et lit le montant, le nom, le jour - jamais le reste de la clinique.
     """
     with SessionLocal() as db:
         paiement = clinic.recu_par_code(db, code)

@@ -122,7 +122,7 @@ export function PatientsGerant({ patients, langue, responsable }: Props) {
               <label className="cadc-champ">
                 <span className="cadc-champ__titre">{t("patients.sexe")}</span>
                 <select value={form.sexe} onChange={(e) => setForm({ ...form, sexe: e.target.value })}>
-                  <option value="">—</option>
+                  <option value="">-</option>
                   <option value="femme">{langue === "en" ? "Woman" : "Femme"}</option>
                   <option value="homme">{langue === "en" ? "Man" : "Homme"}</option>
                 </select>
@@ -130,7 +130,7 @@ export function PatientsGerant({ patients, langue, responsable }: Props) {
               <label className="cadc-champ">
                 <span className="cadc-champ__titre">{t("patients.groupe")}</span>
                 <select value={form.groupe} onChange={(e) => setForm({ ...form, groupe: e.target.value })}>
-                  <option value="">—</option>
+                  <option value="">-</option>
                   {["A+", "A-", "B+", "B-", "AB+", "AB-", "O+"].map((g) => (
                     <option key={g} value={g}>{g}</option>
                   ))}

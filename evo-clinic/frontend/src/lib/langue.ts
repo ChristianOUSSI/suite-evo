@@ -18,14 +18,14 @@ export const DICTEE: Dictionnaire = {
   "texte.label": { fr: "Taille du texte", en: "Text size" },
   "meta.titre": { fr: "evo-clinic | qui a été vu, combien ça a coûté", en: "evo-clinic | who was seen, what it cost" },
   "meta.description": {
-    fr: "Le registre d'une clinique camerounaise : patients, actes, paiements, reçu vérifiable — sans cahier papier ni file à l'accueil.",
-    en: "The register of a Cameroonian clinic: patients, records, payments, verifiable receipt — no paper book, no queue at the desk.",
+    fr: "Le registre d'une clinique camerounaise : patients, actes, paiements, reçu vérifiable - sans cahier papier ni file à l'accueil.",
+    en: "The register of a Cameroonian clinic: patients, records, payments, verifiable receipt - no paper book, no queue at the desk.",
   },
 
   "entree.titre": { fr: "La clinique, sans le cahier papier", en: "The clinic, without the paper book" },
   "entree.chapo": {
-    fr: "evo-clinic tient le registre : qui a été vu, combien ça a coûté, le reçu que le patient vérifie seul — et le mois que le médecin relit.",
-    en: "evo-clinic keeps the register: who was seen, what it cost, the receipt the patient checks alone — and the month the doctor re-reads.",
+    fr: "evo-clinic tient le registre : qui a été vu, combien ça a coûté, le reçu que le patient vérifie seul - et le mois que le médecin relit.",
+    en: "evo-clinic keeps the register: who was seen, what it cost, the receipt the patient checks alone - and the month the doctor re-reads.",
   },
   "entree.ouvrir": { fr: "Ouvrir le registre", en: "Open the register" },
   "entree.slogan": { fr: "un téléphone à l'accueil", en: "one phone at the desk" },
