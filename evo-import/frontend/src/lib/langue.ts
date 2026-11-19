@@ -5,7 +5,7 @@ import { creerTraducteur, type Dictionnaire } from "@cadc/kit/i18n";
  * Le backend rend des nombres, des dates ISO et des clés stables.
  */
 export const DICTEE: Dictionnaire = {
-  "marque.slogan": { fr: "l'envoi, le numéro, le parcours — le quai que le destinataire vérifie seul", en: "the shipment, the number, the journey — the quay the recipient checks alone" },
+  "marque.slogan": { fr: "l'envoi, le numéro, le parcours - le quai que le destinataire vérifie seul", en: "the shipment, the number, the journey - the quay the recipient checks alone" },
   "nav.accueil": { fr: "L'accueil", en: "The desk" },
   "nav.envois": { fr: "Les envois", en: "Shipments" },
   "nav.clients": { fr: "Les clients", en: "Clients" },
@@ -17,14 +17,14 @@ export const DICTEE: Dictionnaire = {
   "texte.label": { fr: "Taille du texte", en: "Text size" },
   "meta.titre": { fr: "evo-import | l'envoi, le numéro, le parcours", en: "evo-import | the shipment, the number, the journey" },
   "meta.description": {
-    fr: "Le quai d'un transitaire camerounais : envois, numéro de suivi à dix signes, parcours public — sans fiche papier ni colis perdu.",
-    en: "The quay of a Cameroonian freight forwarder: shipments, ten-character tracking numbers, public journey — no paper card, no lost parcel.",
+    fr: "Le quai d'un transitaire camerounais : envois, numéro de suivi à dix signes, parcours public - sans fiche papier ni colis perdu.",
+    en: "The quay of a Cameroonian freight forwarder: shipments, ten-character tracking numbers, public journey - no paper card, no lost parcel.",
   },
 
   "entree.titre": { fr: "Le quai, sans la fiche papier", en: "The quay, without the paper card" },
   "entree.chapo": {
-    fr: "evo-import tient le quai : chaque envoi avec son numéro de suivi à dix signes, son mode, son statut — et une page publique où le destinataire suit son colis sans compte.",
-    en: "evo-import keeps the quay: every shipment with its ten-character tracking number, its mode, its status — and a public page where the recipient tracks the parcel with no account.",
+    fr: "evo-import tient le quai : chaque envoi avec son numéro de suivi à dix signes, son mode, son statut - et une page publique où le destinataire suit son colis sans compte.",
+    en: "evo-import keeps the quay: every shipment with its ten-character tracking number, its mode, its status - and a public page where the recipient tracks the parcel with no account.",
   },
   "entree.ouvrir": { fr: "Ouvrir le quai", en: "Open the quay" },
   "entree.slogan": { fr: "un téléphone au quai", en: "one phone at the quay" },
@@ -32,9 +32,9 @@ export const DICTEE: Dictionnaire = {
   "geste.1.titre": { fr: "Enregistrer l'envoi en une minute", en: "Register a shipment in a minute" },
   "geste.1.texte": { fr: "Description, mode, poids, valeur déclarée : le numéro de suivi se génère tout seul, à dix signes.", en: "Description, mode, weight, declared value: the tracking number generates itself, ten characters." },
   "geste.2.titre": { fr: "Le parcours qui avance", en: "The journey that moves" },
-  "geste.2.texte": { fr: "En attente, en transit, en douane, livré : chaque passage laisse sa ligne dans le suivi — rien ne s'efface.", en: "Waiting, in transit, in customs, delivered: every step leaves its line in the tracking — nothing is erased." },
+  "geste.2.texte": { fr: "En attente, en transit, en douane, livré : chaque passage laisse sa ligne dans le suivi - rien ne s'efface.", en: "Waiting, in transit, in customs, delivered: every step leaves its line in the tracking - nothing is erased." },
   "geste.3.titre": { fr: "Le suivi public", en: "The public tracking" },
-  "geste.3.texte": { fr: "Le destinataire tape le numéro sur /suivi : le parcours, la date, le statut — sans compte, sans appel.", en: "The recipient types the number on /suivi: the journey, the date, the status — no account, no call." },
+  "geste.3.texte": { fr: "Le destinataire tape le numéro sur /suivi : le parcours, la date, le statut - sans compte, sans appel.", en: "The recipient types the number on /suivi: the journey, the date, the status - no account, no call." },
   "geste.4.titre": { fr: "Relire le mois", en: "Read the month" },
   "geste.4.texte": { fr: "Envois, frais, par mode et par ville : recalculé à la demande, exporté en CSV.", en: "Shipments, fees, by mode and by city: recomputed on request, exported to CSV." },
   "entree.exige": { fr: "Ce que le produit demande", en: "What the product needs" },
@@ -66,7 +66,7 @@ export const DICTEE: Dictionnaire = {
   "accueil.livres_mois": { fr: "Livrés", en: "Delivered" },
   "accueil.nouveau": { fr: "Nouvel envoi", en: "New shipment" },
   "accueil.suivi": { fr: "Le suivi public", en: "The public tracking" },
-  "accueil.suivi-aide": { fr: "La page où le destinataire suit son colis avec le numéro — à envoyer sur WhatsApp.", en: "The page where the recipient tracks the parcel with the number — to send on WhatsApp." },
+  "accueil.suivi-aide": { fr: "La page où le destinataire suit son colis avec le numéro - à envoyer sur WhatsApp.", en: "The page where the recipient tracks the parcel with the number - to send on WhatsApp." },
 
   "envois.titre": { fr: "Les envois du quai", en: "The quay's shipments" },
   "envois.chapo": { fr: "Chaque envoi : la description, le mode, les deux bouts, le poids, la valeur, le statut. Le parcours se note d'un geste.", en: "Every shipment: the description, the mode, both ends, the weight, the value, the status. The journey is logged in one move." },

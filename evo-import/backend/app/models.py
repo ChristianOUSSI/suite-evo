@@ -7,7 +7,7 @@ Trois règles :
 1. Un envoi a un numéro de suivi à dix signes : c'est lui que le
    destinataire tape pour lire où est son colis, sans compte.
 2. Le statut avance d'un geste ; chaque passage laisse une ligne
-   dans le suivi — le passé ne se réécrit pas.
+   dans le suivi - le passé ne se réécrit pas.
 3. La valeur déclarée et les frais sont en FCFA : c'est ce que la
    douane et le client comptent.
 """

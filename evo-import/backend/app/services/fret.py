@@ -246,7 +246,7 @@ def recap(db: Session, organisation: Organisation, periode: str) -> dict:
         par_mode[un.mode] = par_mode.get(un.mode, 0) + 1
     par_ville: dict[str, int] = {}
     for un in du_mois:
-        ville = un.destinataire_ville or "—"
+        ville = un.destinataire_ville or "-"
         par_ville[ville] = par_ville.get(ville, 0) + 1
 
     return {

@@ -28,7 +28,7 @@ const VIDE = {
 };
 
 /**
- * Les envois du quai : une fiche par colis — la description, le mode, les
+ * Les envois du quai : une fiche par colis - la description, le mode, les
  * deux bouts, le poids, la valeur, les frais. Le parcours avance d'un
  * geste : chaque passage laisse sa ligne dans le suivi.
  */
@@ -166,7 +166,7 @@ export function EnvoisGerant({ envois, clients, langue }: Props) {
             <label className="cadc-champ">
               <span className="cadc-champ__titre">{t("envois.client")}</span>
               <select value={form.client_id} onChange={(e) => setForm({ ...form, client_id: e.target.value })}>
-                <option value="">—</option>
+                <option value="">-</option>
                 {clients.map((un) => (
                   <option key={un.id} value={un.id}>{un.nom}</option>
                 ))}
@@ -229,7 +229,7 @@ export function EnvoisGerant({ envois, clients, langue }: Props) {
                   {un.client ? ` · ${un.client}` : ""}
                 </small>
                 <small>
-                  {un.expéditeur_pays || un.expéditeur_nom || "—"} → {un.destinataire_ville || un.destinataire_nom || "—"}
+                  {un.expéditeur_pays || un.expéditeur_nom || "-"} → {un.destinataire_ville || un.destinataire_nom || "-"}
                   {un.poids_kg > 0 ? ` · ${un.poids_kg} ${t("envois.kg")}` : ""}
                   {un.date_livraison ? ` · ${t("envois.livre_le")} ${f.jourDate(un.date_livraison)}` : ""}
                 </small>

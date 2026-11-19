@@ -10,7 +10,7 @@ import type { Envoi } from "@/lib/types";
 
 /**
  * La page publique du quai : le destinataire tape le numéro de suivi à
- * dix signes et lit le parcours — sans compte, sans appel.
+ * dix signes et lit le parcours - sans compte, sans appel.
  */
 export function SuiviGerant({ langue }: { langue: string }) {
   const t = traduire(langue).t;

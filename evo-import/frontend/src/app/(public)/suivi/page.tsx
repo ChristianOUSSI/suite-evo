@@ -13,8 +13,8 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: langue === "en" ? "Track a shipment" : "Suivre un envoi",
     description: langue === "en"
-      ? "Track your shipment by its tracking number — no account needed."
-      : "Suivez votre envoi avec son numéro de suivi — aucun compte n'est demandé.",
+      ? "Track your shipment by its tracking number - no account needed."
+      : "Suivez votre envoi avec son numéro de suivi - aucun compte n'est demandé.",
   };
 }
 

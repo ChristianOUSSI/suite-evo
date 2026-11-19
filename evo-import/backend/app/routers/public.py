@@ -11,7 +11,7 @@ router = APIRouter(prefix="/public", tags=["public"])
 def suivi(numero: str) -> dict:
     """Le suivi public : le numéro de dix signes, rien d'autre.
 
-    Le destinataire lit le parcours de son envoi sans compte — ni le
+    Le destinataire lit le parcours de son envoi sans compte - ni le
     client interne, ni les frais de marge.
     """
     with SessionLocal() as db:
