@@ -25,7 +25,7 @@ def commander(entree: CommandePublique) -> dict:
     """La commande publique : le client naît de son numéro.
 
     Le visiteur tape son nom, son numéro, son quartier et la quantité
-    de bonbonnes. Le dépôt voit la commande sans compte — le client
+    de bonbonnes. Le dépôt voit la commande sans compte - le client
     est retrouvé par son numéro ou créé.
     """
     with SessionLocal() as db:

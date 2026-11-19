@@ -280,7 +280,7 @@ def recap(db: Session, organisation: Organisation, periode: str) -> dict:
         par_statut[un.statut] = par_statut.get(un.statut, 0) + 1
     par_quartier: dict[str, int] = {}
     for un in livrees:
-        cle = un.client.quartier or un.adresse or "—"
+        cle = un.client.quartier or un.adresse or "-"
         par_quartier[cle] = par_quartier.get(cle, 0) + un.quantite
     par_type: dict[str, int] = {}
     for un in livrees:

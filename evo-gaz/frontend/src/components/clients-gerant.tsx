@@ -14,7 +14,7 @@ type Props = { clients: Client[]; langue: string };
 const VIDE = { nom: "", telephone: "", quartier: "", type: "particulier", note: "" };
 
 /**
- * Les clients du dépôt : une fiche par client — le nom, le numéro
+ * Les clients du dépôt : une fiche par client - le nom, le numéro
  * camerounais, le quartier, le type. Le carnet ne perd personne.
  */
 export function ClientsGerant({ clients, langue }: Props) {
@@ -134,7 +134,7 @@ export function ClientsGerant({ clients, langue }: Props) {
             <span className="cadc-ligne__nom">
               {un.nom}
               <small>
-                {un.telephone_display || "—"}
+                {un.telephone_display || "-"}
                 {un.telephone_joignable ? ` · ${un.operateur}` : ""} · {t(`type.${un.type}`)}
                 {un.quartier ? ` · ${un.quartier}` : ""}
               </small>

@@ -21,7 +21,7 @@ const VIDE = {
 };
 
 /**
- * Les livraisons du dépôt : une fiche par bonbonne partie — le client, le
+ * Les livraisons du dépôt : une fiche par bonbonne partie - le client, le
  * quartier, la quantité, le statut. Commandée → en route → livrée.
  */
 export function LivraisonsGerant({ livraisons, clients, langue }: Props) {
@@ -99,7 +99,7 @@ export function LivraisonsGerant({ livraisons, clients, langue }: Props) {
             <label className="cadc-champ">
               <span className="cadc-champ__titre">{t("livraisons.client")}</span>
               <select value={form.client_id} onChange={(e) => setForm({ ...form, client_id: e.target.value })}>
-                <option value="">—</option>
+                <option value="">-</option>
                 {clients.map((un) => (
                   <option key={un.id} value={un.id}>{un.nom}</option>
                 ))}

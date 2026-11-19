@@ -5,7 +5,7 @@ import { creerTraducteur, type Dictionnaire } from "@cadc/kit/i18n";
  * Le backend rend des nombres, des dates ISO et des clés stables.
  */
 export const DICTEE: Dictionnaire = {
-  "marque.slogan": { fr: "la bonbonne, la livraison, le quartier — le dépôt que le client suit seul", en: "the cylinder, the delivery, the neighbourhood — the depot the client follows alone" },
+  "marque.slogan": { fr: "la bonbonne, la livraison, le quartier - le dépôt que le client suit seul", en: "the cylinder, the delivery, the neighbourhood - the depot the client follows alone" },
   "nav.accueil": { fr: "L'accueil", en: "The desk" },
   "nav.livraisons": { fr: "Les livraisons", en: "Deliveries" },
   "nav.clients": { fr: "Les clients", en: "Clients" },
@@ -17,14 +17,14 @@ export const DICTEE: Dictionnaire = {
   "texte.label": { fr: "Taille du texte", en: "Text size" },
   "meta.titre": { fr: "evo-gaz | la bonbonne, la livraison, le quartier", en: "evo-gaz | the cylinder, the delivery, the neighbourhood" },
   "meta.description": {
-    fr: "Le dépôt de GPL d'un camerounais : livraisons de bonbonnes, clients revendeurs et restaurants — et une page publique pour commander sans compte.",
-    en: "The GPL depot of a Cameroonian business: cylinder deliveries, reseller and restaurant clients — and a public page to order with no account.",
+    fr: "Le dépôt de GPL d'un camerounais : livraisons de bonbonnes, clients revendeurs et restaurants - et une page publique pour commander sans compte.",
+    en: "The GPL depot of a Cameroonian business: cylinder deliveries, reseller and restaurant clients - and a public page to order with no account.",
   },
 
   "entree.titre": { fr: "Le dépôt, sans le cahier", en: "The depot, without the notebook" },
   "entree.chapo": {
-    fr: "evo-gaz tient les livraisons : chaque bonbonne avec son client, son quartier, son statut — et une page publique où le client commande sans compte.",
-    en: "evo-gaz keeps the deliveries: every cylinder with its client, its area, its status — and a public page where the client orders with no account.",
+    fr: "evo-gaz tient les livraisons : chaque bonbonne avec son client, son quartier, son statut - et une page publique où le client commande sans compte.",
+    en: "evo-gaz keeps the deliveries: every cylinder with its client, its area, its status - and a public page where the client orders with no account.",
   },
   "entree.ouvrir": { fr: "Ouvrir le dépôt", en: "Open the depot" },
   "entree.slogan": { fr: "un téléphone au comptoir", en: "one phone at the counter" },
@@ -32,7 +32,7 @@ export const DICTEE: Dictionnaire = {
   "geste.1.titre": { fr: "Prendre la commande en une minute", en: "Take the order in a minute" },
   "geste.1.texte": { fr: "Client, quartier, quantité, prix : la livraison part commandée, passe en route, arrive livrée.", en: "Client, area, quantity, price: the delivery leaves ordered, goes on the road, arrives delivered." },
   "geste.2.titre": { fr: "La commande publique", en: "The public order" },
-  "geste.2.texte": { fr: "Le client tape son nom et son numéro sur /commander — le dépôt voit la commande sans compte, le client naît de son numéro.", en: "The client types their name and number on /commander — the depot sees the order with no account; the client is born from their number." },
+  "geste.2.texte": { fr: "Le client tape son nom et son numéro sur /commander - le dépôt voit la commande sans compte, le client naît de son numéro.", en: "The client types their name and number on /commander - the depot sees the order with no account; the client is born from their number." },
   "geste.3.titre": { fr: "Le carnet des clients", en: "The client book" },
   "geste.3.texte": { fr: "Particulier, revendeur, restaurant, chantier : chaque client garde son numéro camerounais et son quartier.", en: "Individual, reseller, restaurant, site: every client keeps their Cameroonian number and area." },
   "geste.4.titre": { fr: "Relire le mois", en: "Read the month" },
@@ -65,7 +65,7 @@ export const DICTEE: Dictionnaire = {
   "accueil.livraisons": { fr: "Livraisons", en: "Deliveries" },
   "accueil.nouvelle": { fr: "Nouvelle livraison", en: "New delivery" },
   "accueil.commander": { fr: "La page de commande", en: "The order page" },
-  "accueil.commander-aide": { fr: "Le client commande sur /commander — sans compte — à envoyer sur WhatsApp.", en: "The client orders on /commander — no account — ready for WhatsApp." },
+  "accueil.commander-aide": { fr: "Le client commande sur /commander - sans compte - à envoyer sur WhatsApp.", en: "The client orders on /commander - no account - ready for WhatsApp." },
 
   "livraisons.titre": { fr: "Les livraisons du dépôt", en: "The depot deliveries" },
   "livraisons.chapo": { fr: "Chaque livraison : le client, le quartier, la quantité, le statut. Commandée → en route → livrée.", en: "Every delivery: the client, the area, the quantity, the status. Ordered → on the way → delivered." },
@@ -82,7 +82,7 @@ export const DICTEE: Dictionnaire = {
   "livraisons.statut": { fr: "Statut", en: "Status" },
   "livraisons.commandee_le": { fr: "Commandée le", en: "Ordered on" },
   "livraisons.livree_le": { fr: "Livrée le", en: "Delivered on" },
-  "livraisons.aide": { fr: "La livraison avance d'un geste : commandée, en route, livrée — ou annulée. La date de livraison se note toute seule.", en: "The delivery moves in one move: ordered, on the way, delivered — or cancelled. The delivery date notes itself." },
+  "livraisons.aide": { fr: "La livraison avance d'un geste : commandée, en route, livrée - ou annulée. La date de livraison se note toute seule.", en: "The delivery moves in one move: ordered, on the way, delivered - or cancelled. The delivery date notes itself." },
 
   "lstatut.commandee": { fr: "Commandée", en: "Ordered" },
   "lstatut.en_route": { fr: "En route", en: "On the way" },
