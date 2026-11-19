@@ -9,7 +9,7 @@ Trois règles :
 2. Une commande fige le montant au moment de la vente (prix × quantité) :
    si le prix change ensuite, la commande garde le sien.
 3. Le stock ne descend que quand la commande est confirmée ; l'annuler la
-   rend. Rien ne s'efface — on change de statut.
+   rend. Rien ne s'efface - on change de statut.
 """
 
 import re

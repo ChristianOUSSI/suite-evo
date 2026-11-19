@@ -13,7 +13,7 @@ def annonces() -> dict:
     """La page publique : les annonces en ligne de la boutique.
 
     Aucun compte n'est demandé : le client qui a reçu le lien lit les
-    articles — jamais les vendeurs, jamais les commandes.
+    articles - jamais les vendeurs, jamais les commandes.
     """
     with SessionLocal() as db:
         organisation = db.scalar(select(Organisation).limit(1))

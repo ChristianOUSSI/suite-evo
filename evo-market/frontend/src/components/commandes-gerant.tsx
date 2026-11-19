@@ -23,7 +23,7 @@ const VIDE = {
 };
 
 /**
- * Les commandes de la boutique : une vente par ligne — l'annonce, la
+ * Les commandes de la boutique : une vente par ligne - l'annonce, la
  * quantité, l'acheteur, le moyen, le statut. Confirmer descend le stock,
  * annuler le rend ; le montant est figé au moment de la vente.
  */
@@ -102,7 +102,7 @@ export function CommandesGerant({ commandes, annonces, langue }: Props) {
           <label className="cadc-champ">
             <span className="cadc-champ__titre">{t("commandes.annonce")}</span>
             <select value={form.annonce_id} onChange={(e) => setForm({ ...form, annonce_id: e.target.value })}>
-              <option value="">—</option>
+              <option value="">-</option>
               {enLigne.map((un) => (
                 <option key={un.id} value={un.id}>
                   {un.titre} · {f.fcfa(un.prix)} · {un.stock}

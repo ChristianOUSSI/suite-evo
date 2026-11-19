@@ -5,7 +5,7 @@ import { creerTraducteur, type Dictionnaire } from "@cadc/kit/i18n";
  * Le backend rend des nombres, des dates ISO et des clés stables.
  */
 export const DICTEE: Dictionnaire = {
-  "marque.slogan": { fr: "l'annonce, le prix, la commande — la boutique que le client lit sans compte", en: "the listing, the price, the order — the shop the customer reads with no account" },
+  "marque.slogan": { fr: "l'annonce, le prix, la commande - la boutique que le client lit sans compte", en: "the listing, the price, the order - the shop the customer reads with no account" },
   "nav.accueil": { fr: "L'accueil", en: "The desk" },
   "nav.annonces": { fr: "Les annonces", en: "Listings" },
   "nav.commandes": { fr: "Les commandes", en: "Orders" },
@@ -17,14 +17,14 @@ export const DICTEE: Dictionnaire = {
   "texte.label": { fr: "Taille du texte", en: "Text size" },
   "meta.titre": { fr: "evo-market | l'annonce, le prix, la commande", en: "evo-market | the listing, the price, the order" },
   "meta.description": {
-    fr: "La marketplace d'une boutique camerounaise : annonces, prix FCFA, stock, commandes, page publique des articles — sans cahier papier ni vente oubliée.",
-    en: "The marketplace of a Cameroonian shop: listings, FCFA prices, stock, orders, a public page of the articles — no paper book, no forgotten sale.",
+    fr: "La marketplace d'une boutique camerounaise : annonces, prix FCFA, stock, commandes, page publique des articles - sans cahier papier ni vente oubliée.",
+    en: "The marketplace of a Cameroonian shop: listings, FCFA prices, stock, orders, a public page of the articles - no paper book, no forgotten sale.",
   },
 
   "entree.titre": { fr: "La boutique, sans le cahier papier", en: "The shop, without the paper book" },
   "entree.chapo": {
-    fr: "evo-market tient la boutique : chaque article avec son prix, son stock, son vendeur, chaque commande qui avance — nouvelle, confirmée, livrée — et une page publique que le client ouvre sans compte.",
-    en: "evo-market keeps the shop: every article with its price, its stock, its seller, every order that moves — new, confirmed, delivered — and a public page the customer opens with no account.",
+    fr: "evo-market tient la boutique : chaque article avec son prix, son stock, son vendeur, chaque commande qui avance - nouvelle, confirmée, livrée - et une page publique que le client ouvre sans compte.",
+    en: "evo-market keeps the shop: every article with its price, its stock, its seller, every order that moves - new, confirmed, delivered - and a public page the customer opens with no account.",
   },
   "entree.ouvrir": { fr: "Ouvrir la boutique", en: "Open the shop" },
   "entree.slogan": { fr: "un téléphone au comptoir", en: "one phone at the counter" },
@@ -34,7 +34,7 @@ export const DICTEE: Dictionnaire = {
   "geste.2.titre": { fr: "La commande qui avance", en: "The order that moves" },
   "geste.2.texte": { fr: "Nouvelle → confirmée → livrée : le statut est un tap, le stock descend quand la commande est confirmée, l'annulation le rend.", en: "New → confirmed → delivered: the status is a tap, the stock drops when the order is confirmed, cancelling gives it back." },
   "geste.3.titre": { fr: "La page publique", en: "The public page" },
-  "geste.3.texte": { fr: "Le client ouvre /catalogue sans compte : les articles, les prix, les quartiers — à envoyer sur WhatsApp.", en: "The customer opens /catalogue with no account: the articles, the prices, the areas — to send on WhatsApp." },
+  "geste.3.texte": { fr: "Le client ouvre /catalogue sans compte : les articles, les prix, les quartiers - à envoyer sur WhatsApp.", en: "The customer opens /catalogue with no account: the articles, the prices, the areas - to send on WhatsApp." },
   "geste.4.titre": { fr: "Relire le mois", en: "Read the month" },
   "geste.4.texte": { fr: "Ventes, commandes, par catégorie : recalculé à la demande, exporté en CSV.", en: "Sales, orders, by category: recomputed on request, exported to CSV." },
   "entree.exige": { fr: "Ce que le produit demande", en: "What the product needs" },
@@ -64,7 +64,7 @@ export const DICTEE: Dictionnaire = {
   "accueil.ajouter": { fr: "Nouvelle annonce", en: "New listing" },
   "accueil.commander": { fr: "Les commandes", en: "The orders" },
   "accueil.publique": { fr: "La page publique", en: "The public page" },
-  "accueil.publique-aide": { fr: "La page que le client ouvre sans compte — à envoyer sur WhatsApp.", en: "The page the customer opens with no account — to send on WhatsApp." },
+  "accueil.publique-aide": { fr: "La page que le client ouvre sans compte - à envoyer sur WhatsApp.", en: "The page the customer opens with no account - to send on WhatsApp." },
 
   "annonces.titre": { fr: "Les annonces de la boutique", en: "The shop's listings" },
   "annonces.chapo": { fr: "Chaque article : le titre, la catégorie, le prix FCFA, le stock, le vendeur. Le statut se change d'un geste.", en: "Every article: the title, the category, the FCFA price, the stock, the seller. The status changes in one move." },

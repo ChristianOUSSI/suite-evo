@@ -27,8 +27,8 @@ const VIDE = {
 
 /**
  * Les annonces de la boutique : une fiche par article, son prix FCFA,
- * son stock, son vendeur. Le statut avance d'un geste — en ligne,
- * vendu, retiré — et la page publique ne montre que les en ligne.
+ * son stock, son vendeur. Le statut avance d'un geste - en ligne,
+ * vendu, retiré - et la page publique ne montre que les en ligne.
  */
 export function AnnoncesGerant({ annonces, langue }: Props) {
   const routeur = useRouter();

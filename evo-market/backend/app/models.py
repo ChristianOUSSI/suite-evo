@@ -30,8 +30,8 @@ def aujourdhui_defaut() -> date:
 
 # La boutique : ses annonces, ses vendeurs, ses commandes.
 # Une annonce a un prix et un stock ; une commande a un acheteur, un moyen
-# de paiement et un statut. Le statut de la commande avance à la main —
-# nouvelle, confirmée, livrée, annulée — et le passé ne s'efface pas.
+# de paiement et un statut. Le statut de la commande avance à la main -
+# nouvelle, confirmée, livrée, annulée - et le passé ne s'efface pas.
 
 ROLES = ("responsable", "agent")
 CATEGORIES = ("alimentation", "vetements", "electronique", "maison", "beaute", "telephone", "auto", "autre")
