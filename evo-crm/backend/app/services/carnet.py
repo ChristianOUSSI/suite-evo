@@ -22,7 +22,7 @@ from ..schemas import (
     RelanceDeplacement,
     RelanceEntree,
 )
-from ..utils import maintenant
+from ..utils import aujourdhui, maintenant
 from . import present
 
 # Après un devis, on reprend des nouvelles : la relance pousse toute seule.
@@ -181,7 +181,7 @@ def programmer(
         client_id=client.id,
         user_id=compte.id,
         motif=motif,
-        due_le=entree.due_le or date.today(),
+        due_le=entree.due_le or aujourdhui(),
         note=entree.note.strip(),
     )
     db.add(relance)
@@ -197,7 +197,7 @@ def terminer(
     if relance.statut == "faite":
         raise refus("relance_deja_faite")
     relance.statut = "faite"
-    relance.faite_le = date.today()
+    relance.faite_le = aujourdhui()
     if note.strip():
         relance.note = note.strip()
     relance.user_id = compte.id
@@ -227,7 +227,7 @@ def _relance_de(db: Session, entreprise: Entreprise, relance_id: int) -> Relance
 
 def relances_du_jour(db: Session, entreprise: Entreprise) -> list[Relance]:
     """Ce qui est dû, en retard compris, du plus ancien au plus récent."""
-    hoje = date.today()
+    hoje = aujourdhui()
     return list(
         db.scalars(
             select(Relance)
@@ -244,7 +244,7 @@ def relances_du_jour(db: Session, entreprise: Entreprise) -> list[Relance]:
 
 
 def relances_avenir(db: Session, entreprise: Entreprise) -> list[Relance]:
-    hoje = date.today()
+    hoje = aujourdhui()
     return list(
         db.scalars(
             select(Relance)
@@ -304,7 +304,7 @@ def rechercher(
 
 def etat(db: Session, entreprise: Entreprise) -> dict:
     """La vitre du gérant : des nombres, aucun commentaire."""
-    hoje = date.today()
+    hoje = aujourdhui()
     limite = maintenant() - timedelta(days=30)
     lignes = clients(db, entreprise.id)
     actifs = [un for un in lignes if un.actif]

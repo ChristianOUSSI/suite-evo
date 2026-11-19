@@ -2,6 +2,8 @@ from fastapi import APIRouter
 
 from datetime import date
 
+from ..utils import aujourdhui
+
 from ..deps import CompteCourant, DbSession, EntrepriseCourante
 from ..schemas import RelanceDeplacement
 from ..services import carnet, present
@@ -17,7 +19,7 @@ def liste(entreprise: EntrepriseCourante, db: DbSession) -> dict:
     return {
         "du_jour": [present.relance_dict(un) for un in dues],
         "en_retard": [
-            present.relance_dict(un) for un in dues if un.due_le < date.today()
+            present.relance_dict(un) for un in dues if un.due_le < aujourdhui()
         ],
         "a_venir": [present.relance_dict(un) for un in a_venir],
     }

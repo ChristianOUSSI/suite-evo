@@ -16,7 +16,7 @@ from sqlalchemy import select
 from ..messages import refus
 from ..models import Cotisation, Groupe, Membre, Remise, Tour
 from ..security import jeton_public
-from ..utils import tour_suivant
+from ..utils import aujourdhui, tour_suivant
 from . import present
 
 MODES = {"especes", "momo_mtn", "momo_orange"}
@@ -59,7 +59,7 @@ def ouvrir_tour(db, groupe: Groupe, date_prevue: date | None = None) -> Tour:
     numero = 1 if precedent is None else precedent.numero + 1
     if date_prevue is None:
         if precedent is None:
-            date_prevue = date.today()
+            date_prevue = aujourdhui()
         else:
             date_prevue = tour_suivant(
                 precedent.date_prevue, groupe.frequence, groupe.jour_ancre
@@ -111,7 +111,7 @@ def tirer(db, groupe: Groupe, tour_id: int, graine: str = "") -> Tour:
 
     tour.graine = graine_du_tour(groupe, tour, graine)
     tour.gagnant_id = membres[index_tire(tour.graine, len(membres))].id
-    tour.date_tirage = date.today()
+    tour.date_tirage = aujourdhui()
     tour.statut = "tire"
     db.commit()
     db.refresh(tour)
@@ -149,7 +149,7 @@ def payer_cotisation(
     if not autorise:
         raise refus("rail_coupe")
 
-    date_paiement = jour or date.today()
+    date_paiement = jour or aujourdhui()
     du = cotisation.montant_attendu
     cotisation.montant_paye = (
         min(du, cotisation.montant_paye + montant)
@@ -228,7 +228,7 @@ def cloturer_tour(db, groupe: Groupe) -> Tour:
 
 def etat_cercle(db, groupe: Groupe) -> dict:
     """La vitre du trésorier : ce qui est dû, rentré, en retard, qui reçoit."""
-    today = date.today()
+    today = aujourdhui()
     tours = db.scalars(
         select(Tour).where(Tour.groupe_id == groupe.id).order_by(Tour.numero.desc())
     ).all()

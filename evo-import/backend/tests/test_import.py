@@ -1,5 +1,6 @@
 """Le quai : envois, numéro de suivi, parcours, suivi public."""
 
+from app.utils import aujourdhui
 from datetime import date
 
 
@@ -29,7 +30,7 @@ def test_envoi_et_suivi(responsable, client):
             "poids_kg": 120.5,
             "valeur_declaree": 900000,
             "frais": 75000,
-            "date_envoi": date.today().isoformat(),
+            "date_envoi": aujourdhui().isoformat(),
         },
     )
     assert reponse.status_code == 200, reponse.text
@@ -50,7 +51,7 @@ def test_envoi_et_suivi(responsable, client):
         assert reponse.json()["statut"] == statut
 
     final = responsable.get(f"/envois/{envoi_id}").json()
-    assert final["date_livraison"] == date.today().isoformat()
+    assert final["date_livraison"] == aujourdhui().isoformat()
     assert len(final["suivi"]) == 4
     assert [un["statut"] for un in final["suivi"]] == ["en_attente", "en_transit", "en_douane", "livre"]
 

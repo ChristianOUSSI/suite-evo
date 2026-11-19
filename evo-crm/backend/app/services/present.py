@@ -11,7 +11,7 @@ from __future__ import annotations
 from datetime import date
 
 from ..models import Client, Echange, Entreprise, Relance, User
-from ..utils import affiche_telephone, canonise_telephone, jours_depuis, operateur
+from ..utils import affiche_telephone, aujourdhui, canonise_telephone, jours_depuis, operateur
 
 
 def entreprise_dict(entreprise: Entreprise) -> dict:
@@ -91,7 +91,7 @@ def echange_dict(echange: Echange) -> dict:
 
 
 def relance_dict(relance: Relance, ce_jour: date | None = None) -> dict:
-    hoje = ce_jour or date.today()
+    hoje = ce_jour or aujourdhui()
     retard = max(0, (hoje - relance.due_le).days) if relance.statut == "a_faire" else 0
     return {
         "id": relance.id,

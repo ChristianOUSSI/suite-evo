@@ -15,6 +15,7 @@ from sqlalchemy import (
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from .database import Base
+from .utils import aujourdhui
 from .utils import maintenant
 
 FREQUENCES = ("hebdo", "quinzaine", "mensuel")
@@ -81,7 +82,7 @@ class Membre(Base):
     telephone: Mapped[str] = mapped_column(String(24), default="")
     part: Mapped[int] = mapped_column(Integer, default=1)
     actif: Mapped[bool] = mapped_column(Boolean, default=True)
-    entree_le: Mapped[date] = mapped_column(Date, default=date.today)
+    entree_le: Mapped[date] = mapped_column(Date, default=aujourdhui)
     note: Mapped[str] = mapped_column(String(400), default="")
 
     groupe: Mapped[Groupe] = relationship(back_populates="membres")

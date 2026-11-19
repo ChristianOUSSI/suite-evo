@@ -1,5 +1,6 @@
 """L'atelier : motos, clients, réparations, catalogue public."""
 
+from app.utils import aujourdhui
 from datetime import date
 
 
@@ -37,7 +38,7 @@ def test_moto_et_cycle(responsable):
     assert vendu.status_code == 200, vendu.text
     assert vendu.json()["statut"] == "vendu"
     assert vendu.json()["client"] == clients[0]["nom"]
-    assert vendu.json()["date_vente"] == date.today().isoformat()
+    assert vendu.json()["date_vente"] == aujourdhui().isoformat()
 
     reliste = responsable.patch(f"/motos/{moto_id}", json={"statut": "en_vente"})
     assert reliste.status_code == 200
@@ -73,7 +74,7 @@ def test_reparation_cycle(responsable):
     livree = responsable.patch(f"/reparations/{rep_id}", json={"statut": "livree"})
     assert livree.status_code == 200
     assert livree.json()["statut"] == "livree"
-    assert livree.json()["date_livraison"] == date.today().isoformat()
+    assert livree.json()["date_livraison"] == aujourdhui().isoformat()
 
 
 def test_reparation_client_inconnu(responsable):

@@ -1,5 +1,6 @@
 """Le carnet : la séance, la fiche, le journal, la relance, les droits."""
 
+from app.utils import aujourdhui
 from datetime import date, timedelta
 
 
@@ -166,7 +167,7 @@ def test_une_relance_se_clot_et_ne_se_clot_deux_fois(carnet):
 
     close = lire(carnet.post(f"/relances/{relance['id']}/terminer", json={}))
     assert close["statut"] == "faite"
-    assert close["faite_le"] == date.today().isoformat()
+    assert close["faite_le"] == aujourdhui().isoformat()
 
     rep = carnet.post(f"/relances/{relance['id']}/terminer", json={})
     assert rep.status_code == 422

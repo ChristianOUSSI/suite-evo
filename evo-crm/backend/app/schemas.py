@@ -9,7 +9,7 @@ from .models import (
     SEGMENTS,
     TYPES_ECHANGE,
 )
-from .utils import canonise_telephone
+from .utils import aujourdhui, canonise_telephone
 
 SEGMENTS_VALIDES = set(SEGMENTS)
 TYPES_VALIDES = set(TYPES_ECHANGE)
@@ -116,7 +116,7 @@ class RelanceDeplacement(BaseModel):
     @field_validator("due_le")
     @classmethod
     def date_valide(cls, valeur: date) -> date:
-        if valeur < date.today():
+        if valeur < aujourdhui():
             raise ValueError("liste:relance_passee")
         return valeur
 

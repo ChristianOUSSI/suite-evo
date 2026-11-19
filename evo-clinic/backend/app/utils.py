@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import re
 from calendar import monthrange
-from datetime import UTC, date, datetime, timedelta
+from datetime import UTC, date, datetime, timedelta, timezone
 
 MOIS_FR = (
     "janvier", "février", "mars", "avril", "mai", "juin",
@@ -83,7 +83,8 @@ def jour_et_date(jour: date, langue: str = "fr") -> str:
 
 
 def aujourdhui() -> date:
-    return datetime.now(UTC).date()
+    """Le jour lu à Douala : le Cameroun n'a pas d'heure d'été, UTC+1 fixe."""
+    return datetime.now(timezone(timedelta(hours=1))).date()
 
 
 def dans_jours(n: int, depuis: date | None = None) -> date:

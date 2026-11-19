@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import re
 from calendar import monthrange
-from datetime import UTC, date, datetime, timedelta
+from datetime import UTC, date, datetime, timedelta, timezone
 
 MOIS_FR = (
     "janvier", "février", "mars", "avril", "mai", "juin",
@@ -20,6 +20,11 @@ ESPACE_FIN = "\u202f"
 
 def maintenant() -> datetime:
     return datetime.now(UTC).replace(tzinfo=None)
+
+
+def aujourdhui() -> date:
+    """Le jour lu à Douala : le Cameroun n'a pas d'heure d'été, UTC+1 fixe."""
+    return datetime.now(timezone(timedelta(hours=1))).date()
 
 
 def canonise_telephone(brut: str | None) -> str | None:

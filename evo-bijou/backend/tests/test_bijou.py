@@ -1,5 +1,6 @@
 """La vitrine : pièces, clients, vente, catalogue public."""
 
+from app.utils import aujourdhui
 from datetime import date
 
 
@@ -40,7 +41,7 @@ def test_piece_et_cycle(responsable):
     assert vendu.status_code == 200, vendu.text
     assert vendu.json()["statut"] == "vendu"
     assert vendu.json()["client"] == clients[0]["nom"]
-    assert vendu.json()["date_vente"] == date.today().isoformat()
+    assert vendu.json()["date_vente"] == aujourdhui().isoformat()
 
     # Le retour en vitrine efface la vente.
     reliste = responsable.patch(f"/pieces/{piece_id}", json={"statut": "en_vitrine"})

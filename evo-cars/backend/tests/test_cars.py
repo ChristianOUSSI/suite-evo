@@ -1,3 +1,4 @@
+from app.utils import aujourdhui
 from datetime import date
 
 
@@ -117,7 +118,7 @@ def test_recette_et_exports(responsable):
     reponse = responsable.get("/recap")
     assert reponse.status_code == 200
     recap = reponse.json()
-    assert recap["periode"] == date.today().strftime("%Y-%m")
+    assert recap["periode"] == aujourdhui().strftime("%Y-%m")
     assert "par_marque" in recap
 
     for nom in ("voitures.csv", "pieces.csv", "clients.csv"):
