@@ -25,7 +25,7 @@ const VIDE = {
 };
 
 /**
- * Les réparations de l'atelier : une fiche par entrée — le client, la
+ * Les réparations de l'atelier : une fiche par entrée - le client, la
  * panne, les travaux, la main-d'œuvre, les pièces. Le statut avance
  * d'un geste : reçue → en cours → terminée → livrée.
  */
@@ -115,7 +115,7 @@ export function ReparationsGerant({ reparations, clients, motos, langue }: Props
             <label className="cadc-champ">
               <span className="cadc-champ__titre">{t("rep.client")}</span>
               <select value={form.client_id} onChange={(e) => setForm({ ...form, client_id: e.target.value })}>
-                <option value="">—</option>
+                <option value="">-</option>
                 {clients.map((un) => (
                   <option key={un.id} value={un.id}>{un.nom}</option>
                 ))}
@@ -124,7 +124,7 @@ export function ReparationsGerant({ reparations, clients, motos, langue }: Props
             <label className="cadc-champ">
               <span className="cadc-champ__titre">{t("rep.moto")}</span>
               <select value={form.moto_id} onChange={(e) => setForm({ ...form, moto_id: e.target.value })}>
-                <option value="">—</option>
+                <option value="">-</option>
                 {motos.map((un) => (
                   <option key={un.id} value={un.id}>{un.marque} {un.modele}</option>
                 ))}

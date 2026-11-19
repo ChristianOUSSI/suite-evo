@@ -8,7 +8,7 @@ Deux règles :
    Le statut se change d'un geste ; le passé ne se réécrit pas.
 2. Une réparation naît reçue, passe en cours, se termine, se livre.
    Chaque geste porte sa date ; la facture garde le client.
-3. Le catalogue public ne montre que ce qui est en vente —
+3. Le catalogue public ne montre que ce qui est en vente -
    ni l'acheteur, ni les clients, ni le garage.
 """
 

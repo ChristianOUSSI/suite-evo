@@ -5,7 +5,7 @@ import { creerTraducteur, type Dictionnaire } from "@cadc/kit/i18n";
  * Le backend rend des nombres, des dates ISO et des clés stables.
  */
 export const DICTEE: Dictionnaire = {
-  "marque.slogan": { fr: "la moto, la panne, le prix — l'atelier que le client suit seul", en: "the bike, the fault, the price — the workshop the client follows alone" },
+  "marque.slogan": { fr: "la moto, la panne, le prix - l'atelier que le client suit seul", en: "the bike, the fault, the price - the workshop the client follows alone" },
   "nav.accueil": { fr: "L'accueil", en: "The desk" },
   "nav.motos": { fr: "Les motos", en: "Bikes" },
   "nav.reparations": { fr: "Les réparations", en: "Repairs" },
@@ -18,14 +18,14 @@ export const DICTEE: Dictionnaire = {
   "texte.label": { fr: "Taille du texte", en: "Text size" },
   "meta.titre": { fr: "evo-moto | la moto, la panne, le prix", en: "evo-moto | the bike, the fault, the price" },
   "meta.description": {
-    fr: "L'atelier d'un garage camerounais : motos en vente, réparations, clients — et un catalogue public à envoyer sur WhatsApp.",
-    en: "The workshop of a Cameroonian garage: bikes for sale, repairs, clients — and a public catalogue to send on WhatsApp.",
+    fr: "L'atelier d'un garage camerounais : motos en vente, réparations, clients - et un catalogue public à envoyer sur WhatsApp.",
+    en: "The workshop of a Cameroonian garage: bikes for sale, repairs, clients - and a public catalogue to send on WhatsApp.",
   },
 
   "entree.titre": { fr: "L'atelier, sans le cahier", en: "The workshop, without the notebook" },
   "entree.chapo": {
-    fr: "evo-moto tient le garage : chaque moto avec sa fiche et son prix, chaque réparation avec sa panne et son coût — et une page publique où le client lit les motos en vente sans compte.",
-    en: "evo-moto keeps the garage: every bike with its card and price, every repair with its fault and cost — and a public page where the client reads the bikes for sale with no account.",
+    fr: "evo-moto tient le garage : chaque moto avec sa fiche et son prix, chaque réparation avec sa panne et son coût - et une page publique où le client lit les motos en vente sans compte.",
+    en: "evo-moto keeps the garage: every bike with its card and price, every repair with its fault and cost - and a public page where the client reads the bikes for sale with no account.",
   },
   "entree.ouvrir": { fr: "Ouvrir l'atelier", en: "Open the workshop" },
   "entree.slogan": { fr: "un téléphone au garage", en: "one phone at the garage" },
@@ -35,7 +35,7 @@ export const DICTEE: Dictionnaire = {
   "geste.2.titre": { fr: "La réparation qui avance", en: "The repair that moves" },
   "geste.2.texte": { fr: "Reçue, en cours, terminée, livrée : chaque passage porte sa date, le coût garde la main-d'œuvre et les pièces.", en: "Received, in progress, finished, delivered: every step keeps its date, the cost keeps labour and parts." },
   "geste.3.titre": { fr: "Le catalogue public", en: "The public catalogue" },
-  "geste.3.texte": { fr: "Le client lit les motos en vente sur /catalogue — sans compte, sans appel, à envoyer sur WhatsApp.", en: "The client reads the bikes for sale on /catalogue — no account, no call, ready for WhatsApp." },
+  "geste.3.texte": { fr: "Le client lit les motos en vente sur /catalogue - sans compte, sans appel, à envoyer sur WhatsApp.", en: "The client reads the bikes for sale on /catalogue - no account, no call, ready for WhatsApp." },
   "geste.4.titre": { fr: "Relire le mois", en: "Read the month" },
   "geste.4.texte": { fr: "Ventes et atelier : recalculé à la demande, exporté en CSV.", en: "Sales and workshop: recomputed on request, exported to CSV." },
   "entree.exige": { fr: "Ce que le produit demande", en: "What the product needs" },
@@ -70,7 +70,7 @@ export const DICTEE: Dictionnaire = {
   "accueil.nouveau": { fr: "Nouvelle moto", en: "New bike" },
   "accueil.reparation": { fr: "Nouvelle réparation", en: "New repair" },
   "accueil.catalogue": { fr: "Le catalogue public", en: "The public catalogue" },
-  "accueil.catalogue-aide": { fr: "La page où le client lit les motos en vente — à envoyer sur WhatsApp.", en: "The page where the client reads the bikes for sale — to send on WhatsApp." },
+  "accueil.catalogue-aide": { fr: "La page où le client lit les motos en vente - à envoyer sur WhatsApp.", en: "The page where the client reads the bikes for sale - to send on WhatsApp." },
 
   "motos.titre": { fr: "Les motos du garage", en: "The garage bikes" },
   "motos.chapo": { fr: "Chaque moto : la marque, le modèle, l'année, le kilométrage, la couleur, le prix. Le statut se change d'un geste.", en: "Every bike: brand, model, year, mileage, colour, price. The status changes in one move." },
@@ -135,7 +135,7 @@ export const DICTEE: Dictionnaire = {
   "type.livreur": { fr: "Livreur", en: "Delivery rider" },
 
   "catalogue.titre": { fr: "Les motos en vente", en: "Bikes for sale" },
-  "catalogue.chapo": { fr: "Les motos en vente, leurs prix — sans compte. À envoyer sur WhatsApp.", en: "The bikes for sale, their prices — no account needed. Ready for WhatsApp." },
+  "catalogue.chapo": { fr: "Les motos en vente, leurs prix - sans compte. À envoyer sur WhatsApp.", en: "The bikes for sale, their prices - no account needed. Ready for WhatsApp." },
   "catalogue.vide": { fr: "Aucune moto en vente pour l'instant.", en: "No bike for sale yet." },
   "catalogue.chez": { fr: "chez", en: "at" },
   "catalogue.contact": { fr: "Contacter le garage", en: "Contact the garage" },

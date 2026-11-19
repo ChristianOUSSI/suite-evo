@@ -23,7 +23,7 @@ const VIDE = {
 };
 
 /**
- * Les motos du garage : une fiche par moto — la marque, le modèle,
+ * Les motos du garage : une fiche par moto - la marque, le modèle,
  * l'année, le kilométrage, la couleur, le prix. Le statut se change
  * d'un geste ; la vente porte son client et sa date, rien ne s'efface.
  */
