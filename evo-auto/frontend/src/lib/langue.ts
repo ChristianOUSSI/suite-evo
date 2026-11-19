@@ -5,7 +5,7 @@ import { creerTraducteur, type Dictionnaire } from "@cadc/kit/i18n";
  * Le backend rend des nombres, des dates ISO et des clés stables.
  */
 export const DICTEE: Dictionnaire = {
-  "marque.slogan": { fr: "le véhicule, le prix, la vente — le parc que le client vérifie seul", en: "the vehicle, the price, the sale — the lot the buyer checks alone" },
+  "marque.slogan": { fr: "le véhicule, le prix, la vente - le parc que le client vérifie seul", en: "the vehicle, the price, the sale - the lot the buyer checks alone" },
   "nav.accueil": { fr: "L'accueil", en: "The desk" },
   "nav.vehicules": { fr: "Les véhicules", en: "Vehicles" },
   "nav.clients": { fr: "Les clients", en: "Clients" },
@@ -17,14 +17,14 @@ export const DICTEE: Dictionnaire = {
   "texte.label": { fr: "Taille du texte", en: "Text size" },
   "meta.titre": { fr: "evo-auto | le véhicule, le prix, la vente", en: "evo-auto | the vehicle, the price, the sale" },
   "meta.description": {
-    fr: "Le parc d'un concessionnaire camerounais : véhicules, clients, ventes, catalogue public — sans fiche papier ni prix oublié.",
-    en: "The lot of a Cameroonian dealership: vehicles, clients, sales, public catalogue — no paper card, no forgotten price.",
+    fr: "Le parc d'un concessionnaire camerounais : véhicules, clients, ventes, catalogue public - sans fiche papier ni prix oublié.",
+    en: "The lot of a Cameroonian dealership: vehicles, clients, sales, public catalogue - no paper card, no forgotten price.",
   },
 
   "entree.titre": { fr: "Le parc, sans la fiche papier", en: "The lot, without the paper card" },
   "entree.chapo": {
-    fr: "evo-auto tient le parc : chaque véhicule avec sa marque, son prix, son statut — et un catalogue public où l'acheteur vérifie la fiche sans compte.",
-    en: "evo-auto keeps the lot: every vehicle with its brand, its price, its status — and a public catalogue where the buyer checks the card with no account.",
+    fr: "evo-auto tient le parc : chaque véhicule avec sa marque, son prix, son statut - et un catalogue public où l'acheteur vérifie la fiche sans compte.",
+    en: "evo-auto keeps the lot: every vehicle with its brand, its price, its status - and a public catalogue where the buyer checks the card with no account.",
   },
   "entree.ouvrir": { fr: "Ouvrir le parc", en: "Open the lot" },
   "entree.slogan": { fr: "un téléphone au parc", en: "one phone at the lot" },
@@ -32,9 +32,9 @@ export const DICTEE: Dictionnaire = {
   "geste.1.titre": { fr: "Entrer le véhicule en une minute", en: "Enter a vehicle in a minute" },
   "geste.1.texte": { fr: "Marque, modèle, année, kilométrage, prix : la fiche se remplit, le statut démarre en vente.", en: "Brand, model, year, mileage, price: the card fills itself, the status starts for sale." },
   "geste.2.titre": { fr: "Réserver, vendre, retirer", en: "Reserve, sell, withdraw" },
-  "geste.2.texte": { fr: "En vente, réservé, vendu, retiré : le statut se change d'un geste — la vente porte son client et sa date.", en: "For sale, reserved, sold, withdrawn: the status changes in one move — the sale carries its client and its date." },
+  "geste.2.texte": { fr: "En vente, réservé, vendu, retiré : le statut se change d'un geste - la vente porte son client et sa date.", en: "For sale, reserved, sold, withdrawn: the status changes in one move - the sale carries its client and its date." },
   "geste.3.titre": { fr: "Le catalogue public", en: "The public catalogue" },
-  "geste.3.texte": { fr: "L'acheteur lit les véhicules en vente sur /catalogue : prix, kilométrage, carburant — sans compte, à envoyer sur WhatsApp.", en: "The buyer reads the vehicles for sale on /catalogue: price, mileage, fuel — no account, to send on WhatsApp." },
+  "geste.3.texte": { fr: "L'acheteur lit les véhicules en vente sur /catalogue : prix, kilométrage, carburant - sans compte, à envoyer sur WhatsApp.", en: "The buyer reads the vehicles for sale on /catalogue: price, mileage, fuel - no account, to send on WhatsApp." },
   "geste.4.titre": { fr: "Relire le mois", en: "Read the month" },
   "geste.4.texte": { fr: "Ventes, valeur du stock, par marque et par carburant : recalculé à la demande, exporté en CSV.", en: "Sales, stock value, by brand and by fuel: recomputed on request, exported to CSV." },
   "entree.exige": { fr: "Ce que le produit demande", en: "What the product needs" },
@@ -64,7 +64,7 @@ export const DICTEE: Dictionnaire = {
   "accueil.vendue_mois": { fr: "Valeur vendue", en: "Value sold" },
   "accueil.nouveau": { fr: "Nouveau véhicule", en: "New vehicle" },
   "accueil.catalogue": { fr: "Le catalogue public", en: "The public catalogue" },
-  "accueil.catalogue-aide": { fr: "La page où l'acheteur lit les véhicules en vente sans compte — à envoyer sur WhatsApp.", en: "The page where the buyer reads the vehicles for sale with no account — to send on WhatsApp." },
+  "accueil.catalogue-aide": { fr: "La page où l'acheteur lit les véhicules en vente sans compte - à envoyer sur WhatsApp.", en: "The page where the buyer reads the vehicles for sale with no account - to send on WhatsApp." },
 
   "vehicules.titre": { fr: "Les véhicules du parc", en: "The lot's vehicles" },
   "vehicules.chapo": { fr: "Chaque véhicule : la marque, le modèle, l'année, le kilométrage, le prix. Le statut se change d'un geste.", en: "Every vehicle: the brand, the model, the year, the mileage, the price. The status changes in one move." },

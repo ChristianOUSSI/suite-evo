@@ -8,7 +8,7 @@ Trois règles :
    Le statut se change d'un geste ; le passé ne se réécrit pas.
 2. Un véhicule vendu garde son client et son prix de vente :
    la vente est une date, pas un commentaire.
-3. Le catalogue public ne montre que ce qui est en vente —
+3. Le catalogue public ne montre que ce qui est en vente -
    ni le vendeur, ni les clients.
 """
 
