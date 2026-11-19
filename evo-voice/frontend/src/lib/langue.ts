@@ -5,7 +5,7 @@ import { creerTraducteur, type Dictionnaire } from "@cadc/kit/i18n";
  * Le backend rend des nombres, des dates ISO et des clés stables.
  */
 export const DICTEE: Dictionnaire = {
-  "marque.slogan": { fr: "ce qui a été dit, ce que ça veut dire, ce qui s'est passé — sans rien envoyer", en: "what was said, what it means, what happened — without sending anything" },
+  "marque.slogan": { fr: "ce qui a été dit, ce que ça veut dire, ce qui s'est passé - sans rien envoyer", en: "what was said, what it means, what happened - without sending anything" },
   "nav.accueil": { fr: "L'accueil", en: "The desk" },
   "nav.commandes": { fr: "Les commandes", en: "Commands" },
   "nav.recap": { fr: "Le mois", en: "The month" },
@@ -16,22 +16,22 @@ export const DICTEE: Dictionnaire = {
   "texte.label": { fr: "Taille du texte", en: "Text size" },
   "meta.titre": { fr: "evo-voice | ce qui a été dit, ce qui s'est passé", en: "evo-voice | what was said, what happened" },
   "meta.description": {
-    fr: "La dictée et la commande vocale d'une organisation camerounaise : transcription, intention, exécution locale — et rien qui ne quitte la machine en mode démo.",
-    en: "Dictation and voice commands for a Cameroonian organisation: transcription, intent, local execution — and nothing leaves the machine in demo mode.",
+    fr: "La dictée et la commande vocale d'une organisation camerounaise : transcription, intention, exécution locale - et rien qui ne quitte la machine en mode démo.",
+    en: "Dictation and voice commands for a Cameroonian organisation: transcription, intent, local execution - and nothing leaves the machine in demo mode.",
   },
 
   "entree.titre": { fr: "La voix, sans le réseau", en: "The voice, without the network" },
   "entree.chapo": {
-    fr: "evo-voice écoute le comptoir : chaque phrase dite devient une commande — transcrite, interprétée, exécutée ici.",
-    en: "evo-voice listens at the counter: every spoken sentence becomes a command — transcribed, interpreted, executed here.",
+    fr: "evo-voice écoute le comptoir : chaque phrase dite devient une commande - transcrite, interprétée, exécutée ici.",
+    en: "evo-voice listens at the counter: every spoken sentence becomes a command - transcribed, interpreted, executed here.",
   },
   "entree.ouvrir": { fr: "Ouvrir la voix", en: "Open the voice" },
   "entree.slogan": { fr: "un téléphone au comptoir", en: "one phone at the counter" },
   "geste.titre": { fr: "Quatre gestes de la voix", en: "Four moves for the voice" },
   "geste.1.titre": { fr: "Dire, puis transcrire", en: "Speak, then transcribe" },
-  "geste.1.texte": { fr: "La phrase dite est recopiée telle quelle — la dictée n'invente rien.", en: "The spoken sentence is copied as-is — dictation invents nothing." },
+  "geste.1.texte": { fr: "La phrase dite est recopiée telle quelle - la dictée n'invente rien.", en: "The spoken sentence is copied as-is - dictation invents nothing." },
   "geste.2.titre": { fr: "L'intention se devine", en: "The intent is guessed" },
-  "geste.2.texte": { fr: "Rappel, message, note, recherche, alerte : la règle dit ce qu'elle a compris — l'humain corrige si besoin.", en: "Reminder, message, note, search, alert: the rule says what it understood — the human corrects if needed." },
+  "geste.2.texte": { fr: "Rappel, message, note, recherche, alerte : la règle dit ce qu'elle a compris - l'humain corrige si besoin.", en: "Reminder, message, note, search, alert: the rule says what it understood - the human corrects if needed." },
   "geste.3.titre": { fr: "Exécuter en local", en: "Execute locally" },
   "geste.3.texte": { fr: "Un geste exécute la commande ici : le résultat est gardé, horodaté, journalisé.", en: "One move runs the command here: the result is kept, timestamped, journalised." },
   "geste.4.titre": { fr: "Relire le mois", en: "Read the month" },
@@ -66,7 +66,7 @@ export const DICTEE: Dictionnaire = {
   "commandes.chapo": { fr: "Chaque phrase dite : la transcription, l'intention devinée, le résultat de l'exécution.", en: "Every spoken sentence: the transcription, the guessed intent, the execution result." },
   "commandes.nouvelle": { fr: "Nouvelle dictée", en: "New dictation" },
   "commandes.transcription": { fr: "Ce qui a été dit", en: "What was said" },
-  "commandes.transcription-aide": { fr: "Recopie la phrase telle que la dictée l'a entendue — ou tape-la si le micro dort.", en: "Copy the sentence as dictation heard it — or type it if the mic is asleep." },
+  "commandes.transcription-aide": { fr: "Recopie la phrase telle que la dictée l'a entendue - ou tape-la si le micro dort.", en: "Copy the sentence as dictation heard it - or type it if the mic is asleep." },
   "commandes.dictée": { fr: "Écouter…", en: "Listening…" },
   "commandes.intention": { fr: "Intention", en: "Intent" },
   "commandes.statut": { fr: "Statut", en: "Status" },
@@ -87,7 +87,7 @@ export const DICTEE: Dictionnaire = {
   "intention.recherche": { fr: "Recherche", en: "Search" },
   "intention.alerte": { fr: "Alerte", en: "Alert" },
   "intention.autre": { fr: "Autre", en: "Other" },
-  "intention.vide": { fr: "—", en: "—" },
+  "intention.vide": { fr: "-", en: "-" },
 
   "cstatut.recue": { fr: "Reçue", en: "Received" },
   "cstatut.interpreteee": { fr: "Interprétée", en: "Interpreted" },

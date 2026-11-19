@@ -3,7 +3,7 @@ from __future__ import annotations
 """La dictée et la commande vocale : ce qui a été dit, ce que ça veut dire.
 
 On parle au téléphone, la machine transcrit (en démo, on tape ce qui a été
-dit), l'intention est devinée par des règles simples, puis exécutée ici —
+dit), l'intention est devinée par des règles simples, puis exécutée ici -
 rien ne part sur le réseau : ni SMS, ni appel, ni message.
 """
 

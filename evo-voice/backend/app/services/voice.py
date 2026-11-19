@@ -3,7 +3,7 @@ from __future__ import annotations
 """La voix : transcription, intention, exécution locale.
 
 En mode démo, la transcription est tapée à la main (ce que la dictée a
-entendu) et l'exécution produit un résultat déterministe — aucun SMS,
+entendu) et l'exécution produit un résultat déterministe - aucun SMS,
 aucun appel, aucun message ne quitte la machine.
 """
 
@@ -31,7 +31,7 @@ MOTIFS: tuple[tuple[str, tuple[str, ...]], ...] = (
 
 RESULTATS_PAR_INTENTION = {
     "rappel": "Rappel rangé : il ressortira à l'écran à l'heure dite.",
-    "message": "Message préparé : texte relu et prêt à copier — rien n'est envoyé en démo.",
+    "message": "Message préparé : texte relu et prêt à copier - rien n'est envoyé en démo.",
     "note": "Note rangée dans le carnet du jour, classée par intention.",
     "recherche": "Recherche menée dans les sources locales : les points clés sont listés.",
     "alerte": "Alerte notée : elle remontera tant qu'elle n'est pas acquittée.",

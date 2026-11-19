@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-"""La démo de la voix : des commandes dans chaque file — déterministe."""
+"""La démo de la voix : des commandes dans chaque file - déterministe."""
 
 import random
 from datetime import timedelta
