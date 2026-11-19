@@ -127,7 +127,7 @@ def corriger_produit(
     db: DbSession,
 ) -> dict:
     """Prix, stock et fiche : le responsable seul. Le stock ne se règle pas
-    ici — il bouge à la vente, à l'annulation et au réapprovisionnement."""
+    ici - il bouge à la vente, à l'annulation et au réapprovisionnement."""
     from ..services import shop
 
     produit = shop.produit_de(db, organisation, produit_id)

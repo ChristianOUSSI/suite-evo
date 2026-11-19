@@ -16,7 +16,7 @@ const VIDE = { nom: "", unite: "piece" as Unite, prix_achat: 0, prix_vente: 0, s
 
 /**
  * Les articles de la boutique. Prix, stock et fiche : le responsable seul.
- * Le stock ne se règle pas ici — il bouge à la vente, à l'annulation et au
+ * Le stock ne se règle pas ici - il bouge à la vente, à l'annulation et au
  * réapprovisionnement, qui laisse sa trace dans la note.
  */
 export function ProduitsGerant({ produits, langue, responsable }: Props) {

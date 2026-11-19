@@ -187,7 +187,7 @@ export function CaisseGerant({ ventes, produits, langue }: Props) {
               {f.fcfa(vente.total)}
               <br />
               {vente.statut === "annulee" ? (
-                <span className="cadc-badge cadc-badge--doux">—</span>
+                <span className="cadc-badge cadc-badge--doux">-</span>
               ) : (
                 <span className="cadc-badge cadc-badge--vert">OK</span>
               )}

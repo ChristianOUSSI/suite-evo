@@ -91,7 +91,7 @@ export default async function PageAccueil() {
                 <span className="cadc-ligne__valeur">
                   {f.fcfa(un.prix_vente)}
                   <br />
-                  <small>{un.stock === 0 ? "—" : `≤ ${un.seuil_alerte}`}</small>
+                  <small>{un.stock === 0 ? "-" : `≤ ${un.seuil_alerte}`}</small>
                 </span>
               </li>
             ))}

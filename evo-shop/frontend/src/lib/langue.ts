@@ -16,14 +16,14 @@ export const DICTEE: Dictionnaire = {
   "texte.label": { fr: "Taille du texte", en: "Text size" },
   "meta.titre": { fr: "evo-shop | la caisse qui ne perd pas un franc", en: "evo-shop | the till that loses no franc" },
   "meta.description": {
-    fr: "Le point de vente d'une boutique camerounaise : le ticket qui se fige, le stock qui descend, le mois recalculé — sans caisse enregistreuse.",
-    en: "The point of sale of a Cameroonian shop: the receipt that freezes, the stock that drops, the month recomputed — no cash register needed.",
+    fr: "Le point de vente d'une boutique camerounaise : le ticket qui se fige, le stock qui descend, le mois recalculé - sans caisse enregistreuse.",
+    en: "The point of sale of a Cameroonian shop: the receipt that freezes, the stock that drops, the month recomputed - no cash register needed.",
   },
 
   "entree.titre": { fr: "La boutique, sans la caisse enregistreuse", en: "The shop, without the cash register" },
   "entree.chapo": {
-    fr: "evo-shop tient la caisse : le ticket qui se fige, le stock qui descend tout seul, le mois que le patron relit — tout depuis un téléphone.",
-    en: "evo-shop keeps the till: the receipt that freezes, the stock that drops by itself, the month the owner re-reads — all from a phone.",
+    fr: "evo-shop tient la caisse : le ticket qui se fige, le stock qui descend tout seul, le mois que le patron relit - tout depuis un téléphone.",
+    en: "evo-shop keeps the till: the receipt that freezes, the stock that drops by itself, the month the owner re-reads - all from a phone.",
   },
   "entree.ouvrir": { fr: "Ouvrir la caisse", en: "Open the till" },
   "entree.slogan": { fr: "un téléphone sur le comptoir", en: "one phone on the counter" },

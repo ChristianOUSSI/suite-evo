@@ -23,7 +23,7 @@ def _maintenant_naif() -> datetime:
     return maintenant()
 
 # Point de vente : la boutique, ses produits, ses tickets.
-# Le stock baisse à la vente, il remonte à l'annulation — jamais à l'édition
+# Le stock baisse à la vente, il remonte à l'annulation - jamais à l'édition
 # d'un prix. Le prix de vente du jour fait foi, l'historique garde l'instantané.
 
 UNITES = ("piece", "sac", "kg", "litre", "carton", "paquet")

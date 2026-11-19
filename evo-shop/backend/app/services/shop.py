@@ -6,7 +6,7 @@ Trois règles :
 
 1. Le prix unitaire se fige à la vente, pas à l'article. Changer le prix de
    vente demain ne réécrit pas le ticket d'aujourd'hui.
-2. Le stock baisse à la vente validée et remonte à l'annulation — jamais à
+2. Le stock baisse à la vente validée et remonte à l'annulation - jamais à
    l'édition d'un prix ou d'un nom.
 3. Une vente ne peut pas vendre ce qu'il n'y a pas : le contrôle se fait à
    l'écriture, pas à l'affichage.
