@@ -115,6 +115,7 @@ export const DICTEE: Dictionnaire = {
   "catalogue.aucun": { fr: "Aucun véhicule en vente pour l'instant.", en: "No vehicle for sale yet." },
   "catalogue.appeler": { fr: "Appeler le parc", en: "Call the lot" },
   "catalogue.voir": { fr: "Voir la fiche", en: "See the card" },
+  "catalogue.partager": { fr: "Envoyer le catalogue sur WhatsApp", en: "Send the catalogue on WhatsApp" },
 
   "recap.titre": { fr: "Le mois du parc", en: "The lot month" },
   "recap.chapo": { fr: "Ventes, valeur du stock, par marque et par carburant : recalculé à la demande.", en: "Sales, stock value, by brand and by fuel: recomputed on request." },

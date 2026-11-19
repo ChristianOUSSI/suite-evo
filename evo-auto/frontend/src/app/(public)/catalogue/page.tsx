@@ -74,6 +74,21 @@ export default async function PageCatalogue() {
               ))}
             </ul>
           )}
+
+          {catalogue?.lien && vehicules.length > 0 ? (
+            <p className="cadc-note">
+              <a
+                className="cadc-bouton cadc-bouton--doux"
+                href={`https://wa.me/?text=${encodeURIComponent(
+                  `${concessionnaire?.nom ?? "evo-auto"} - ${vehicules.length} ${langue === "en" ? "vehicles for sale" : "véhicules à vendre"} : ${catalogue.lien}`,
+                )}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {t("catalogue.partager")}
+              </a>
+            </p>
+          ) : null}
         </div>
       </main>
     </div>

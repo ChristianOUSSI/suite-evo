@@ -52,3 +52,19 @@ def vehicule_dict(vehicule: Vehicule) -> dict:
         "note": vehicule.note,
         "cree_le": vehicule.cree_le.isoformat(timespec="seconds"),
     }
+
+
+def vehicule_publique_dict(vehicule: Vehicule) -> dict:
+    """Ce que le catalogue montre : la fiche du véhicule, jamais le client
+    ni le statut interne."""
+    return {
+        "id": vehicule.id,
+        "marque": vehicule.marque,
+        "modele": vehicule.modele,
+        "annee": vehicule.annee,
+        "kilometrage": vehicule.kilometrage,
+        "carburant": vehicule.carburant,
+        "boite": vehicule.boite,
+        "prix": vehicule.prix,
+        "note": vehicule.note,
+    }

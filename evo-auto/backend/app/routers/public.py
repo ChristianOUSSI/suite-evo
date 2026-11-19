@@ -1,6 +1,7 @@
 from fastapi import APIRouter
-from sqlalchemy import func, select
+from sqlalchemy import select
 
+from ..config import settings
 from ..database import SessionLocal
 from ..models import Organisation, Vehicule
 from ..services import present
@@ -29,5 +30,6 @@ def catalogue() -> dict:
         ).all()
         return {
             "concessionnaire": present.organisation_dict(organisation),
-            "vehicules": [present.vehicule_dict(un) for un in vehicules],
+            "vehicules": [present.vehicule_publique_dict(un) for un in vehicules],
+            "lien": f"{settings.public_base_url}/catalogue",
         }

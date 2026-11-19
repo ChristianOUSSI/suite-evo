@@ -58,9 +58,22 @@ export type Vehicule = {
   cree_le: string;
 };
 
+export type VehiculePublic = {
+  id: number;
+  marque: string;
+  modele: string;
+  annee: number;
+  kilometrage: number;
+  carburant: Carburant | string;
+  boite: Boite | string;
+  prix: number;
+  note: string;
+};
+
 export type Catalogue = {
   concessionnaire: Organisation | null;
-  vehicules: Vehicule[];
+  vehicules: VehiculePublic[];
+  lien?: string;
 };
 
 export type Etat = {
