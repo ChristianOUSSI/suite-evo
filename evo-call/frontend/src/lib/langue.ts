@@ -5,7 +5,7 @@ import { creerTraducteur, type Dictionnaire } from "@cadc/kit/i18n";
  * Le backend rend des nombres, des dates ISO et des clés stables.
  */
 export const DICTEE: Dictionnaire = {
-  "marque.slogan": { fr: "l'appel, la file, la durée — le standard que le client ne quitte pas", en: "the call, the queue, the duration — the switchboard the caller never leaves" },
+  "marque.slogan": { fr: "l'appel, la file, la durée - le standard que le client ne quitte pas", en: "the call, the queue, the duration - the switchboard the caller never leaves" },
   "nav.accueil": { fr: "L'accueil", en: "The desk" },
   "nav.appels": { fr: "Les appels", en: "Calls" },
   "nav.rappels": { fr: "Les rappels", en: "Callbacks" },
@@ -17,14 +17,14 @@ export const DICTEE: Dictionnaire = {
   "texte.label": { fr: "Taille du texte", en: "Text size" },
   "meta.titre": { fr: "evo-call | l'appel, la file, la durée", en: "evo-call | the call, the queue, the duration" },
   "meta.description": {
-    fr: "Le centre d'appels d'une maison camerounaise : file d'attente, agents, durées, rappels — sans poste qui se perd et sans appel oublié.",
-    en: "The call centre of a Cameroonian office: waiting queue, agents, durations, callbacks — no lost call, no forgotten callback.",
+    fr: "Le centre d'appels d'une maison camerounaise : file d'attente, agents, durées, rappels - sans poste qui se perd et sans appel oublié.",
+    en: "The call centre of a Cameroonian office: waiting queue, agents, durations, callbacks - no lost call, no forgotten callback.",
   },
 
   "entree.titre": { fr: "Le standard, sans le poste qui raccroche", en: "The switchboard, without the phone that hangs up" },
   "entree.chapo": {
-    fr: "evo-call tient la file : chaque appel avec son client, son sens, son motif, sa durée — et une page publique où l'appelant voit la file sans compte.",
-    en: "evo-call keeps the queue: every call with its caller, its direction, its reason, its duration — and a public page where the caller sees the queue with no account.",
+    fr: "evo-call tient la file : chaque appel avec son client, son sens, son motif, sa durée - et une page publique où l'appelant voit la file sans compte.",
+    en: "evo-call keeps the queue: every call with its caller, its direction, its reason, its duration - and a public page where the caller sees the queue with no account.",
   },
   "entree.ouvrir": { fr: "Ouvrir le standard", en: "Open the switchboard" },
   "entree.slogan": { fr: "un téléphone au standard", en: "one phone at the desk" },
@@ -32,7 +32,7 @@ export const DICTEE: Dictionnaire = {
   "geste.1.titre": { fr: "Noter l'appel en une minute", en: "Log a call in a minute" },
   "geste.1.texte": { fr: "Client, numéro camerounais, sens, motif : l'appel entre en file, la file se lit d'un coup d'œil.", en: "Caller, Cameroonian number, direction, reason: the call enters the queue, the queue reads at a glance." },
   "geste.2.titre": { fr: "L'agent qui prend l'appel", en: "The agent who picks up" },
-  "geste.2.texte": { fr: "En file, en cours, terminé, sans réponse : le statut se change d'un geste — le passé ne se réécrit pas.", en: "Queued, in progress, done, unanswered: the status changes in one move — the past is never rewritten." },
+  "geste.2.texte": { fr: "En file, en cours, terminé, sans réponse : le statut se change d'un geste - le passé ne se réécrit pas.", en: "Queued, in progress, done, unanswered: the status changes in one move - the past is never rewritten." },
   "geste.3.titre": { fr: "Le rappel qui revient", en: "The callback that comes back" },
   "geste.3.texte": { fr: "Un rappel n'est pas un appel perdu : il porte sa date et revient en file le jour venu.", en: "A callback is not a lost call: it carries its date and returns to the queue on the day." },
   "geste.4.titre": { fr: "Relire le mois", en: "Read the month" },
@@ -65,7 +65,7 @@ export const DICTEE: Dictionnaire = {
   "accueil.nouveau": { fr: "Nouvel appel", en: "New call" },
   "accueil.rappels_page": { fr: "Les rappels", en: "The callbacks" },
   "accueil.file": { fr: "La file publique", en: "The public queue" },
-  "accueil.file-aide": { fr: "La page où l'appelant voit combien de personnes attendent, sans compte — à afficher au standard.", en: "The page where the caller sees how many people are waiting, no account — to show at the desk." },
+  "accueil.file-aide": { fr: "La page où l'appelant voit combien de personnes attendent, sans compte - à afficher au standard.", en: "The page where the caller sees how many people are waiting, no account - to show at the desk." },
 
   "appels.titre": { fr: "Les appels du standard", en: "The switchboard's calls" },
   "appels.chapo": { fr: "Chaque appel : le client, le sens, le motif, le statut, la durée. Le statut se change d'un geste.", en: "Every call: the caller, the direction, the reason, the status, the duration. The status changes in one move." },

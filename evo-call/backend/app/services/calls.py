@@ -181,7 +181,7 @@ def recap(db: Session, organisation: Organisation, periode: str) -> dict:
         par_statut[un.statut] = par_statut.get(un.statut, 0) + 1
     par_agent: dict[str, dict] = {}
     for un in du_mois:
-        nom = un.agent.nom if un.agent else "—"
+        nom = un.agent.nom if un.agent else "-"
         if nom not in par_agent:
             par_agent[nom] = {"agent": nom, "appels": 0, "duree": 0}
         par_agent[nom]["appels"] += 1

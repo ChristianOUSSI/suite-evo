@@ -38,7 +38,7 @@ export default async function PageRappels() {
             <span className="cadc-ligne__nom">
               {un.client_nom || t(`sens.${un.sens}`)}
               <small>
-                {un.client_telephone_display || "—"} · {t(`motif.${un.motif}`)}
+                {un.client_telephone_display || "-"} · {t(`motif.${un.motif}`)}
                 {un.agent ? ` · ${un.agent}` : ""}
               </small>
               {un.note ? <small>{un.note}</small> : null}
@@ -47,7 +47,7 @@ export default async function PageRappels() {
               {un.date_rappel ? (
                 <span className="cadc-note cadc-note--acier">{f.jourDate(un.date_rappel)}</span>
               ) : (
-                <span className="cadc-note cadc-note--rouge">—</span>
+                <span className="cadc-note cadc-note--rouge">-</span>
               )}
               <Link href={`/appels`} className="cadc-bouton cadc-bouton--petit cadc-bouton--doux">
                 {t("rappels.fait")}

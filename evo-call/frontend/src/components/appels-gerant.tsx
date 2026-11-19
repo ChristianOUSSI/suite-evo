@@ -24,7 +24,7 @@ const VIDE = {
 };
 
 /**
- * Les appels du standard : une fiche par appel — le client, le sens, le
+ * Les appels du standard : une fiche par appel - le client, le sens, le
  * motif, la durée. Le statut se change d'un geste ; la file se lit
  * d'un coup d'œil, rien ne s'efface.
  */
