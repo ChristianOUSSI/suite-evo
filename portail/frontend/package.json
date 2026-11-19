@@ -1,0 +1,22 @@
+{
+  "name": "portail-suite-evo",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --port 5800",
+    "build": "next build",
+    "start": "next start --port 5800"
+  },
+  "dependencies": {
+    "@cadc/kit": "file:../../cadc/kit",
+    "next": "16.4.3",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "typescript": "^5"
+  }
+}
