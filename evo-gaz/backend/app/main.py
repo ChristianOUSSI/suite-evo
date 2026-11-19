@@ -40,6 +40,17 @@ app.add_middleware(
 )
 
 
+@app.middleware("http")
+async def entetes_securite(request: Request, suite):
+    """Les en-têtes qu'un navigateur sérieux attend : pas de mime deviné,
+    pas d'encadrement, pas de référent qui fuit."""
+    reponse = await suite(request)
+    reponse.headers.setdefault("X-Content-Type-Options", "nosniff")
+    reponse.headers.setdefault("X-Frame-Options", "SAMEORIGIN")
+    reponse.headers.setdefault("Referrer-Policy", "no-referrer")
+    return reponse
+
+
 @app.exception_handler(IntegrityError)
 async def cle_primaire_pris(_: Request, __: IntegrityError) -> JSONResponse:
     return JSONResponse(

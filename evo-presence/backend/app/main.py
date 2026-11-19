@@ -1,6 +1,6 @@
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
@@ -39,6 +39,17 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+@app.middleware("http")
+async def entetes_securite(request: Request, suite):
+    """Les en-têtes qu'un navigateur sérieux attend : pas de mime deviné,
+    pas d'encadrement, pas de référent qui fuit."""
+    reponse = await suite(request)
+    reponse.headers.setdefault("X-Content-Type-Options", "nosniff")
+    reponse.headers.setdefault("X-Frame-Options", "SAMEORIGIN")
+    reponse.headers.setdefault("Referrer-Policy", "no-referrer")
+    return reponse
 
 app.include_router(auth.router)
 app.include_router(organisation.router)
