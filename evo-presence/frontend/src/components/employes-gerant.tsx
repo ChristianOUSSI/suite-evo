@@ -142,7 +142,7 @@ function FicheEmploye({ employe, responsable, occupe, erreur, onCorriger, t }: F
       <span className="cadc-ligne__nom">
         {employe.nom}
         <small>
-          {employe.service || "—"} · {employe.telephone_display || t("employes.sans_numero")}
+          {employe.service || "-"} · {employe.telephone_display || t("employes.sans_numero")}
         </small>
         <small>
           {employe.pointages > 0 ? `${employe.pointages} ${t("commun.pointages")}` : t("employes.jamais_pointe")}

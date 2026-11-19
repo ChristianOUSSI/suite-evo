@@ -108,7 +108,7 @@ export default async function PageBulletin({
                 <li className="jours__ligne" key={`${journee.jour}-${index}`}>
                   <span className="jours__date">{f.date(journee.jour)}</span>
                   <span>
-                    {journee.arrivee || "—"} → {journee.depart || "—"}
+                    {journee.arrivee || "-"} → {journee.depart || "-"}
                     {journee.note ? ` · ${journee.note}` : ""}
                   </span>
                   <span>{t(`etat.${journee.statut}`)}</span>

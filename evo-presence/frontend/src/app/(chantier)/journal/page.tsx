@@ -48,7 +48,7 @@ export default async function PageJournal() {
                   </small>
                 </span>
                 <span className="cadc-ligne__valeur">
-                  {ligne.arrivee || "—"} → {ligne.depart || "—"}
+                  {ligne.arrivee || "-"} → {ligne.depart || "-"}
                   <br />
                   <span
                     className={`cadc-badge ${

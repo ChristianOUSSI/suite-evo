@@ -25,7 +25,7 @@ def _maintenant_naif() -> datetime:
     return maintenant()
 
 # Un pointeur de présence universel : l'entreprise, ses employés, et une
-# ligne par employé et par jour. Les états sont volontairement peu nombreux —
+# ligne par employé et par jour. Les états sont volontairement peu nombreux -
 # un agent qui pointe vingt cases ne pointe plus personne.
 
 ETATS = ("present", "retard", "absent")

@@ -20,7 +20,7 @@ const HEURES = ["", "06:00", "07:00", "07:30", "08:00", "08:30", "09:00", "09:30
  * Le portail du matin.
  *
  * Une case par employé et par jour : le second pointage corrige le premier,
- * il ne le double pas — la règle vit dans le backend, l'écran la rend simple.
+ * il ne le double pas - la règle vit dans le backend, l'écran la rend simple.
  * L'agent peut revenir sur une journée passée pour corriger une case oubliée,
  * jamais écrire dans le futur.
  */
@@ -192,7 +192,7 @@ export function PortailPointage({ equipeInitiale, jourInitial, langue }: Props) 
                   >
                     {HEURES.map((un) => (
                       <option key={un} value={un}>
-                        {un || "—"}
+                        {un || "-"}
                       </option>
                     ))}
                   </select>
@@ -211,7 +211,7 @@ export function PortailPointage({ equipeInitiale, jourInitial, langue }: Props) 
                   >
                     {HEURES.map((un) => (
                       <option key={un} value={un}>
-                        {un || "—"}
+                        {un || "-"}
                       </option>
                     ))}
                   </select>
