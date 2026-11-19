@@ -1,0 +1,46 @@
+name: backend-tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        produit:
+          - evo-tontine
+          - evo-crm
+          - evo-presence
+          - evo-hotel
+          - evo-shop
+          - evo-school
+          - evo-clinic
+          - evo-immo
+          - evo-log
+          - evo-market
+          - evo-docs
+          - evo-call
+          - evo-auto
+          - evo-import
+          - evo-bijou
+          - evo-moto
+          - evo-cars
+          - evo-wear
+          - evo-gaz
+          - evo-carnet
+          - evo-agent
+          - evo-voice
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Dépendances
+        run: pip install -r requirements-backend.txt
+      - name: pytest
+        working-directory: ${{ matrix.produit }}/backend
+        run: python -m pytest tests -q
