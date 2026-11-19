@@ -57,6 +57,14 @@
   box-shadow: 0 6px 18px rgb(0 0 0 / 8%);
 }
 
+.portail__logo {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  object-fit: cover;
+  border: 1px solid var(--cadc-ligne);
+}
+
 .portail__nom {
   font-family: var(--cadc-mono);
   font-size: 0.82rem;

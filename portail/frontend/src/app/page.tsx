@@ -55,6 +55,15 @@ function Carte({ produit, langue }: { produit: Produit; langue: Langue }) {
   return (
     <li>
       <a className="portail__carte" href={`http://localhost:${produit.port}`}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={`http://localhost:${produit.port}/logo.jpg`}
+          alt={produit.nom}
+          className="portail__logo"
+          onError={(e) => {
+            (e.target as HTMLImageElement).style.display = "none";
+          }}
+        />
         <span className="portail__nom">{produit.nom}</span>
         <span className="portail__titre">{texte.titre}</span>
         <span className="portail__texte">{texte.texte}</span>

@@ -42,7 +42,8 @@ type NomProps = {
 export function NomProduit({ href = "/", sous }: NomProps) {
   const contenu = (
     <>
-      <MarqueCadc titre="evo-crm" className="cadc-marque__signe" />
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src="/logo.jpg" alt="evo-crm" className="cadc-marque__signe" style={{ borderRadius: 9, objectFit: "cover" }} />
       <span className="cadc-marque__texte">
         <span className="cadc-marque__nom">evo-crm</span>
         <span className="cadc-marque__sous">{sous ?? "CODE AXIS DIGITAL CAMEROON"}</span>

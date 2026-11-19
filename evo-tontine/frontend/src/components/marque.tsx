@@ -52,7 +52,8 @@ export function NomProduit({ href = "/", sous, photo = false }: NomProps) {
           priority
         />
       ) : (
-        <MarqueCadc titre="evo-tontine" className="cadc-marque__signe" />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src="/logo.jpg" alt="evo-tontine" className="cadc-marque__signe" style={{ borderRadius: 9, objectFit: "cover" }} />
       )}
       <span className="cadc-marque__texte">
         <span className="cadc-marque__nom">evo-tontine</span>
