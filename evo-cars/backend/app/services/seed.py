@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-"""La démo du garage : voitures, pièces, clients — déterministe, jamais en prod."""
+"""La démo du garage : voitures, pièces, clients - déterministe, jamais en prod."""
 
 import random
 from datetime import timedelta

@@ -8,7 +8,7 @@ Deux règles :
    Une pièce entre en stock, descend à la vente, se réapprovisionne.
 2. La vente d'une pièce porte son client, sa date et son prix.
    Le stock ne ment jamais : on ne vend pas ce qu'on n'a pas.
-3. Le catalogue public ne montre que ce qui est en vente —
+3. Le catalogue public ne montre que ce qui est en vente -
    ni l'acheteur, ni les clients, ni le garage.
 """
 

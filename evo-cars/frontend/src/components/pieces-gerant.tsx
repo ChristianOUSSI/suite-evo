@@ -24,7 +24,7 @@ const VIDE = {
 type Vente = { piece: Piece; quantite: number; client_id: string };
 
 /**
- * Les pièces du stock : une fiche par pièce — la référence, la
+ * Les pièces du stock : une fiche par pièce - la référence, la
  * désignation, la compatibilité, le stock, les prix. Vendre descend
  * le stock et porte son client ; réapprovisionner le remonte.
  */
@@ -202,7 +202,7 @@ export function PiecesGerant({ pieces, clients, langue }: Props) {
                   <label className="cadc-champ">
                     <span className="cadc-champ__titre">{t("pieces.client")}</span>
                     <select value={vente.client_id} onChange={(e) => setVente({ ...vente, client_id: e.target.value })}>
-                      <option value="">—</option>
+                      <option value="">-</option>
                       {clients.map((unClient) => (
                         <option key={unClient.id} value={unClient.id}>{unClient.nom}</option>
                       ))}

@@ -24,7 +24,7 @@ const VIDE = {
 };
 
 /**
- * Les voitures du parc : une fiche par voiture — la marque, le modèle,
+ * Les voitures du parc : une fiche par voiture - la marque, le modèle,
  * l'année, le kilométrage, le carburant, la boîte, le prix. Le statut
  * se change d'un geste ; la vente porte son client et sa date.
  */

@@ -5,7 +5,7 @@ import { creerTraducteur, type Dictionnaire } from "@cadc/kit/i18n";
  * Le backend rend des nombres, des dates ISO et des clés stables.
  */
 export const DICTEE: Dictionnaire = {
-  "marque.slogan": { fr: "la voiture, la pièce, le prix — le garage que le client suit seul", en: "the car, the part, the price — the garage the client follows alone" },
+  "marque.slogan": { fr: "la voiture, la pièce, le prix - le garage que le client suit seul", en: "the car, the part, the price - the garage the client follows alone" },
   "nav.accueil": { fr: "L'accueil", en: "The desk" },
   "nav.voitures": { fr: "Les voitures", en: "Cars" },
   "nav.pieces": { fr: "Les pièces", en: "Parts" },
@@ -18,14 +18,14 @@ export const DICTEE: Dictionnaire = {
   "texte.label": { fr: "Taille du texte", en: "Text size" },
   "meta.titre": { fr: "evo-cars | la voiture, la pièce, le prix", en: "evo-cars | the car, the part, the price" },
   "meta.description": {
-    fr: "Le garage d'un concessionnaire camerounais : voitures en vente, pièces détachées en stock — et un catalogue public à envoyer sur WhatsApp.",
-    en: "The garage of a Cameroonian dealer: cars for sale, spare parts in stock — and a public catalogue to send on WhatsApp.",
+    fr: "Le garage d'un concessionnaire camerounais : voitures en vente, pièces détachées en stock - et un catalogue public à envoyer sur WhatsApp.",
+    en: "The garage of a Cameroonian dealer: cars for sale, spare parts in stock - and a public catalogue to send on WhatsApp.",
   },
 
   "entree.titre": { fr: "Le garage, sans le cahier", en: "The garage, without the notebook" },
   "entree.chapo": {
-    fr: "evo-cars tient le parc et le stock : chaque voiture avec sa fiche et son prix, chaque pièce avec son stock — et une page publique où le client lit les voitures et les pièces sans compte.",
-    en: "evo-cars keeps the lot and the stock: every car with its card and price, every part with its stock — and a public page where the client reads cars and parts with no account.",
+    fr: "evo-cars tient le parc et le stock : chaque voiture avec sa fiche et son prix, chaque pièce avec son stock - et une page publique où le client lit les voitures et les pièces sans compte.",
+    en: "evo-cars keeps the lot and the stock: every car with its card and price, every part with its stock - and a public page where the client reads cars and parts with no account.",
   },
   "entree.ouvrir": { fr: "Ouvrir le garage", en: "Open the garage" },
   "entree.slogan": { fr: "un téléphone au comptoir", en: "one phone at the desk" },
@@ -35,7 +35,7 @@ export const DICTEE: Dictionnaire = {
   "geste.2.titre": { fr: "La pièce qui descend", en: "The part that comes down" },
   "geste.2.texte": { fr: "En stock, vendue, épuisée : le stock descend à la vente, se réapprovisionne, et la vente porte son client et sa date.", en: "In stock, sold, empty: the stock drops on sale, restocks, and the sale keeps its client and date." },
   "geste.3.titre": { fr: "Le catalogue public", en: "The public catalogue" },
-  "geste.3.texte": { fr: "Le client lit les voitures et les pièces sur /catalogue — sans compte, sans appel, à envoyer sur WhatsApp.", en: "The client reads cars and parts on /catalogue — no account, no call, ready for WhatsApp." },
+  "geste.3.texte": { fr: "Le client lit les voitures et les pièces sur /catalogue - sans compte, sans appel, à envoyer sur WhatsApp.", en: "The client reads cars and parts on /catalogue - no account, no call, ready for WhatsApp." },
   "geste.4.titre": { fr: "Relire le mois", en: "Read the month" },
   "geste.4.texte": { fr: "Ventes de voitures et de pièces : recalculé à la demande, exporté en CSV.", en: "Car and part sales: recomputed on request, exported to CSV." },
   "entree.exige": { fr: "Ce que le produit demande", en: "What the product needs" },
@@ -72,7 +72,7 @@ export const DICTEE: Dictionnaire = {
   "accueil.nouveau": { fr: "Nouvelle voiture", en: "New car" },
   "accueil.piece": { fr: "Nouvelle pièce", en: "New part" },
   "accueil.catalogue": { fr: "Le catalogue public", en: "The public catalogue" },
-  "accueil.catalogue-aide": { fr: "La page où le client lit les voitures et les pièces — à envoyer sur WhatsApp.", en: "The page where the client reads cars and parts — to send on WhatsApp." },
+  "accueil.catalogue-aide": { fr: "La page où le client lit les voitures et les pièces - à envoyer sur WhatsApp.", en: "The page where the client reads cars and parts - to send on WhatsApp." },
 
   "voitures.titre": { fr: "Les voitures du parc", en: "The lot cars" },
   "voitures.chapo": { fr: "Chaque voiture : la marque, le modèle, l'année, le kilométrage, le carburant, la boîte, le prix. Le statut se change d'un geste.", en: "Every car: brand, model, year, mileage, fuel, gearbox, price. The status changes in one move." },
@@ -143,7 +143,7 @@ export const DICTEE: Dictionnaire = {
   "type.garage": { fr: "Garage", en: "Garage" },
 
   "catalogue.titre": { fr: "Voitures et pièces à vendre", en: "Cars and parts for sale" },
-  "catalogue.chapo": { fr: "Les voitures et les pièces en vente, leurs prix — sans compte. À envoyer sur WhatsApp.", en: "The cars and parts for sale, their prices — no account needed. Ready for WhatsApp." },
+  "catalogue.chapo": { fr: "Les voitures et les pièces en vente, leurs prix - sans compte. À envoyer sur WhatsApp.", en: "The cars and parts for sale, their prices - no account needed. Ready for WhatsApp." },
   "catalogue.vide": { fr: "Rien en vente pour l'instant.", en: "Nothing for sale yet." },
   "catalogue.pieces": { fr: "Les pièces", en: "The parts" },
   "catalogue.chez": { fr: "chez", en: "at" },
