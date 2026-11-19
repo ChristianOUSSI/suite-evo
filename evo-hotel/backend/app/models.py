@@ -30,7 +30,7 @@ def _maintenant_naif() -> datetime:
 # à la lecture - une chambre ne se loue pas deux fois au même soir.
 
 TYPES_CHAMBRE = ("standard", "deluxe", "suite", "familiale")
-STATUTS = ("confirmee", "en_cours", "terminee", "annulee")
+STATUTS = ("demande", "confirmee", "en_cours", "terminee", "annulee")
 ROLES = ("responsable", "receptionniste")
 
 

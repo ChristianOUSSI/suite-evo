@@ -1,4 +1,4 @@
-# suite-evo — conventions de la maison
+# suite-evo - conventions de la maison
 
 Vingt-deux produits `evo-*` + le `portail/` + le socle `cadc/kit`.
 Chaque produit est autonome : `backend/` (FastAPI + SQLite) et
@@ -17,7 +17,7 @@ Chaque produit est autonome : `backend/` (FastAPI + SQLite) et
   Le health le dit : `"aucun SMS, aucun appel, aucune … ne quitte cette
   machine"`.
 - **Ports** : la table fait foi (voir README.md). Ne jamais réutiliser
-  un port pris — evo-clinic a sauté 4100/9100 pour ça.
+  un port pris - evo-clinic a sauté 4100/9100 pour ça.
 - **Kit** : avant lint/build, `node ../../cadc/kit/sync.mjs`. Ne jamais
   copier le socle dans un produit.
 - **Pas de secret en clair** : `.env` est ignoré, `.env.example` reste.
@@ -40,5 +40,5 @@ scripts/arreter.sh   # tout arrêter
 ```
 
 Le portail (`portail/frontend`, port 5800) liste les produits et sonde
-leur disponibilité — ajouter un produit = ajouter une ligne dans
+leur disponibilité - ajouter un produit = ajouter une ligne dans
 `src/lib/produits.ts`.

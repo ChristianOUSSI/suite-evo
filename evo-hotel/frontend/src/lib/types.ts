@@ -4,7 +4,7 @@ export type Role = "responsable" | "receptionniste";
 
 export type TypeChambre = "standard" | "deluxe" | "suite" | "familiale";
 
-export type StatutSejour = "confirmee" | "en_cours" | "terminee" | "annulee";
+export type StatutSejour = "demande" | "confirmee" | "en_cours" | "terminee" | "annulee";
 
 export interface Organisation {
   id: number;
@@ -116,6 +116,37 @@ export interface Etat {
   arrivees_du_jour: number;
   departs_du_jour: number;
   a_venir: number;
+  demandes: number;
+}
+
+export interface TypeDisponible {
+  type: TypeChambre;
+  prix_min: number;
+  prix_max: number;
+  capacite_max: number;
+  chambres: number;
+  nuits: number;
+}
+
+export interface DisponibilitePublique {
+  arrivee: string;
+  depart: string;
+  types: TypeDisponible[];
+}
+
+export interface HotelPublique {
+  hotel: Organisation;
+}
+
+export interface ReservationEnvoyee {
+  ok: boolean;
+  reference: number;
+  chambre_type: TypeChambre;
+  prix_par_nuit: number;
+  nuits: number;
+  arrivee: string;
+  depart: string;
+  hotel: Organisation;
 }
 
 export interface Recap {

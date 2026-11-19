@@ -1,7 +1,7 @@
-# evo-bijou — Bijouterie
+# evo-bijou - Bijouterie
 
 La vitrine d'une bijouterie camerounaise : chaque pièce avec sa
-référence, sa matière, son poids en grammes, son carat, ses prix — et
+référence, sa matière, son poids en grammes, son carat, ses prix - et
 un catalogue public où le client lit les pièces en vitrine sans compte.
 
 ## Ce que le produit fait
@@ -10,13 +10,13 @@ un catalogue public où le client lit les pièces en vitrine sans compte.
   acier, perles, autre), poids, carat, prix d'achat et de vente,
   fournisseur, note. La référence `BJ-XXXXXX` se génère toute seule.
   Le statut se change d'un geste : en vitrine → réservé → vendu →
-  retiré — la vente porte son client et sa date, rien ne s'efface.
+  retiré - la vente porte son client et sa date, rien ne s'efface.
 - **Les clients** (`/clients`) : chaque acheteur ou collectionneur avec
   son numéro camerounais (MTN, Orange, Nexttel) et son type.
 - **Le mois** (`/recap`) : pièces vendues, valeur vendue, marge,
-  valeur en vitrine, par matière et par statut — recalculé à la
+  valeur en vitrine, par matière et par statut - recalculé à la
   demande, exports CSV.
-- **`/catalogue` public** : les pièces en vitrine, leurs prix — sans
+- **`/catalogue` public** : les pièces en vitrine, leurs prix - sans
   compte, sans prix d'achat. À envoyer sur WhatsApp.
 - Tout en **français + anglais**, palette et polices CADC, mobile-first.
 

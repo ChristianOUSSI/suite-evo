@@ -1,4 +1,4 @@
-# evo-log — Logistique & colis
+# evo-log - Logistique & colis
 
 Le registre d'un transporteur camerounais : chaque colis avec son numéro de
 suivi à dix signes, chaque statut qui avance (reçu → en transit → arrivé →
@@ -7,20 +7,20 @@ compte.
 
 ## Ce que le produit fait
 
-- **Les colis** (`/colis`) : une fiche par envoi — genre (document, colis,
+- **Les colis** (`/colis`) : une fiche par envoi - genre (document, colis,
   valise, électroménager, palette), expéditeur et destinataire avec leurs
   numéros camerounais, trajet entre villes desservies, poids, frais en FCFA
   et moyen de paiement (espèces, MTN/Orange/Nexttel Money, virement, à payer).
 - **Le numéro de suivi** : généré automatiquement, dix signes sans I, O, 0
-  ni 1 — dicible au téléphone, unique par transporteur.
+  ni 1 - dicible au téléphone, unique par transporteur.
 - **Le statut** : reçu → en transit → arrivé → distribué, plus retourné et
   annulé pour la vie réelle. Passer à « distribué » pose la date de
   livraison toute seule ; revenir en arrière l'efface.
-- **`/suivi` public** : le destinataire tape son numéro — statut, trajet,
-  dates, téléphone du transporteur — sans compte. Ne montre ni expéditeur
+- **`/suivi` public** : le destinataire tape son numéro - statut, trajet,
+  dates, téléphone du transporteur - sans compte. Ne montre ni expéditeur
   ni numéro du destinataire.
 - **Le mois** (`/recap`) : dépôts, distributions, frais encaissés, à
-  percevoir, par statut, par trajet, par genre — exports CSV.
+  percevoir, par statut, par trajet, par genre - exports CSV.
 
 ## Contexte camerounais
 

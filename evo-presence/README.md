@@ -1,7 +1,7 @@
 # evo-presence
 
 Le pointage des présences. Un téléphone à l'entrée, une ligne par employé et
-par jour : qui est arrivé, à quelle heure, qui est en retard, qui est absent —
+par jour : qui est arrivé, à quelle heure, qui est en retard, qui est absent -
 et le mois que chacun peut vérifier seul, sans compte ni cahier à réclamer.
 
 Backend FastAPI + SQLite, frontend Next.js 16 / React 19 / TypeScript strict.
@@ -20,7 +20,7 @@ cd frontend && npm install && npm run dev   # http://localhost:3700
 suit pas le lien `node_modules/@cadc/kit` sous Windows.
 
 Comptes de démonstration : `ada@horizon.cm` et `mbarga@horizon.cm` (mot de
-passe `Presence2026!`) — responsable et agent.
+passe `Presence2026!`) - responsable et agent.
 
 ## Ce que fait le pointage
 
@@ -32,7 +32,7 @@ passe `Presence2026!`) — responsable et agent.
   Sortir quelqu'un de la liste n'efface rien : ses journées restent écrites.
 - **Le journal.** Les dernières lignes pointées, qui a pointé et quand.
 - **Le mois.** Présents, retards, absents et heures, **recalculés à chaque
-  demande** — ce n'est pas un document figé. Chacun reçoit un code de
+  demande** - ce n'est pas un document figé. Chacun reçoit un code de
   contrôle de dix signes, stable pour un même mois.
 - **Le bulletin public.** `/verifier` : l'employé tape son code, son mois
   s'affiche jour par jour, sans compte. Seul son mois se lit, jamais celui
@@ -72,7 +72,7 @@ passe `Presence2026!`) — responsable et agent.
   Les refus portent `{code, fr, en}`, y compris les 422 de Pydantic, avec les
   noms de champs humanisés.
 - Le code de contrôle est **dérivé d'un secret serveur** : il ne se devine
-  pas, il ne se forge pas, et il ne livre que le mois qu'il désigne — ni les
+  pas, il ne se forge pas, et il ne livre que le mois qu'il désigne - ni les
   collègues, ni les autres services.
 - La langue se lit dans un cookie côté serveur, donc le premier rendu est
   déjà dans la bonne langue. La taille du texte reste dans le téléphone,

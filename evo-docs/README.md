@@ -1,14 +1,14 @@
-# evo-docs — Gestion documentaire
+# evo-docs - Gestion documentaire
 
-Le classeur d'une maison camerounaise : documents, références à dix signes, échéances, vérification publique — sans dossier papier ni échéance oubliée. Code Axis Digital Cameroon.
+Le classeur d'une maison camerounaise : documents, références à dix signes, échéances, vérification publique - sans dossier papier ni échéance oubliée. Code Axis Digital Cameroon.
 
 ## Ce que le produit fait
 
-- **Les documents** (`/documents`) : chaque papier avec son titre, sa catégorie (facture, contrat, courrier, PV, identité, autorisation, autre), son émetteur, son destinataire, sa date et son échéance. La référence se génère toute seule — dix signes sans I, O, 0 ni 1, dicibles au téléphone. Le statut se change d'un geste : actif → archivé / annulé. Rien ne s'efface.
-- **Les échéances** (`/echeances`) : les documents actifs avec une date limite, du plus urgent au plus lointain — retards, sous 30 jours, sans échéance. Une échéance dépassée se lit en rouge, elle ne disparaît pas.
-- **L'accueil** (`/accueil`) : la vitre du bureau — documents actifs, retards, échéances à venir.
-- **La vérification publique** (`/verifier`) : le contrôleur ou le client tape la référence à dix signes — le titre, la catégorie, la date, le statut — **sans compte**. La page ne montre ni émetteur ni échéance ni note.
-- **Le mois** (`/recap`) : documents ajoutés, actifs, retards, par catégorie et par statut — recalculé à la demande, export CSV (`/api/exports/documents.csv`).
+- **Les documents** (`/documents`) : chaque papier avec son titre, sa catégorie (facture, contrat, courrier, PV, identité, autorisation, autre), son émetteur, son destinataire, sa date et son échéance. La référence se génère toute seule - dix signes sans I, O, 0 ni 1, dicibles au téléphone. Le statut se change d'un geste : actif → archivé / annulé. Rien ne s'efface.
+- **Les échéances** (`/echeances`) : les documents actifs avec une date limite, du plus urgent au plus lointain - retards, sous 30 jours, sans échéance. Une échéance dépassée se lit en rouge, elle ne disparaît pas.
+- **L'accueil** (`/accueil`) : la vitre du bureau - documents actifs, retards, échéances à venir.
+- **La vérification publique** (`/verifier`) : le contrôleur ou le client tape la référence à dix signes - le titre, la catégorie, la date, le statut - **sans compte**. La page ne montre ni émetteur ni échéance ni note.
+- **Le mois** (`/recap`) : documents ajoutés, actifs, retards, par catégorie et par statut - recalculé à la demande, export CSV (`/api/exports/documents.csv`).
 - **Les réglages** (`/reglages`) : la maison (nom, ville, quartier, téléphone), les comptes, l'export.
 
 ## Règles
@@ -20,7 +20,7 @@ Le classeur d'une maison camerounaise : documents, références à dix signes, �
 ## Rôles
 
 - **Responsable** : tout, plus les comptes et les réglages.
-- **Agent** : les documents et les échéances — le quotidien du bureau.
+- **Agent** : les documents et les échéances - le quotidien du bureau.
 
 ## Compte de démonstration
 
@@ -32,11 +32,11 @@ Le classeur d'une maison camerounaise : documents, références à dix signes, �
 ## Lancer
 
 ```bash
-# Backend — API sur http://127.0.0.1:9600
+# Backend - API sur http://127.0.0.1:9600
 cd backend
 python -m uvicorn app.main:app --port 9600
 
-# Frontend — http://localhost:4600
+# Frontend - http://localhost:4600
 cd frontend
 npm install
 npm run dev

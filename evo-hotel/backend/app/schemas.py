@@ -131,6 +131,30 @@ class SejourCorrection(BaseModel):
         return valeur
 
 
+class ReservationPublique(BaseModel):
+    """Ce que le visiteur de la page publique envoie : des dates, un type
+    de chambre souhaité, et comment le rappeler."""
+
+    arrivee: date
+    depart: date
+    type_chambre: str = Field(default="", max_length=20)
+    client_nom: str = Field(min_length=2, max_length=160)
+    client_telephone: str = Field(default="", max_length=24)
+    note: str = Field(default="", max_length=600)
+
+    @field_validator("type_chambre")
+    @classmethod
+    def type_optionnel(cls, valeur: str) -> str:
+        if valeur and valeur not in TYPES_VALIDES:
+            raise ValueError("liste:type_chambre")
+        return valeur
+
+    @field_validator("client_telephone")
+    @classmethod
+    def canonise(cls, valeur: str) -> str:
+        return _telephone(valeur)
+
+
 class CompteEntree(BaseModel):
     nom: str = Field(min_length=2, max_length=120)
     email: str = Field(max_length=160)

@@ -68,3 +68,34 @@ export async function lireOuRien<T>(path: string, langue = "fr"): Promise<T | nu
     throw erreur;
   }
 }
+
+export async function lirePublique<T>(path: string, langue = "fr"): Promise<T> {
+  let reponse: Response;
+  try {
+    reponse = await fetch(`${API_ORIGIN}${path}`, {
+      headers: { "accept-language": langue },
+      cache: "no-store",
+    });
+  } catch {
+    throw new ErreurChantier(
+      langue === "en"
+        ? "The hotel is not answering. Check that the API is running."
+        : "L'hôtel ne répond pas. Vérifie que l'API est démarrée.",
+      0,
+    );
+  }
+  let payload: unknown = null;
+  try {
+    payload = await reponse.json();
+  } catch {
+    payload = null;
+  }
+  if (!reponse.ok) {
+    throw new ErreurChantier(
+      texteDans((payload as { detail?: unknown })?.detail, langue) ||
+        (langue === "en" ? "This page could not be read." : "Cette page n'a pas pu être lue."),
+      reponse.status,
+    );
+  }
+  return payload as T;
+}

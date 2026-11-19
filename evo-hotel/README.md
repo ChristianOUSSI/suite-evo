@@ -1,7 +1,7 @@
 # evo-hotel
 
 Le cahier des chambres. Un téléphone à la réception : qui dort où ce soir,
-qui arrive demain, ce que le mois a rapporté — et la feuille que le
+qui arrive demain, ce que le mois a rapporté - et la feuille que le
 comptable demande, sans papier et sans double réservation.
 
 Backend FastAPI + SQLite, frontend Next.js 16 / React 19 / TypeScript strict.
@@ -32,15 +32,22 @@ Comptes de démonstration : `ada@hotellba.cm` (responsable) et
   client connu revient par son numéro, sa fiche est déjà là.
 - **Les gestes.** Confirmé → en cours → terminé, ou annulé : la chambre se
   libère en un geste. Un séjour clos ne se rouvre pas.
+- **La réservation publique.** `/reserver` : le client choisit ses dates,
+  voit les types de chambre libres avec leur prix, laisse son nom et son
+  numéro - sans compte, sans paiement. La demande dort en statut « demande »
+  jusqu'à ce que la réception la confirme ; confirmer une demande vérifie
+  que la chambre est toujours libre, deux demandes sur la même chambre ne
+  peuvent pas être confirmées toutes les deux.
 - **Les chambres et les clients.** Fiches séparées, le responsable seul
   touche aux chambres et aux comptes ; la réception gère les séjours.
 - **Le mois.** Nuits vendues, recette estimée (nuits × prix de la nuit),
-  taux d'occupation — recalculés à chaque demande. Quatre exports CSV.
+  taux d'occupation - recalculés à chaque demande. Quatre exports CSV.
 
 ## Ce qui est vérifié
 
-- `pytest` backend : 15 tests, dont le refus de chevauchement, le client
-  connu par numéro, le cycle de vie du séjour et les rôles.
+- `pytest` backend : 18 tests, dont le refus de chevauchement, le client
+  connu par numéro, le cycle de vie du séjour, les rôles et le parcours
+  public complet (disponibilité, demande, confirmation, conflit).
 - `npm run lint`, `tsc --noEmit`, `next build` : verts.
 - Parcours HTTP réel : connexion, les sept écrans, `/etat`, `/recap`,
   `/disponibilite` avec des données de démonstration garnies.
@@ -54,7 +61,7 @@ Comptes de démonstration : `ada@hotellba.cm` (responsable) et
 ## Les décisions de fabrication
 
 - Le statut se décide à l'écriture ; « en cours » et « à venir » se déduisent
-  des dates à la lecture — personne ne met à jour un champ statut.
+  des dates à la lecture - personne ne met à jour un champ statut.
 - Le montant se calcule à la lecture : nuits × prix de la nuit au tarif du
   jour. Un prix corrigé change le devis, pas le passé.
 - Le backend rend des nombres, des dates ISO et des clés stables, jamais de

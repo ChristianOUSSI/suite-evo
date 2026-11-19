@@ -60,9 +60,23 @@ export default async function PageAccueil() {
           <span className="portail__reste">
             {etat.arrivees_du_jour} {t("accueil.arrivees")} · {etat.departs_du_jour}{" "}
             {t("accueil.departs")} · {etat.a_venir} {t("accueil.a_venir")}
+            {etat.demandes > 0 ? ` · ${etat.demandes} ${t("accueil.demandes")}` : ""}
           </span>
         </div>
       </div>
+
+      {etat.demandes > 0 ? (
+        <section className="cadc-carte" aria-label={t("accueil.demandes")}>
+          <div className="cadc-tete">
+            <h2>{t("accueil.demandes")}</h2>
+            <span className="cadc-tete__cote">{etat.demandes}</span>
+          </div>
+          <p className="cadc-note">
+            {t("accueil.demandes-aide")}{" "}
+            <Link href="/sejours">{t("nav.sejours")}</Link>
+          </p>
+        </section>
+      ) : null}
 
       <section className="cadc-carte" aria-label={t("nav.sejours")}>
         <div className="cadc-tete">

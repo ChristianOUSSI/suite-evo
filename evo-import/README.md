@@ -1,8 +1,8 @@
-# evo-import — Fret & import
+# evo-import - Fret & import
 
 Le quai d'un transitaire camerounais : chaque envoi avec son numéro de
 suivi à dix signes, son mode (maritime, aérien, terrestre, express), son
-statut — et une page publique où le destinataire suit son colis sans
+statut - et une page publique où le destinataire suit son colis sans
 compte.
 
 ## Ce que le produit fait
@@ -11,15 +11,15 @@ compte.
   de départ, destinataire et ville d'arrivée, poids, valeur déclarée,
   frais, client du carnet. Le numéro de suivi (`EVIO-…` à dix signes) se
   génère tout seul. Le parcours avance d'un geste : en attente → en
-  transit → en douane → livré, ou bloqué/annulé — chaque passage laisse
+  transit → en douane → livré, ou bloqué/annulé - chaque passage laisse
   sa ligne datée dans le suivi, rien ne s'efface.
 - **Les clients** (`/clients`) : chaque expéditeur ou destinataire avec
-  son numéro camerounais (MTN, Orange, Nexttel) et son type —
+  son numéro camerounais (MTN, Orange, Nexttel) et son type -
   particulier, entreprise, revendeur.
 - **Le mois** (`/recap`) : envois du mois, frais, valeur déclarée, par
-  statut, par mode, par ville — recalculé à la demande, exports CSV.
+  statut, par mode, par ville - recalculé à la demande, exports CSV.
 - **`/suivi` public** : le destinataire tape le numéro sur
-  `/suivi?numero=…` et lit le parcours complet — sans compte, sans appel.
+  `/suivi?numero=…` et lit le parcours complet - sans compte, sans appel.
   À envoyer sur WhatsApp avec le numéro.
 - Tout en **français + anglais**, palette et polices CADC, mobile-first.
 

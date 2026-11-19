@@ -90,8 +90,8 @@ LISTES: dict[str, dict[str, str]] = {
         "en": "standard, deluxe, suite or familiale.",
     },
     "statut": {
-        "fr": "confirmee, en_cours, terminee ou annulee.",
-        "en": "confirmee, en_cours, terminee or annulee.",
+        "fr": "demande, confirmee, en_cours, terminee ou annulee.",
+        "en": "demande, confirmee, en_cours, terminee or annulee.",
     },
     "role": {"fr": "responsable ou receptionniste.", "en": "responsable or receptionniste."},
 }

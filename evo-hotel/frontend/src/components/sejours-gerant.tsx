@@ -270,6 +270,16 @@ export function SejoursGerant({ sejours, chambres, clients, langue }: Props) {
                 <br />
                 <span className="cadc-badge cadc-badge--doux">{t(`statut.${statut}`)}</span>
                 <span className="cadc-acts" style={{ marginTop: 6 }}>
+                  {statut === "demande" ? (
+                    <button
+                      type="button"
+                      className="cadc-bouton cadc-bouton--petit cadc-bouton--premier"
+                      disabled={occupe}
+                      onClick={() => changerStatut(sejour, "confirmee")}
+                    >
+                      {t("statut.confirmer")}
+                    </button>
+                  ) : null}
                   {statut === "confirmee" ? (
                     <button
                       type="button"

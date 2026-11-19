@@ -1,7 +1,7 @@
-# evo-cars — Voitures & pièces
+# evo-cars - Voitures & pièces
 
 Le garage d'un concessionnaire camerounais : chaque voiture du parc
-avec sa fiche et son prix, chaque pièce détachée avec son stock — et
+avec sa fiche et son prix, chaque pièce détachée avec son stock - et
 un catalogue public où le client lit les voitures et les pièces sans
 compte.
 
@@ -9,17 +9,17 @@ compte.
 
 - **Les voitures** (`/voitures`) : marque, modèle, année, kilométrage,
   carburant, boîte, prix. Le statut se change d'un geste : en vente →
-  réservé → vendu → retiré — la vente porte son client et sa date.
+  réservé → vendu → retiré - la vente porte son client et sa date.
 - **Les pièces** (`/pieces`) : référence, désignation, compatibilité,
   stock, prix d'achat et de vente. Vendre descend le stock (une vente
   plus grande que le stock est refusée), le réassort le remonte, la
   vente porte son client et sa date.
-- **Les clients** (`/clients`) : acheteurs et garages partenaires —
+- **Les clients** (`/clients`) : acheteurs et garages partenaires -
   avec leur numéro camerounais (MTN, Orange, Nexttel).
 - **Le mois** (`/recap`) : voitures vendues, encaissé pièces,
-  valeur du stock, par marque et par statut — exports CSV.
+  valeur du stock, par marque et par statut - exports CSV.
 - **`/catalogue` public** : voitures en vente et pièces en stock,
-  leurs prix — sans compte. À envoyer sur WhatsApp.
+  leurs prix - sans compte. À envoyer sur WhatsApp.
 - Tout en **français + anglais**, palette et polices CADC, mobile-first.
 
 ## Lancer

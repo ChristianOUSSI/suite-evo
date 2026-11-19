@@ -1,6 +1,6 @@
 # evo-school
 
-La caisse de l'école. Frais scolaires, versements, reçus qui se vérifient —
+La caisse de l'école. Frais scolaires, versements, reçus qui se vérifient -
 un téléphone au bureau, pas un cahier qui se perd.
 
 Backend FastAPI + SQLite, frontend Next.js 16 / React 19 / TypeScript strict.
@@ -25,15 +25,15 @@ Comptes de démonstration : `ada@ecolecm.cm` (responsable) et
 
 - **La caisse** (`/caisse`). Choisir l'élève, taper le montant, choisir le
   moyen (espèces, MTN Money, Orange Money…), c'est fini. Un code de reçu de
-  dix signes se génère tout seul — le parent peut le vérifier sans compte
+  dix signes se génère tout seul - le parent peut le vérifier sans compte
   sur `/verifier`.
 - **Les élèves** (`/eleves`). Une fiche par enfant : classe, matricule,
   parent et son numéro camerounais, frais attendus. Payé, reste et solde se
   calculent seuls. Filtre « ceux qui restent à payer ».
 - **Les classes** (`/classes`). Titulaire, frais annuels. Le responsable
-  seul y touche — une classe mal nommée est une caisse qui ne rentre pas.
+  seul y touche - une classe mal nommée est une caisse qui ne rentre pas.
 - **Le mois** (`/recap`). Encaissé, reste à percevoir, par classe et par
-  élève — recalculés à chaque demande, exports CSV.
+  élève - recalculés à chaque demande, exports CSV.
 - **La vitre** (`/accueil`). Le CA du mois, les élèves, les classes, le
   reste total.
 

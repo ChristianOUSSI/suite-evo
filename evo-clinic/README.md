@@ -1,7 +1,7 @@
 # evo-clinic
 
 Le registre de la clinique de quartier. Patients, actes, encaissements,
-reçu vérifiable — un téléphone à l'accueil, pas un cahier qui se perd.
+reçu vérifiable - un téléphone à l'accueil, pas un cahier qui se perd.
 
 Backend FastAPI + SQLite, frontend Next.js 16 / React 19 / TypeScript strict.
 Le produit est bilingue français et anglais et pose sur le socle `@cadc/kit`
@@ -27,13 +27,13 @@ Comptes de démonstration : `ada@clinique.cm` (responsable) et
   encaisser, patients, actes du mois.
 - **Les actes** (`/actes`). Une consultation par ligne : patient, motif,
   diagnostic, traitement, prix figé. L'agent consigne, le responsable seul
-  annule — et l'annulation garde la trace.
+  annule - et l'annulation garde la trace.
 - **Les patients** (`/patients`, `/patients/[id]`). Une fiche par personne :
   groupe sanguin, sexe, naissance, allergies, note. Le détail réunit les
   actes et les paiements du patient. Filtre « ceux qui doivent ».
 - **Les paiements** (`/caisse`). Espèces, MTN Money, Orange Money, Nexttel,
   virement, assurance : chaque encaissement sort son reçu de dix signes.
-- **Le mois** (`/recap`). Actes par motif, encaissé, reste dû — recalculé à
+- **Le mois** (`/recap`). Actes par motif, encaissé, reste dû - recalculé à
   la demande, exports CSV.
 - **`/verifier` public**. Le patient vérifie son reçu avec le code, sans
   compte.

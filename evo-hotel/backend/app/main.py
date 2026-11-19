@@ -9,7 +9,7 @@ from sqlalchemy.exc import IntegrityError, OperationalError
 from .config import settings
 from .database import Base, SessionLocal, engine
 from .messages import refus_de_validation
-from .routers import auth, exports, organisation, reservations
+from .routers import auth, exports, organisation, public, reservations
 from .services.seed import seed_database
 
 # Un schéma trop vieux se reconstruit : `create_all` ajoute les colonnes
@@ -90,6 +90,7 @@ async def validation_422(_: Request, exc: RequestValidationError) -> JSONRespons
 app.include_router(auth.router)
 app.include_router(organisation.router)
 app.include_router(reservations.router)
+app.include_router(public.router)
 app.include_router(exports.router)
 
 

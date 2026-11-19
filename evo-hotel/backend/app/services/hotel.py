@@ -15,7 +15,7 @@ Trois règles :
 
 from datetime import date, timedelta
 
-from sqlalchemy import select
+from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
 from ..messages import refus
@@ -79,8 +79,8 @@ def _verifier_libre(
             raise refus("chambre_occupee")
 
 
-def trouver_ou_creer_client(
-    db: Session, organisation: Organisation, entree, compte: User
+def _client_depuis_saisie(
+    db: Session, organisation: Organisation, entree, note_creation: str
 ) -> Client:
     """Un client connu revient par son numéro ; sinon une fiche naît."""
     if entree.client_id is not None:
@@ -104,11 +104,19 @@ def trouver_ou_creer_client(
         organisation_id=organisation.id,
         nom=nom,
         telephone=entree.client_telephone,
-        note=f"créé à la réception par {compte.nom}",
+        note=note_creation,
     )
     db.add(client)
     db.flush()
     return client
+
+
+def trouver_ou_creer_client(
+    db: Session, organisation: Organisation, entree, compte: User
+) -> Client:
+    return _client_depuis_saisie(
+        db, organisation, entree, f"créé à la réception par {compte.nom}"
+    )
 
 
 def reserver(
@@ -157,6 +165,12 @@ def corriger_sejour(
         sejour.depart = nouveau_depart
 
     if entree.statut is not None:
+        # Une demande confirmée devient un vrai séjour : la chambre doit être
+        # libre sur ses dates, sinon deux clients dorment au même lit.
+        if entree.statut in SEJOURS_VIVANTS and sejour.statut not in SEJOURS_VIVANTS:
+            _verifier_libre(
+                db, sejour.chambre_id, sejour.arrivee, sejour.depart, sauf_id=sejour.id
+            )
         sejour.statut = entree.statut
     if entree.note is not None:
         sejour.note = entree.note.strip()
@@ -221,6 +235,13 @@ def etat(db: Session, organisation: Organisation) -> dict:
             for un in sejours
             if un.arrivee > ce_jour
         ),
+        "demandes": db.scalar(
+            select(func.count(Sejour.id)).where(
+                Sejour.organisation_id == organisation.id,
+                Sejour.statut == "demande",
+            )
+        )
+        or 0,
     }
 
 
@@ -284,6 +305,107 @@ def disponibilite(
                 }
             )
     return libres
+
+
+def types_disponibles(
+    db: Session, organisation: Organisation, arrivee: date, depart: date
+) -> list[dict]:
+    """Ce que la page publique propose : les types de chambre libres, sans
+    jamais montrer les numéros de chambre ni les noms des clients."""
+    _verifier_dates(arrivee, depart)
+    chambres = db.scalars(
+        select(Chambre)
+        .where(Chambre.organisation_id == organisation.id, Chambre.actif.is_(True))
+        .order_by(Chambre.prix_par_nuit, Chambre.numero)
+    ).all()
+    par_type: dict[str, list[Chambre]] = {}
+    for chambre in chambres:
+        occupe = any(
+            chevauche(arrivee, depart, un.arrivee, un.depart)
+            for un in sejours_de_la_chambre(db, chambre.id)
+        )
+        if not occupe:
+            par_type.setdefault(chambre.type, []).append(chambre)
+    nuits = (depart - arrivee).days
+    return [
+        {
+            "type": un_type,
+            "prix_min": min(un.prix_par_nuit for un in chambres_du_type),
+            "prix_max": max(un.prix_par_nuit for un in chambres_du_type),
+            "capacite_max": max(un.capacite for un in chambres_du_type),
+            "chambres": len(chambres_du_type),
+            "nuits": nuits,
+        }
+        for un_type, chambres_du_type in sorted(par_type.items())
+    ]
+
+
+def reservation_publique(db: Session, organisation: Organisation, entree) -> Sejour:
+    """La demande venue de la page publique : une demande, pas un séjour.
+
+    La chambre n'est pas encore attribuée au sens strict : on prend la moins
+    chère libre du type demandé, et la réception confirmera ou corrigera.
+    """
+    _verifier_dates(entree.arrivee, entree.depart)
+    chambres = db.scalars(
+        select(Chambre)
+        .where(Chambre.organisation_id == organisation.id, Chambre.actif.is_(True))
+        .order_by(Chambre.prix_par_nuit, Chambre.numero)
+    ).all()
+    if entree.type_chambre:
+        chambres = [un for un in chambres if un.type == entree.type_chambre]
+        if not chambres:
+            raise refus("chambre_inconnue", 404)
+    chambre = None
+    for candidate in chambres:
+        if not any(
+            chevauche(entree.arrivee, entree.depart, un.arrivee, un.depart)
+            for un in sejours_de_la_chambre(db, candidate.id)
+        ):
+            chambre = candidate
+            break
+    if chambre is None:
+        raise refus("chambre_occupee", 409)
+
+    nom = (entree.client_nom or "").strip()
+    if len(nom) < 2:
+        raise refus("saisie", nom="le nom du client")
+    client = None
+    if entree.client_telephone:
+        client = db.scalar(
+            select(Client).where(
+                Client.organisation_id == organisation.id,
+                Client.telephone == entree.client_telephone,
+            )
+        )
+    if client is None:
+        client = Client(
+            organisation_id=organisation.id,
+            nom=nom,
+            telephone=entree.client_telephone,
+            note="créé depuis la page publique de l'hôtel",
+        )
+        db.add(client)
+        db.flush()
+    note = entree.note.strip()
+    if note:
+        note = f"demande en ligne : {note}"
+    else:
+        note = "demande en ligne"
+    sejour = Sejour(
+        organisation_id=organisation.id,
+        chambre_id=chambre.id,
+        client_id=client.id,
+        arrivee=entree.arrivee,
+        depart=entree.depart,
+        statut="demande",
+        note=note,
+        cree_par=None,
+    )
+    db.add(sejour)
+    db.commit()
+    db.refresh(sejour)
+    return sejour
 
 
 def recap(db: Session, organisation: Organisation, periode: str) -> dict:

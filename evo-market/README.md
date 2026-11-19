@@ -1,20 +1,20 @@
-# evo-market — Marketplace
+# evo-market - Marketplace
 
-La marketplace d'une boutique camerounaise : annonces de vente, stock, commandes, page publique des articles — sans cahier papier ni vente oubliée. Code Axis Digital Cameroon.
+La marketplace d'une boutique camerounaise : annonces de vente, stock, commandes, page publique des articles - sans cahier papier ni vente oubliée. Code Axis Digital Cameroon.
 
 ## Ce que le produit fait
 
 - **Les annonces** (`/annonces`) : chaque article avec son titre, sa catégorie (alimentation, vêtements, électronique, maison, beauté, téléphone, auto, autre), son prix en FCFA, son stock, sa ville et son quartier, son vendeur et son numéro camerounais. Le statut se change d'un geste : en ligne → vendu / retiré. Une annonce retirée sort de la page publique sans s'effacer.
 - **Les commandes** (`/commandes`) : chaque vente avec l'annonce, la quantité, l'acheteur, son numéro, le moyen de paiement (espèces, MTN/Orange/Nexttel Money, virement) et le statut : nouvelle → confirmée → livrée / annulée. Le montant est figé au moment de la vente ; le stock descend quand la commande est confirmée et lui est rendu si on en sort. Une annonce épuisée ou retirée ne se commande plus (refus `rupture`).
-- **L'accueil** (`/accueil`) : la vitre du comptoir — annonces en ligne, ruptures, commandes neuves, ventes du mois et total vendu.
-- **La page publique** (`/catalogue`) : les articles en ligne, les prix, les quartiers — **sans compte**, à envoyer sur WhatsApp. Elle ne montre ni vendeurs ni commandes.
-- **Le mois** (`/recap`) : ventes, commandes, par statut et par catégorie — recalculé à la demande, exports CSV (`/api/exports/annonces.csv`, `/api/exports/commandes.csv`).
+- **L'accueil** (`/accueil`) : la vitre du comptoir - annonces en ligne, ruptures, commandes neuves, ventes du mois et total vendu.
+- **La page publique** (`/catalogue`) : les articles en ligne, les prix, les quartiers - **sans compte**, à envoyer sur WhatsApp. Elle ne montre ni vendeurs ni commandes.
+- **Le mois** (`/recap`) : ventes, commandes, par statut et par catégorie - recalculé à la demande, exports CSV (`/api/exports/annonces.csv`, `/api/exports/commandes.csv`).
 - **Les réglages** (`/reglages`) : la boutique (nom, ville, quartier, téléphone), les comptes, les exports.
 
 ## Rôles
 
 - **Responsable** : tout, plus les comptes et les réglages.
-- **Agent** : les annonces et les commandes — le quotidien du comptoir.
+- **Agent** : les annonces et les commandes - le quotidien du comptoir.
 
 ## Compte de démonstration
 
@@ -26,11 +26,11 @@ La marketplace d'une boutique camerounaise : annonces de vente, stock, commandes
 ## Lancer
 
 ```bash
-# Backend — API sur http://127.0.0.1:9500
+# Backend - API sur http://127.0.0.1:9500
 cd backend
 python -m uvicorn app.main:app --port 9500
 
-# Frontend — http://localhost:4500
+# Frontend - http://localhost:4500
 cd frontend
 npm install
 npm run dev

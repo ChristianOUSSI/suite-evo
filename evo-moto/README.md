@@ -1,23 +1,23 @@
-# evo-moto — Motos & atelier
+# evo-moto - Motos & atelier
 
 L'atelier d'un garage camerounais : chaque moto avec sa fiche et son
-prix, chaque réparation avec sa panne et son coût — et un catalogue
+prix, chaque réparation avec sa panne et son coût - et un catalogue
 public où le client lit les motos en vente sans compte.
 
 ## Ce que le produit fait
 
 - **Les motos** (`/motos`) : marque, modèle, année, kilométrage,
   couleur, prix. Le statut se change d'un geste : en vente → réservé →
-  vendu → retiré — la vente porte son client et sa date.
+  vendu → retiré - la vente porte son client et sa date.
 - **Les réparations** (`/reparations`) : le client, la panne, les
   travaux, la main-d'œuvre, les pièces, l'immatriculation. Le statut
-  avance : reçue → en cours → terminée → livrée — chaque passage porte
+  avance : reçue → en cours → terminée → livrée - chaque passage porte
   sa date.
-- **Les clients** (`/clients`) : acheteurs, propriétaires, livreurs —
+- **Les clients** (`/clients`) : acheteurs, propriétaires, livreurs -
   avec leur numéro camerounais (MTN, Orange, Nexttel).
 - **Le mois** (`/recap`) : motos vendues, valeur vendue, encaissé
-  atelier, réparations par statut, par marque — exports CSV.
-- **`/catalogue` public** : les motos en vente, leurs prix — sans
+  atelier, réparations par statut, par marque - exports CSV.
+- **`/catalogue` public** : les motos en vente, leurs prix - sans
   compte. À envoyer sur WhatsApp.
 - Tout en **français + anglais**, palette et polices CADC, mobile-first.
 

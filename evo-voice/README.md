@@ -1,21 +1,21 @@
-# evo-voice — dictée & commande vocale
+# evo-voice - dictée & commande vocale
 
-Ce qui a été dit, ce que ça veut dire, ce qui s'est passé — tout en local :
+Ce qui a été dit, ce que ça veut dire, ce qui s'est passé - tout en local :
 en mode démo, **aucun SMS, aucun appel, aucune commande ne quitte la
 machine**.
 
 ## Ce que le produit fait
 
 - **La dictée** (`/commandes`) : la phrase dite est recopiée telle quelle
-  (en démo, on la tape — le micro dort). L'intention est devinée par des
+  (en démo, on la tape - le micro dort). L'intention est devinée par des
   règles simples : rappel, message, note, recherche, alerte, autre.
-- **L'interprétation** : chaque commande arrive déjà lue — l'écran dit ce
+- **L'interprétation** : chaque commande arrive déjà lue - l'écran dit ce
   que la règle a compris, et l'humain peut corriger l'intention à la main.
-- **L'exécution** : un geste exécute la commande ici — résultat
+- **L'exécution** : un geste exécute la commande ici - résultat
   déterministe, horodaté, journalisé. Rien n'est envoyé : ni SMS, ni appel,
   ni message.
 - **Le mois** (`/recap`) : dictées reçues, exécutées, par intention et par
-  statut — recalculé à la demande, export CSV.
+  statut - recalculé à la demande, export CSV.
 - **Réglages** : organisation, comptes (responsable / agent), exports.
 
 ## Comptes de démonstration

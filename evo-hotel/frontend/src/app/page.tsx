@@ -36,6 +36,9 @@ export default async function Presentation() {
               >
                 {t("entree.ouvrir")}
               </Link>
+              <Link href="/reserver" className="cadc-bouton cadc-bouton--grand cadc-bouton--doux">
+                {t("entree.reserver")}
+              </Link>
               <span className="cadc-badge cadc-badge--doux">{t("entree.slogan")}</span>
             </div>
             <MentionDemo langue={langue} />

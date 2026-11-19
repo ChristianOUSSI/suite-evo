@@ -1,7 +1,7 @@
-# evo-wear — Prêt-à-porter
+# evo-wear - Prêt-à-porter
 
 La boutique d'un prêt-à-porter camerounais : chaque article avec sa
-taille, sa couleur, son stock et son prix — et un catalogue public où
+taille, sa couleur, son stock et son prix - et un catalogue public où
 la cliente lit les articles en stock sans compte.
 
 ## Ce que le produit fait
@@ -9,13 +9,13 @@ la cliente lit les articles en stock sans compte.
 - **Les articles** (`/articles`) : nom, catégorie (pagne, robe,
   chemise, pantalon, ensemble, chaussure, accessoire), taille, couleur,
   stock, prix d'achat et de vente. Le statut se change d'un geste :
-  en stock → vendu → épuisé — la vente descend le stock, porte sa
+  en stock → vendu → épuisé - la vente descend le stock, porte sa
   cliente et sa date (une vente plus grande que le stock est refusée).
 - **Les clientes** (`/clients`) : particulières, revendeurs, événements
-  — avec leur numéro camerounais (MTN, Orange, Nexttel).
+  - avec leur numéro camerounais (MTN, Orange, Nexttel).
 - **Le mois** (`/recap`) : articles vendus, quantité, encaissé,
-  valeur du stock, par catégorie, statut et couleur — exports CSV.
-- **`/catalogue` public** : les articles en stock, leurs prix — sans
+  valeur du stock, par catégorie, statut et couleur - exports CSV.
+- **`/catalogue` public** : les articles en stock, leurs prix - sans
   compte, sans prix d'achat. À envoyer sur WhatsApp.
 - Tout en **français + anglais**, palette et polices CADC, mobile-first.
 

@@ -218,3 +218,99 @@ def test_exports(responsable):
         assert reponse.status_code == 200
         assert "text/csv" in reponse.headers["content-type"]
         assert reponse.text.startswith("﻿")
+
+
+def test_reservation_publique(client):
+    """Le visiteur demande une chambre sans compte : la demande dort en
+    « demande », la chambre reste libre jusqu'à confirmation."""
+    arrivee = (date.today() + timedelta(days=20)).isoformat()
+    depart = (date.today() + timedelta(days=22)).isoformat()
+
+    dispo = client.get(f"/public/disponibilite?arrivee={arrivee}&depart={depart}")
+    assert dispo.status_code == 200, dispo.text
+    types = dispo.json()["types"]
+    assert types, "aucun type libre sur cette période"
+
+    type_choisi = types[0]["type"]
+    entree = {
+        "arrivee": arrivee,
+        "depart": depart,
+        "type_chambre": type_choisi,
+        "client_nom": "Visiteur WhatsApp",
+        "client_telephone": "699001122",
+        "note": "préfère le sixième étage",
+    }
+    reponse = client.post("/public/reservations", json=entree)
+    assert reponse.status_code == 201, reponse.text
+    corps = reponse.json()
+    assert corps["ok"] is True
+    assert corps["chambre_type"] == type_choisi
+    assert corps["nuits"] == 2
+    assert corps["hotel"]["nom"]
+
+    # La demande n'occupe pas la chambre : une seconde demande passe.
+    reponse2 = client.post("/public/reservations", json={**entree, "client_nom": "Autre Visiteur"})
+    assert reponse2.status_code == 201, reponse2.text
+
+
+def test_deux_demandes_une_seule_confirmation(responsable, client):
+    """Deux demandes en ligne peuvent viser la même chambre : la première
+    confirmation passe, la seconde est refusée — la chambre est prise."""
+    arrivee = (date.today() + timedelta(days=30)).isoformat()
+    depart = (date.today() + timedelta(days=31)).isoformat()
+    dispo = client.get(f"/public/disponibilite?arrivee={arrivee}&depart={depart}")
+    types = dispo.json()["types"]
+    assert types
+    entree = {
+        "arrivee": arrivee,
+        "depart": depart,
+        "type_chambre": types[0]["type"],
+        "client_telephone": "",
+        "note": "",
+    }
+    ids = []
+    for nom in ("Premier Demandeur", "Second Demandeur"):
+        reponse = client.post(
+            "/public/reservations", json={**entree, "client_nom": nom}
+        )
+        assert reponse.status_code == 201, reponse.text
+        ids.append(reponse.json()["reference"])
+
+    premier = responsable.patch(f"/sejours/{ids[0]}", json={"statut": "confirmee"})
+    assert premier.status_code == 200, premier.text
+    # Les deux demandes sont tombées sur la même chambre (la moins chère
+    # libre du type) : la seconde confirmation doit être refusée.
+    second = responsable.patch(f"/sejours/{ids[1]}", json={"statut": "confirmee"})
+    assert second.status_code == 422, second.text
+    assert second.json()["detail"]["code"] == "chambre_occupee"
+
+
+def test_confirmation_demande_verifie_la_chambre(responsable, client):
+    """La réception confirme une demande : si la chambre s'est louée entre-
+    temps, la confirmation est refusée."""
+    arrivee = (date.today() + timedelta(days=40)).isoformat()
+    depart = (date.today() + timedelta(days=42)).isoformat()
+    dispo = client.get(f"/public/disponibilite?arrivee={arrivee}&depart={depart}")
+    types = dispo.json()["types"]
+    assert types
+    entree = {
+        "arrivee": arrivee,
+        "depart": depart,
+        "type_chambre": types[0]["type"],
+        "client_nom": "Client Confirmation",
+        "client_telephone": "",
+        "note": "",
+    }
+    creation = client.post("/public/reservations", json=entree)
+    assert creation.status_code == 201, creation.text
+
+    sejours = responsable.get("/sejours").json()["sejours"]
+    demande = next(un for un in sejours if un["id"] == creation.json()["reference"])
+    assert demande["statut"] == "demande"
+
+    # La confirmation passe tant que la chambre est libre.
+    ok = responsable.patch(
+        f"/sejours/{demande['id']}", json={"statut": "confirmee"}
+    )
+    assert ok.status_code == 200, ok.text
+    assert ok.json()["statut"] == "confirmee"

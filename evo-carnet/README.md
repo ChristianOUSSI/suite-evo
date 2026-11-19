@@ -1,20 +1,20 @@
-# evo-carnet — Carnet numérique
+# evo-carnet - Carnet numérique
 
 Le carnet numérique d'une famille ou d'une petite organisation camerounaise :
-les notes, leurs catégories, leurs épingles — et un lien public pour
+les notes, leurs catégories, leurs épingles - et un lien public pour
 partager une note sur WhatsApp.
 
 ## Ce que le produit fait
 
 - **Les notes** (`/notes`) : titre, contenu, catégorie (personnel, travail,
   courses, idées, santé, argent, autre). Épingler fait remonter la note,
-  archiver la range au fond — rien ne se perd.
+  archiver la range au fond - rien ne se perd.
 - **Le partage** : chaque note a un code (`/partage/CODE`) qui ouvre une page
   publique en lecture seule, sans compte. « Nouveau code » remplace l'ancien
-  lien — l'ancien meurt.
+  lien - l'ancien meurt.
 - **La recherche** : titre, contenu et catégorie, avec filtre par catégorie
   et bascule notes/archivées.
-- **Le mois** (`/recap`) : notes écrites, mots, par catégorie — recalculé à
+- **Le mois** (`/recap`) : notes écrites, mots, par catégorie - recalculé à
   la demande, export CSV.
 - Comptes démo : `ada@carnet.cm` / `mbarga@carnet.cm`, mot de passe
   `Carnet2026!`.
@@ -35,4 +35,4 @@ cd frontend && npm run lint && npm run build
 
 ## Licence / marque
 
-CODE AXIS DIGITAL CAMEROON — produit de la famille evo.
+CODE AXIS DIGITAL CAMEROON - produit de la famille evo.

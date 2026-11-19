@@ -1,24 +1,24 @@
-# evo-immo — Annonces immobilières
+# evo-immo - Annonces immobilières
 
 Le registre d'une agence immobilière camerounaise : les biens avec leur prix
 et leur propriétaire, les demandes des clients avec leur canal, les visites
-avec leur issue — et une page publique des annonces à envoyer sur WhatsApp.
+avec leur issue - et une page publique des annonces à envoyer sur WhatsApp.
 
 ## Ce que le produit fait
 
-- **Les biens** (`/biens`) : fiche par bien — type (maison, appartement,
+- **Les biens** (`/biens`) : fiche par bien - type (maison, appartement,
   chambre, terrain, bureau, commercial), ville, quartier, prix en FCFA,
   surface, chambres, propriétaire et son numéro camerounais. Le statut se
   change d'un geste : disponible, en négociation, loué, vendu, retiré.
-- **Les demandes** (`/demandes`) : chaque contact client a son canal —
-  téléphone, WhatsApp, visite, panneau, bouche à oreille — et son suivi :
+- **Les demandes** (`/demandes`) : chaque contact client a son canal -
+  téléphone, WhatsApp, visite, panneau, bouche à oreille - et son suivi :
   nouvelle, contactée, visite, convertie, perdue.
 - **Les visites** (`/visites`) : le bien, le jour, l'heure, le client ;
-  l'issue se note après — conclue, absente, refusée. Le passé ne se réécrit pas.
+  l'issue se note après - conclue, absente, refusée. Le passé ne se réécrit pas.
 - **L'accueil** (`/accueil`) : biens en main, demandes neuves, visites du jour.
 - **Le mois** (`/recap`) : visites par issue, demandes par quartier, valeur
-  des biens vendus/loués — recalculé à la demande, exports CSV.
-- **`/annonces`** (public) : les biens disponibles, sans compte — le lien à
+  des biens vendus/loués - recalculé à la demande, exports CSV.
+- **`/annonces`** (public) : les biens disponibles, sans compte - le lien à
   envoyer sur WhatsApp. Ne montre jamais le propriétaire ni les demandes.
 
 ## Contexte camerounais

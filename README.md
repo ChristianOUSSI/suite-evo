@@ -1,4 +1,4 @@
-# suite-evo — la maison des logiciels de comptoir
+# suite-evo - la maison des logiciels de comptoir
 
 Vingt-deux produits CODE AXIS DIGITAL CAMEROON, un même socle : chaque métier
 a son logiciel, chaque logiciel tient sur un téléphone, en français comme en
@@ -6,7 +6,7 @@ anglais, en FCFA, avec Mobile Money et les numéros camerounais.
 
 ## Le portail
 
-`portail/frontend` — la page d'accueil de la suite (port **5800**) : les 22
+`portail/frontend` - la page d'accueil de la suite (port **5800**) : les 22
 produits, leur adresse, et un témoin qui dit si chacun répond.
 
 ```bash
@@ -47,5 +47,5 @@ SQLite) et son `frontend/` (Next.js sur `@cadc/kit`, français + anglais,
 mobile-first). En mode démo, **rien ne quitte la machine** : aucun SMS,
 aucun appel, aucun argent ne part.
 
-Le socle partagé vit dans `cadc/kit` — synchronisé par
+Le socle partagé vit dans `cadc/kit` - synchronisé par
 `node ../../cadc/kit/sync.mjs` avant chaque lint/build.
