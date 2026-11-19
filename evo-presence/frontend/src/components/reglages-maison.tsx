@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { traduire } from "@/lib/langue";
 import { VILLES } from "@/lib/format";
 import { ecrire } from "@/lib/client-api";
-import { ErreurChantier } from "@/lib/errors";
+import { ErreurPresence } from "@/lib/errors";
 import type { Organisation, OrganisationEntree } from "@/lib/types";
 
 type Props = {
@@ -55,7 +55,7 @@ export function ReglagesMaison({ organisation, langue, responsable }: Props) {
       setEcrit(true);
       routeur.refresh();
     } catch (e) {
-      setErreur(e instanceof ErreurChantier ? e.message : t("commun.horsLigne"));
+      setErreur(e instanceof ErreurPresence ? e.message : t("commun.horsLigne"));
     } finally {
       setEnCours(false);
     }

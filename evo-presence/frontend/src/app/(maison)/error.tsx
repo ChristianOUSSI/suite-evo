@@ -2,7 +2,7 @@
 
 import { EcranErreur } from "@/components/ecran-erreur";
 
-export default function ErreurChantier({
+export default function ErreurPresence({
   error,
   reset,
 }: {

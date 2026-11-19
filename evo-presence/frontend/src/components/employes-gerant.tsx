@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 
 import { traduire } from "@/lib/langue";
 import { ecrire } from "@/lib/client-api";
-import { ErreurChantier } from "@/lib/errors";
+import { ErreurPresence } from "@/lib/errors";
 import type { Employe, EmployeEntree } from "@/lib/types";
 
 type Vide = { nom: string; telephone: string; service: string; note: string };
@@ -39,7 +39,7 @@ export function EmployesGerant({ employes, langue, responsable }: Props) {
       setAjout(VIDE);
       routeur.refresh();
     } catch (e) {
-      setErreurAjout(e instanceof ErreurChantier ? e.message : t("commun.horsLigne"));
+      setErreurAjout(e instanceof ErreurPresence ? e.message : t("commun.horsLigne"));
       setEnCours(null);
     }
   }
@@ -53,7 +53,7 @@ export function EmployesGerant({ employes, langue, responsable }: Props) {
     } catch (e) {
       setErreurs((actuelles) => ({
         ...actuelles,
-        [employe.id]: e instanceof ErreurChantier ? e.message : t("commun.horsLigne"),
+        [employe.id]: e instanceof ErreurPresence ? e.message : t("commun.horsLigne"),
       }));
       setEnCours(null);
     }

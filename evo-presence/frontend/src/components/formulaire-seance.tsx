@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import { ecrire } from "@/lib/client-api";
-import { ErreurChantier } from "@/lib/errors";
+import { ErreurPresence } from "@/lib/errors";
 import { traduire } from "@/lib/langue";
 import type { Connexion } from "@/lib/types";
 
@@ -52,7 +52,7 @@ export function FormulaireSeance({ langue }: { langue: string }) {
       routeur.refresh();
     } catch (erreur) {
       setTord(
-        erreur instanceof ErreurChantier
+        erreur instanceof ErreurPresence
           ? erreur.message
           : langue === "en"
             ? "The session did not open."

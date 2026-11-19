@@ -5,7 +5,7 @@ import { useCallback, useState } from "react";
 import { traduire } from "@/lib/langue";
 import { formats, ETATS } from "@/lib/format";
 import { ecrire } from "@/lib/client-api";
-import { ErreurChantier } from "@/lib/errors";
+import { ErreurPresence } from "@/lib/errors";
 import type { Equipe, Place, Presence, StatutPresence } from "@/lib/types";
 
 type Props = {
@@ -62,7 +62,7 @@ export function PortailPointage({ equipeInitiale, jourInitial, langue }: Props) 
           ),
         );
       } catch (e) {
-        setErreur(e instanceof ErreurChantier ? e.message : t("commun.horsLigne"));
+        setErreur(e instanceof ErreurPresence ? e.message : t("commun.horsLigne"));
       } finally {
         setChargement(false);
       }
@@ -115,7 +115,7 @@ export function PortailPointage({ equipeInitiale, jourInitial, langue }: Props) 
         ),
       );
     } catch (e) {
-      setTordu(e instanceof ErreurChantier ? e.message : t("commun.horsLigne"));
+      setTordu(e instanceof ErreurPresence ? e.message : t("commun.horsLigne"));
     } finally {
       setOccupes((actuelles) => ({ ...actuelles, [place.employe_id]: false }));
     }

@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 import { NOM_COOKIE, normaliserLangue } from "@cadc/kit/i18n";
 
 import { lire } from "./api";
-import { ErreurChantier } from "./errors";
+import { ErreurPresence } from "./errors";
 import type { Seance } from "./types";
 
 /** La langue choisie, lue là où le serveur la voit : dans le cookie. */
@@ -19,7 +19,7 @@ export const seance = cache(async (): Promise<Seance | null> => {
   try {
     return await lire<Seance>("/auth/me", langue);
   } catch (erreur) {
-    if (erreur instanceof ErreurChantier && erreur.status === 401) {
+    if (erreur instanceof ErreurPresence && erreur.status === 401) {
       return null;
     }
     throw erreur;

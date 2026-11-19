@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 
 import { traduire } from "@/lib/langue";
 import { ecrire } from "@/lib/client-api";
-import { ErreurChantier } from "@/lib/errors";
+import { ErreurPresence } from "@/lib/errors";
 
 /**
  * Ranger le cahier.
@@ -27,7 +27,7 @@ export function Deconnexion({ langue }: { langue: string }) {
       routeur.push("/connexion");
       routeur.refresh();
     } catch (e) {
-      setErreur(e instanceof ErreurChantier ? e.message : t("commun.horsLigne"));
+      setErreur(e instanceof ErreurPresence ? e.message : t("commun.horsLigne"));
       setEnCours(false);
     }
   }

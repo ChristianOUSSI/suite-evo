@@ -1,9 +1,9 @@
-export class ErreurChantier extends Error {
+export class ErreurPresence extends Error {
   status: number;
 
   constructor(message: string, status: number) {
     super(message);
-    this.name = "ErreurChantier";
+    this.name = "ErreurPresence";
     this.status = status;
   }
 }
