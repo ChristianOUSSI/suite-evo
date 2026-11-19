@@ -3,7 +3,7 @@ from __future__ import annotations
 """Le carnet numérique : les notes, leurs catégories, leurs partages.
 
 Une note s'épingle, se range, s'archive. Le code de partage ouvre une
-page publique en lecture seule — la note voyage sur WhatsApp sans
+page publique en lecture seule - la note voyage sur WhatsApp sans
 compte.
 """
 

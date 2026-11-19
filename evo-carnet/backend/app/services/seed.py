@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-"""La démo du carnet : des notes dans chaque catégorie — déterministe."""
+"""La démo du carnet : des notes dans chaque catégorie - déterministe."""
 
 import random
 from datetime import timedelta

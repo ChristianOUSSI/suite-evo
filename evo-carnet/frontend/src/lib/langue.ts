@@ -5,7 +5,7 @@ import { creerTraducteur, type Dictionnaire } from "@cadc/kit/i18n";
  * Le backend rend des nombres, des dates ISO et des clés stables.
  */
 export const DICTEE: Dictionnaire = {
-  "marque.slogan": { fr: "la note, l'épingle, le partage — le carnet que la famille suit seule", en: "the note, the pin, the share — the notebook the family follows alone" },
+  "marque.slogan": { fr: "la note, l'épingle, le partage - le carnet que la famille suit seule", en: "the note, the pin, the share - the notebook the family follows alone" },
   "nav.accueil": { fr: "L'accueil", en: "The desk" },
   "nav.notes": { fr: "Les notes", en: "Notes" },
   "nav.recap": { fr: "Le mois", en: "The month" },
@@ -16,14 +16,14 @@ export const DICTEE: Dictionnaire = {
   "texte.label": { fr: "Taille du texte", en: "Text size" },
   "meta.titre": { fr: "evo-carnet | la note, l'épingle, le partage", en: "evo-carnet | the note, the pin, the share" },
   "meta.description": {
-    fr: "Le carnet numérique d'une famille camerounaise : notes, catégories, épingles — et un lien public pour partager une note sur WhatsApp.",
-    en: "The digital notebook of a Cameroonian family: notes, categories, pins — and a public link to share a note on WhatsApp.",
+    fr: "Le carnet numérique d'une famille camerounaise : notes, catégories, épingles - et un lien public pour partager une note sur WhatsApp.",
+    en: "The digital notebook of a Cameroonian family: notes, categories, pins - and a public link to share a note on WhatsApp.",
   },
 
   "entree.titre": { fr: "Le carnet, sans le papier", en: "The notebook, without the paper" },
   "entree.chapo": {
-    fr: "evo-carnet tient les notes : chaque titre, chaque contenu, chaque catégorie — et un lien public pour envoyer une note par WhatsApp.",
-    en: "evo-carnet keeps the notes: every title, every content, every category — and a public link to send a note by WhatsApp.",
+    fr: "evo-carnet tient les notes : chaque titre, chaque contenu, chaque catégorie - et un lien public pour envoyer une note par WhatsApp.",
+    en: "evo-carnet keeps the notes: every title, every content, every category - and a public link to send a note by WhatsApp.",
   },
   "entree.ouvrir": { fr: "Ouvrir le carnet", en: "Open the notebook" },
   "entree.slogan": { fr: "un téléphone au comptoir", en: "one phone at the counter" },
@@ -31,7 +31,7 @@ export const DICTEE: Dictionnaire = {
   "geste.1.titre": { fr: "Noter en une minute", en: "Jot down in a minute" },
   "geste.1.texte": { fr: "Titre, contenu, catégorie : la note se range, s'épingle, s'archive.", en: "Title, content, category: the note files itself, pins itself, archives itself." },
   "geste.2.titre": { fr: "Partager par un lien", en: "Share by a link" },
-  "geste.2.texte": { fr: "Chaque note a son code : /partage/CODE s'ouvre sans compte, en lecture seule — prêt pour WhatsApp.", en: "Every note has its code: /partage/CODE opens with no account, read-only — ready for WhatsApp." },
+  "geste.2.texte": { fr: "Chaque note a son code : /partage/CODE s'ouvre sans compte, en lecture seule - prêt pour WhatsApp.", en: "Every note has its code: /partage/CODE opens with no account, read-only - ready for WhatsApp." },
   "geste.3.titre": { fr: "Retrouver vite", en: "Find it fast" },
   "geste.3.texte": { fr: "Recherche dans le titre et le contenu, filtre par catégorie : la note remonte même vieille.", en: "Search in title and content, filter by category: the note comes back even when old." },
   "geste.4.titre": { fr: "Relire le mois", en: "Read the month" },
@@ -60,7 +60,7 @@ export const DICTEE: Dictionnaire = {
   "accueil.categories": { fr: "Catégories", en: "Categories" },
   "accueil.nouvelle": { fr: "Nouvelle note", en: "New note" },
   "accueil.partage": { fr: "Partager une note", en: "Share a note" },
-  "accueil.partage-aide": { fr: "Chaque note a son lien /partage/CODE — en lecture seule, sans compte — à envoyer sur WhatsApp.", en: "Every note has its /partage/CODE link — read-only, no account — ready for WhatsApp." },
+  "accueil.partage-aide": { fr: "Chaque note a son lien /partage/CODE - en lecture seule, sans compte - à envoyer sur WhatsApp.", en: "Every note has its /partage/CODE link - read-only, no account - ready for WhatsApp." },
 
   "notes.titre": { fr: "Les notes du carnet", en: "The notebook notes" },
   "notes.chapo": { fr: "Chaque note : le titre, le contenu, la catégorie. Épingler la fait remonter, archiver la range.", en: "Every note: the title, the content, the category. Pinning brings it up, archiving files it away." },
@@ -85,7 +85,7 @@ export const DICTEE: Dictionnaire = {
   "notes.mots": { fr: "mots", en: "words" },
   "notes.maj": { fr: "modifiée le", en: "edited on" },
   "notes.creee": { fr: "écrite le", en: "written on" },
-  "notes.aide": { fr: "La note s'épingle en haut, s'archive au fond. Le code de partage ouvre une page publique en lecture seule — l'ancien code meurt quand on en demande un nouveau.", en: "The note pins to the top, archives to the back. The share code opens a public read-only page — the old code dies when a new one is requested." },
+  "notes.aide": { fr: "La note s'épingle en haut, s'archive au fond. Le code de partage ouvre une page publique en lecture seule - l'ancien code meurt quand on en demande un nouveau.", en: "The note pins to the top, archives to the back. The share code opens a public read-only page - the old code dies when a new one is requested." },
 
   "categorie.perso": { fr: "Personnel", en: "Personal" },
   "categorie.travail": { fr: "Travail", en: "Work" },

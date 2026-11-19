@@ -15,7 +15,7 @@ type Props = { notes: Note[]; archivees: Note[]; langue: string };
 const VIDE = { titre: "", contenu: "", categorie: "perso" };
 
 /**
- * Les notes du carnet : une fiche par note — le titre, le contenu, la
+ * Les notes du carnet : une fiche par note - le titre, le contenu, la
  * catégorie. Épingler la fait remonter, archiver la range, le code de
  * partage ouvre une page publique en lecture seule.
  */
