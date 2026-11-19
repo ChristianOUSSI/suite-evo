@@ -7,7 +7,7 @@ Trois règles :
 1. Chaque document porte une référence à dix signes, générée toute seule :
    c'est ce que le client ou le contrôleur demande au téléphone.
 2. Une échéance qui passe ne s'efface pas : le document reste, son statut
-   change — actif, archivé — et le récap dit ce qui arrive.
+   change - actif, archivé - et le récap dit ce qui arrive.
 3. Le passé ne se réécrit pas : on archive, on n'efface pas.
 """
 

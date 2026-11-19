@@ -13,7 +13,7 @@ def verifier(reference: str) -> dict:
     """La vérification publique : le titre et le statut, rien de plus.
 
     Le contrôleur ou le client qui a la référence à dix signes vérifie
-    que le document existe — sans compte, sans voir le contenu.
+    que le document existe - sans compte, sans voir le contenu.
     """
     with SessionLocal() as db:
         document = docs.document_par_reference(db, reference)

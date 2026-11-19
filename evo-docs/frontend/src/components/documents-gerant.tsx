@@ -24,7 +24,7 @@ const VIDE = {
 };
 
 /**
- * Les documents du classeur : une fiche par papier — la référence à dix
+ * Les documents du classeur : une fiche par papier - la référence à dix
  * signes, la catégorie, l'émetteur, l'échéance. Le statut se change d'un
  * geste ; les retards se lisent d'un coup d'œil, rien ne s'efface.
  */

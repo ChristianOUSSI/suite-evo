@@ -5,7 +5,7 @@ import { creerTraducteur, type Dictionnaire } from "@cadc/kit/i18n";
  * Le backend rend des nombres, des dates ISO et des clés stables.
  */
 export const DICTEE: Dictionnaire = {
-  "marque.slogan": { fr: "le document, la référence, l'échéance — le classeur que le contrôleur vérifie seul", en: "the document, the reference, the deadline — the file the inspector checks alone" },
+  "marque.slogan": { fr: "le document, la référence, l'échéance - le classeur que le contrôleur vérifie seul", en: "the document, the reference, the deadline - the file the inspector checks alone" },
   "nav.accueil": { fr: "L'accueil", en: "The desk" },
   "nav.documents": { fr: "Les documents", en: "Documents" },
   "nav.echeances": { fr: "Les échéances", en: "Deadlines" },
@@ -17,14 +17,14 @@ export const DICTEE: Dictionnaire = {
   "texte.label": { fr: "Taille du texte", en: "Text size" },
   "meta.titre": { fr: "evo-docs | le document, la référence, l'échéance", en: "evo-docs | the document, the reference, the deadline" },
   "meta.description": {
-    fr: "Le classeur d'une maison camerounaise : documents, références à dix signes, échéances, vérification publique — sans dossier papier ni échéance oubliée.",
-    en: "The file of a Cameroonian office: documents, ten-character references, deadlines, public verification — no paper folder, no forgotten deadline.",
+    fr: "Le classeur d'une maison camerounaise : documents, références à dix signes, échéances, vérification publique - sans dossier papier ni échéance oubliée.",
+    en: "The file of a Cameroonian office: documents, ten-character references, deadlines, public verification - no paper folder, no forgotten deadline.",
   },
 
   "entree.titre": { fr: "Le classeur, sans le dossier papier", en: "The file, without the paper folder" },
   "entree.chapo": {
-    fr: "evo-docs tient le classeur : chaque document avec sa référence à dix signes, sa catégorie, son échéance — et une page publique où le contrôleur vérifie la référence sans compte.",
-    en: "evo-docs keeps the file: every document with its ten-character reference, its category, its deadline — and a public page where the inspector checks the reference with no account.",
+    fr: "evo-docs tient le classeur : chaque document avec sa référence à dix signes, sa catégorie, son échéance - et une page publique où le contrôleur vérifie la référence sans compte.",
+    en: "evo-docs keeps the file: every document with its ten-character reference, its category, its deadline - and a public page where the inspector checks the reference with no account.",
   },
   "entree.ouvrir": { fr: "Ouvrir le classeur", en: "Open the file" },
   "entree.slogan": { fr: "un téléphone au bureau", en: "one phone at the desk" },
@@ -32,9 +32,9 @@ export const DICTEE: Dictionnaire = {
   "geste.1.titre": { fr: "Déposer le document en une minute", en: "File a document in a minute" },
   "geste.1.texte": { fr: "Titre, catégorie, émetteur, échéance : la référence se génère toute seule, à dix signes dicibles.", en: "Title, category, issuer, deadline: the reference generates itself, ten speakable characters." },
   "geste.2.titre": { fr: "L'échéance qui compte", en: "The deadline that counts" },
-  "geste.2.texte": { fr: "Actif, archivé : le statut se change d'un geste, les retards se lisent d'un coup d'œil — rien ne s'efface.", en: "Active, archived: the status changes in one move, the delays read at a glance — nothing is erased." },
+  "geste.2.texte": { fr: "Actif, archivé : le statut se change d'un geste, les retards se lisent d'un coup d'œil - rien ne s'efface.", en: "Active, archived: the status changes in one move, the delays read at a glance - nothing is erased." },
   "geste.3.titre": { fr: "La vérification publique", en: "The public verification" },
-  "geste.3.texte": { fr: "Le contrôleur tape la référence sur /verifier : le titre, la date, le statut — sans compte, sans appel.", en: "The inspector types the reference on /verifier: the title, the date, the status — no account, no call." },
+  "geste.3.texte": { fr: "Le contrôleur tape la référence sur /verifier : le titre, la date, le statut - sans compte, sans appel.", en: "The inspector types the reference on /verifier: the title, the date, the status - no account, no call." },
   "geste.4.titre": { fr: "Relire le mois", en: "Read the month" },
   "geste.4.texte": { fr: "Documents ajoutés, échéances, retards : recalculé à la demande, exporté en CSV.", en: "Documents added, deadlines, delays: recomputed on request, exported to CSV." },
   "entree.exige": { fr: "Ce que le produit demande", en: "What the product needs" },
@@ -62,7 +62,7 @@ export const DICTEE: Dictionnaire = {
   "accueil.ajouter": { fr: "Nouveau document", en: "New document" },
   "accueil.echeances": { fr: "Les échéances", en: "The deadlines" },
   "accueil.verifier": { fr: "La vérification publique", en: "The public verification" },
-  "accueil.verifier-aide": { fr: "La page où le contrôleur vérifie une référence sans compte — à envoyer sur WhatsApp.", en: "The page where the inspector checks a reference with no account — to send on WhatsApp." },
+  "accueil.verifier-aide": { fr: "La page où le contrôleur vérifie une référence sans compte - à envoyer sur WhatsApp.", en: "The page where the inspector checks a reference with no account - to send on WhatsApp." },
 
   "documents.titre": { fr: "Les documents du classeur", en: "The file's documents" },
   "documents.chapo": { fr: "Chaque document : la référence, la catégorie, l'émetteur, l'échéance. Le statut se change d'un geste.", en: "Every document: the reference, the category, the issuer, the deadline. The status changes in one move." },
