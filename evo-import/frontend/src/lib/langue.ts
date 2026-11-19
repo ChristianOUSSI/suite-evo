@@ -132,6 +132,7 @@ export const DICTEE: Dictionnaire = {
   "suivi.date_livraison": { fr: "Livré le", en: "Delivered on" },
   "suivi.parcours": { fr: "Le parcours", en: "The journey" },
   "suivi.appeler": { fr: "Appeler le transitaire", en: "Call the forwarder" },
+  "suivi.partager": { fr: "Envoyer ce suivi sur WhatsApp", en: "Send this tracking on WhatsApp" },
 
   "recap.titre": { fr: "Le mois du quai", en: "The quay month" },
   "recap.chapo": { fr: "Envois, frais, par mode et par ville : recalculé à la demande.", en: "Shipments, fees, by mode and by city: recomputed on request." },

@@ -70,6 +70,11 @@ export type SuiviPublic = {
   telephone_display: string;
 };
 
+export type SuiviReponse = {
+  colis: SuiviPublic;
+  lien?: string;
+};
+
 export type Etat = {
   jour: string;
   periode: string;

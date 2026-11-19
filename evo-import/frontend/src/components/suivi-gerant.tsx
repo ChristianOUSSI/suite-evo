@@ -129,6 +129,21 @@ export function SuiviGerant({ langue }: { langue: string }) {
               ))}
             </ul>
           </section>
+
+          {envoi.lien ? (
+            <p className="cadc-note">
+              <a
+                className="cadc-bouton cadc-bouton--doux"
+                href={`https://wa.me/?text=${encodeURIComponent(
+                  `${envoi.numero_suivi} - ${envoi.transitaire?.nom ?? "evo-import"} : ${envoi.lien}`,
+                )}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {t("suivi.partager")}
+              </a>
+            </p>
+          ) : null}
         </div>
       ) : null}
     </div>

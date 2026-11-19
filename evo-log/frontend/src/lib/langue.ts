@@ -133,6 +133,7 @@ export const DICTEE: Dictionnaire = {
   "suivi.livraison": { fr: "Livré le", en: "Delivered on" },
   "suivi.transporteur": { fr: "Transporteur", en: "Carrier" },
   "suivi.appeler": { fr: "Appeler le transporteur", en: "Call the carrier" },
+  "suivi.partager": { fr: "Envoyer ce suivi sur WhatsApp", en: "Send this tracking on WhatsApp" },
 
   "reglages.titre": { fr: "Les réglages du transporteur", en: "The carrier settings" },
   "reglages.chapo": { fr: "La maison, les comptes, les exports : ce qui se règle une fois.", en: "The premises, the accounts, the exports: what is set once." },

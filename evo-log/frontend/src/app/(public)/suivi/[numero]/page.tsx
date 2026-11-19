@@ -8,7 +8,7 @@ import { lirePublique } from "@/lib/api";
 import { formats } from "@/lib/format";
 import { langueCourante } from "@/lib/session";
 import { traduire } from "@/lib/langue";
-import type { SuiviPublic } from "@/lib/types";
+import type { SuiviPublic, SuiviReponse } from "@/lib/types";
 
 import "../../../../styles/log.css";
 
@@ -30,12 +30,14 @@ export default async function PageSuiviNumero({
   const { numero } = await params;
 
   let suivi: SuiviPublic | null = null;
+  let lien = "";
   try {
-    const corps = await lirePublique<{ colis: SuiviPublic }>(
+    const corps = await lirePublique<SuiviReponse>(
       `/public/suivi/${encodeURIComponent(numero)}`,
       langue,
     );
     suivi = corps.colis;
+    lien = corps.lien ?? "";
   } catch {
     suivi = null;
   }
@@ -103,6 +105,18 @@ export default async function PageSuiviNumero({
             <Link href="/suivi" className="cadc-bouton cadc-bouton--doux">
               {t("suivi.chercher")}
             </Link>
+            {lien ? (
+              <a
+                className="cadc-bouton cadc-bouton--doux"
+                href={`https://wa.me/?text=${encodeURIComponent(
+                  `${suivi.numero} - ${suivi.transporteur} : ${lien}`,
+                )}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {t("suivi.partager")}
+              </a>
+            ) : null}
           </div>
         </div>
       </main>

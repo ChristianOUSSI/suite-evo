@@ -68,6 +68,7 @@ export type Envoi = {
   cree_le: string;
   suivi: LigneSuivi[];
   transitaire?: Organisation;
+  lien?: string;
 };
 
 export type Etat = {

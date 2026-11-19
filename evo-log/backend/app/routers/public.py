@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 from sqlalchemy import select
 
+from ..config import settings
 from ..database import SessionLocal
 from ..messages import refus
 from ..models import Colis, Organisation
@@ -33,4 +34,4 @@ def suivi(numero: str) -> dict:
         )
         if colis is None:
             raise refus("colis_inconnu", 404)
-        return {"colis": present.suivi_dict(colis)}
+        return {"colis": present.suivi_dict(colis), "lien": f"{settings.public_base_url}/suivi/{colis.numero}"}

@@ -1,5 +1,7 @@
 from fastapi import APIRouter
 
+from ..config import settings
+
 from ..database import SessionLocal
 from ..messages import refus
 from ..services import fret, present
@@ -20,4 +22,5 @@ def suivi(numero: str) -> dict:
             raise refus("suivi_inconnu", 404)
         corps = present.envoi_dict(envoi, public=True)
         corps["transitaire"] = present.organisation_dict(envoi.organisation)
+        corps["lien"] = f"{settings.public_base_url}/suivi/{envoi.numero_suivi}"
         return corps
