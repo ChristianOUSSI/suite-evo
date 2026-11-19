@@ -59,6 +59,21 @@ export default async function PageCommander() {
               </a>
             </p>
           ) : null}
+
+          {depot?.lien ? (
+            <p className="cadc-note">
+              <a
+                className="cadc-bouton cadc-bouton--doux"
+                href={`https://wa.me/?text=${encodeURIComponent(
+                  `${magasin?.nom ?? "evo-gaz"} - ${langue === "en" ? "order gas" : "commander du gaz"} : ${depot.lien}`,
+                )}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {t("commander.partager")}
+              </a>
+            </p>
+          ) : null}
         </div>
       </main>
     </div>

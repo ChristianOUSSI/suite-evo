@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 from sqlalchemy import select
 
+from ..config import settings
 from ..database import SessionLocal
 from ..models import Organisation
 from ..schemas import CommandePublique
@@ -17,7 +18,7 @@ def depot() -> dict:
         organisation = db.scalar(select(Organisation).limit(1))
         if organisation is None:
             return {"depot": None}
-        return {"depot": present.organisation_dict(organisation)}
+        return {"depot": present.organisation_dict(organisation), "lien": f"{settings.public_base_url}/commander"}
 
 
 @router.post("/commandes", status_code=201)

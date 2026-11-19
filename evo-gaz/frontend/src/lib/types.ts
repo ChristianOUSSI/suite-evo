@@ -59,6 +59,7 @@ export type Livraison = {
 
 export type Depot = {
   depot: Organisation | null;
+  lien?: string;
 };
 
 export type Etat = {

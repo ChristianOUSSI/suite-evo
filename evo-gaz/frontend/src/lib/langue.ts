@@ -117,6 +117,7 @@ export const DICTEE: Dictionnaire = {
   "commander.ok": { fr: "Commande reçue ! Le dépôt te contacte au {numero}.", en: "Order received! The depot will contact you on {numero}." },
   "commander.vide": { fr: "Le dépôt n'a pas encore ouvert sa page de commande.", en: "The depot has not opened its order page yet." },
   "commander.aide": { fr: "Le dépôt voit ta commande tout de suite et te rappelle pour confirmer.", en: "The depot sees your order right away and calls back to confirm." },
+  "commander.partager": { fr: "Envoyer cette page de commande sur WhatsApp", en: "Send this order page on WhatsApp" },
 
   "recap.titre": { fr: "Le mois du dépôt", en: "The depot month" },
   "recap.chapo": { fr: "Livraisons et bonbonnes : recalculé à la demande.", en: "Deliveries and cylinders: recomputed on request." },
