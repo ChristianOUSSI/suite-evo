@@ -2,7 +2,7 @@ from fastapi import APIRouter, Query
 
 from ..deps import CompteCourant, DbSession, OrganisationCourante
 from ..messages import refus
-from ..schemas import CommandeCorrection, CommandeEntree
+from ..schemas import CommandeCorrection, CommandeEntree, DemandeCorrection
 from ..services import market, present
 from ..utils import aujourdhui, periode_de
 
@@ -73,3 +73,29 @@ def recap_mois(
 ) -> dict:
     """Le mois de la boutique : ventes, commandes, par catégorie."""
     return market.recap(db, organisation, periode or periode_de(aujourdhui()))
+
+
+@router.get("/demandes")
+def demandes(
+    organisation: OrganisationCourante,
+    db: DbSession,
+    statut: str | None = Query(default=None),
+) -> dict:
+    """Les commandes venues de la page publique des annonces."""
+    lignes = market.liste_demandes(db, organisation, statut=statut)
+    return {
+        "total": len(lignes),
+        "en_attente": sum(1 for un in lignes if un.statut == "demande"),
+        "demandes": [market.demande_dict(un) for un in lignes],
+    }
+
+
+@router.patch("/demandes/{demande_id}")
+def corriger_demande(
+    demande_id: int,
+    entree: DemandeCorrection,
+    organisation: OrganisationCourante,
+    db: DbSession,
+) -> dict:
+    demande = market.corriger_demande(db, organisation, demande_id, entree.statut or "")
+    return market.demande_dict(demande)

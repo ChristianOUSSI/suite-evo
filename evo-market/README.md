@@ -8,6 +8,7 @@ La marketplace d'une boutique camerounaise : annonces de vente, stock, commandes
 - **Les commandes** (`/commandes`) : chaque vente avec l'annonce, la quantité, l'acheteur, son numéro, le moyen de paiement (espèces, MTN/Orange/Nexttel Money, virement) et le statut : nouvelle → confirmée → livrée / annulée. Le montant est figé au moment de la vente ; le stock descend quand la commande est confirmée et lui est rendu si on en sort. Une annonce épuisée ou retirée ne se commande plus (refus `rupture`).
 - **L'accueil** (`/accueil`) : la vitre du comptoir - annonces en ligne, ruptures, commandes neuves, ventes du mois et total vendu.
 - **La page publique** (`/catalogue`) : les articles en ligne, les prix, les quartiers - **sans compte**, à envoyer sur WhatsApp. Elle ne montre ni vendeurs ni commandes.
+- **La commande en ligne** (`/commander`) : l'acheteur choisit l'article, la quantité, son nom et son numéro, sans compte. La demande arrive « demandée » ; la boutique confirme ou annule dans `/demandes`, puis crée la commande en caisse.
 - **Le mois** (`/recap`) : ventes, commandes, par statut et par catégorie - recalculé à la demande, exports CSV (`/api/exports/annonces.csv`, `/api/exports/commandes.csv`).
 - **Les réglages** (`/reglages`) : la boutique (nom, ville, quartier, téléphone), les comptes, les exports.
 

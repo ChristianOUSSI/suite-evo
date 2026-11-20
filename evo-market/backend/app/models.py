@@ -130,3 +130,31 @@ class Commande(Base):
     organisation: Mapped[Organisation] = relationship(back_populates="commandes")
     annonce: Mapped[Annonce] = relationship(back_populates="commandes_liste")
     auteur: Mapped[User] = relationship(foreign_keys=[cree_par])
+
+
+STATUTS_DEMANDE = ("demande", "confirmee", "annulee")
+
+
+class Demande(Base):
+    """La commande venue de la page publique des annonces.
+
+    L'acheteur écrit sans compte : quelle annonce, combien, son nom et
+    son numéro. La boutique confirme ou annule - la commande interne
+    se crée ensuite avec le stock vérifié.
+    """
+
+    __tablename__ = "demandes"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    organisation_id: Mapped[int] = mapped_column(ForeignKey("organisations.id"), index=True)
+    annonce_id: Mapped[int | None] = mapped_column(ForeignKey("annonces.id"), nullable=True)
+    quantite: Mapped[int] = mapped_column(Integer, default=1)
+    acheteur_nom: Mapped[str] = mapped_column(String(160), default="")
+    acheteur_telephone: Mapped[str] = mapped_column(String(24), default="")
+    note: Mapped[str] = mapped_column(Text, default="")
+    statut: Mapped[str] = mapped_column(String(12), default="demande", index=True)
+    cree_le: Mapped[datetime] = mapped_column(DateTime, default=_maintenant_naif)
+    traite_le: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+
+    organisation: Mapped[Organisation] = relationship()
+    annonce: Mapped[Annonce | None] = relationship(lazy="joined")

@@ -106,3 +106,32 @@ def test_export_csv(responsable):
 def test_agent_fait_le_quotidien_mais_pas_les_comptes(agent, responsable):
     assert agent.post("/comptes", json={"nom": "X Y", "email": "x@y.cm", "mot_de_passe": "abcdef", "role": "agent"}).status_code == 403
     assert agent.put("/organisation", json={"nom": "Autre Boutique"}).status_code == 403
+
+
+def test_commande_publique(agent):
+    """L'acheteur commande depuis les annonces sans compte."""
+    from fastapi.testclient import TestClient
+
+    from app.main import app
+
+    annonces = TestClient(app).get("/public/annonces").json()["annonces"]
+    assert annonces, "la démo doit publier des articles"
+    annonce = next(a for a in annonces if a["stock"] > 0) if any("stock" in a for a in annonces) else annonces[0]
+
+    reponse = TestClient(app).post(
+        "/public/commandes",
+        json={
+            "annonce_id": annonce["id"],
+            "quantite": 1,
+            "acheteur_nom": "Acheteuse Test",
+            "acheteur_telephone": "690 12 34 56",
+            "note": "Call me",
+        },
+    )
+    assert reponse.status_code == 201, reponse.text
+    corps = reponse.json()
+    assert corps["ok"] and corps["statut"] == "demande"
+
+    liste = agent.get("/demandes").json()
+    demande = next(d for d in liste["demandes"] if d["id"] == corps["id"])
+    assert demande["acheteur_telephone"].startswith("+237")

@@ -9,6 +9,7 @@ const LIENS = [
   { href: "/accueil", cle: "nav.accueil", marque: "accueil" },
   { href: "/annonces", cle: "nav.annonces", marque: "annonces" },
   { href: "/commandes", cle: "nav.commandes", marque: "commandes" },
+  { href: "/demandes", cle: "nav.demandes", marque: "commandes" },
   { href: "/recap", cle: "nav.recap", marque: "recap" },
   { href: "/reglages", cle: "nav.reglages", marque: "reglages" },
 ];

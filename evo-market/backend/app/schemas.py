@@ -161,3 +161,22 @@ class CompteEntree(BaseModel):
         if valeur not in {"responsable", "agent"}:
             raise ValueError("liste:role")
         return valeur
+
+
+class DemandeEntree(BaseModel):
+    """L'acheteur qui commande depuis les annonces, sans compte."""
+
+    annonce_id: int | None = None
+    quantite: int = Field(default=1, ge=1, le=999)
+    acheteur_nom: str = Field(min_length=2, max_length=160)
+    acheteur_telephone: str = Field(max_length=24)
+    note: str = Field(default="", max_length=600)
+
+    @field_validator("acheteur_telephone")
+    @classmethod
+    def canonise(cls, valeur: str) -> str:
+        return _telephone(valeur)
+
+
+class DemandeCorrection(BaseModel):
+    statut: str | None = Field(default=None, max_length=12)

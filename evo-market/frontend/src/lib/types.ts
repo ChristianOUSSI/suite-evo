@@ -165,3 +165,32 @@ export type CommandeEntree = {
   date?: string | null;
   note?: string;
 };
+
+export type StatutDemande = "demande" | "confirmee" | "annulee";
+
+export type Demande = {
+  id: number;
+  annonce: string;
+  annonce_id: number | null;
+  quantite: number;
+  acheteur_nom: string;
+  acheteur_telephone: string;
+  note: string;
+  statut: StatutDemande;
+  cree_le: string;
+  traite_le: string | null;
+};
+
+export type ListeDemandes = {
+  total: number;
+  en_attente: number;
+  demandes: Demande[];
+};
+
+export type DemandeEntree = {
+  annonce_id: number | null;
+  quantite: number;
+  acheteur_nom: string;
+  acheteur_telephone: string;
+  note: string;
+};
