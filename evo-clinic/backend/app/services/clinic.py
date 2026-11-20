@@ -305,3 +305,81 @@ def recap(db: Session, organisation: Organisation, periode: str) -> dict:
         "par_motif": sorted(par_motif.values(), key=lambda un: -un["montant"]),
         "par_patient": sorted(par_patient, key=lambda un: -un["dus"])[:30],
     }
+
+
+
+def rdv_dict(rdv) -> dict:
+    """Un rendez-vous, vue de la clinique."""
+    from ..utils import affiche_telephone
+
+    return {
+        "id": rdv.id,
+        "nom": rdv.nom,
+        "telephone": rdv.telephone,
+        "telephone_display": affiche_telephone(rdv.telephone),
+        "motif": rdv.motif,
+        "jour": rdv.jour.isoformat(),
+        "heure": rdv.heure,
+        "note": rdv.note,
+        "statut": rdv.statut,
+        "patient": rdv.patient.nom if rdv.patient else "",
+        "cree_le": rdv.cree_le.isoformat(timespec="seconds"),
+        "traite_le": rdv.traite_le.isoformat(timespec="seconds") if rdv.traite_le else None,
+    }
+
+
+def ajouter_rdv(db: Session, organisation: Organisation, entree) -> "RendezVous":
+    """La demande de rendez-vous venue de la page publique."""
+    from ..models import RendezVous
+    from ..utils import aujourdhui
+
+    if entree.jour < aujourdhui():
+        raise refus("saisie", **{"jour": "aujourd'hui ou plus tard"})
+    rdv = RendezVous(
+        organisation_id=organisation.id,
+        nom=entree.nom.strip(),
+        telephone=entree.telephone,
+        motif=entree.motif.strip(),
+        jour=entree.jour,
+        heure=entree.heure,
+        note=entree.note.strip(),
+    )
+    db.add(rdv)
+    db.commit()
+    db.refresh(rdv)
+    return rdv
+
+
+def liste_rdv(db: Session, organisation: Organisation, statut: str | None = None) -> list:
+    from ..models import RendezVous
+
+    requete = (
+        select(RendezVous)
+        .where(RendezVous.organisation_id == organisation.id)
+        .order_by(RendezVous.jour, RendezVous.heure, RendezVous.id)
+    )
+    if statut:
+        requete = requete.where(RendezVous.statut == statut)
+    return list(db.scalars(requete).all())
+
+
+def rdv_de(db: Session, organisation: Organisation, rdv_id: int):
+    from ..models import RendezVous
+
+    rdv = db.get(RendezVous, rdv_id)
+    if rdv is None or rdv.organisation_id != organisation.id:
+        raise refus("rdv_inconnu", 404)
+    return rdv
+
+
+def corriger_rdv(db: Session, organisation: Organisation, rdv_id: int, statut: str):
+    if statut not in ("demande", "confirme", "refuse", "fait"):
+        raise refus("saisie", **{"statut": "demande, confirme, refuse ou fait"})
+    rdv = rdv_de(db, organisation, rdv_id)
+    rdv.statut = statut
+    from ..utils import maintenant
+
+    rdv.traite_le = maintenant() if statut != "demande" else None
+    db.commit()
+    db.refresh(rdv)
+    return rdv

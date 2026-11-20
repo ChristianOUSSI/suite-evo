@@ -37,6 +37,10 @@ Comptes de démonstration : `ada@clinique.cm` (responsable) et
   la demande, exports CSV.
 - **`/verifier` public**. Le patient vérifie son reçu avec le code, sans
   compte.
+- **Le rendez-vous en ligne** (`/rdv`). Le patient écrit nom, numéro,
+  motif, jour et heure, sans compte. La demande arrive « demandée » ; la
+  clinique confirme, refuse ou marque fait dans `/rendez-vous`, puis
+  consigne la consultation comme un acte ordinaire.
 
 ## Ce qui est vérifié
 

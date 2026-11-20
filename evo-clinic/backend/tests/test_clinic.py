@@ -132,3 +132,37 @@ def test_export_csv(responsable):
         assert reponse.status_code == 200
         assert "text/csv" in reponse.headers["content-type"]
         assert reponse.text.splitlines()
+
+
+def test_rendez_vous_public(responsable):
+    """Le patient demande un rendez-vous sans compte ; la clinique tranche."""
+    from fastapi.testclient import TestClient
+
+    from app.main import app
+
+    anonyme = TestClient(app)
+    reponse = anonyme.post(
+        "/public/rendez-vous",
+        json={
+            "nom": "Marie Ngo",
+            "telephone": "677 44 55 66",
+            "motif": "Fever and headache",
+            "jour": "2030-01-15",
+            "heure": "09:30",
+            "note": "First visit",
+        },
+    )
+    assert reponse.status_code == 201, reponse.text
+    corps = reponse.json()
+    assert corps["ok"] and corps["statut"] == "demande"
+
+    liste = responsable.get("/rendez-vous").json()
+    assert liste["demandes"] >= 1
+    rdv = next(r for r in liste["rendez_vous"] if r["id"] == corps["id"])
+    assert rdv["telephone"].startswith("+237")
+
+    ok = responsable.patch(
+        f"/rendez-vous/{corps['id']}", json={"statut": "confirme"}
+    )
+    assert ok.status_code == 200
+    assert ok.json()["statut"] == "confirme"

@@ -2,7 +2,7 @@ from fastapi import APIRouter, Query
 
 from ..deps import CompteCourant, DbSession, OrganisationCourante
 from ..messages import refus
-from ..schemas import ActeCorrection, ActeEntree, PaiementCorrection, PaiementEntree
+from ..schemas import RendezVousCorrection, ActeCorrection, ActeEntree, PaiementCorrection, PaiementEntree
 from ..services import clinic, present
 from ..utils import aujourdhui, periode_de
 
@@ -124,3 +124,29 @@ def recap_mois(
 ) -> dict:
     """Le mois de la clinique : actes, encaissé, ce qui reste dû."""
     return clinic.recap(db, organisation, periode or periode_de(aujourdhui()))
+
+
+@router.get("/rendez-vous")
+def rendez_vous(
+    organisation: OrganisationCourante,
+    db: DbSession,
+    statut: str | None = Query(default=None),
+) -> dict:
+    lignes = clinic.liste_rdv(db, organisation, statut=statut)
+    return {
+        "total": len(lignes),
+        "demandes": sum(1 for un in lignes if un.statut == "demande"),
+        "rendez_vous": [clinic.rdv_dict(un) for un in lignes],
+    }
+
+
+@router.patch("/rendez-vous/{rdv_id}")
+def corriger_rdv(
+    rdv_id: int,
+    entree: RendezVousCorrection,
+    organisation: OrganisationCourante,
+    compte: CompteCourant,
+    db: DbSession,
+) -> dict:
+    rdv = clinic.corriger_rdv(db, organisation, rdv_id, entree.statut or "")
+    return clinic.rdv_dict(rdv)

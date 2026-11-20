@@ -50,6 +50,14 @@ CODES: dict[str, dict[str, str]] = {
         "fr": "La saisie n'est pas reçue telle quelle.",
         "en": "The input was not accepted as given.",
     },
+    "rdv_inconnu": {
+        "fr": "Ce rendez-vous n'existe pas dans la clinique.",
+        "en": "That appointment does not exist in the clinic.",
+    },
+    "organisation_inconnue": {
+        "fr": "Aucune clinique n'est encore ouverte ici.",
+        "en": "No clinic is open here yet.",
+    },
 }
 
 
@@ -68,6 +76,10 @@ CHAMPS: dict[str, dict[str, str]] = {
     "acte_id": {"fr": "l'acte", "en": "the record"},
     "note": {"fr": "la note", "en": "the note"},
     "role": {"fr": "le rôle", "en": "the role"},
+    "motif": {"fr": "le motif", "en": "the reason"},
+    "jour": {"fr": "le jour", "en": "the day"},
+    "heure": {"fr": "l'heure", "en": "the time"},
+    "statut": {"fr": "le statut", "en": "the status"},
 }
 
 

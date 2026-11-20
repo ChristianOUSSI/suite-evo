@@ -168,3 +168,35 @@ export type RecuPublic = {
   acte?: string;
   code?: string;
 };
+
+export type RendezVousStatut = "demande" | "confirme" | "refuse" | "fait";
+
+export type RendezVous = {
+  id: number;
+  nom: string;
+  telephone: string;
+  telephone_display: string;
+  motif: string;
+  jour: string;
+  heure: string;
+  note: string;
+  statut: RendezVousStatut;
+  patient: string;
+  cree_le: string;
+  traite_le: string | null;
+};
+
+export type ListeRendezVous = {
+  total: number;
+  demandes: number;
+  rendez_vous: RendezVous[];
+};
+
+export type RendezVousEntree = {
+  nom: string;
+  telephone: string;
+  motif: string;
+  jour: string;
+  heure: string;
+  note: string;
+};

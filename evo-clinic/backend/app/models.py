@@ -151,3 +151,33 @@ def _aujourdhui() -> date:
     from .utils import aujourdhui
 
     return aujourdhui()
+
+
+STATUTS_RDV = ("demande", "confirme", "refuse", "fait")
+
+
+class RendezVous(Base):
+    """Une demande de rendez-vous venue de la page publique.
+
+    Le patient écrit sans compte : nom, numéro, motif, jour et heure.
+    La clinique confirme ou refuse - la consultation se consigne ensuite
+    comme un acte ordinaire.
+    """
+
+    __tablename__ = "rendez_vous"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    organisation_id: Mapped[int] = mapped_column(ForeignKey("organisations.id"), index=True)
+    nom: Mapped[str] = mapped_column(String(160))
+    telephone: Mapped[str] = mapped_column(String(24), default="")
+    motif: Mapped[str] = mapped_column(String(160), default="")
+    jour: Mapped[date] = mapped_column(Date, index=True)
+    heure: Mapped[str] = mapped_column(String(5), default="")
+    note: Mapped[str] = mapped_column(Text, default="")
+    statut: Mapped[str] = mapped_column(String(12), default="demande", index=True)
+    patient_id: Mapped[int | None] = mapped_column(ForeignKey("patients.id"), nullable=True)
+    cree_le: Mapped[datetime] = mapped_column(DateTime, default=lambda: _maintenant_naif())
+    traite_le: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+
+    organisation: Mapped[Organisation] = relationship()
+    patient: Mapped[Patient | None] = relationship(lazy="joined")

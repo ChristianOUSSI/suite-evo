@@ -141,3 +141,34 @@ class CompteEntree(BaseModel):
         if valeur not in ROLES_VALIDES:
             raise ValueError("liste:role")
         return valeur
+
+
+class RendezVousEntree(BaseModel):
+    """Le patient qui demande un rendez-vous, sans compte."""
+
+    nom: str = Field(min_length=2, max_length=160)
+    telephone: str = Field(max_length=24)
+    motif: str = Field(default="", max_length=160)
+    jour: date_type
+    heure: str = Field(default="", max_length=5)
+    note: str = Field(default="", max_length=600)
+
+    @field_validator("telephone")
+    @classmethod
+    def canonise(cls, valeur: str) -> str:
+        return _telephone(valeur)
+
+    @field_validator("heure")
+    @classmethod
+    def heure_valide(cls, valeur: str) -> str:
+        if not valeur:
+            return ""
+        import re
+
+        if not re.fullmatch(r"([01]\d|2[0-3]):[0-5]\d", valeur):
+            raise ValueError("heure")
+        return valeur
+
+
+class RendezVousCorrection(BaseModel):
+    statut: str | None = Field(default=None, max_length=12)
