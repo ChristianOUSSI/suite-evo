@@ -148,3 +148,32 @@ class Reparation(Base):
     organisation: Mapped[Organisation] = relationship(back_populates="reparations")
     client: Mapped[Client] = relationship(back_populates="reparations")
     moto: Mapped[Moto | None] = relationship(back_populates="reparations")
+
+
+TYPES_DEMANDE = ("moto", "reparation")
+STATUTS_DEMANDE = ("demande", "confirmee", "annulee")
+
+
+class Demande(Base):
+    """La demande venue de la page publique : une moto ou une réparation.
+
+    Le client écrit sans compte. Le garage confirme ou annule - la
+    vente ou la réparation se consigne ensuite comme d'habitude.
+    """
+
+    __tablename__ = "demandes"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    organisation_id: Mapped[int] = mapped_column(ForeignKey("organisations.id"), index=True)
+    type: Mapped[str] = mapped_column(String(12), default="moto")
+    moto_id: Mapped[int | None] = mapped_column(ForeignKey("motos.id"), nullable=True)
+    client_nom: Mapped[str] = mapped_column(String(160), default="")
+    client_telephone: Mapped[str] = mapped_column(String(24), default="")
+    description: Mapped[str] = mapped_column(String(400), default="")
+    note: Mapped[str] = mapped_column(Text, default="")
+    statut: Mapped[str] = mapped_column(String(12), default="demande", index=True)
+    cree_le: Mapped[datetime] = mapped_column(DateTime, default=_maintenant_naif)
+    traite_le: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+
+    organisation: Mapped[Organisation] = relationship()
+    moto: Mapped[Moto | None] = relationship(lazy="joined")

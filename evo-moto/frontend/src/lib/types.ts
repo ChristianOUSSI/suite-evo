@@ -174,3 +174,35 @@ export type ClientEntree = {
   type?: string;
   note?: string;
 };
+
+export type TypeDemande = "moto" | "reparation";
+export type StatutDemande = "demande" | "confirmee" | "annulee";
+
+export type Demande = {
+  id: number;
+  type: TypeDemande;
+  moto: string;
+  moto_id: number | null;
+  client_nom: string;
+  client_telephone: string;
+  description: string;
+  note: string;
+  statut: StatutDemande;
+  cree_le: string;
+  traite_le: string | null;
+};
+
+export type ListeDemandes = {
+  total: number;
+  en_attente: number;
+  demandes: Demande[];
+};
+
+export type DemandeEntree = {
+  type: TypeDemande;
+  moto_id: number | null;
+  client_nom: string;
+  client_telephone: string;
+  description: string;
+  note: string;
+};

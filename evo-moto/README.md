@@ -19,6 +19,9 @@ public où le client lit les motos en vente sans compte.
   atelier, réparations par statut, par marque - exports CSV.
 - **`/catalogue` public** : les motos en vente, leurs prix - sans
   compte. À envoyer sur WhatsApp.
+- **`/demande` public** : le client écrit pour une moto ou une
+  réparation, sans compte. La demande arrive « demandée » ; le garage
+  confirme ou annule dans `/demandes`, puis vend ou répare.
 - Tout en **français + anglais**, palette et polices CADC, mobile-first.
 
 ## Lancer
