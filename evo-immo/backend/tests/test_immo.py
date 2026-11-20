@@ -123,3 +123,33 @@ def test_export_csv(responsable):
         assert reponse.status_code == 200
         assert "text/csv" in reponse.headers["content-type"]
         assert reponse.text.splitlines()
+
+
+def test_demande_depuis_annonce(agent):
+    """Le prospect écrit depuis la page des annonces, sans compte."""
+    from fastapi.testclient import TestClient
+
+    from app.main import app
+
+    # Une annonce publique pour viser un bien précis.
+    annonces = TestClient(app).get("/public/annonces").json()["annonces"]
+    assert annonces, "la démo doit publier des biens"
+    bien = annonces[0]
+
+    reponse = TestClient(app).post(
+        "/public/demandes",
+        json={
+            "bien_id": bien["id"],
+            "nom": "Prospect Test",
+            "telephone": "690 12 34 56",
+            "message": "Disponible samedi ?",
+        },
+    )
+    assert reponse.status_code == 201, reponse.text
+    corps = reponse.json()
+    assert corps["ok"] and corps["statut"] == "nouvelle"
+
+    liste = agent.get("/demandes").json()
+    demande = next(d for d in liste["demandes"] if d["id"] == corps["id"])
+    assert demande["canal"] == "annonce"
+    assert demande["client_telephone"].startswith("+237")

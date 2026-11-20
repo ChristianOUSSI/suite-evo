@@ -20,6 +20,9 @@ avec leur issue - et une page publique des annonces à envoyer sur WhatsApp.
   des biens vendus/loués - recalculé à la demande, exports CSV.
 - **`/annonces`** (public) : les biens disponibles, sans compte - le lien à
   envoyer sur WhatsApp. Ne montre jamais le propriétaire ni les demandes.
+- **`/demande`** (public) : le prospect écrit depuis une annonce - nom,
+  numéro, message, bien visé. La demande arrive « nouvelle » avec le canal
+  « annonce » ; l'agent rappelle au numéro donné.
 
 ## Contexte camerounais
 

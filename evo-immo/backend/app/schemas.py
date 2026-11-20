@@ -227,3 +227,17 @@ class CompteEntree(BaseModel):
         if valeur not in {"responsable", "agent"}:
             raise ValueError("liste:role")
         return valeur
+
+
+class DemandePubliqueEntree(BaseModel):
+    """Le prospect qui écrit depuis la page des annonces, sans compte."""
+
+    bien_id: int | None = None
+    nom: str = Field(min_length=2, max_length=160)
+    telephone: str = Field(max_length=24)
+    message: str = Field(default="", max_length=2000)
+
+    @field_validator("telephone")
+    @classmethod
+    def canonise(cls, valeur: str) -> str:
+        return _telephone(valeur)

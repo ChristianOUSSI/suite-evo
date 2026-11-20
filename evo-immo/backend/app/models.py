@@ -31,7 +31,7 @@ def _maintenant_naif() -> datetime:
 ROLES = ("responsable", "agent")
 TYPES = ("maison", "appartement", "chambre", "terrain", "bureau", "commercial")
 STATUTS = ("disponible", "negociation", "loue", "vendu", "retire")
-CANAUX = ("telephone", "whatsapp", "visite", "panneau", "bouche_a_oreille", "autre")
+CANAUX = ("telephone", "whatsapp", "visite", "panneau", "bouche_a_oreille", "annonce", "autre")
 STATUTS_DEMANDE = ("nouvelle", "contactee", "visite", "convertie", "perdue")
 ISSUES = ("a_venir", "ok", "absent", "refusee")
 

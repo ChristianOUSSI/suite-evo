@@ -202,6 +202,16 @@ export const DICTEE: Dictionnaire = {
   "commun.aucun": { fr: "Rien à lire pour l'instant.", en: "Nothing to read yet." },
   "commun.voir": { fr: "Voir", en: "View" },
   "commun.whatsapp": { fr: "WhatsApp", en: "WhatsApp" },
+  "annonces.demander": { fr: "Demander ce bien", en: "Ask about this property" },
+  "demande.titre": { fr: "Demander un bien", en: "Ask about a property" },
+  "demande.chapo": { fr: "Vous avez vu une annonce ? Écrivez ici, sans compte. L'agence vous rappellera.", en: "Saw a listing? Write here, no account needed. The agency will call you back." },
+  "demande.nom": { fr: "Votre nom", en: "Your name" },
+  "demande.telephone": { fr: "Numéro (ex. 690 12 34 56)", en: "Number (e.g. 690 12 34 56)" },
+  "demande.message": { fr: "Votre message", en: "Your message" },
+  "demande.bien": { fr: "Bien concerné", en: "Property" },
+  "demande.autre": { fr: "Une question générale", en: "A general question" },
+  "demande.envoyer": { fr: "Envoyer la demande", en: "Send the request" },
+  "demande.ok": { fr: "Demande envoyée. L'agence vous rappellera.", en: "Request sent. The agency will call you back." },
 };
 
 export function traduire(langue: string) {

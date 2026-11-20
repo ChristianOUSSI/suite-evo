@@ -189,3 +189,10 @@ export type VisiteEntree = {
   issue?: IssueVisite;
   note?: string;
 };
+
+export type DemandePubliqueEntree = {
+  bien_id: number | null;
+  nom: string;
+  telephone: string;
+  message: string;
+};

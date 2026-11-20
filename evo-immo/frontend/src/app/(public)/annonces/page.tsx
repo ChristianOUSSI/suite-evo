@@ -85,6 +85,9 @@ export default async function PageAnnonces() {
                   </span>
                   <span className="cadc-ligne__valeur">
                     <strong>{f.fcfa(un.prix)}</strong>
+                    <Link href={`/demande?bien=${un.id}`} className="cadc-bouton cadc-bouton--doux">
+                      {t("annonces.demander")}
+                    </Link>
                   </span>
                 </li>
               ))}

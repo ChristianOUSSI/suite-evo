@@ -38,6 +38,10 @@ CODES: dict[str, dict[str, str]] = {
         "fr": "La saisie n'est pas reçue telle quelle.",
         "en": "The input was not accepted as given.",
     },
+    "organisation_inconnue": {
+        "fr": "Aucune agence n'est encore ouverte ici.",
+        "en": "No agency is open here yet.",
+    },
 }
 
 

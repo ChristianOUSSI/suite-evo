@@ -320,3 +320,43 @@ def annonces_publiques(db: Session, organisation: Organisation) -> list[dict]:
         .order_by(Bien.prix)
     ).all()
     return [annonce_dict(un) for un in biens]
+
+
+
+def demande_publique_dict(demande) -> dict:
+    """La demande publique, vue de l'agence."""
+    return {
+        "id": demande.id,
+        "bien": demande.bien.titre if demande.bien else "",
+        "client_nom": demande.client_nom,
+        "client_telephone": demande.client_telephone,
+        "canal": demande.canal,
+        "message": demande.message,
+        "statut": demande.statut,
+        "date": demande.date.isoformat(),
+    }
+
+
+def ajouter_demande_publique(
+    db: Session, organisation: Organisation, entree
+) -> Demande:
+    """La demande venue de la page des annonces : canal « annonce »,
+    sans compte, sans auteur - l'agent la prend ensuite."""
+    if entree.bien_id is not None:
+        bien = bien_de(db, organisation, entree.bien_id)
+        if bien.statut == "retire":
+            raise refus("bien_inconnu", 404)
+    demande = Demande(
+        organisation_id=organisation.id,
+        bien_id=entree.bien_id,
+        client_nom=entree.nom.strip(),
+        client_telephone=entree.telephone,
+        canal="annonce",
+        message=entree.message.strip(),
+        statut="nouvelle",
+        cree_par=None,
+    )
+    db.add(demande)
+    db.commit()
+    db.refresh(demande)
+    return demande
