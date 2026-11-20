@@ -53,6 +53,10 @@
   --serie: "Newsreader", Georgia, serif;
   --texte: "Karla", "Segoe UI", sans-serif;
   --mono: "Space Mono", ui-monospace, monospace;
+  /* Profondeur douce pour le thème nuit. */
+  --ombre: 0 2px 6px rgb(0 0 0 / 30%), 0 12px 32px rgb(0 0 0 / 35%);
+  --ombre-levee: 0 6px 18px rgb(0 0 0 / 42%), 0 20px 52px rgb(0 0 0 / 48%);
+  --transition: 160ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 * {
@@ -108,17 +112,25 @@ button {
   background: var(--ambre);
   color: #1a1206;
   border: 0;
-  border-radius: 3px;
-  padding: 11px 18px;
+  border-radius: 8px;
+  padding: 12px 20px;
   font-weight: 700;
   text-decoration: none;
   display: inline-block;
   cursor: pointer;
   font-family: var(--texte);
+  box-shadow: 0 2px 8px rgb(240 166 60 / 25%);
+  transition: transform var(--transition), box-shadow var(--transition), filter var(--transition);
 }
 
 .bouton:hover {
-  filter: brightness(1.1);
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgb(240 166 60 / 35%);
+}
+
+.bouton:active {
+  transform: translateY(0);
 }
 
 .bouton.sobre:hover {
