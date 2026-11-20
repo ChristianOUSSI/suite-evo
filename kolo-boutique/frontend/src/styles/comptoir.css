@@ -31,9 +31,17 @@
 }
 
 .compteur {
-  padding: 0.7rem 0.8rem 0.8rem;
-  border-top: 1px solid var(--encre);
-  background: var(--sable-clair);
+  padding: 0.8rem 0.9rem 0.9rem;
+  border: 1px solid var(--encre);
+  border-top: 3px solid var(--encre);
+  background: var(--feuille);
+  box-shadow: var(--ombre);
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+
+.compteur:hover {
+  box-shadow: var(--ombre-levee);
+  transform: translateY(-2px);
 }
 
 .compteur__legende {
@@ -127,9 +135,17 @@
   grid-template-columns: 1.5fr 0.6fr 1fr auto;
   align-items: baseline;
   gap: 0.8rem;
-  padding-block: 0.55rem;
+  padding-block: 0.6rem;
+  padding-inline: 0.6rem;
+  margin-inline: -0.6rem;
   border-bottom: 1px solid var(--regrais);
+  border-radius: 8px;
   font-size: 0.83rem;
+  transition: background var(--transition);
+}
+
+.vente-ligne:hover {
+  background: var(--feuille);
 }
 
 .vente-ligne:last-child {
