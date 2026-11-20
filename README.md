@@ -1,13 +1,15 @@
 # suite-evo - la maison des logiciels de comptoir
 
-Vingt-deux produits CODE AXIS DIGITAL CAMEROON, un même socle : chaque métier
-a son logiciel, chaque logiciel tient sur un téléphone, en français comme en
-anglais, en FCFA, avec Mobile Money et les numéros camerounais.
+Vingt-deux produits `evo-*` + quatre produits anciens de la maison
+(`palabre`, `ecole-cash`, `voice`, `kolo-boutique`), un même socle :
+chaque métier a son logiciel, chaque logiciel tient sur un téléphone,
+en français comme en anglais, en FCFA, avec Mobile Money et les
+numéros camerounais.
 
 ## Le portail
 
-`portail/frontend` - la page d'accueil de la suite (port **5800**) : les 22
-produits, leur adresse, et un témoin qui dit si chacun répond.
+`portail/frontend` - la page d'accueil de la suite (port **5800**) : les
+26 produits, leur adresse, et un témoin qui dit si chacun répond.
 
 ```bash
 cd portail/frontend
@@ -41,6 +43,10 @@ npm run dev    # http://localhost:5800
 | evo-carnet | Carnet numérique | 5500 | 10500 |
 | evo-agent | Agent IA autonome | 5600 | 10600 |
 | evo-voice | Dictée & commande vocale | 5700 | 10700 |
+| palabre | Recouvrement & relances | 3000 | 8000 |
+| ecole-cash | Caisse scolaire | 3200 | 8200 |
+| voice | Standard téléphonique | 3100 | 8100 |
+| kolo-boutique | Cahier de boutique | 3400 | 8300 |
 
 Chaque dossier `evo-*` contient son `README.md`, son `backend/` (FastAPI +
 SQLite) et son `frontend/` (Next.js sur `@cadc/kit`, français + anglais,

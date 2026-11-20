@@ -34,6 +34,10 @@ jobs:
           - evo-carnet
           - evo-agent
           - evo-voice
+          - palabra
+          - ecole-cash
+          - voice
+          - kolo-boutique
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
