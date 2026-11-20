@@ -63,11 +63,17 @@
 .place {
   display: grid;
   gap: 10px;
-  padding: 14px;
+  padding: 15px;
   border: 1px solid var(--cadc-ligne);
   border-left: 5px solid var(--cadc-ligne-forte);
-  border-radius: 14px;
+  border-radius: var(--cadc-rayon, 12px);
   background: var(--cadc-feuille);
+  box-shadow: var(--cadc-ombre);
+  transition: box-shadow var(--cadc-transition, 160ms), transform var(--cadc-transition, 160ms);
+}
+
+.place:hover {
+  box-shadow: var(--cadc-ombre-levee);
 }
 
 .place--present { border-left-color: var(--cadc-vert); }
@@ -159,10 +165,17 @@
   grid-template-columns: minmax(0, 1.4fr) auto auto;
   gap: 12px;
   align-items: center;
-  padding: 14px;
+  padding: 15px;
   border: 1px solid var(--cadc-ligne);
-  border-radius: 14px;
+  border-radius: var(--cadc-rayon, 12px);
   background: var(--cadc-feuille);
+  box-shadow: var(--cadc-ombre);
+  transition: box-shadow var(--cadc-transition, 160ms), transform var(--cadc-transition, 160ms);
+}
+
+.feuille__ligne:hover {
+  box-shadow: var(--cadc-ombre-levee);
+  transform: translateY(-2px);
 }
 
 .feuille__nom {
@@ -216,10 +229,13 @@
 .souche {
   display: grid;
   gap: 6px;
-  padding: 20px;
-  border-radius: 16px;
-  background: var(--cadc-encre);
+  padding: 22px;
+  border-radius: var(--cadc-rayon-grand, 18px);
+  background:
+    radial-gradient(500px 180px at 80% -40px, rgb(46 110 166 / 20%), transparent),
+    var(--cadc-encre);
   color: var(--cadc-papier-2);
+  box-shadow: var(--cadc-ombre-levee);
 }
 
 .souche__legende {
