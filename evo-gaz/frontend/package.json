@@ -4,11 +4,11 @@
   "private": true,
   "scripts": {
     "predev": "node ../../cadc/kit/sync.mjs",
-    "dev": "next dev --port 5300",
+    "dev": "next dev --port 5400",
     "prebuild": "node ../../cadc/kit/sync.mjs",
     "build": "next build",
     "prestart": "node ../../cadc/kit/sync.mjs",
-    "start": "next start --port 5300",
+    "start": "next start --port 5400",
     "prelint": "node ../../cadc/kit/sync.mjs",
     "lint": "eslint"
   },
