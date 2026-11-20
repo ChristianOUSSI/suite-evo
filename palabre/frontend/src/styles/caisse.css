@@ -98,13 +98,15 @@
   margin-inline: -0.55rem;
   padding: 0.82rem 0.55rem;
   border-bottom: 1px solid var(--rule);
+  border-radius: 6px;
   color: inherit;
   text-decoration: none;
-  transition: background-color 150ms ease;
+  transition: background-color var(--transition), box-shadow var(--transition);
 }
 
 .cash-row:hover {
   background: rgba(247, 249, 251, 0.72);
+  box-shadow: inset 3px 0 0 var(--moss);
 }
 
 .cash-row__when {
@@ -283,19 +285,23 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 2.3rem;
-  padding: 0.28rem 0.25rem;
+  min-height: 2.6rem;
+  padding: 0.4rem 0.3rem;
   border: 1px solid var(--rule-strong);
+  border-radius: 8px;
   background: var(--sheet-bright);
   color: var(--ink-soft);
   cursor: pointer;
-  font-size: 0.6rem;
+  font-size: 0.62rem;
+  font-weight: 600;
   line-height: 1.3;
   text-align: center;
   transition:
-    border-color 140ms ease,
-    background-color 140ms ease,
-    color 140ms ease;
+    border-color var(--transition),
+    background-color var(--transition),
+    color var(--transition),
+    box-shadow var(--transition),
+    transform var(--transition);
 }
 
 .quick-method input {
@@ -308,12 +314,19 @@
 
 .quick-method:hover {
   border-color: var(--ink);
+  box-shadow: var(--ombre);
+  transform: translateY(-1px);
+}
+
+.quick-method:active {
+  transform: translateY(0);
 }
 
 .quick-method.is-active {
   border-color: var(--ink);
   background: var(--ink);
   color: var(--paper);
+  box-shadow: var(--ombre-levee);
 }
 
 .quick-method input:focus-visible + span {
