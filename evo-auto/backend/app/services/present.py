@@ -66,5 +66,6 @@ def vehicule_publique_dict(vehicule: Vehicule) -> dict:
         "carburant": vehicule.carburant,
         "boite": vehicule.boite,
         "prix": vehicule.prix,
+        "statut": vehicule.statut,
         "note": vehicule.note,
     }

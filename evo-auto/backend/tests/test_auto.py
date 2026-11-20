@@ -144,7 +144,7 @@ def test_catalogue_public(client):
     assert len(corps["vehicules"]) > 0
     assert all(un["statut"] == "en_vente" for un in corps["vehicules"])
     # Le catalogue ne fuit ni client ni détail privé.
-    assert all(un["client"] == "" for un in corps["vehicules"])
+    assert all("client" not in un and "client_id" not in un for un in corps["vehicules"])
 
 
 def test_exports(responsable):

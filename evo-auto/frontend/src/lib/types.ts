@@ -67,6 +67,7 @@ export type VehiculePublic = {
   carburant: Carburant | string;
   boite: Boite | string;
   prix: number;
+  statut?: string;
   note: string;
 };
 

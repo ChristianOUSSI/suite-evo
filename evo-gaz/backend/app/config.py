@@ -1,5 +1,6 @@
 from functools import lru_cache
 
+from pydantic import model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -20,6 +21,31 @@ class Settings(BaseSettings):
     seed_demo: bool = True
     cors_origins: str = "http://localhost:5400,http://127.0.0.1:5400"
 
+
+    @model_validator(mode="after")
+    def verifier_production(self):
+        """Refuse de servir en production avec le secret de démonstration.
+
+        `DEMO_MODE=False` sans `JWT_SECRET` réel laisserait n'importe qui
+        forger une session : on s'arrête au démarrage plutôt que de
+        découvrir la faille après.
+        """
+        if not self.demo_mode:
+            if "dev-seulement" in self.jwt_secret or len(self.jwt_secret) < 32:
+                raise ValueError(
+                    "JWT_SECRET trop faible pour la production : "
+                    "définir EVO_*_JWT_SECRET (32 caractères minimum)."
+                )
+            if not self.cookie_secure:
+                import warnings
+
+                warnings.warn(
+                    "COOKIE_SECURE=False en production : le cookie de "
+                    "session peut voyager en clair. Activer HTTPS et "
+                    "EVO_*_COOKIE_SECURE=True.",
+                    stacklevel=2,
+                )
+        return self
     @property
     def origines(self) -> list[str]:
         return [un.strip() for un in self.cors_origins.split(",") if un.strip()]
