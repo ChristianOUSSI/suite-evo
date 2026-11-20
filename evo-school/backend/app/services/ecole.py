@@ -257,3 +257,91 @@ def recap(db: Session, organisation: Organisation, periode: str) -> dict:
         "par_classe": sorted(par_classe.values(), key=lambda un: un["classe"]),
         "par_eleve": sorted(par_eleve, key=lambda un: (-un["reste"], un["nom"])),
     }
+
+
+def demande_dict(demande) -> dict:
+    """Une demande d'inscription, vue de l'école."""
+    from ..services.present import affiche_telephone
+
+    return {
+        "id": demande.id,
+        "eleve_nom": demande.eleve_nom,
+        "parent_nom": demande.parent_nom,
+        "telephone": demande.parent_telephone,
+        "telephone_display": affiche_telephone(demande.parent_telephone),
+        "classe": demande.classe.nom if demande.classe else "",
+        "classe_id": demande.classe_id,
+        "note": demande.note,
+        "statut": demande.statut,
+        "cree_le": demande.cree_le.isoformat(timespec="seconds"),
+        "traite_le": demande.traite_le.isoformat(timespec="seconds") if demande.traite_le else None,
+    }
+
+
+def ajouter_demande(db: Session, organisation: Organisation, entree) -> "Demande":
+    """La demande d'inscription venue de la page publique."""
+    from ..models import Demande
+
+    if entree.classe_id is not None:
+        classe_de(db, organisation, entree.classe_id)
+    demande = Demande(
+        organisation_id=organisation.id,
+        eleve_nom=entree.eleve_nom.strip(),
+        parent_nom=entree.parent_nom.strip(),
+        parent_telephone=entree.telephone,
+        classe_id=entree.classe_id,
+        note=entree.note.strip(),
+    )
+    db.add(demande)
+    db.commit()
+    db.refresh(demande)
+    return demande
+
+
+def liste_demandes(db: Session, organisation: Organisation) -> list:
+    from ..models import Demande
+
+    return list(
+        db.scalars(
+            select(Demande)
+            .where(Demande.organisation_id == organisation.id)
+            .order_by(Demande.id.desc())
+        ).all()
+    )
+
+
+def demande_de(db: Session, organisation: Organisation, demande_id: int):
+    from ..models import Demande
+
+    demande = db.get(Demande, demande_id)
+    if demande is None or demande.organisation_id != organisation.id:
+        raise refus("demande_inconnue", 404)
+    return demande
+
+
+def traiter_demande(db: Session, organisation: Organisation, demande_id: int, statut: str):
+    """L'école inscrit ou refuse. « inscrit » demande la fiche élève."""
+    if statut not in ("demandee", "inscrit", "refuse"):
+        raise refus("saisie", **{"statut": "demandee, inscrit ou refuse"})
+    demande = demande_de(db, organisation, demande_id)
+    demande.statut = statut
+    from ..utils import maintenant
+
+    demande.traite_le = maintenant() if statut != "demandee" else None
+    db.commit()
+    db.refresh(demande)
+    return demande
+
+
+def classes_publiques(db: Session, organisation: Organisation) -> list[dict]:
+    """Les classes proposées à l'inscription : nom et niveau, pas les élèves."""
+    classes = db.scalars(
+        select(Classe).where(
+            Classe.organisation_id == organisation.id,
+            Classe.actif.is_(True),
+        ).order_by(Classe.nom)
+    ).all()
+    return [
+        {"id": un.id, "nom": un.nom, "frais_annuels": un.frais_annuels}
+        for un in classes
+    ]

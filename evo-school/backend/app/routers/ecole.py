@@ -4,7 +4,7 @@ from fastapi import APIRouter, Query
 
 from ..deps import CompteCourant, DbSession, OrganisationCourante
 from ..messages import refus
-from ..schemas import VersementCorrection, VersementEntree
+from ..schemas import DemandeCorrection, VersementCorrection, VersementEntree
 from ..services import ecole, present
 from ..utils import aujourdhui, periode_de
 
@@ -80,3 +80,28 @@ def recap_mois(
 ) -> dict:
     """Le mois des frais : encaissé par classe, reste à payer par élève."""
     return ecole.recap(db, organisation, periode or periode_de(aujourdhui()))
+
+
+@router.get("/inscriptions")
+def inscriptions(organisation: OrganisationCourante, db: DbSession) -> dict:
+    """Les demandes d'inscription venues de la page publique."""
+    lignes = ecole.liste_demandes(db, organisation)
+    return {
+        "total": len(lignes),
+        "demandees": sum(1 for un in lignes if un.statut == "demandee"),
+        "demandes": [ecole.demande_dict(un) for un in lignes],
+    }
+
+
+@router.patch("/inscriptions/{demande_id}")
+def corriger_demande(
+    demande_id: int,
+    entree: DemandeCorrection,
+    organisation: OrganisationCourante,
+    compte: CompteCourant,
+    db: DbSession,
+) -> dict:
+    if compte.role != "responsable" and entree.statut not in ("inscrit", "refuse"):
+        raise refus("droits", 403)
+    demande = ecole.traiter_demande(db, organisation, demande_id, entree.statut or "")
+    return ecole.demande_dict(demande)

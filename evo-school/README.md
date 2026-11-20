@@ -36,6 +36,10 @@ Comptes de démonstration : `ada@ecolecm.cm` (responsable) et
   élève - recalculés à chaque demande, exports CSV.
 - **La vitre** (`/accueil`). Le CA du mois, les élèves, les classes, le
   reste total.
+- **L'inscription en ligne** (`/inscription`). Le parent écrit le nom de
+  son enfant, son numéro et la classe voulue, sans compte. La demande
+  arrive « demandée » ; l'école l'inscrit ou la refuse dans
+  `/inscriptions`, puis crée la fiche élève.
 
 ## Ce qui est vérifié
 

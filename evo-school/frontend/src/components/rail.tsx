@@ -10,6 +10,7 @@ const LIENS = [
   { href: "/caisse", cle: "nav.caisse", marque: "caisse" },
   { href: "/eleves", cle: "nav.eleves", marque: "eleves" },
   { href: "/classes", cle: "nav.classes", marque: "classes" },
+  { href: "/inscriptions", cle: "nav.inscriptions", marque: "eleves" },
   { href: "/recap", cle: "nav.recap", marque: "recap" },
   { href: "/reglages", cle: "nav.reglages", marque: "reglages" },
 ];

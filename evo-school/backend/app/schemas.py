@@ -124,3 +124,22 @@ class CompteEntree(BaseModel):
         if valeur not in ROLES_VALIDES:
             raise ValueError("liste:role")
         return valeur
+
+
+class DemandeEntree(BaseModel):
+    """Le parent qui demande l'inscription de son enfant, sans compte."""
+
+    eleve_nom: str = Field(min_length=2, max_length=160)
+    parent_nom: str = Field(default="", max_length=160)
+    telephone: str = Field(max_length=24)
+    classe_id: int | None = None
+    note: str = Field(default="", max_length=600)
+
+    @field_validator("telephone")
+    @classmethod
+    def canonise(cls, valeur: str) -> str:
+        return _telephone(valeur)
+
+
+class DemandeCorrection(BaseModel):
+    statut: str | None = Field(default=None, max_length=12)

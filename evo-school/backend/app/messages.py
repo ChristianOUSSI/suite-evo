@@ -54,6 +54,14 @@ CODES: dict[str, dict[str, str]] = {
         "fr": "La saisie n'est pas reçue telle quelle.",
         "en": "The input was not accepted as given.",
     },
+    "demande_inconnue": {
+        "fr": "Cette demande n'existe pas dans l'école.",
+        "en": "That request does not exist in the school.",
+    },
+    "organisation_inconnue": {
+        "fr": "Aucune école n'est encore ouverte ici.",
+        "en": "No school is open here yet.",
+    },
 }
 
 
@@ -73,6 +81,9 @@ CHAMPS: dict[str, dict[str, str]] = {
     "periode": {"fr": "le mois", "en": "the month"},
     "eleve_id": {"fr": "l'élève", "en": "the student"},
     "note": {"fr": "la note", "en": "the note"},
+    "eleve_nom": {"fr": "le nom de l'enfant", "en": "the child's name"},
+    "telephone": {"fr": "le numéro", "en": "the number"},
+    "statut": {"fr": "le statut", "en": "the status"},
     "role": {"fr": "le rôle", "en": "the role"},
 }
 

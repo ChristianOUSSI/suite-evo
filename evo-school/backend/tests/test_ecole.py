@@ -1,5 +1,9 @@
 """Le cahier des frais, de bout en bout."""
 
+from fastapi.testclient import TestClient
+
+from app.main import app
+
 
 def test_sante(client):
     reponse = client.get("/health")
@@ -121,3 +125,41 @@ def test_exports(responsable):
         reponse = responsable.get(chemin)
         assert reponse.status_code == 200
         assert "text/csv" in reponse.headers["content-type"]
+
+
+def test_inscription_publique(responsable):
+    """Le parent demande l'inscription sans compte ; l'école tranche."""
+    classes = TestClient(app).get("/public/classes").json()["classes"]
+    assert classes, "la démo doit proposer des classes"
+
+    reponse = TestClient(app).post(
+        "/public/inscriptions",
+        json={
+            "eleve_nom": "Awa Mbarga",
+            "parent_nom": "Jean Mbarga",
+            "telephone": "699 11 22 33",
+            "classe_id": classes[0]["id"],
+            "note": "Nouvel arrivant à Douala",
+        },
+    )
+    assert reponse.status_code == 201
+    corps = reponse.json()
+    assert corps["ok"] and corps["statut"] == "demandee"
+
+    # La demande apparaît dans la liste interne.
+    liste = responsable.get("/inscriptions").json()
+    assert liste["demandees"] >= 1
+    demande = next(d for d in liste["demandes"] if d["id"] == corps["id"])
+    assert demande["telephone"].startswith("+237")
+
+    # Le responsable refuse ; un comptable ne peut pas marquer « inscrit ».
+    refus = TestClient(app).patch(
+        f"/inscriptions/{corps['id']}", json={"statut": "refuse"}
+    )
+    assert refus.status_code == 401
+
+    ok = responsable.patch(
+        f"/inscriptions/{corps['id']}", json={"statut": "refuse"}
+    )
+    assert ok.status_code == 200
+    assert ok.json()["statut"] == "refuse"

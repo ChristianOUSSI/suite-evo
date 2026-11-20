@@ -70,7 +70,14 @@ export default async function PageConnexion() {
               </div>
             </div>
           ) : (
-            <FormulaireSeance langue={langue} />
+            <>
+              <FormulaireSeance langue={langue} />
+              <p className="cadc-champ__aide" style={{ textAlign: "center" }}>
+                <Link href="/inscription">{t("inscription.titre")}</Link>
+                {" · "}
+                <Link href="/verifier">{t("verifier.titre")}</Link>
+              </p>
+            </>
           )}
         </div>
       </main>

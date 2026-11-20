@@ -10,6 +10,7 @@ export const DICTEE: Dictionnaire = {
   "nav.caisse": { fr: "Les versements", en: "Payments" },
   "nav.eleves": { fr: "Les élèves", en: "Students" },
   "nav.classes": { fr: "Les classes", en: "Classes" },
+  "nav.inscriptions": { fr: "Les inscriptions", en: "Enrollments" },
   "nav.recap": { fr: "Le mois", en: "The month" },
   "nav.reglages": { fr: "Les réglages", en: "Settings" },
   "aller.contenu": { fr: "Aller au contenu", en: "Skip to content" },
@@ -173,6 +174,23 @@ export const DICTEE: Dictionnaire = {
   "commun.mois": { fr: "mois", en: "month" },
   "commun.jours": { fr: "jours", en: "days" },
   "commun.reseaux": { fr: "MTN, Orange, Nexttel", en: "MTN, Orange, Nexttel" },
+
+  "inscription.titre": { fr: "Inscrire un enfant", en: "Enroll a child" },
+  "inscription.chapo": { fr: "Le parent écrit ici, sans compte. L'école répond au numéro donné.", en: "The parent writes here, no account needed. The school replies on the number given." },
+  "inscription.eleve": { fr: "Nom de l'enfant", en: "Child's name" },
+  "inscription.parent": { fr: "Nom du parent", en: "Parent's name" },
+  "inscription.telephone": { fr: "Numéro (ex. 699 11 22 33)", en: "Number (e.g. 699 11 22 33)" },
+  "inscription.classe": { fr: "Classe voulue", en: "Wanted class" },
+  "inscription.aucune": { fr: "Pas de préférence", en: "No preference" },
+  "inscription.note": { fr: "Note (facultatif)", en: "Note (optional)" },
+  "inscription.envoyer": { fr: "Envoyer la demande", en: "Send the request" },
+  "inscription.ok": { fr: "Demande envoyée. L'école vous rappellera.", en: "Request sent. The school will call you back." },
+  "inscriptions.titre": { fr: "Les demandes d'inscription", en: "Enrollment requests" },
+  "inscriptions.chapo": { fr: "Les parents qui ont écrit sur la page publique. Inscrire puis créer la fiche élève.", en: "Parents who wrote on the public page. Mark enrolled, then create the student file." },
+  "inscriptions.vide": { fr: "Aucune demande pour l'instant.", en: "No requests yet." },
+  "inscriptions.demandee": { fr: "Demandée", en: "Requested" },
+  "inscriptions.inscrit": { fr: "Inscrit", en: "Enrolled" },
+  "inscriptions.refuse": { fr: "Refusée", en: "Declined" },
 };
 
 export function traduire(langue: string) {

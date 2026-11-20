@@ -181,3 +181,37 @@ export interface CompteEntree {
   mot_de_passe: string;
   role: Role;
 }
+
+export interface Demande {
+  id: number;
+  eleve_nom: string;
+  parent_nom: string;
+  telephone: string;
+  telephone_display: string;
+  classe: string;
+  classe_id: number | null;
+  note: string;
+  statut: "demandee" | "inscrit" | "refuse";
+  cree_le: string;
+  traite_le: string | null;
+}
+
+export interface ListeDemandes {
+  total: number;
+  demandees: number;
+  demandes: Demande[];
+}
+
+export interface ClassePublique {
+  id: number;
+  nom: string;
+  frais_annuels: number;
+}
+
+export interface DemandeEntree {
+  eleve_nom: string;
+  parent_nom: string;
+  telephone: string;
+  classe_id: number | null;
+  note: string;
+}

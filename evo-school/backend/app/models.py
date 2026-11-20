@@ -157,3 +157,34 @@ def _aujourdhui() -> date:
     from .utils import aujourdhui
 
     return aujourdhui()
+
+
+STATUTS_DEMANDE = ("demandee", "inscrit", "refuse")
+
+
+class Demande(Base):
+    """La demande d'inscription venue de la page publique.
+
+    Le parent écrit sans compte : enfant, parent, numéro, classe voulue.
+    L'école l'inscrit ou la refuse - rien ne s'inscrit tout seul.
+    """
+
+    __tablename__ = "demandes"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    organisation_id: Mapped[int] = mapped_column(ForeignKey("organisations.id"))
+    eleve_nom: Mapped[str] = mapped_column(String(160))
+    parent_nom: Mapped[str] = mapped_column(String(160), default="")
+    parent_telephone: Mapped[str] = mapped_column(String(24), default="")
+    classe_id: Mapped[int | None] = mapped_column(ForeignKey("classes.id"), nullable=True)
+    note: Mapped[str] = mapped_column(Text, default="")
+    statut: Mapped[str] = mapped_column(String(12), default="demandee", index=True)
+    eleve_id: Mapped[int | None] = mapped_column(ForeignKey("eleves.id"), nullable=True)
+    cree_le: Mapped[datetime] = mapped_column(
+        DateTime, default=lambda: _maintenant_naif()
+    )
+    traite_le: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+
+    organisation: Mapped[Organisation] = relationship()
+    classe: Mapped[Classe | None] = relationship(lazy="joined")
+    eleve: Mapped[Eleve | None] = relationship(lazy="joined")
