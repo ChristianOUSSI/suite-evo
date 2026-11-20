@@ -15,6 +15,7 @@ from .routers import (
     exports,
     knowledge,
     messages,
+    public,
     settings as settings_router,
     standard,
 )
@@ -71,6 +72,7 @@ app.include_router(appointments.router)
 app.include_router(dispatches.router)
 app.include_router(settings_router.router)
 app.include_router(exports.router)
+app.include_router(public.router)
 
 
 @app.get("/health", tags=["système"])
