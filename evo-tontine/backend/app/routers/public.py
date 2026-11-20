@@ -3,7 +3,7 @@ from fastapi import APIRouter
 from ..deps import DbSession
 from ..messages import refus
 from ..models import Remise
-from ..services import present
+from ..services import present, tontine
 from ..utils import date_longue, fcfa
 
 router = APIRouter(tags=["public"])
@@ -39,3 +39,16 @@ def verifier(jeton: str, db: DbSession) -> dict:
         "moment": remise.moment.isoformat(),
         "abonnement": groupe.abonnement_mensuel,
     }
+
+
+@router.get("/public/membre/{code}")
+def fiche_membre(code: str, db: DbSession) -> dict:
+    """La fiche du membre, vérifiable sans compte avec son code personnel.
+
+    Le membre qui doute de sa cagnotte montre son code : il voit ce qu'il
+    a cotisé et ce qu'il a reçu, sans déranger la trésorière.
+    """
+    fiche = tontine.fiche_membre_publique(db, code)
+    if fiche is None:
+        raise refus("code_inconnu", 404)
+    return fiche

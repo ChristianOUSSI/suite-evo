@@ -313,3 +313,22 @@ def _groupe(momo=True):
         "orange_actif": True,
         "especes_actifs": True,
     }
+
+
+def test_la_fiche_membre_se_verifie_sans_compte(cercle):
+    """Le code personnel du membre montre ses cotisations et ses pots."""
+    membres = lire(cercle.get("/membres"))["membres"]
+    membre = next(un for un in membres if un["actif"])
+    assert membre["code"]
+    assert membre["lien"].endswith(f"/membre/{membre['code']}")
+
+    fiche = lire(cercle.get(f"/public/membre/{membre['code']}"))
+    assert fiche["membre"] == membre["nom"]
+    assert fiche["groupe"]
+    assert "cotisations" in fiche and "pots" in fiche
+    assert fiche["total_paye"] >= 0
+
+    # Un code inventé est refusé sans rien dire de plus.
+    introuvable = cercle.get("/public/membre/ZZZZZZZZ")
+    assert introuvable.status_code == 404
+    assert introuvable.json()["detail"]["code"] == "code_inconnu"

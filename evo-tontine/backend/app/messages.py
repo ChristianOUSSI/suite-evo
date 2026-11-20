@@ -94,6 +94,10 @@ CODES: dict[str, dict[str, str]] = {
         "fr": "Ce code ne correspond à aucune remise.",
         "en": "That code matches no handover.",
     },
+    "code_inconnu": {
+        "fr": "Ce code ne correspond à aucun membre.",
+        "en": "That code matches no member.",
+    },
     "saisie": {
         "fr": "La saisie n'est pas reçue telle quelle.",
         "en": "The input was not accepted as given.",

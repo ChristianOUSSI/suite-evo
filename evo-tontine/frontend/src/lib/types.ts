@@ -63,6 +63,8 @@ export interface Membre {
   payee_le: string | null;
   mode: string;
   reference: string;
+  code: string;
+  lien: string;
 }
 
 export interface Cercle {
@@ -200,4 +202,27 @@ export interface MembreEntree {
   telephone: string;
   part: number;
   note: string;
+}
+
+export interface CotisationPublique {
+  tour: number;
+  jour: string;
+  attendu: number;
+  paye: number;
+  reste: number;
+  penalite: number;
+  payee_le: string | null;
+  mode: string;
+}
+
+export interface FicheMembrePublique {
+  membre: string;
+  groupe: string;
+  ville: string;
+  part: number;
+  cotisations: CotisationPublique[];
+  pots: { tour: number; jour: string; montant: number; moment: string }[];
+  total_paye: number;
+  total_attendu: number;
+  total_pots: number;
 }

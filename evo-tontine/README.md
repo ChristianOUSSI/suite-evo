@@ -25,10 +25,10 @@ Deux comptes de démonstration, mot de passe `Tontine2026!` :
 
 ## Ce qui a été vérifié en réel (9 novembre 2026)
 
-- `python -m pytest` : 14 tests passent, dont le tirage revérifié depuis la
+- `python -m pytest` : 16 tests passent, dont le tirage revérifié depuis la
   graine, la pénalité écrite une seule fois, le refus de remise sur pot
-  incomplet, et deux tests ajoutés ici : `la preuve se relit à tout moment`
-  et `le dernier tour remis porte son reçu`.
+  incomplet, le reçu public par jeton, et la fiche membre par code
+  personnel.
 - `npm run lint` : 0 erreur. `npx tsc --noEmit` : 0 erreur. `npm run build` :
  la compilation passe, 12 routes.
 - Les 18 combinaisons route × langue rendent 200 sans écran d'incident :

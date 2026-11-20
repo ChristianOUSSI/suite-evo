@@ -10,7 +10,9 @@ imposée. L'écran formate, avec les règles du Cameroun partagées par tous les
 produits CADC.
 """
 
+from ..config import settings
 from ..models import Cotisation, Groupe, Membre, Remise, Tour, User
+from ..security import code_membre
 from ..utils import affiche_telephone, canonise_telephone, operateur
 
 
@@ -64,6 +66,8 @@ def membre_dict(membre: Membre, cotisation: Cotisation | None = None) -> dict:
         "payee_le": cotisation.payee_le.isoformat() if cotisation and cotisation.payee_le else None,
         "mode": cotisation.mode if cotisation else "",
         "reference": cotisation.reference if cotisation else "",
+        "code": code_membre(membre.id),
+        "lien": f"{settings.public_base_url}/membre/{code_membre(membre.id)}",
     }
 
 

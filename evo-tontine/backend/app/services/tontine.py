@@ -290,3 +290,63 @@ def _dernier(tour: Tour | None) -> dict | None:
         **present.tour_dict(tour),
         "remise": present.remise_dict(tour.remise) if tour.remise else None,
     }
+
+
+def fiche_membre_publique(db, code: str) -> dict | None:
+    """La fiche publique du membre : ses cotisations et ses pots reçus.
+
+    Le code sert de clé : qui l'a peut vérifier, sans compte. On ne rend
+    que ce qui regarde ce membre - ni les autres cotisants, ni le pot
+    des autres tours.
+    """
+    from ..models import Membre
+    from ..security import membre_depuis_code
+
+    ids = list(db.scalars(select(Membre.id)).all())
+    membre_id = membre_depuis_code(code, ids)
+    if membre_id is None:
+        return None
+    membre = db.get(Membre, membre_id)
+    if membre is None or not membre.actif:
+        return None
+
+    cotisations = db.scalars(
+        select(Cotisation)
+        .where(Cotisation.membre_id == membre.id)
+        .order_by(Cotisation.tour_id)
+    ).all()
+    pots = db.scalars(
+        select(Remise).where(Remise.membre_id == membre.id)
+    ).all()
+
+    return {
+        "membre": membre.nom,
+        "groupe": membre.groupe.nom,
+        "ville": membre.groupe.ville,
+        "part": membre.part,
+        "cotisations": [
+            {
+                "tour": cotisation.tour.numero,
+                "jour": cotisation.tour.date_prevue.isoformat(),
+                "attendu": cotisation.montant_attendu,
+                "paye": cotisation.montant_paye,
+                "reste": max(0, cotisation.montant_attendu - cotisation.montant_paye),
+                "penalite": cotisation.penalite,
+                "payee_le": cotisation.payee_le.isoformat() if cotisation.payee_le else None,
+                "mode": cotisation.mode,
+            }
+            for cotisation in cotisations
+        ],
+        "pots": [
+            {
+                "tour": remise.tour.numero,
+                "jour": remise.tour.date_prevue.isoformat(),
+                "montant": remise.montant,
+                "moment": remise.moment.isoformat(),
+            }
+            for remise in pots
+        ],
+        "total_paye": sum(un.montant_paye for un in cotisations),
+        "total_attendu": sum(un.montant_attendu for un in cotisations),
+        "total_pots": sum(un.montant for un in pots),
+    }

@@ -63,3 +63,33 @@ def jeton_public(longueur: int = 10) -> str:
     """La clé du reçu de remise, lue à voix haute au membre qui reçoit."""
     alphabet = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"
     return "".join(secrets.choice(alphabet) for _ in range(longueur))
+
+
+def code_membre(membre_id: int) -> str:
+    """Le code personnel du membre, stable et sans colonne en base.
+
+    HMAC(secret, id) tronqué : le même membre garde le même code après
+    chaque redémarrage, et deviner le code d'un autre demande de casser
+    le HMAC.
+    """
+    digest = hmac.new(
+        settings.jwt_secret.encode("utf-8"),
+        f"membre:{membre_id}".encode("utf-8"),
+        hashlib.sha256,
+    ).digest()
+    alphabet = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"
+    valeur = int.from_bytes(digest[:5], "big")
+    return "".join(alphabet[(valeur >> (5 * i)) & 31] for i in range(8))
+
+
+def membre_depuis_code(code: str, ids: list[int]) -> int | None:
+    """Retrouve le membre derrière son code en balayant les ids connus.
+
+    Les cercles restent petits (quelques dizaines de membres) : un
+    balayage HMAC est plus simple et plus sûr qu'une table de codes.
+    """
+    code = code.strip().upper()
+    for membre_id in ids:
+        if code_membre(membre_id) == code:
+            return membre_id
+    return None

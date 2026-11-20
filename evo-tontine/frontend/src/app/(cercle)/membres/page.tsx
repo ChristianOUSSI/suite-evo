@@ -137,6 +137,15 @@ export default async function PageMembres() {
                 </p>
               ) : null}
 
+              {membre.actif ? (
+                <p className="cadc-champ__aide">
+                  {t("membres.code")} <code>{membre.code}</code> ·{" "}
+                  <a href={membre.lien} target="_blank" rel="noreferrer">
+                    {t("membres.code-lien")}
+                  </a>
+                </p>
+              ) : null}
+
               <div className="cadc-acts">
                 {tour && membre.actif ? (
                   <Encaissement

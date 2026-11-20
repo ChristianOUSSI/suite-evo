@@ -237,6 +237,8 @@ export const DICTEE: Dictionnaire = {
   },
   "membres.payee_le": { fr: "Part entrée le", en: "Share in on" },
   "membres.mode": { fr: "Par", en: "Through" },
+  "membres.code": { fr: "Son code personnel", en: "Their personal code" },
+  "membres.code-lien": { fr: "sa fiche à partager", en: "their page to share" },
 
   // Réglages
   "reglages.titre": { fr: "Les réglages du cercle", en: "Circle settings" },
@@ -323,6 +325,30 @@ export const DICTEE: Dictionnaire = {
     fr: "Seule cette remise se lit ici : pas les autres noms, pas les autres pots, pas un numéro de téléphone.",
     en: "Only this handover reads here: not the other names, not the other pools, not a phone number.",
   },
+
+  "membre.titre": { fr: "La fiche du membre", en: "The member's page" },
+  "membre.chapo": {
+    fr: "Ce qu'il a cotisé, ce qu'il a reçu. Lu avec son code, sans compte.",
+    en: "What they paid in, what they received. Read with their code, no account.",
+  },
+  "membre.introuvable": {
+    fr: "Ce code ne correspond à aucun membre.",
+    en: "That code matches no member.",
+  },
+  "membre.cotise": { fr: "Cotisé au total", en: "Paid in total" },
+  "membre.recu": { fr: "Reçu au total", en: "Received total" },
+  "membre.reste": { fr: "Reste à cotiser", en: "Still to pay" },
+  "membre.tour": { fr: "Tour", en: "Round" },
+  "membre.jour": { fr: "Jour", en: "Day" },
+  "membre.du": { fr: "Dû", en: "Due" },
+  "membre.paye": { fr: "Payé", en: "Paid" },
+  "membre.penalite": { fr: "Pénalité", en: "Penalty" },
+  "membre.pot": { fr: "Pot reçu", en: "Pool received" },
+  "membre.hors": {
+    fr: "Seule la fiche de ce membre se lit ici : pas les autres cotisants, pas leurs pots.",
+    en: "Only this member's page reads here: not the other contributors, not their pools.",
+  },
+  "membre.verifier": { fr: "Vérifier un autre code", en: "Check another code" },
 
   // Communs
   "commun.enregistrer": { fr: "Enregistrer", en: "Save" },
