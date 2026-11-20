@@ -78,11 +78,13 @@
 /* Un appel en file se lit autrement qu.un terminé. */
 .appel--file {
   border-left: 5px solid var(--cadc-vert);
+  background: var(--cadc-vert-lave);
 }
 
 /* Un appel sans réponse se lit autrement qu'un actif. */
 .appel--perdu {
   border-left: 5px solid var(--cadc-rouge);
+  background: var(--cadc-rouge-lave);
 }
 
 .appel--clos,

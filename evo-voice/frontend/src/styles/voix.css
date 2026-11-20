@@ -78,10 +78,12 @@
 /* Une exécution ratée se lit autrement qu'une terminée. */
 .commande--echec {
   border-left: 5px solid var(--cadc-rouge);
+  background: var(--cadc-rouge-lave);
 }
 
 .commande--interpretee {
   border-left: 5px solid var(--cadc-acier);
+  background: var(--cadc-acier-pale);
 }
 
 .commande__resultat {

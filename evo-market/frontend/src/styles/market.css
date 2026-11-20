@@ -78,6 +78,7 @@
 /* Une commande livrée se lit autrement qu'une neuve. */
 .commande--livree {
   border-left: 5px solid var(--cadc-vert);
+  background: var(--cadc-vert-lave);
 }
 
 .commande--annulee,

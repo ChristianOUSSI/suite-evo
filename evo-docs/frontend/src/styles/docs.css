@@ -78,11 +78,13 @@
 /* Une commande livrée se lit autrement qu'une neuve. */
 .document--actif {
   border-left: 5px solid var(--cadc-vert);
+  background: var(--cadc-vert-lave);
 }
 
 /* Un document en retard se lit autrement qu'un actif. */
 .eleve--solde {
   border-left: 5px solid var(--cadc-rouge);
+  background: var(--cadc-rouge-lave);
 }
 
 .document--clos,

@@ -78,10 +78,12 @@
 /* Une exécution ratée se lit autrement qu'une terminée. */
 .tache--echec {
   border-left: 5px solid var(--cadc-rouge);
+  background: var(--cadc-rouge-lave);
 }
 
 .tache--en_cours {
   border-left: 5px solid var(--cadc-acier);
+  background: var(--cadc-acier-pale);
 }
 
 .tache__resultat {
