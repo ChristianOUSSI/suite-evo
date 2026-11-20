@@ -117,3 +117,30 @@ class Piece(Base):
 
     organisation: Mapped[Organisation] = relationship(back_populates="pieces")
     client: Mapped[Client | None] = relationship(back_populates="pieces")
+
+
+STATUTS_DEMANDE = ("demande", "confirmee", "annulee")
+
+
+class Demande(Base):
+    """La demande de réservation venue de la page publique.
+
+    Le client écrit sans compte : quelle pièce, son nom, son numéro,
+    une note. La bijouterie confirme ou annule - la vente se consigne
+    ensuite comme d'habitude.
+    """
+
+    __tablename__ = "demandes"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    organisation_id: Mapped[int] = mapped_column(ForeignKey("organisations.id"), index=True)
+    piece_id: Mapped[int | None] = mapped_column(ForeignKey("pieces.id"), nullable=True)
+    client_nom: Mapped[str] = mapped_column(String(160), default="")
+    client_telephone: Mapped[str] = mapped_column(String(24), default="")
+    note: Mapped[str] = mapped_column(Text, default="")
+    statut: Mapped[str] = mapped_column(String(12), default="demande", index=True)
+    cree_le: Mapped[datetime] = mapped_column(DateTime, default=_maintenant_naif)
+    traite_le: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+
+    organisation: Mapped[Organisation] = relationship()
+    piece: Mapped[Piece | None] = relationship(lazy="joined")

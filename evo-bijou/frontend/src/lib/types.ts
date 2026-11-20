@@ -133,3 +133,31 @@ export type ClientEntree = {
   type?: string;
   note?: string;
 };
+
+export type StatutDemande = "demande" | "confirmee" | "annulee";
+
+export type Demande = {
+  id: number;
+  piece: string;
+  piece_id: number | null;
+  reference: string;
+  client_nom: string;
+  client_telephone: string;
+  note: string;
+  statut: StatutDemande;
+  cree_le: string;
+  traite_le: string | null;
+};
+
+export type ListeDemandes = {
+  total: number;
+  en_attente: number;
+  demandes: Demande[];
+};
+
+export type DemandeEntree = {
+  piece_id: number | null;
+  client_nom: string;
+  client_telephone: string;
+  note: string;
+};

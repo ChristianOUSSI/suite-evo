@@ -18,6 +18,10 @@ un catalogue public où le client lit les pièces en vitrine sans compte.
   demande, exports CSV.
 - **`/catalogue` public** : les pièces en vitrine, leurs prix - sans
   compte, sans prix d'achat. À envoyer sur WhatsApp.
+- **`/demande` public** : le client demande une pièce depuis le
+  catalogue, sans compte. La demande arrive « demandée » ; la
+  bijouterie confirme ou annule dans `/demandes`, puis vend ou
+  réserve la pièce.
 - Tout en **français + anglais**, palette et polices CADC, mobile-first.
 
 ## Lancer

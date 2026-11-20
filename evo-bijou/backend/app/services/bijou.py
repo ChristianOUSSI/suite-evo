@@ -258,3 +258,76 @@ def recap(db: Session, organisation: Organisation, periode: str) -> dict:
             for cle, n in sorted(par_matiere_vendue.items(), key=lambda un: -un[1])
         ],
     }
+
+
+
+def demande_dict(demande) -> dict:
+    """Une demande de réservation, vue de la bijouterie."""
+    return {
+        "id": demande.id,
+        "piece": demande.piece.nom if demande.piece else "",
+        "piece_id": demande.piece_id,
+        "reference": demande.piece.reference if demande.piece else "",
+        "client_nom": demande.client_nom,
+        "client_telephone": demande.client_telephone,
+        "note": demande.note,
+        "statut": demande.statut,
+        "cree_le": demande.cree_le.isoformat(timespec="seconds"),
+        "traite_le": demande.traite_le.isoformat(timespec="seconds") if demande.traite_le else None,
+    }
+
+
+def ajouter_demande(db: Session, organisation: Organisation, entree) -> "Demande":
+    """La demande venue de la page publique : statut « demande »."""
+    from ..models import Demande
+
+    if entree.piece_id is not None:
+        piece = piece_de(db, organisation, entree.piece_id)
+        if piece.statut != "en_vitrine":
+            raise refus("piece_inconnue", 404)
+    demande = Demande(
+        organisation_id=organisation.id,
+        piece_id=entree.piece_id,
+        client_nom=entree.client_nom.strip(),
+        client_telephone=entree.client_telephone,
+        note=entree.note.strip(),
+    )
+    db.add(demande)
+    db.commit()
+    db.refresh(demande)
+    return demande
+
+
+def liste_demandes(db: Session, organisation: Organisation, statut: str | None = None) -> list:
+    from ..models import Demande
+
+    requete = (
+        select(Demande)
+        .where(Demande.organisation_id == organisation.id)
+        .order_by(Demande.id.desc())
+    )
+    if statut:
+        requete = requete.where(Demande.statut == statut)
+    return list(db.scalars(requete).all())
+
+
+def demande_de(db: Session, organisation: Organisation, demande_id: int):
+    from ..models import Demande
+
+    demande = db.get(Demande, demande_id)
+    if demande is None or demande.organisation_id != organisation.id:
+        raise refus("demande_inconnue", 404)
+    return demande
+
+
+def corriger_demande(db: Session, organisation: Organisation, demande_id: int, statut: str):
+    if statut not in ("demande", "confirmee", "annulee"):
+        raise refus("saisie", statut="demande, confirmee ou annulee")
+    demande = demande_de(db, organisation, demande_id)
+    demande.statut = statut
+    from ..utils import maintenant
+
+    demande.traite_le = maintenant() if statut != "demande" else None
+    db.commit()
+    db.refresh(demande)
+    return demande
