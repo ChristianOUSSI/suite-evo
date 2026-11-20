@@ -2,7 +2,7 @@ from __future__ import annotations
 
 """Ce que l'API rend à l'écran : des nombres, des dates ISO, des clés stables."""
 
-from ..models import Client, Organisation, User, Vehicule
+from ..models import Demande, Client, Organisation, User, Vehicule
 from ..utils import affiche_telephone, canonise_telephone, operateur
 
 
@@ -68,4 +68,20 @@ def vehicule_publique_dict(vehicule: Vehicule) -> dict:
         "prix": vehicule.prix,
         "statut": vehicule.statut,
         "note": vehicule.note,
+    }
+
+
+def demande_dict(demande: Demande) -> dict:
+    """La demande publique, pour l'écran interne."""
+    return {
+        "id": demande.id,
+        "vehicule_id": demande.vehicule_id,
+        "vehicule": f"{demande.vehicule.marque} {demande.vehicule.modele} {demande.vehicule.annee}" if demande.vehicule else "",
+        "client_nom": demande.client_nom,
+        "client_telephone": demande.client_telephone,
+        "telephone_display": affiche_telephone(demande.client_telephone),
+        "note": demande.note,
+        "statut": demande.statut,
+        "cree_le": demande.cree_le.isoformat() if demande.cree_le else "",
+        "traite_le": demande.traite_le.isoformat() if demande.traite_le else None,
     }

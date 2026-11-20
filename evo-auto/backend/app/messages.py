@@ -30,6 +30,18 @@ CODES: dict[str, dict[str, str]] = {
         "fr": "Seul le responsable touche aux comptes et aux réglages.",
         "en": "Only the manager edits accounts and settings.",
     },
+    "demande_inconnue": {
+        "fr": "Cette demande n'est pas du carnet.",
+        "en": "That request does not belong to this book.",
+    },
+    "demande_statut": {
+        "fr": "Le statut de la demande n'est pas du carnet.",
+        "en": "That request status is not one of the book statuses.",
+    },
+    "organisation_absente": {
+        "fr": "Le concessionnaire n'est pas encore ouvert.",
+        "en": "The dealership is not open yet.",
+    },
     "saisie": {
         "fr": "La saisie n'est pas reçue telle quelle.",
         "en": "The input was not accepted as given.",

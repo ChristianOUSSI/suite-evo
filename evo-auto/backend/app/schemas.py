@@ -131,3 +131,24 @@ class CompteEntree(BaseModel):
         if valeur not in {"responsable", "agent"}:
             raise ValueError("liste:role")
         return valeur
+
+
+class DemandeEntree(BaseModel):
+    """Le visiteur qui demande un véhicule, sans compte."""
+
+    vehicule_id: int | None = None
+    client_nom: str = Field(min_length=2, max_length=160)
+    client_telephone: str = Field(max_length=24)
+    note: str = Field(default="", max_length=600)
+
+    @field_validator("client_telephone")
+    @classmethod
+    def canonise(cls, valeur: str) -> str:
+        canonique = canonise_telephone(valeur)
+        if canonique is None:
+            raise ValueError("liste:telephone")
+        return canonique
+
+
+class DemandeCorrection(BaseModel):
+    statut: str | None = Field(default=None, max_length=12)

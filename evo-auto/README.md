@@ -18,6 +18,9 @@ les ventes - et un catalogue public que l'acheteur lit sans compte.
   (particulier, entreprise, garage).
 - **`/catalogue` public** : les véhicules en vente, rien d'autre - ni
   client, ni réservé, ni vendu. À envoyer sur WhatsApp.
+- **`/demande` public** : l'acheteur écrit pour un véhicule, sans
+  compte. Le concessionnaire confirme ou annule dans `/demandes`,
+  puis vend.
 - **Le mois** (`/recap`) : ventes du mois, valeur du stock, valeur vendue,
   par marque, par carburant, par statut - recalculé à la demande,
   exports CSV (véhicules + clients).

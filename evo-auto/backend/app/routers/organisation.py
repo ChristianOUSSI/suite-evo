@@ -6,6 +6,7 @@ from ..messages import refus
 from ..models import Client, User, Vehicule
 from ..schemas import (
     ClientEntree,
+    DemandeCorrection,
     CompteEntree,
     OrganisationEntree,
     VehiculeCorrection,
@@ -152,3 +153,25 @@ def corriger_vehicule(
         raise refus("saisie")
     vehicule = auto.corriger_vehicule(db, organisation, vehicule_id, patch)
     return present.vehicule_dict(vehicule)
+
+
+@router.get("/demandes")
+def demandes(db: DbSession, organisation: OrganisationCourante, statut: str | None = None) -> dict:
+    rows, en_attente, total = auto.liste_demandes(db, organisation, statut)
+    return {
+        "en_attente": en_attente,
+        "total": total,
+        "demandes": [present.demande_dict(un) for un in rows],
+    }
+
+
+@router.post("/demandes/{demande_id}")
+def corriger_demande(
+    demande_id: int,
+    entree: DemandeCorrection,
+    db: DbSession,
+    organisation: OrganisationCourante,
+) -> dict:
+    demande = auto.demande_de(db, organisation, demande_id)
+    demande = auto.corriger_demande(db, demande, entree.statut or "demande")
+    return present.demande_dict(demande)

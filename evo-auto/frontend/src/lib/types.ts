@@ -139,3 +139,20 @@ export type ClientEntree = {
   type?: string;
   note?: string;
 };
+
+export type StatutDemande = "demande" | "confirmee" | "annulee";
+
+export type Demande = {
+  id: number;
+  vehicule_id: number | null;
+  vehicule: string;
+  client_nom: string;
+  client_telephone: string;
+  telephone_display: string;
+  note: string;
+  statut: StatutDemande | string;
+  cree_le: string;
+  traite_le: string | null;
+};
+
+export type ListeDemandes = { en_attente: number; total: number; demandes: Demande[] };

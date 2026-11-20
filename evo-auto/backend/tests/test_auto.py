@@ -152,3 +152,38 @@ def test_exports(responsable):
         reponse = responsable.get(f"/exports/{nom}")
         assert reponse.status_code == 200
         assert nom.split(".")[0].replace("-", "_") in reponse.text.splitlines()[0] or True
+
+
+def test_demande_publique(responsable, app_client):
+    catalogue = app_client.get("/public/catalogue").json()
+    vehicule = catalogue["vehicules"][0]
+    reponse = app_client.post(
+        "/public/demandes",
+        json={
+            "vehicule_id": vehicule["id"],
+            "client_nom": "Achat Test",
+            "client_telephone": "6 90 12 34 56",
+            "note": "essai routier samedi",
+        },
+    )
+    assert reponse.status_code == 201
+    assert reponse.json()["statut"] == "demande"
+
+    liste = responsable.get("/demandes").json()
+    assert liste["total"] == 1
+    assert liste["demandes"][0]["client_telephone"] == "+237690123456"
+    assert "Toyota" in liste["demandes"][0]["vehicule"] or catalogue["vehicules"][0]["marque"] in liste["demandes"][0]["vehicule"]
+
+    demande_id = liste["demandes"][0]["id"]
+    reponse = responsable.post(f"/demandes/{demande_id}", json={"statut": "confirmee"})
+    assert reponse.status_code == 200
+    assert reponse.json()["statut"] == "confirmee"
+    assert responsable.get("/demandes?statut=confirmee").json()["total"] == 1
+
+
+def test_demande_publique_invalides(app_client):
+    reponse = app_client.post(
+        "/public/demandes",
+        json={"client_nom": "A", "client_telephone": "12"},
+    )
+    assert reponse.status_code == 422
