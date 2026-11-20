@@ -3,8 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "predev": "node ../../cadc/kit/sync.mjs",
     "dev": "next dev --port 5800",
+    "prebuild": "node ../../cadc/kit/sync.mjs",
     "build": "next build",
+    "prestart": "node ../../cadc/kit/sync.mjs",
     "start": "next start --port 5800"
   },
   "dependencies": {
