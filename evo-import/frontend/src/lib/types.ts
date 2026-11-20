@@ -137,3 +137,39 @@ export type ClientEntree = {
   type?: string;
   note?: string;
 };
+
+export type StatutDemande = "demande" | "devis" | "acceptee" | "refusee";
+
+export type Demande = {
+  id: number;
+  nom: string;
+  telephone: string;
+  description: string;
+  mode: string;
+  expediteur_pays: string;
+  destinataire_ville: string;
+  poids_kg: number;
+  valeur_declaree: number;
+  note: string;
+  statut: StatutDemande;
+  cree_le: string;
+  traite_le: string | null;
+};
+
+export type ListeDemandes = {
+  total: number;
+  en_attente: number;
+  demandes: Demande[];
+};
+
+export type DemandeEntree = {
+  nom: string;
+  telephone: string;
+  description: string;
+  mode: string;
+  expediteur_pays: string;
+  destinataire_ville: string;
+  poids_kg: number;
+  valeur_declaree: number;
+  note: string;
+};

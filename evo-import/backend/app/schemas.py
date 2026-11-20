@@ -104,3 +104,39 @@ class CompteEntree(BaseModel):
         if valeur not in {"responsable", "agent"}:
             raise ValueError("liste:role")
         return valeur
+
+
+class DemandeEntree(BaseModel):
+    """Le client qui demande un devis de transport, sans compte."""
+
+    nom: str = Field(min_length=2, max_length=160)
+    telephone: str = Field(max_length=24)
+    description: str = Field(min_length=2, max_length=200)
+    mode: str = Field(default="maritime", max_length=12)
+    expediteur_pays: str = Field(default="", max_length=60)
+    destinataire_ville: str = Field(default="", max_length=80)
+    poids_kg: float = Field(default=0, ge=0, le=100000)
+    valeur_declaree: int = Field(default=0, ge=0, le=10_000_000_000)
+    note: str = Field(default="", max_length=600)
+
+    @field_validator("mode")
+    @classmethod
+    def mode_connu(cls, valeur: str) -> str:
+        if valeur not in MODES_VALIDES:
+            raise ValueError("liste:mode")
+        return valeur
+
+    @field_validator("telephone")
+    @classmethod
+    def canonise(cls, valeur: str) -> str:
+        if not valeur or not valeur.strip():
+            return ""
+        canonique = canonise_telephone(valeur)
+        if canonique is None:
+            raise ValueError("liste:telephone")
+        return canonique
+
+
+class DemandeCorrection(BaseModel):
+    statut: str | None = Field(default=None, max_length=12)
+    note: str | None = Field(default=None, max_length=600)

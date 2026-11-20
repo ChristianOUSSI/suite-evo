@@ -21,6 +21,9 @@ compte.
 - **`/suivi` public** : le destinataire tape le numéro sur
   `/suivi?numero=…` et lit le parcours complet - sans compte, sans appel.
   À envoyer sur WhatsApp avec le numéro.
+- **`/devis` public** : le client écrit ce qui part, d'où, vers où,
+  poids, valeur - sans compte. La demande arrive « demandée » ; le
+  transitaire note le prix et tranche dans `/demandes`.
 - Tout en **français + anglais**, palette et polices CADC, mobile-first.
 
 ## Lancer

@@ -8,6 +8,7 @@ import { traduire } from "@/lib/langue";
 const LIENS = [
   { href: "/accueil", cle: "nav.accueil", marque: "accueil" },
   { href: "/envois", cle: "nav.envois", marque: "envois" },
+  { href: "/demandes", cle: "nav.demandes", marque: "envois" },
   { href: "/clients", cle: "nav.clients", marque: "clients" },
   { href: "/recap", cle: "nav.recap", marque: "recap" },
   { href: "/reglages", cle: "nav.reglages", marque: "reglages" },

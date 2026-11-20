@@ -4,6 +4,10 @@ from ..config import settings
 
 from ..database import SessionLocal
 from ..messages import refus
+from sqlalchemy import select
+
+from ..models import Organisation
+from ..schemas import DemandeEntree
 from ..services import fret, present
 
 router = APIRouter(prefix="/public", tags=["public"])
@@ -24,3 +28,20 @@ def suivi(numero: str) -> dict:
         corps["transitaire"] = present.organisation_dict(envoi.organisation)
         corps["lien"] = f"{settings.public_base_url}/suivi/{envoi.numero_suivi}"
         return corps
+
+
+
+@router.post("/devis", status_code=201)
+def devis(entree: DemandeEntree) -> dict:
+    """La demande de devis : elle arrive « demande », le transitaire répond."""
+    with SessionLocal() as db:
+        organisation = db.scalar(select(Organisation).order_by(Organisation.id).limit(1))
+        if organisation is None:
+            raise refus("organisation_inconnue", 404)
+        demande = fret.ajouter_demande(db, organisation, entree)
+        return {
+            "ok": True,
+            "id": demande.id,
+            "statut": demande.statut,
+            "message": "Votre demande est bien arrivée. Le transitaire vous rappellera au numéro donné.",
+        }

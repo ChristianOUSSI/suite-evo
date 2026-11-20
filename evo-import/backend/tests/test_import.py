@@ -152,3 +152,39 @@ def test_exports(responsable):
     for nom in ("envois.csv", "clients.csv"):
         reponse = responsable.get(f"/exports/{nom}")
         assert reponse.status_code == 200
+
+
+def test_demande_devis_publique(responsable):
+    """Le client demande un devis sans compte ; le transitaire répond."""
+    from fastapi.testclient import TestClient
+
+    from app.main import app
+
+    anonyme = TestClient(app)
+    reponse = anonyme.post(
+        "/public/devis",
+        json={
+            "nom": "Client Test",
+            "telephone": "690 12 34 56",
+            "description": "Two pallets of textiles",
+            "mode": "maritime",
+            "expediteur_pays": "Turkey",
+            "destinataire_ville": "Douala",
+            "poids_kg": 850,
+            "valeur_declaree": 12000000,
+            "note": "Need quote before Friday",
+        },
+    )
+    assert reponse.status_code == 201, reponse.text
+    corps = reponse.json()
+    assert corps["ok"] and corps["statut"] == "demande"
+
+    liste = responsable.get("/demandes").json()
+    demande = next(d for d in liste["demandes"] if d["id"] == corps["id"])
+    assert demande["telephone"].startswith("+237")
+
+    ok = responsable.patch(
+        f"/demandes/{corps['id']}", json={"statut": "devis", "note": "Quote sent: 450 000 FCFA"}
+    )
+    assert ok.status_code == 200
+    assert ok.json()["statut"] == "devis"

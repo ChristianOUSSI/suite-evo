@@ -137,3 +137,33 @@ class Suivi(Base):
     cree_le: Mapped[datetime] = mapped_column(DateTime, default=_maintenant_naif)
 
     envoi: Mapped[Envoi] = relationship(back_populates="suivi")
+
+
+STATUTS_DEMANDE = ("demande", "devis", "acceptee", "refusee")
+
+
+class Demande(Base):
+    """La demande de transport/import venue de la page publique.
+
+    Le client écrit sans compte : ce qui part, d'où, vers où, combien.
+    Le transitaire répond avec un devis - la demande n'est pas un envoi.
+    """
+
+    __tablename__ = "demandes"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    organisation_id: Mapped[int] = mapped_column(ForeignKey("organisations.id"), index=True)
+    nom: Mapped[str] = mapped_column(String(160))
+    telephone: Mapped[str] = mapped_column(String(24), default="")
+    description: Mapped[str] = mapped_column(String(200), default="")
+    mode: Mapped[str] = mapped_column(String(12), default="maritime")
+    expediteur_pays: Mapped[str] = mapped_column(String(60), default="")
+    destinataire_ville: Mapped[str] = mapped_column(String(80), default="")
+    poids_kg: Mapped[float] = mapped_column(default=0.0)
+    valeur_declaree: Mapped[int] = mapped_column(Integer, default=0)
+    note: Mapped[str] = mapped_column(Text, default="")
+    statut: Mapped[str] = mapped_column(String(12), default="demande", index=True)
+    cree_le: Mapped[datetime] = mapped_column(DateTime, default=_maintenant_naif)
+    traite_le: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+
+    organisation: Mapped[Organisation] = relationship()
