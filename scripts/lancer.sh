@@ -32,6 +32,10 @@ evo-gaz|10400|5400
 evo-carnet|10500|5500
 evo-agent|10600|5600
 evo-voice|10700|5700
+palabre|8000|3000
+ecole-cash|8200|3200
+voice|8100|3100
+kolo-boutique|8300|3400
 "
 
 echo "$TABLE" | while IFS='|' read -r dossier api front; do
