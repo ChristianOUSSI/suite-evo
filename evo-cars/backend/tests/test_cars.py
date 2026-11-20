@@ -133,3 +133,32 @@ def test_validation_bilingue(responsable):
     corps = reponse.json()
     assert "code" in corps
     assert "fr" in corps and "en" in corps
+
+
+def test_demande_publique(agent):
+    """Le client demande une voiture ou une pièce, sans compte."""
+    from fastapi.testclient import TestClient
+
+    from app.main import app
+
+    catalogue = TestClient(app).get("/public/catalogue").json()
+    assert catalogue["voitures"] or catalogue["pieces"], "la démo doit montrer le parc"
+
+    reponse = TestClient(app).post(
+        "/public/demandes",
+        json={
+            "type": "voiture",
+            "voiture_id": catalogue["voitures"][0]["id"] if catalogue["voitures"] else None,
+            "client_nom": "Client Test",
+            "client_telephone": "690 12 34 56",
+            "note": "Test drive Saturday",
+        },
+    )
+    assert reponse.status_code == 201, reponse.text
+    corps = reponse.json()
+    assert corps["ok"] and corps["statut"] == "demande"
+
+    liste = agent.get("/demandes").json()
+    demande = next(d for d in liste["demandes"] if d["id"] == corps["id"])
+    assert demande["type"] == "voiture"
+    assert demande["client_telephone"].startswith("+237")

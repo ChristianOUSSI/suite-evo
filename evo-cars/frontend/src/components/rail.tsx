@@ -10,6 +10,7 @@ const LIENS = [
   { href: "/voitures", cle: "nav.voitures", marque: "voitures" },
   { href: "/pieces", cle: "nav.pieces", marque: "pieces" },
   { href: "/clients", cle: "nav.clients", marque: "clients" },
+  { href: "/demandes", cle: "nav.demandes", marque: "clients" },
   { href: "/recap", cle: "nav.recap", marque: "recap" },
   { href: "/reglages", cle: "nav.reglages", marque: "reglages" },
 ];

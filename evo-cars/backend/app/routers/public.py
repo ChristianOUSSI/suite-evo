@@ -5,7 +5,9 @@ from sqlalchemy import select
 
 from ..database import SessionLocal
 from ..models import Organisation, Piece, Voiture
-from ..services import present
+from ..messages import refus
+from ..schemas import DemandeEntree
+from ..services import cars, present
 
 router = APIRouter(prefix="/public", tags=["public"])
 
@@ -43,4 +45,21 @@ def catalogue() -> dict:
             "voitures": [present.voiture_dict(un, public=True) for un in voitures],
             "pieces": [present.piece_dict(un, public=True) for un in pieces],
             "lien": f"{settings.public_base_url}/catalogue",
+        }
+
+
+
+@router.post("/demandes", status_code=201)
+def demandes(entree: DemandeEntree) -> dict:
+    """La demande du client : voiture ou pièce, elle arrive « demande »."""
+    with SessionLocal() as db:
+        organisation = db.scalar(select(Organisation).limit(1))
+        if organisation is None:
+            raise refus("organisation_inconnue", 404)
+        demande = cars.ajouter_demande(db, organisation, entree)
+        return {
+            "ok": True,
+            "id": demande.id,
+            "statut": demande.statut,
+            "message": "Votre demande est bien arrivée. Le garage vous rappellera au numéro donné.",
         }

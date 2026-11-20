@@ -180,3 +180,36 @@ export type ClientEntree = {
   type?: string;
   note?: string;
 };
+
+export type TypeDemande = "voiture" | "piece";
+export type StatutDemande = "demande" | "confirmee" | "annulee";
+
+export type Demande = {
+  id: number;
+  type: TypeDemande;
+  voiture: string;
+  piece: string;
+  voiture_id: number | null;
+  piece_id: number | null;
+  client_nom: string;
+  client_telephone: string;
+  note: string;
+  statut: StatutDemande;
+  cree_le: string;
+  traite_le: string | null;
+};
+
+export type ListeDemandes = {
+  total: number;
+  en_attente: number;
+  demandes: Demande[];
+};
+
+export type DemandeEntree = {
+  type: TypeDemande;
+  voiture_id: number | null;
+  piece_id: number | null;
+  client_nom: string;
+  client_telephone: string;
+  note: string;
+};

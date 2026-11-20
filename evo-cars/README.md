@@ -20,6 +20,9 @@ compte.
   valeur du stock, par marque et par statut - exports CSV.
 - **`/catalogue` public** : voitures en vente et pièces en stock,
   leurs prix - sans compte. À envoyer sur WhatsApp.
+- **`/demande` public** : le client écrit pour une voiture ou une
+  pièce, sans compte. La demande arrive « demandée » ; le garage
+  confirme ou annule dans `/demandes`, puis vend.
 - Tout en **français + anglais**, palette et polices CADC, mobile-first.
 
 ## Lancer

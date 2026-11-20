@@ -12,6 +12,7 @@ from ..schemas import (
     PieceEntree,
     VoitureCorrection,
     VoitureEntree,
+    DemandeCorrection,
 )
 from ..security import hash_password
 from ..services import cars as domaine
@@ -216,3 +217,28 @@ def corriger_piece(
         raise refus("saisie")
     piece = domaine.corriger_piece(db, organisation, piece_id, patch)
     return present.piece_dict(piece)
+
+
+@router.get("/demandes")
+def demandes(
+    organisation: OrganisationCourante,
+    db: DbSession,
+    statut: str | None = Query(default=None),
+) -> dict:
+    lignes = domaine.liste_demandes(db, organisation, statut=statut)
+    return {
+        "total": len(lignes),
+        "en_attente": sum(1 for un in lignes if un.statut == "demande"),
+        "demandes": [domaine.demande_dict(un) for un in lignes],
+    }
+
+
+@router.patch("/demandes/{demande_id}")
+def corriger_demande(
+    demande_id: int,
+    entree: DemandeCorrection,
+    organisation: OrganisationCourante,
+    db: DbSession,
+) -> dict:
+    demande = domaine.corriger_demande(db, organisation, demande_id, entree.statut or "")
+    return domaine.demande_dict(demande)
