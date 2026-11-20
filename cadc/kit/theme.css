@@ -1,35 +1,44 @@
 /* CODE AXIS DIGITAL CAMEROON · socle partagé
    Palette reprise des logos : encre marine, acier, argent. Le fond de travail
    reste pâle et lisible, le blanc ne sert que de texte sur surface sombre.
-   Tout est pensé pour un téléphone à 25 000 F tenu par une personne de 60 ans. */
+   Raffinée sur le modèle evo-gaz : papier chaud, encres profondes, ombres
+   douces, cibles larges. Tout est pensé pour un téléphone à 25 000 F tenu
+   par une personne de 60 ans. */
 
 :root {
   /* Encres et papiers */
   --cadc-nuit: #0b1218;
-  --cadc-encre: #0e1d2b;
-  --cadc-encre-2: #1d3346;
-  --cadc-encre-3: #3c556e;
-  --cadc-acier: #2f6da3;
-  --cadc-acier-clair: #4f8cc0;
-  --cadc-acier-pale: #dbe8f3;
+  --cadc-encre: #10222f;
+  --cadc-encre-2: #1c3548;
+  --cadc-encre-3: #44607a;
+  --cadc-acier: #2e6ea6;
+  --cadc-acier-clair: #5a94cf;
+  --cadc-acier-pale: #d9e8f4;
   --cadc-argent: #c7d8e8;
   --cadc-brume: #9db2c6;
 
-  --cadc-papier: #e9eef3;
-  --cadc-papier-2: #f2f6f9;
-  --cadc-feuille: #f7fafc;
-  --cadc-ligne: #c2d0dc;
-  --cadc-ligne-forte: #8fa6b8;
+  --cadc-papier: #eef1f4;
+  --cadc-papier-2: #f6f8fa;
+  --cadc-feuille: #fbfcfd;
+  --cadc-ligne: #ccd7e2;
+  --cadc-ligne-forte: #9db4c7;
 
   /* Couleurs d'état, jamais de violet ni de dégradé décoratif */
-  --cadc-vert: #1c6b4a;
-  --cadc-vert-lave: #d6e9df;
+  --cadc-vert: #177a4e;
+  --cadc-vert-lave: #dcf0e5;
   --cadc-orange: #a85a1e;
-  --cadc-orange-lave: #f3e2d0;
-  --cadc-rouge: #a33a34;
-  --cadc-rouge-lave: #f2dcd9;
+  --cadc-orange-lave: #f5e6d3;
+  --cadc-rouge: #a83a34;
+  --cadc-rouge-lave: #f3dcd8;
   --cadc-or: #7a6320;
-  --cadc-or-lave: #ece2c8;
+  --cadc-or-lave: #efe4c8;
+
+  /* Profondeur : ombres douces, jamais dures */
+  --cadc-ombre: 0 1px 2px rgb(16 34 47 / 5%), 0 8px 24px rgb(16 34 47 / 6%);
+  --cadc-ombre-levee: 0 4px 12px rgb(16 34 47 / 9%), 0 16px 40px rgb(16 34 47 / 11%);
+  --cadc-rayon: 12px;
+  --cadc-rayon-grand: 18px;
+  --cadc-rayon-petit: 8px;
 
   /* Typographie : 17 px de base, pas 16. Les chiffres sont tabulaires. */
   --cadc-texte: 17px;
@@ -39,9 +48,9 @@
 
   /* Rythme */
   --cadc-p: 16px;
-  --cadc-rayon: 10px;
   --cadc-cible: 48px;
   --cadc-gabarit: 1100px;
+  --cadc-transition: 160ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Trois tailles de texte, choisies par l'utilisateur et mémorisées. */
@@ -57,19 +66,22 @@ html { -webkit-text-size-adjust: 100%; }
 
 body {
   margin: 0;
-  background: var(--cadc-papier);
+  background:
+    radial-gradient(1200px 400px at 50% -120px, rgb(46 110 166 / 6%), transparent),
+    var(--cadc-papier);
   color: var(--cadc-encre);
   font-family: var(--cadc-sans);
   font-size: var(--cadc-texte);
   line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
 }
 
 h1, h2, h3, h4 {
   margin: 0;
   font-family: var(--cadc-titre);
-  font-weight: 400;
-  line-height: 1.1;
-  letter-spacing: -0.01em;
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
 }
 
 p { margin: 0; }
@@ -81,7 +93,7 @@ button { font: inherit; }
   outline-offset: 2px;
 }
 
-::selection { background: var(--cadc-encre); color: var(--cadc-papier-2); }
+::selection { background: var(--cadc-acier); color: #fff; }
 
 /* ---------- ossature ---------- */
 
@@ -106,12 +118,13 @@ button { font: inherit; }
   z-index: 20;
   background: var(--cadc-encre);
   border-top: 1px solid var(--cadc-encre-2);
-  padding: 6px 8px calc(6px + env(safe-area-inset-bottom));
+  box-shadow: 0 -4px 20px rgb(11 18 24 / 14%);
+  padding: 8px 8px calc(8px + env(safe-area-inset-bottom));
 }
 
 .cadc-rail__interieur {
   display: flex;
-  gap: 4px;
+  gap: 6px;
   overflow-x: auto;
   scrollbar-width: none;
 }
@@ -122,24 +135,33 @@ button { font: inherit; }
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 3px;
+  gap: 4px;
   min-height: 54px;
-  padding: 7px 10px;
-  border-radius: var(--cadc-rayon);
+  padding: 8px 10px;
+  border-radius: var(--cadc-rayon-petit);
   color: var(--cadc-argent);
   font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.01em;
   text-decoration: none;
   white-space: nowrap;
+  transition: background var(--cadc-transition), color var(--cadc-transition);
 }
 
 .cadc-rail__lien:hover { background: var(--cadc-encre-2); color: #fff; }
-.cadc-rail__lien[aria-current="page"] { background: var(--cadc-acier); color: #fff; }
+.cadc-rail__lien[aria-current="page"] {
+  background: var(--cadc-acier);
+  color: #fff;
+  box-shadow: 0 2px 10px rgb(46 110 166 / 40%);
+}
 
 /* Bandeau du haut : marque + langues + compte. */
 .cadc-bandeau {
-  background: var(--cadc-feuille);
+  position: sticky;
+  top: 0;
+  z-index: 15;
+  background: color-mix(in srgb, var(--cadc-feuille) 88%, transparent);
+  backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--cadc-ligne);
 }
 
@@ -161,7 +183,7 @@ button { font: inherit; }
 
 .cadc-marque__signe { width: 38px; height: 38px; flex: none; color: var(--cadc-encre); }
 .cadc-marque__texte { display: flex; flex-direction: column; line-height: 1.15; }
-.cadc-marque__nom { font-family: var(--cadc-titre); font-size: 1.22rem; }
+.cadc-marque__nom { font-family: var(--cadc-titre); font-size: 1.22rem; font-weight: 500; }
 .cadc-marque__sous {
   color: var(--cadc-encre-3);
   font-size: 0.66rem;
@@ -180,34 +202,50 @@ button { font: inherit; }
   min-height: var(--cadc-cible);
   padding: 11px 18px;
   border: 1px solid var(--cadc-encre);
-  border-radius: var(--cadc-rayon);
+  border-radius: 999px;
   background: var(--cadc-feuille);
   color: var(--cadc-encre);
   font-size: 0.98rem;
   font-weight: 600;
+  letter-spacing: 0.005em;
   text-decoration: none;
   cursor: pointer;
+  transition: background var(--cadc-transition), border-color var(--cadc-transition),
+    color var(--cadc-transition), box-shadow var(--cadc-transition), transform var(--cadc-transition);
 }
 
-.cadc-bouton:hover { background: var(--cadc-acier-pale); }
-.cadc-bouton:disabled { opacity: 0.45; cursor: not-allowed; }
+.cadc-bouton:hover {
+  background: var(--cadc-acier-pale);
+  transform: translateY(-1px);
+  box-shadow: var(--cadc-ombre);
+}
+.cadc-bouton:active { transform: translateY(0); }
+.cadc-bouton:disabled { opacity: 0.45; cursor: not-allowed; transform: none; box-shadow: none; }
 
 .cadc-bouton--premier {
   background: var(--cadc-encre);
   border-color: var(--cadc-encre);
   color: var(--cadc-papier-2);
 }
-.cadc-bouton--premier:hover { background: var(--cadc-acier); border-color: var(--cadc-acier); color: #fff; }
+.cadc-bouton--premier:hover {
+  background: var(--cadc-acier);
+  border-color: var(--cadc-acier);
+  color: #fff;
+  box-shadow: 0 4px 14px rgb(46 110 166 / 35%);
+}
 
 .cadc-bouton--acier {
   background: var(--cadc-acier);
   border-color: var(--cadc-acier);
   color: #fff;
 }
-.cadc-bouton--acier:hover { background: var(--cadc-encre); border-color: var(--cadc-encre); }
+.cadc-bouton--acier:hover {
+  background: var(--cadc-encre);
+  border-color: var(--cadc-encre);
+}
 
 .cadc-bouton--doux { border-color: transparent; background: transparent; color: var(--cadc-encre-3); }
-.cadc-bouton--doux:hover { background: var(--cadc-acier-pale); color: var(--cadc-encre); }
+.cadc-bouton--doux:hover { background: var(--cadc-acier-pale); color: var(--cadc-encre); box-shadow: none; }
 
 .cadc-bouton--danger {
   background: var(--cadc-rouge);
@@ -218,7 +256,7 @@ button { font: inherit; }
 
 .cadc-bouton--large { width: 100%; }
 .cadc-bouton--grand { min-height: 56px; font-size: 1.06rem; padding-inline: 22px; }
-.cadc-bouton--petit { min-height: 42px; padding: 5px 13px; font-size: 0.9rem; font-weight: 600; }
+.cadc-bouton--petit { min-height: 42px; padding: 5px 14px; font-size: 0.9rem; font-weight: 600; }
 
 /* ---------- champs ---------- */
 
@@ -238,13 +276,19 @@ button { font: inherit; }
 .cadc-saisie {
   width: 100%;
   min-height: var(--cadc-cible);
-  padding: 12px 13px;
-  border: 1px solid var(--cadc-ligne-forte);
-  border-radius: var(--cadc-rayon);
+  padding: 12px 14px;
+  border: 1.5px solid var(--cadc-ligne-forte);
+  border-radius: var(--cadc-rayon-petit);
   background: #fff;
   color: var(--cadc-encre);
   font-size: 1rem;
+  transition: border-color var(--cadc-transition), box-shadow var(--cadc-transition);
 }
+
+.cadc-champ input:hover,
+.cadc-champ select:hover,
+.cadc-champ textarea:hover,
+.cadc-saisie:hover { border-color: var(--cadc-encre-3); }
 
 .cadc-champ textarea { min-height: 96px; resize: vertical; }
 
@@ -254,10 +298,11 @@ button { font: inherit; }
 .cadc-saisie:focus {
   outline: none;
   border-color: var(--cadc-acier);
-  box-shadow: 0 0 0 3px var(--cadc-acier-pale);
+  box-shadow: 0 0 0 4px var(--cadc-acier-pale);
 }
 
 .cadc-champ input[aria-invalid="true"] { border-color: var(--cadc-rouge); }
+.cadc-champ input[aria-invalid="true"]:focus { box-shadow: 0 0 0 4px var(--cadc-rouge-lave); }
 
 .cadc-champ__aide { color: var(--cadc-encre-3); font-size: 0.84rem; }
 .cadc-champ__tord { color: var(--cadc-rouge); font-size: 0.84rem; font-weight: 600; }
@@ -267,12 +312,13 @@ button { font: inherit; }
   display: flex;
   align-items: stretch;
   min-height: var(--cadc-cible);
-  border: 1px solid var(--cadc-ligne-forte);
-  border-radius: var(--cadc-rayon);
+  border: 1.5px solid var(--cadc-ligne-forte);
+  border-radius: var(--cadc-rayon-petit);
   background: #fff;
   overflow: hidden;
+  transition: border-color var(--cadc-transition), box-shadow var(--cadc-transition);
 }
-.cadc-champ__prefixe:focus-within { border-color: var(--cadc-acier); box-shadow: 0 0 0 3px var(--cadc-acier-pale); }
+.cadc-champ__prefixe:focus-within { border-color: var(--cadc-acier); box-shadow: 0 0 0 4px var(--cadc-acier-pale); }
 .cadc-champ__prefixe > span {
   display: grid;
   place-items: center;
@@ -309,8 +355,9 @@ button { font: inherit; }
   margin-top: 1px;
   flex: none;
   border: 2px solid var(--cadc-ligne-forte);
-  border-radius: 7px;
+  border-radius: 8px;
   background: #fff;
+  transition: background var(--cadc-transition), border-color var(--cadc-transition);
 }
 .cadc-choix__boite::after {
   content: "";
@@ -333,9 +380,9 @@ button { font: inherit; }
   display: grid;
   gap: 2px;
   margin: 0;
-  padding: 12px 14px 14px;
+  padding: 14px 16px 16px;
   border: 1px solid var(--cadc-ligne);
-  border-radius: 14px;
+  border-radius: var(--cadc-rayon);
   background: var(--cadc-papier-2);
 }
 .cadc-ensemble legend {
@@ -349,10 +396,18 @@ button { font: inherit; }
 .cadc-carte {
   background: var(--cadc-feuille);
   border: 1px solid var(--cadc-ligne);
-  border-radius: 14px;
-  padding: 18px;
+  border-radius: var(--cadc-rayon-grand);
+  padding: 20px;
+  box-shadow: var(--cadc-ombre);
+  transition: box-shadow var(--cadc-transition), transform var(--cadc-transition);
 }
-.cadc-carte--pleine { background: var(--cadc-encre); border-color: var(--cadc-encre); color: var(--cadc-papier-2); }
+.cadc-carte:hover { box-shadow: var(--cadc-ombre-levee); }
+.cadc-carte--pleine {
+  background: var(--cadc-encre);
+  border-color: var(--cadc-encre);
+  color: var(--cadc-papier-2);
+  box-shadow: var(--cadc-ombre-levee);
+}
 .cadc-carte--premiere { border-left: 4px solid var(--cadc-acier); }
 
 .cadc-tete {
@@ -361,7 +416,7 @@ button { font: inherit; }
   justify-content: space-between;
   gap: 14px;
   flex-wrap: wrap;
-  padding-bottom: 10px;
+  padding-bottom: 12px;
   border-bottom: 1px solid var(--cadc-ligne);
   margin-bottom: 14px;
 }
@@ -373,7 +428,7 @@ button { font: inherit; }
   align-items: baseline;
   justify-content: space-between;
   gap: 12px;
-  padding-block: 11px;
+  padding-block: 12px;
   border-bottom: 1px solid var(--cadc-ligne);
 }
 .cadc-ligne:last-child { border-bottom: 0; }
@@ -386,9 +441,9 @@ button { font: inherit; }
 ul.cadc-liste, ol.cadc-liste { margin: 0; padding: 0; list-style: none; }
 
 .cadc-vide {
-  padding: 28px 18px;
-  border: 1px dashed var(--cadc-ligne-forte);
-  border-radius: 14px;
+  padding: 32px 20px;
+  border: 1.5px dashed var(--cadc-ligne-forte);
+  border-radius: var(--cadc-rayon);
   background: var(--cadc-papier-2);
   text-align: center;
 }
@@ -397,15 +452,27 @@ ul.cadc-liste, ol.cadc-liste { margin: 0; padding: 0; list-style: none; }
 
 /* Indicateurs chiffrés */
 .cadc-stats { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
-.cadc-stat { padding: 14px; border: 1px solid var(--cadc-ligne); border-radius: 12px; background: var(--cadc-papier-2); }
+.cadc-stat {
+  padding: 16px;
+  border: 1px solid var(--cadc-ligne);
+  border-radius: var(--cadc-rayon);
+  background: var(--cadc-feuille);
+  box-shadow: var(--cadc-ombre);
+}
 .cadc-stat__legende { color: var(--cadc-encre-3); font-size: 0.76rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
-.cadc-stat__valeur { display: block; margin-top: 4px; font-family: var(--cadc-mono); font-variant-numeric: tabular-nums; font-size: 1.45rem; font-weight: 700; letter-spacing: -0.03em; }
-.cadc-stat__aide { display: block; margin-top: 3px; color: var(--cadc-encre-3); font-size: 0.82rem; }
+.cadc-stat__valeur { display: block; margin-top: 5px; font-family: var(--cadc-mono); font-variant-numeric: tabular-nums; font-size: 1.5rem; font-weight: 700; letter-spacing: -0.03em; }
+.cadc-stat__aide { display: block; margin-top: 4px; color: var(--cadc-encre-3); font-size: 0.82rem; }
 .cadc-stat--vert .cadc-stat__valeur { color: var(--cadc-vert); }
 .cadc-stat--rouge .cadc-stat__valeur { color: var(--cadc-rouge); }
 
 /* Messages */
-.cadc-note { padding: 13px 15px; border-left: 4px solid var(--cadc-or); border-radius: 8px; background: var(--cadc-or-lave); font-size: 0.95rem; }
+.cadc-note {
+  padding: 14px 16px;
+  border-left: 4px solid var(--cadc-or);
+  border-radius: var(--cadc-rayon-petit);
+  background: var(--cadc-or-lave);
+  font-size: 0.95rem;
+}
 .cadc-note--vert { border-left-color: var(--cadc-vert); background: var(--cadc-vert-lave); }
 .cadc-note--rouge { border-left-color: var(--cadc-rouge); background: var(--cadc-rouge-lave); }
 .cadc-note--acier { border-left-color: var(--cadc-acier); background: var(--cadc-acier-pale); }
@@ -414,7 +481,7 @@ ul.cadc-liste, ol.cadc-liste { margin: 0; padding: 0; list-style: none; }
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  padding: 3px 9px;
+  padding: 4px 11px;
   border: 1px solid currentColor;
   border-radius: 999px;
   font-size: 0.74rem;
@@ -435,7 +502,7 @@ ul.cadc-liste, ol.cadc-liste { margin: 0; padding: 0; list-style: none; }
 .cadc-onglet {
   flex: none;
   min-height: 44px;
-  padding: 9px 15px;
+  padding: 9px 16px;
   border: 1px solid var(--cadc-ligne-forte);
   border-radius: 999px;
   background: var(--cadc-feuille);
@@ -445,6 +512,7 @@ ul.cadc-liste, ol.cadc-liste { margin: 0; padding: 0; list-style: none; }
   text-decoration: none;
   cursor: pointer;
   white-space: nowrap;
+  transition: border-color var(--cadc-transition), background var(--cadc-transition), color var(--cadc-transition);
 }
 .cadc-onglet:hover { border-color: var(--cadc-acier); }
 .cadc-onglet[aria-current="true"] { background: var(--cadc-encre); border-color: var(--cadc-encre); color: var(--cadc-papier-2); }
@@ -463,23 +531,28 @@ ul.cadc-liste, ol.cadc-liste { margin: 0; padding: 0; list-style: none; }
   font-weight: 700;
   letter-spacing: 0.04em;
   cursor: pointer;
+  transition: background var(--cadc-transition), color var(--cadc-transition);
 }
 .cadc-langue[aria-pressed="true"] { background: var(--cadc-encre); color: #fff; }
 
 .cadc-texte-taille { display: inline-flex; align-items: center; gap: 6px; color: var(--cadc-encre-3); font-size: 0.78rem; font-weight: 700; }
-.cadc-texte-taille button { min-width: var(--cadc-cible); min-height: var(--cadc-cible); border: 1px solid var(--cadc-ligne-forte); border-radius: 8px; background: var(--cadc-feuille); cursor: pointer; font-weight: 700; }
+.cadc-texte-taille button { min-width: var(--cadc-cible); min-height: var(--cadc-cible); border: 1px solid var(--cadc-ligne-forte); border-radius: 8px; background: var(--cadc-feuille); cursor: pointer; font-weight: 700; transition: all var(--cadc-transition); }
+.cadc-texte-taille button:hover { border-color: var(--cadc-acier); }
 .cadc-texte-taille button[aria-pressed="true"] { background: var(--cadc-acier); border-color: var(--cadc-acier); color: #fff; }
 
 /* Tableaux : ils deviennent des fiches sur téléphone */
 .cadc-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
-.cadc-table th { padding: 9px 10px; border-bottom: 2px solid var(--cadc-encre); text-align: left; font-size: 0.76rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--cadc-encre-3); }
-.cadc-table td { padding: 12px 10px; border-bottom: 1px solid var(--cadc-ligne); vertical-align: top; }
+.cadc-table th { padding: 10px 12px; border-bottom: 2px solid var(--cadc-encre); text-align: left; font-size: 0.76rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--cadc-encre-3); }
+.cadc-table td { padding: 13px 12px; border-bottom: 1px solid var(--cadc-ligne); vertical-align: top; }
+.cadc-table tr:last-child td { border-bottom: 0; }
+.cadc-table tbody tr { transition: background var(--cadc-transition); }
+.cadc-table tbody tr:hover { background: var(--cadc-papier-2); }
 .cadc-table .cadc-droite { text-align: right; font-family: var(--cadc-mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
 .cadc-table caption { text-align: left; color: var(--cadc-encre-3); font-size: 0.84rem; padding-bottom: 8px; }
 
 .cadc-signe { display: inline-flex; vertical-align: middle; }
 
-.cadc-pied { border-top: 1px solid var(--cadc-ligne); padding-block: 16px 22px; color: var(--cadc-encre-3); font-size: 0.8rem; }
+.cadc-pied { border-top: 1px solid var(--cadc-ligne); padding-block: 18px 24px; color: var(--cadc-encre-3); font-size: 0.8rem; }
 .cadc-pied__rangee { display: flex; flex-wrap: wrap; gap: 8px 18px; justify-content: space-between; align-items: baseline; }
 
 .cadc-demo {
@@ -498,7 +571,7 @@ ul.cadc-liste, ol.cadc-liste { margin: 0; padding: 0; list-style: none; }
   z-index: 90;
   transform: translateY(-200%);
   padding: 12px 16px;
-  border-radius: 8px;
+  border-radius: var(--cadc-rayon-petit);
   background: var(--cadc-encre);
   color: #fff;
   font-weight: 700;
@@ -511,12 +584,21 @@ ul.cadc-liste, ol.cadc-liste { margin: 0; padding: 0; list-style: none; }
 @media (max-width: 700px) {
   .cadc-table thead { display: none; }
   .cadc-table, .cadc-table tbody, .cadc-table tr, .cadc-table td { display: block; width: 100%; }
-  .cadc-table tr { margin-bottom: 10px; border: 1px solid var(--cadc-ligne); border-radius: 12px; background: var(--cadc-feuille); padding: 6px 12px; }
-  .cadc-table td { border: 0; padding: 7px 0; display: flex; justify-content: space-between; gap: 14px; align-items: baseline; }
+  .cadc-table tr {
+    margin-bottom: 12px;
+    border: 1px solid var(--cadc-ligne);
+    border-radius: var(--cadc-rayon);
+    background: var(--cadc-feuille);
+    padding: 8px 14px;
+    box-shadow: var(--cadc-ombre);
+  }
+  .cadc-table td { border: 0; padding: 8px 0; display: flex; justify-content: space-between; gap: 14px; align-items: baseline; }
   .cadc-table td::before { content: attr(data-col); color: var(--cadc-encre-3); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; }
   .cadc-table .cadc-droite { text-align: right; }
   .cadc-bandeau__rangee { min-height: 56px; }
   .cadc-marque__signe { width: 32px; height: 32px; }
+  .cadc-bouton { border-radius: var(--cadc-rayon-petit); }
+  .cadc-bouton--grand { min-height: 58px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -527,4 +609,5 @@ ul.cadc-liste, ol.cadc-liste { margin: 0; padding: 0; list-style: none; }
 @media print {
   .cadc-rail, .cadc-bandeau, .cadc-pied { display: none; }
   body { background: #fff; }
+  .cadc-carte, .cadc-stat { box-shadow: none; }
 }
