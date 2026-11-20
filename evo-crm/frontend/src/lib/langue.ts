@@ -197,6 +197,7 @@ export const DICTEE: Dictionnaire = {
   "type.devis": { fr: "Devis", en: "Quote" },
   "type.commande": { fr: "Commande", en: "Order" },
   "type.reclamation": { fr: "Réclamation", en: "Complaint" },
+  "type.formulaire": { fr: "Formulaire", en: "Form" },
 
   // Fiche
   "fiche.journal": { fr: "Ce qui s'est dit", en: "What was said" },
@@ -360,6 +361,27 @@ export const DICTEE: Dictionnaire = {
   "commun.reseaux": { fr: "MTN, Orange, Nexttel", en: "MTN, Orange, Nexttel" },
   "commun.jours": { fr: "jours", en: "days" },
   "commun.mois": { fr: "mois", en: "month" },
+  "contact.titre": { fr: "Écrire à l'entreprise", en: "Write to the company" },
+  "contact.chapo": {
+    fr: "Laisse ton nom et ton numéro : l'équipe te rappelle. Sans compte, sans installation.",
+    en: "Leave your name and number: the team calls you back. No account, no install.",
+  },
+  "contact.nom": { fr: "Ton nom", en: "Your name" },
+  "contact.telephone": { fr: "Ton numéro", en: "Your number" },
+  "contact.quartier": { fr: "Ton quartier", en: "Your neighbourhood" },
+  "contact.besoin": { fr: "Ce dont tu as besoin", en: "What you need" },
+  "contact.envoyer": { fr: "Envoyer", en: "Send" },
+  "contact.envoi": { fr: "Envoi…", en: "Sending…" },
+  "contact.ok-titre": { fr: "Message envoyé !", en: "Message sent!" },
+  "contact.ok-texte": {
+    fr: "{entreprise} a bien reçu ton message et te rappelle très vite.",
+    en: "{entreprise} received your message and will call you back soon.",
+  },
+  "contact.encore": { fr: "Écrire encore", en: "Write again" },
+  "contact.vide": {
+    fr: "Cette entreprise n'a pas encore ouvert sa page de contact.",
+    en: "This company has not opened its contact page yet.",
+  },
 };
 
 export function traduire(langue: string) {

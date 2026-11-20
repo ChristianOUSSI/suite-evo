@@ -121,6 +121,20 @@ class RelanceDeplacement(BaseModel):
         return valeur
 
 
+class ContactEntree(BaseModel):
+    """Le prospect qui écrit depuis la page publique de l'entreprise."""
+
+    nom: str = Field(min_length=2, max_length=160)
+    telephone: str = Field(max_length=24)
+    quartier: str = Field(default="", max_length=80)
+    besoin: str = Field(min_length=3, max_length=1000)
+
+    @field_validator("telephone")
+    @classmethod
+    def canonise(cls, valeur: str) -> str:
+        return _telephone(valeur, obligatoire=True)
+
+
 class CompteEntree(BaseModel):
     nom: str = Field(min_length=2, max_length=120)
     email: str = Field(max_length=160)

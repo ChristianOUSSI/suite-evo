@@ -8,7 +8,7 @@ from fastapi.responses import JSONResponse
 from .config import settings
 from .database import SessionLocal, init_db
 from .messages import refus_de_validation
-from .routers import auth, carnet, exports, fiches, relances
+from .routers import auth, carnet, exports, fiches, public, relances
 from .services.seed import seed_database
 
 
@@ -56,6 +56,7 @@ app.include_router(carnet.router)
 app.include_router(fiches.router)
 app.include_router(relances.router)
 app.include_router(exports.router)
+app.include_router(public.router)
 
 
 @app.exception_handler(RequestValidationError)

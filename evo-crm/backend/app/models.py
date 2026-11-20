@@ -22,7 +22,7 @@ from .database import Base
 # remplit six cases ne remplit plus rien du tout.
 
 SEGMENTS = ("particulier", "revendeur", "grossiste", "institution")
-TYPES_ECHANGE = ("appel", "whatsapp", "visite", "sms", "devis", "commande", "reclamation")
+TYPES_ECHANGE = ("appel", "whatsapp", "visite", "sms", "devis", "commande", "reclamation", "formulaire")
 ROLES = ("responsable", "vendeur")
 STATUTS_RELANCE = ("a_faire", "faite")
 

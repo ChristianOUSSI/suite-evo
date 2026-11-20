@@ -1,5 +1,6 @@
 """Le carnet : la séance, la fiche, le journal, la relance, les droits."""
 
+from app.services.seed import RESPONSABLE
 from app.utils import aujourdhui
 from datetime import date, timedelta
 
@@ -280,3 +281,38 @@ def test_un_client_inconnu_renvoie_un_refus_bilingue(carnet):
     corps = rep.json()["detail"]
     assert corps["code"] == "client_inconnu"
     assert corps["fr"] != corps["en"]
+
+
+def test_le_formulaire_public_cree_la_fiche_et_la_reprise(client):
+    """Le prospect écrit sans compte : fiche, journal, relance pour rappeler."""
+    maison = client.get("/public/entreprise")
+    assert maison.status_code == 200
+    assert maison.json()["entreprise"]["nom"]
+
+    entree = {
+        "nom": "Marlyse Eyenga",
+        "telephone": "699 12 34 56",
+        "quartier": "Bonanjo",
+        "besoin": "Un devis pour une commande de 50 cartons",
+    }
+    reponse = client.post("/public/contact", json=entree)
+    assert reponse.status_code == 201, reponse.text
+    assert reponse.json()["ok"] is True
+
+    # La fiche existe, avec le contact journalisé et la relance du lend.
+    assert client.post("/auth/login", json=RESPONSABLE).status_code == 200
+    trouves = client.get("/clients?q=Marlyse").json()
+    assert any(un["nom"] == "Marlyse Eyenga" for un in trouves["clients"])
+
+    # Un second envoi sur le même numéro ne double pas la fiche.
+    encore = client.post("/public/contact", json=entree)
+    assert encore.status_code == 201
+    relances = client.get("/relances").json()
+    assert any("Marlyse" in un["motif"] for un in relances["a_venir"])
+
+    # Sans numéro, pas de fiche : le formulaire l'exige.
+    sans_numero = client.post(
+        "/public/contact",
+        json={"nom": "Test Sans Numero", "telephone": "", "besoin": "bonjour"},
+    )
+    assert sans_numero.status_code == 422

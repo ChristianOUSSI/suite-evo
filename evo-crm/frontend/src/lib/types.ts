@@ -9,7 +9,8 @@ export type TypeEchange =
   | "sms"
   | "devis"
   | "commande"
-  | "reclamation";
+  | "reclamation"
+  | "formulaire";
 
 export type Role = "responsable" | "vendeur";
 
@@ -170,4 +171,24 @@ export interface CompteEntree {
   email: string;
   mot_de_passe: string;
   role: Role;
+}
+
+export interface EntreprisePublique {
+  nom: string;
+  ville: string;
+  quartier: string;
+  secteur: string;
+  telephone: string;
+  telephone_display: string;
+}
+
+export interface PageContact {
+  entreprise: EntreprisePublique | null;
+  lien?: string;
+}
+
+export interface ContactEnvoye {
+  ok: boolean;
+  reference: number;
+  entreprise: EntreprisePublique;
 }

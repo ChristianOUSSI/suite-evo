@@ -24,6 +24,12 @@ Deux comptes de démonstration, mot de passe `Carnet2026!` :
 `kelly@etsmama.cm` (responsable, écrit les réglages et sort une fiche) et
 `yves@etsmama.cm` (vendeur, journal et relances seulement).
 
+**La page publique** (`/contact`) : le prospect laisse son nom, son
+numéro camerounais, son quartier et son besoin, sans compte. La fiche est
+créée ou reprise sur le numéro, le contact entre au journal comme
+« formulaire », et une relance est programmée pour le lendemain - le
+lead n'attend pas d'être retapé.
+
 ## Ce qui a été vérifié en réel (9 novembre 2026)
 
 - `python -m pytest` : 20 tests passent, dont la reprise qui pousse toute

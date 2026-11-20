@@ -357,3 +357,68 @@ def carnet(db: Session, entreprise: Entreprise) -> dict:
     }
 
 
+
+
+def contact_publique(db: Session, entreprise: Entreprise, entree) -> dict:
+    """Le prospect qui écrit sans compte : fiche créée ou reprise, et le
+    contact rangé dans le journal. Une relance est programmée pour que
+    l'équipe rappelle - c'est tout l'intérêt du carnet.
+    """
+    canonique = entree.telephone
+    client = db.scalar(
+        select(Client).where(
+            Client.entreprise_id == entreprise.id,
+            Client.telephone == canonique,
+        )
+    )
+    if client is None:
+        client = Client(
+            entreprise_id=entreprise.id,
+            nom=entree.nom.strip(),
+            telephone=canonique,
+            quartier=entree.quartier.strip(),
+            segment="particulier",
+        )
+        db.add(client)
+        db.flush()
+    elif not client.actif:
+        client.actif = True
+
+    note = f"[formulaire] {entree.besoin.strip()}"
+    db.add(
+        Echange(
+            client_id=client.id,
+            type="formulaire",
+            note=note,
+            moment=maintenant().replace(microsecond=0),
+        )
+    )
+    if relance_en_attente(db, client) is None:
+        db.add(
+            Relance(
+                client_id=client.id,
+                motif=f"Rappeler {client.nom} (formulaire public)",
+                due_le=aujourdhui() + timedelta(days=1),
+                origine="manuel",
+            )
+        )
+    db.commit()
+    return {
+        "ok": True,
+        "reference": client.id,
+        "entreprise": entreprise_dict_publique(entreprise),
+    }
+
+
+def entreprise_dict_publique(entreprise: Entreprise) -> dict:
+    """Ce que la page publique montre : la maison, son numéro, rien d'autre."""
+    from ..utils import affiche_telephone
+
+    return {
+        "nom": entreprise.nom,
+        "ville": entreprise.ville,
+        "quartier": entreprise.quartier,
+        "secteur": entreprise.secteur,
+        "telephone": entreprise.telephone,
+        "telephone_display": affiche_telephone(entreprise.telephone),
+    }
