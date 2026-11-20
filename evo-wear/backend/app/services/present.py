@@ -2,7 +2,7 @@ from __future__ import annotations
 
 """Ce que l'API rend à l'écran : des nombres, des dates ISO, des clés stables."""
 
-from ..models import Article, Client, Organisation, User
+from ..models import Article, Client, Demande, Organisation, User
 from ..utils import affiche_telephone, canonise_telephone, operateur
 
 
@@ -58,3 +58,20 @@ def article_dict(article: Article, public: bool = False) -> dict:
             "date_vente": article.date_vente.isoformat() if article.date_vente else None,
         })
     return corps
+
+
+def demande_dict(demande: Demande) -> dict:
+    """La demande publicitaire, pour l'écran interne."""
+    return {
+        "id": demande.id,
+        "article_id": demande.article_id,
+        "article": demande.article.nom if demande.article else "",
+        "reference": demande.article.reference if demande.article else "",
+        "client_nom": demande.client_nom,
+        "client_telephone": demande.client_telephone,
+        "telephone_display": affiche_telephone(demande.client_telephone),
+        "note": demande.note,
+        "statut": demande.statut,
+        "cree_le": demande.cree_le.isoformat() if demande.cree_le else "",
+        "traite_le": demande.traite_le.isoformat() if demande.traite_le else None,
+    }

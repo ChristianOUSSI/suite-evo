@@ -4,8 +4,10 @@ from ..config import settings
 from sqlalchemy import select
 
 from ..database import SessionLocal
+from ..deps import DbSession
 from ..models import Article, Organisation
-from ..services import present
+from ..schemas import DemandeEntree
+from ..services import present, wear as domaine
 
 router = APIRouter(prefix="/public", tags=["public"])
 
@@ -35,3 +37,15 @@ def catalogue() -> dict:
             "articles": [present.article_dict(un, public=True) for un in articles],
             "lien": f"{settings.public_base_url}/catalogue",
         }
+
+
+@router.post("/demandes")
+def demande(entree: DemandeEntree, db: DbSession) -> dict:
+    """La cliente demande un article sans compte - la boutique confirme."""
+    demande = domaine.demande_publique(db, entree)
+    return {
+        "ok": True,
+        "id": demande.id,
+        "statut": demande.statut,
+        "message": "Votre demande est bien arrivée. La boutique vous rappellera au numéro donné.",
+    }

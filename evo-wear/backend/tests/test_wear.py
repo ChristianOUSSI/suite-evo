@@ -96,3 +96,38 @@ def test_validation_bilingue(responsable):
     corps = reponse.json()
     assert "code" in corps
     assert "fr" in corps and "en" in corps
+
+
+def test_demande_publique(responsable, app_client):
+    catalogue = app_client.get("/public/catalogue").json()
+    article = catalogue["articles"][0]
+    reponse = app_client.post(
+        "/public/demandes",
+        json={
+            "article_id": article["id"],
+            "client_nom": "Aïcha Mbarga",
+            "client_telephone": "6 90 12 34 56",
+            "note": "taille M, couleur rouge",
+        },
+    )
+    assert reponse.status_code == 200
+    assert reponse.json()["ok"] is True
+    assert reponse.json()["statut"] == "demande"
+
+    liste = responsable.get("/demandes").json()
+    assert liste["total"] == 1
+    assert liste["demandes"][0]["client_telephone"] == "+237690123456"
+
+    demande_id = liste["demandes"][0]["id"]
+    reponse = responsable.post(f"/demandes/{demande_id}", json={"statut": "confirmee"})
+    assert reponse.status_code == 200
+    assert reponse.json()["statut"] == "confirmee"
+    assert responsable.get("/demandes?statut=confirmee").json()["total"] == 1
+
+
+def test_demande_publique_invalides(app_client):
+    reponse = app_client.post(
+        "/public/demandes",
+        json={"client_nom": "A", "client_telephone": "12"},
+    )
+    assert reponse.status_code == 422

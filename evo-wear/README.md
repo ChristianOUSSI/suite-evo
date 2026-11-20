@@ -17,6 +17,9 @@ la cliente lit les articles en stock sans compte.
   valeur du stock, par catégorie, statut et couleur - exports CSV.
 - **`/catalogue` public** : les articles en stock, leurs prix - sans
   compte, sans prix d'achat. À envoyer sur WhatsApp.
+- **`/demande` public** : la cliente demande un article, sa taille et
+  sa couleur, sans compte. La boutique confirme ou annule dans
+  `/demandes` ; la vente se consigne ensuite comme d'habitude.
 - Tout en **français + anglais**, palette et polices CADC, mobile-first.
 
 ## Lancer

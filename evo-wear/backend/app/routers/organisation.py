@@ -7,6 +7,7 @@ from ..models import Organisation, User
 from ..schemas import (
     ArticleCorrection,
     ArticleEntree,
+    DemandeCorrection,
     ClientEntree,
     CompteEntree,
     OrganisationEntree,
@@ -165,3 +166,25 @@ def corriger_article(
         raise refus("saisie")
     article = domaine.corriger_article(db, organisation, article_id, patch)
     return present.article_dict(article)
+
+
+@router.get("/demandes")
+def demandes(db: DbSession, organisation: OrganisationCourante, statut: str | None = None) -> dict:
+    rows, en_attente, total = domaine.liste_demandes(db, organisation, statut)
+    return {
+        "en_attente": en_attente,
+        "total": total,
+        "demandes": [present.demande_dict(un) for un in rows],
+    }
+
+
+@router.post("/demandes/{demande_id}")
+def corriger_demande(
+    demande_id: int,
+    entree: DemandeCorrection,
+    db: DbSession,
+    organisation: OrganisationCourante,
+) -> dict:
+    demande = domaine.demande_de(db, organisation, demande_id)
+    demande = domaine.corriger_demande(db, demande, entree.statut or "demande")
+    return present.demande_dict(demande)

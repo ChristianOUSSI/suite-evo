@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 import { Bascules } from "@/components/bascules";
 import { NomProduit } from "@/components/marque";
@@ -71,6 +72,9 @@ export default async function PageCatalogue() {
                       </a>
                     </p>
                   ) : null}
+                  <p className="appel__lieu">
+                    <Link href={`/demande?article=${un.id}`}>{t("catalogue.demander")}</Link>
+                  </p>
                 </li>
               ))}
             </ul>

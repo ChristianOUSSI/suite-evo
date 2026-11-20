@@ -10,13 +10,13 @@ jamais.
 import re
 import secrets
 
-from sqlalchemy import select
+from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
 from ..messages import refus
-from ..models import Article, Client, Organisation
-from ..schemas import ArticleCorrection, ArticleEntree, ClientEntree
-from ..utils import aujourdhui, periode_de
+from ..models import Article, Client, Demande, Organisation, STATUTS_DEMANDE
+from ..schemas import ArticleCorrection, ArticleEntree, ClientEntree, DemandeCorrection, DemandeEntree
+from ..utils import aujourdhui, maintenant, periode_de
 
 ALPHABET = "ABCDEFGHJKMNPQRSTUVWXYZ23456789"
 
@@ -275,3 +275,62 @@ def recap(db: Session, organisation: Organisation, periode: str) -> dict:
             for cle, n in sorted(par_couleur.items(), key=lambda un: -un[1])[:8]
         ],
     }
+
+
+def demande_publique(
+    db: Session, entree: DemandeEntree
+) -> Demande:
+    """La cliente qui demande un article depuis la page publique."""
+    organisation = db.scalar(select(Organisation).limit(1))
+    if organisation is None:
+        raise refus("organisation_absente", 422)
+    article = None
+    if entree.article_id is not None:
+        article = db.get(Article, entree.article_id)
+        if article is None or article.organisation_id != organisation.id:
+            article = None
+    demande = Demande(
+        organisation_id=organisation.id,
+        article_id=article.id if article else None,
+        client_nom=entree.client_nom.strip(),
+        client_telephone=entree.client_telephone.strip(),
+        note=entree.note.strip(),
+    )
+    db.add(demande)
+    db.commit()
+    db.refresh(demande)
+    return demande
+
+
+def liste_demandes(
+    db: Session, organisation: Organisation, statut: str | None = None
+) -> tuple[list[Demande], int, int]:
+    requete = select(Demande).where(Demande.organisation_id == organisation.id)
+    if statut:
+        requete = requete.where(Demande.statut == statut)
+    rows = list(db.scalars(requete.order_by(Demande.cree_le.desc())).all())
+    en_attente = db.scalar(
+        select(func.count())
+        .select_from(Demande)
+        .where(Demande.organisation_id == organisation.id, Demande.statut == "demande")
+    ) or 0
+    return rows, en_attente, len(rows)
+
+
+def demande_de(db: Session, organisation: Organisation, demande_id: int) -> Demande:
+    demande = db.get(Demande, demande_id)
+    if demande is None or demande.organisation_id != organisation.id:
+        raise refus("demande_inconnue", 404)
+    return demande
+
+
+def corriger_demande(
+    db: Session, demande: Demande, statut: str
+) -> Demande:
+    if statut not in STATUTS_DEMANDE:
+        raise refus("demande_statut", 422)
+    demande.statut = statut
+    demande.traite_le = maintenant()
+    db.commit()
+    db.refresh(demande)
+    return demande

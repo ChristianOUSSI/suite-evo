@@ -22,6 +22,18 @@ CODES: dict[str, dict[str, str]] = {
         "fr": "Cette cliente n'est pas du carnet.",
         "en": "That client does not belong to this book.",
     },
+    "organisation_absente": {
+        "fr": "La boutique n'est pas encore ouverte.",
+        "en": "The shop is not open yet.",
+    },
+    "demande_inconnue": {
+        "fr": "Cette demande n’est pas du panier.",
+        "en": "That request does not belong to this shop.",
+    },
+    "demande_statut": {
+        "fr": "Le statut de la demande n’est pas du panier.",
+        "en": "That request status is not one of the shop statuses.",
+    },
     "stock_insuffisant": {
         "fr": "Le stock ne couvre pas cette vente.",
         "en": "The stock does not cover that sale.",
