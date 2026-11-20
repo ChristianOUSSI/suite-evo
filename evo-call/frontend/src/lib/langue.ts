@@ -171,6 +171,29 @@ export const DICTEE: Dictionnaire = {
   "commun.reseaux": { fr: "MTN, Orange, Nexttel", en: "MTN, Orange, Nexttel" },
   "commun.aucun": { fr: "Rien à lire pour l'instant.", en: "Nothing to read yet." },
   "commun.voir": { fr: "Voir", en: "View" },
+  "rappel.titre": { fr: "Demander un rappel", en: "Request a callback" },
+  "rappel.chapo": {
+    fr: "Le standard est occupé ? Laisse ton nom et ton numéro : on te rappelle.",
+    en: "The desk is busy? Leave your name and number: we call you back.",
+  },
+  "rappel.nom": { fr: "Ton nom", en: "Your name" },
+  "rappel.telephone": { fr: "Ton numéro", en: "Your number" },
+  "rappel.motif": { fr: "De quoi s'agit-il", en: "What is it about" },
+  "rappel.creneau": { fr: "Quand te rappeler (optionnel)", en: "When to call back (optional)" },
+  "rappel.note": { fr: "Un mot pour le standard", en: "A word for the desk" },
+  "rappel.envoyer": { fr: "Demander le rappel", en: "Request the callback" },
+  "rappel.envoi": { fr: "Envoi…", en: "Sending…" },
+  "rappel.ok-titre": { fr: "Demande envoyée !", en: "Request sent!" },
+  "rappel.ok-texte": {
+    fr: "Ta demande n°{reference} est dans la file des rappels. Le standard te contacte.",
+    en: "Your request n°{reference} is in the callback queue. The desk will contact you.",
+  },
+  "rappel.encore": { fr: "Demander un autre rappel", en: "Request another callback" },
+  "rappel.vide": {
+    fr: "Ce centre n'a pas encore ouvert sa page de rappel.",
+    en: "This centre has not opened its callback page yet.",
+  },
+  "rappel.file": { fr: "Voir la file du standard", en: "See the switchboard queue" },
   "commun.whatsapp": { fr: "WhatsApp", en: "WhatsApp" },
 };
 

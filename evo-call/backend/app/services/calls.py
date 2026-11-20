@@ -204,3 +204,39 @@ def recap(db: Session, organisation: Organisation, periode: str) -> dict:
         "duree_totale": sum(durees),
         "duree_moyenne": sum(durees) // len(durees) if durees else 0,
     }
+
+
+def rappel_public(db: Session, organisation: Organisation, entree) -> Appel:
+    """Le client qui écrit sans compte : il demande à être rappelé.
+
+    L'appel entre directement dans la case « rappel » de la file - le
+    standard le voit comme un rappel programmé, pas comme un appel perdu.
+    Le compte auteur est celui du responsable : la machine a parlé, pas
+    une personne.
+    """
+    auteur = db.scalar(
+        select(User)
+        .where(User.organisation_id == organisation.id)
+        .order_by(User.role != "responsable", User.id)
+        .limit(1)
+    )
+    if auteur is None:
+        raise refus("saisie", **{"centre": "sans agent"})
+
+    note = f"[formulaire] {entree.note.strip()}".strip()
+    appel = Appel(
+        organisation_id=organisation.id,
+        client_nom=entree.nom.strip(),
+        client_telephone=entree.telephone,
+        sens="entrant",
+        motif=entree.motif,
+        statut="rappel",
+        date=aujourdhui(),
+        date_rappel=entree.creneau or aujourdhui(),
+        note=note,
+        cree_par=auteur.id,
+    )
+    db.add(appel)
+    db.commit()
+    db.refresh(appel)
+    return appel

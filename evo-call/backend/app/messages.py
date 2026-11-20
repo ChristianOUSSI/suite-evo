@@ -51,6 +51,10 @@ CHAMPS: dict[str, dict[str, str]] = {
     "note": {"fr": "la note", "en": "the note"},
     "ville": {"fr": "la ville", "en": "the city"},
     "quartier": {"fr": "le quartier", "en": "the area"},
+    "creneau": {
+        "fr": "aujourd'hui ou plus tard.",
+        "en": "today or later.",
+    },
     "telephone": {"fr": "le numéro", "en": "the number"},
     "role": {"fr": "le rôle", "en": "the role"},
     "agent_id": {"fr": "l'agent", "en": "the agent"},

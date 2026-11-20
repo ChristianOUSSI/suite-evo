@@ -107,3 +107,11 @@ export type AppelEntree = {
   date_rappel?: string | null;
   note?: string;
 };
+
+export type CentrePublique = { centre: Organisation | null };
+
+export type RappelEnvoye = {
+  ok: boolean;
+  reference: number;
+  centre: Organisation;
+};

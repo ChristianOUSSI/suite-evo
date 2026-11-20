@@ -150,3 +150,37 @@ def test_export(responsable):
     texte = reponse.text
     assert "client" in texte.splitlines()[0]
     assert "" in texte.splitlines()[0] or "client" in texte
+
+
+def test_le_rappel_public_entre_dans_la_file(client, responsable):
+    """Le client demande à être rappelé sans compte : le standard le voit."""
+    centre = client.get("/public/centre")
+    assert centre.status_code == 200
+    assert centre.json()["centre"]["nom"]
+
+    envoi = client.post(
+        "/public/rappel",
+        json={
+            "nom": "Bertin Talla",
+            "telephone": "677 12 34 56",
+            "motif": "sav",
+            "creneau": "2030-01-15",
+            "note": "Problème avec ma commande de la semaine",
+        },
+    )
+    assert envoi.status_code == 201, envoi.text
+    assert envoi.json()["ok"] is True
+
+    # L'appel est dans la case « rappel » de la file interne.
+    rappels = responsable.get("/appels?statut=rappel").json()["appels"]
+    trouve = next(un for un in rappels if un["client_nom"] == "Bertin Talla")
+    assert trouve["sens"] == "entrant"
+    assert trouve["date_rappel"] == "2030-01-15"
+    assert "formulaire" in trouve["note"]
+
+    # Un créneau passé est refusé, une date passée ne passe pas.
+    hier = client.post(
+        "/public/rappel",
+        json={"nom": "Test", "telephone": "677112233", "creneau": "2000-01-01"},
+    )
+    assert hier.status_code == 422

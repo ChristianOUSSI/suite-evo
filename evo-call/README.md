@@ -19,6 +19,9 @@ les durées, les rappels - sans poste qui se perd et sans appel oublié.
   date - un rappel n'est pas un appel perdu.
 - **`/file` public** : la page où l'appelant voit combien de personnes
   attendent, sans compte - aucun nom, aucun numéro ne sort d'ici.
+- **`/rappel` public** : le client occupé laisse son nom, son numéro et
+  son motif, sans compte. Sa demande entre dans la file des rappels du
+  standard avec une date de rappel - traitée comme un rappel programmé.
 - **Le mois** (`/recap`) : appels, durées totales et moyennes, par agent,
   par motif, par statut - recalculé à la demande, export CSV.
 - Comptes démo : `ada@call.cm` / `mbarga@call.cm`, mot de passe

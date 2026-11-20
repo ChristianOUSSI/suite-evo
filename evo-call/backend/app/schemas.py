@@ -5,7 +5,7 @@ from datetime import date as date_type
 from pydantic import BaseModel, Field, field_validator
 
 from .models import MOTIFS, SENS, STATUTS
-from .utils import canonise_telephone
+from .utils import aujourdhui, canonise_telephone
 
 MOTIFS_VALIDES = set(MOTIFS)
 SENS_VALIDES = set(SENS)
@@ -110,6 +110,38 @@ class AppelCorrection(BaseModel):
     def statut_connu(cls, valeur: str | None) -> str | None:
         if valeur is not None and valeur not in STATUTS_VALIDES:
             raise ValueError("liste:statut")
+        return valeur
+
+
+class RappelEntree(BaseModel):
+    """Le client qui demande à être rappelé, sans compte."""
+
+    nom: str = Field(min_length=2, max_length=160)
+    telephone: str = Field(max_length=24)
+    motif: str = Field(default="renseignement", max_length=20)
+    creneau: date_type | None = None
+    note: str = Field(default="", max_length=600)
+
+    @field_validator("telephone")
+    @classmethod
+    def canonise(cls, valeur: str) -> str:
+        canonique = canonise_telephone(valeur)
+        if canonique is None:
+            raise ValueError("liste:telephone")
+        return canonique
+
+    @field_validator("motif")
+    @classmethod
+    def motif_connu(cls, valeur: str) -> str:
+        if valeur not in MOTIFS_VALIDES:
+            raise ValueError("liste:motif")
+        return valeur
+
+    @field_validator("creneau")
+    @classmethod
+    def creneau_valide(cls, valeur: date_type | None) -> date_type | None:
+        if valeur is not None and valeur < aujourdhui():
+            raise ValueError("liste:creneau")
         return valeur
 
 
