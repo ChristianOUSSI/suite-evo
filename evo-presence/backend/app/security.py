@@ -79,3 +79,20 @@ def code_de_controle(organisation_id: int, ouvrier_id: int, periode: str) -> str
         nombre, reste = divmod(nombre, len(ALPHABET))
         sortir.append(ALPHABET[reste])
     return "".join(sortir)
+
+
+def code_pointage(employe_id: int) -> str:
+    """Le code du pointage partagé : stable, dérivé, sans colonne en base.
+
+    L'employé le garde sur son téléphone ou le mémorise ; l'écran de
+    l'entrée le reconnaît sans jamais demander de compte. Huit signes,
+    même alphabet que le bulletin : se dicte sans ambiguïté.
+    """
+    base = f"pointage|{employe_id}".encode("utf-8")
+    empreinte = hmac.new(settings.jwt_secret.encode("utf-8"), base, hashlib.sha256).digest()
+    nombre = int.from_bytes(empreinte[:5], "big")
+    sortir = []
+    for _ in range(8):
+        nombre, reste = divmod(nombre, len(ALPHABET))
+        sortir.append(ALPHABET[reste])
+    return "".join(sortir)

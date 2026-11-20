@@ -44,6 +44,7 @@ export interface Employe {
   entree_le: string;
   note: string;
   pointages: number;
+  code_pointage: string;
 }
 
 export interface ListeEmployes {
@@ -179,4 +180,17 @@ export interface CompteEntree {
   email: string;
   mot_de_passe: string;
   role: Role;
+}
+
+export interface EcranPointage {
+  entreprise: { nom: string; ville: string; quartier: string } | null;
+}
+
+export interface PointageEnvoye {
+  ok: boolean;
+  employe: string;
+  jour: string;
+  statut: string;
+  arrivee: string;
+  depart: string;
 }

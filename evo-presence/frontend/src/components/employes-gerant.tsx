@@ -148,6 +148,11 @@ function FicheEmploye({ employe, responsable, occupe, erreur, onCorriger, t }: F
           {employe.pointages > 0 ? `${employe.pointages} ${t("commun.pointages")}` : t("employes.jamais_pointe")}
           {!employe.actif ? ` · ${t("employes.sorti")}` : ""}
         </small>
+        {employe.actif ? (
+          <small>
+            {t("employe.code")} <code>{employe.code_pointage}</code>
+          </small>
+        ) : null}
       </span>
 
       <span className="cadc-acts" style={{ flexWrap: "wrap" }}>

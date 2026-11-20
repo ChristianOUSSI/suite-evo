@@ -104,6 +104,14 @@ LISTES: dict[str, dict[str, str]] = {
         "en": "9 digits after +237, or nothing.",
     },
     "role": {"fr": "responsable ou agent.", "en": "responsable or agent."},
+    "code_pointage": {
+        "fr": "huit signes sans I, O, 0 ni 1 - le code de l'employé.",
+        "en": "eight signs without I, O, 0 or 1 - the employee's code.",
+    },
+    "geste": {
+        "fr": "arrivee ou depart.",
+        "en": "arrivee or depart.",
+    },
 }
 
 

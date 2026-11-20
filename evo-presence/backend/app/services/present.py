@@ -7,6 +7,7 @@ un bulletin imposé en français à un employé anglophone.
 """
 
 from ..models import Employe, Organisation, Presence, User
+from ..security import code_pointage
 from ..utils import affiche_telephone, canonise_telephone, operateur
 
 
@@ -38,6 +39,7 @@ def employe_dict(employe: Employe) -> dict:
         "entree_le": employe.entree_le.isoformat(),
         "note": employe.note,
         "pointages": len(employe.pointages),
+        "code_pointage": code_pointage(employe.id),
     }
 
 

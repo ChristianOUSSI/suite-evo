@@ -87,6 +87,11 @@ def aujourdhui() -> date:
     return datetime.now(timezone(timedelta(hours=1))).date()
 
 
+def heure_now() -> str:
+    """L'heure à Douala au format HH:MM, pour les pointages de l'écran."""
+    return datetime.now(timezone(timedelta(hours=1))).strftime("%H:%M")
+
+
 def dans_jours(n: int, depuis: date | None = None) -> date:
     return (depuis or aujourdhui()) + timedelta(days=n)
 

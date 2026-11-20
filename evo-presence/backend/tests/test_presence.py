@@ -185,3 +185,44 @@ def test_exports(responsable):
         assert reponse.status_code == 200
         assert "text/csv" in reponse.headers["content-type"]
         assert reponse.text.startswith("﻿")
+
+
+def test_le_pointage_kiosque_par_code(client, responsable, un_employe):
+    """L'écran partagé : code, arrivée, départ - sans compte."""
+    code = un_employe["code_pointage"]
+    assert code and len(code) == 8
+
+    ecran = client.get("/public/pointage")
+    assert ecran.status_code == 200
+    assert ecran.json()["entreprise"]["nom"]
+
+    arrivee = client.post(
+        "/public/pointage", json={"code": code.lower(), "geste": "arrivee"}
+    )
+    assert arrivee.status_code == 201, arrivee.text
+    corps = arrivee.json()
+    assert corps["ok"] is True
+    assert corps["employe"] == un_employe["nom"]
+    assert corps["arrivee"]
+
+    # Le départ complète la même journée, pas une seconde ligne.
+    depart = client.post(
+        "/public/pointage", json={"code": code, "geste": "depart"}
+    )
+    assert depart.status_code == 201
+    assert depart.json()["depart"]
+
+    # La ligne est visible au comptoir, notée « kiosque ».
+    equipe = responsable.get("/pointage?jour=" + corps["jour"]).json()["equipe"]
+    ligne = next(
+        un for un in equipe if un["employe_id"] == un_employe["id"]
+    )
+    assert ligne["arrivee"] == corps["arrivee"]
+    assert ligne["depart"] == depart.json()["depart"]
+
+    # Un code inventé est refusé sans rien dire de plus.
+    faux = client.post(
+        "/public/pointage", json={"code": "ZZZZZZZZ", "geste": "arrivee"}
+    )
+    assert faux.status_code == 404
+    assert faux.json()["detail"]["code"] == "code_inconnu"

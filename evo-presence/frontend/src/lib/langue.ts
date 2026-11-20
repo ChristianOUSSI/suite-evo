@@ -170,6 +170,35 @@ export const DICTEE: Dictionnaire = {
   "commun.jours": { fr: "jours", en: "days" },
   "commun.pointages": { fr: "pointages", en: "entries" },
   "commun.reseaux": { fr: "MTN, Orange, Nexttel", en: "MTN, Orange, Nexttel" },
+  "kiosque.titre": { fr: "Pointer sa présence", en: "Clock in or out" },
+  "kiosque.chapo": {
+    fr: "Tape ton code d'employé : l'écran pointe ton arrivée ou ton départ. Pas de compte, pas de chef qui pointe à ta place.",
+    en: "Type your employee code: the screen logs your arrival or departure. No account, no boss logging for you.",
+  },
+  "kiosque.code": { fr: "Ton code", en: "Your code" },
+  "kiosque.code-aide": {
+    fr: "Huit signes, donnés par ton responsable. Exemple : K7X2M9PQ.",
+    en: "Eight signs, given by your manager. Example: K7X2M9PQ.",
+  },
+  "kiosque.arrivee": { fr: "Je viens d'arriver", en: "I just arrived" },
+  "kiosque.depart": { fr: "Je pars", en: "I'm leaving" },
+  "kiosque.envoyer": { fr: "Pointer", en: "Clock" },
+  "kiosque.envoi": { fr: "Pointage…", en: "Logging…" },
+  "kiosque.ok-titre": { fr: "Pointé !", en: "Logged!" },
+  "kiosque.ok-arrivee": { fr: "{employe} est arrivé à {heure}.", en: "{employe} arrived at {heure}." },
+  "kiosque.ok-depart": { fr: "{employe} est parti à {heure}.", en: "{employe} left at {heure}." },
+  "kiosque.reessayer": { fr: "Pointer encore", en: "Clock again" },
+  "kiosque.vide": {
+    fr: "Cette entreprise n'a pas encore ouvert son écran de pointage.",
+    en: "This company has not opened its clock screen yet.",
+  },
+  "kiosque.verifier": { fr: "Vérifier son mois", en: "Check your month" },
+  "employe.code": { fr: "Code de pointage", en: "Clock code" },
+  "employe.code-aide": {
+    fr: "À donner à l'employé : il pointe seul sur l'écran partagé.",
+    en: "Give it to the employee: they clock in alone on the shared screen.",
+  },
+
 };
 
 export function traduire(langue: string) {

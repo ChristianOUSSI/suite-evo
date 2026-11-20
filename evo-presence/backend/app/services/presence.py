@@ -21,7 +21,7 @@ from ..messages import refus
 from ..models import ETATS, Employe, Organisation, Presence, User
 from ..security import code_de_controle
 from ..schemas import FORME_PERIODE
-from ..utils import aujourdhui, bornes_de, maintenant, periode_de
+from ..utils import aujourdhui, bornes_de, heure_now, maintenant, periode_de
 
 TOUS_STATUTS = tuple(ETATS)
 
@@ -309,3 +309,70 @@ def retrouver_code(db: Session, code: str) -> tuple[Organisation, int, str] | No
 def _mois_precedent(periode: str) -> str:
     annee, mois = (int(un) for un in periode.split("-"))
     return f"{annee:04d}-12" if mois == 1 else f"{annee:04d}-{mois - 1:02d}"
+
+
+def pointer_kiosque(db: Session, code: str, geste: str, heure: str) -> Presence:
+    """Le pointage de l'écran partagé : un code, un geste, une heure.
+
+    L'employé tape son code au téléphone de l'entrée - pas de compte, pas
+    de chef qui pointe à sa place. Le second passage corrige le premier,
+    comme au comptoir. On ne pointe jamais dans le futur.
+    """
+    from ..security import code_pointage
+
+    code_propre = code.strip().upper()
+    employe = None
+    for candidat in db.scalars(
+        select(Employe).where(Employe.actif.is_(True))
+    ).all():
+        if code_pointage(candidat.id) == code_propre:
+            employe = candidat
+            break
+    if employe is None:
+        raise refus("code_inconnu", 404)
+
+    jour = aujourdhui()
+    existant = db.scalar(
+        select(Presence).where(
+            Presence.employe_id == employe.id,
+            Presence.jour == jour,
+        )
+    )
+
+    maintenant_heure = heure_now()
+    if geste == "depart":
+        if existant is None:
+            # On ne part pas sans être venu : la journée naît « present »
+            # avec le départ noté, l'arrivée reste à corriger au comptoir.
+            existant = Presence(
+                employe_id=employe.id,
+                jour=jour,
+                statut="present",
+                depart=heure or maintenant_heure,
+                note="[kiosque]",
+            )
+            db.add(existant)
+        else:
+            existant.depart = heure or maintenant_heure
+            if "[kiosque]" not in existant.note:
+                existant.note = f"{existant.note} [kiosque]".strip()
+    else:
+        if existant is None:
+            existant = Presence(
+                employe_id=employe.id,
+                jour=jour,
+                statut="present",
+                arrivee=heure or maintenant_heure,
+                note="[kiosque]",
+            )
+            db.add(existant)
+        else:
+            existant.arrivee = heure or maintenant_heure
+            if existant.statut == "absent":
+                existant.statut = "present"
+            if "[kiosque]" not in existant.note:
+                existant.note = f"{existant.note} [kiosque]".strip()
+
+    db.commit()
+    db.refresh(existant)
+    return existant

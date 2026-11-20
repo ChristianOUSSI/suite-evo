@@ -6,6 +6,7 @@ from datetime import date
 from pydantic import BaseModel, Field, field_validator
 
 from .models import ETATS, ROLES
+from .security import ALPHABET
 from .utils import canonise_telephone
 
 ETATS_VALIDES = set(ETATS)
@@ -126,3 +127,36 @@ class CompteEntree(BaseModel):
         if valeur not in ROLES_VALIDES:
             raise ValueError("liste:role")
         return valeur
+
+
+GESTES = ("arrivee", "depart")
+
+
+class PointageKiosque(BaseModel):
+    """Le pointage de l'écran partagé : un code, un geste, une heure."""
+
+    code: str = Field(min_length=8, max_length=8)
+    geste: str = Field(default="arrivee", max_length=8)
+    heure: str = Field(default="", max_length=5)
+
+    @field_validator("code")
+    @classmethod
+    def code_propre(cls, valeur: str) -> str:
+        propre = valeur.strip().upper()
+        if any(un not in ALPHABET for un in propre):
+            raise ValueError("liste:code_pointage")
+        return propre
+
+    @field_validator("geste")
+    @classmethod
+    def geste_connu(cls, valeur: str) -> str:
+        if valeur not in GESTES:
+            raise ValueError("liste:geste")
+        return valeur
+
+    @field_validator("heure")
+    @classmethod
+    def heure_valide(cls, valeur: str) -> str:
+        if not valeur:
+            return ""
+        return _heure(valeur)

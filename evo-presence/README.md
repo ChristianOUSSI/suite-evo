@@ -37,6 +37,11 @@ passe `Presence2026!`) - responsable et agent.
 - **Le bulletin public.** `/verifier` : l'employé tape son code, son mois
   s'affiche jour par jour, sans compte. Seul son mois se lit, jamais celui
   des collègues.
+- **L'écran partagé** (`/kiosque`). Un téléphone à l'entrée : l'employé
+  tape son code personnel (huit signes, stable, donné par le responsable)
+  et choisit « je viens d'arriver » ou « je pars ». L'heure se prend à
+  Douala (UTC+1), le second passage corrige le premier, jamais dans le
+  futur. Pas de compte, pas de chef qui pointe à la place de l'employé.
 - **Les exports.** Trois feuilles CSV (employés, pointages, récap mensuel)
   en point-virgule, protégées contre l'injection de formules.
 
