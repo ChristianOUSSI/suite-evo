@@ -13,15 +13,19 @@
   gap: 0.9rem;
   width: 100%;
   text-align: left;
-  padding: 0.8rem 0.85rem;
+  padding: 0.85rem 0.9rem;
   border: 1px solid var(--rule);
+  border-radius: 10px;
   background: var(--sheet-bright);
   font-size: 0.84rem;
-  transition: border-color 140ms ease;
+  box-shadow: var(--ombre);
+  transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
 }
 
 .classe-onglet:hover {
   border-color: var(--ink);
+  box-shadow: var(--ombre-levee);
+  transform: translateY(-1px);
 }
 
 .classe-onglet.is-choisie {
@@ -101,10 +105,18 @@
   grid-template-columns: 7rem 1.4fr 1fr auto auto auto;
   align-items: center;
   gap: 1rem;
-  padding: 0.8rem 0.85rem;
+  padding: 0.85rem 0.9rem;
   border: 1px solid var(--rule);
+  border-radius: 10px;
   background: var(--sheet-bright);
   font-size: 0.82rem;
+  box-shadow: var(--ombre);
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+
+.reçu-carte:hover {
+  box-shadow: var(--ombre-levee);
+  transform: translateY(-1px);
 }
 
 .reçu-carte--annule {
