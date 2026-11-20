@@ -55,12 +55,15 @@
   text-decoration: none;
   font-size: 14px;
   color: var(--encre-douce);
-  padding: 6px 9px;
+  padding: 7px 10px;
   border-left: 2px solid transparent;
+  border-radius: 0 6px 6px 0;
+  transition: background var(--transition), color var(--transition);
 }
 
 .rail a:hover {
   color: var(--encre);
+  background: rgba(227, 233, 238, 0.05);
 }
 
 .rail a.actif {
@@ -135,14 +138,23 @@
   height: 8px;
   border-radius: 50%;
   background: var(--mousse);
+  box-shadow: 0 0 8px rgb(133 171 109 / 70%);
 }
 
 .feu.eteint {
   background: var(--rouille);
+  box-shadow: 0 0 8px rgb(201 97 63 / 70%);
 }
 
 .feu.attente {
   background: var(--ambre);
+  box-shadow: 0 0 8px rgb(240 166 60 / 80%);
+  animation: feu-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes feu-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.45; }
 }
 
 .panneaux {
