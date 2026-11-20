@@ -995,7 +995,7 @@ main {
 }
 
 .sheet--offset {
-  box-shadow: 5px 5px 0 var(--paper-dark);
+  box-shadow: 6px 6px 0 var(--paper-dark), var(--ombre-levee);
 }
 
 .section-head {
