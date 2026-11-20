@@ -35,6 +35,7 @@ def aujourdhui_defaut() -> date_type:
 ROLES = ("responsable", "agent")
 CATEGORIES = ("facture", "contrat", "courrier", "pv", "identite", "autorisation", "autre")
 STATUTS = ("actif", "archive", "annule")
+STATUTS_DEMANDE = ("demandee", "prete", "remise", "refusee")
 
 ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"
 
@@ -103,3 +104,26 @@ class Document(Base):
 
     organisation: Mapped[Organisation] = relationship()
     auteur: Mapped[User] = relationship(foreign_keys=[cree_par])
+
+
+class Demande(Base):
+    """La demande de document venue de la page publique.
+
+    Un citoyen, un parent, un client : il écrit sans compte, l'organisation
+    prépare puis remet. Le statut suit le papier, pas l'écran.
+    """
+
+    __tablename__ = "demandes"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    organisation_id: Mapped[int] = mapped_column(ForeignKey("organisations.id"))
+    nom: Mapped[str] = mapped_column(String(160))
+    telephone: Mapped[str] = mapped_column(String(24), default="")
+    categorie: Mapped[str] = mapped_column(String(20), default="autre")
+    motif: Mapped[str] = mapped_column(Text, default="")
+    statut: Mapped[str] = mapped_column(String(16), default="demandee", index=True)
+    note: Mapped[str] = mapped_column(Text, default="")
+    cree_le: Mapped[datetime] = mapped_column(DateTime, default=_maintenant_naif)
+    traite_le: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+
+    organisation: Mapped[Organisation] = relationship()

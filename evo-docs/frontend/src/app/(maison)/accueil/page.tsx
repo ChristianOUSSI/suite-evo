@@ -83,6 +83,9 @@ export default async function PageAccueil() {
         <a href="/verifier" target="_blank" rel="noreferrer" className="cadc-bouton cadc-bouton--doux">
           {t("accueil.verifier")}
         </a>
+        <Link href="/demandes" className="cadc-bouton cadc-bouton--doux">
+          {t("nav.demandes")}
+        </Link>
       </div>
 
       <section className="cadc-carte" aria-label={t("accueil.verifier")}>

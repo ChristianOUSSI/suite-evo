@@ -118,3 +118,25 @@ export type DocumentEntree = {
   echeance?: string | null;
   note?: string;
 };
+
+export type StatutDemande = "demandee" | "prete" | "remise" | "refusee";
+
+export type Demande = {
+  id: number;
+  nom: string;
+  telephone: string;
+  telephone_display: string;
+  categorie: Categorie | string;
+  motif: string;
+  statut: StatutDemande;
+  note: string;
+  cree_le: string;
+  traite_le: string | null;
+};
+
+export type ListeDemandes = { demandes: Demande[] };
+
+export type DemandeEnvoyee = {
+  ok: boolean;
+  demande: { reference: number; statut: StatutDemande; categorie: string };
+};

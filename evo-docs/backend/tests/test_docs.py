@@ -103,3 +103,52 @@ def test_export_csv(responsable):
 def test_agent_fait_le_quotidien_mais_pas_les_comptes(agent, responsable):
     assert agent.post("/comptes", json={"nom": "X Y", "email": "x@y.cm", "mot_de_passe": "abcdef", "role": "agent"}).status_code == 403
     assert agent.put("/organisation", json={"nom": "Autre Maison"}).status_code == 403
+
+
+def test_la_demande_publique_entre_au_registre(client, responsable):
+    """Le citoyen demande sans compte ; l'équipe prépare, remet, refuse."""
+    # La page publique n'a besoin de rien d'autre que l'organisation.
+    envoi = client.post(
+        "/public/demandes",
+        json={
+            "nom": "Maman Essimi",
+            "telephone": "699 55 66 77",
+            "categorie": "identite",
+            "motif": "Une attestation de scolarité pour ma fille",
+        },
+    )
+    assert envoi.status_code == 201, envoi.text
+    assert envoi.json()["ok"] is True
+    reference = envoi.json()["demande"]["reference"]
+
+    # La demande est dans le registre, en « demandee ».
+    registre = responsable.get("/demandes").json()["demandes"]
+    demande = next(un for un in registre if un["id"] == reference)
+    assert demande["statut"] == "demandee"
+    assert demande["nom"] == "Maman Essimi"
+    assert demande["telephone_display"] == "6 99 55 66 77"
+
+    # L'équipe la prépare puis la remet.
+    pr = responsable.patch(
+        f"/demandes/{reference}", json={"statut": "prete"}
+    )
+    assert pr.status_code == 200
+    assert pr.json()["statut"] == "prete"
+    assert pr.json()["traite_le"]
+
+    # Un statut inconnu est refusé dans les deux langues.
+    mauvais = responsable.patch(
+        f"/demandes/{reference}", json={"statut": "vole"}
+    )
+    assert mauvais.status_code == 422
+
+    # Une demande d'une autre organisation n'existe pas.
+    introuvable = responsable.patch("/demandes/999999", json={"statut": "remise"})
+    assert introuvable.status_code == 404
+
+    # La catégorie est validée.
+    mauvaise = client.post(
+        "/public/demandes",
+        json={"nom": "Test", "categorie": "inconnue"},
+    )
+    assert mauvaise.status_code == 422

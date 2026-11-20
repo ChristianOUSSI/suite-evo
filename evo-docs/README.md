@@ -8,6 +8,7 @@ Le classeur d'une maison camerounaise : documents, références à dix signes, �
 - **Les échéances** (`/echeances`) : les documents actifs avec une date limite, du plus urgent au plus lointain - retards, sous 30 jours, sans échéance. Une échéance dépassée se lit en rouge, elle ne disparaît pas.
 - **L'accueil** (`/accueil`) : la vitre du bureau - documents actifs, retards, échéances à venir.
 - **La vérification publique** (`/verifier`) : le contrôleur ou le client tape la référence à dix signes - le titre, la catégorie, la date, le statut - **sans compte**. La page ne montre ni émetteur ni échéance ni note.
+- **La demande publique** (`/demande`) : le citoyen, le parent ou le client demande un document - nom, numéro, catégorie, motif - **sans compte**. La demande entre au registre (`/demandes`) : l'équipe la prépare, la remet ou la refuse, et le suivi se lit d'un geste.
 - **Le mois** (`/recap`) : documents ajoutés, actifs, retards, par catégorie et par statut - recalculé à la demande, export CSV (`/api/exports/documents.csv`).
 - **Les réglages** (`/reglages`) : la maison (nom, ville, quartier, téléphone), les comptes, l'export.
 

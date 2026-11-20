@@ -15,7 +15,7 @@ from sqlalchemy.orm import Session
 from ..messages import refus
 from ..models import Document, Organisation, User, nouvelle_reference
 from ..schemas import DocumentEntree
-from ..utils import aujourdhui, periode_de
+from ..utils import affiche_telephone, aujourdhui, maintenant, periode_de
 
 
 def document_de(db: Session, organisation: Organisation, document_id: int) -> Document:
@@ -201,3 +201,81 @@ def recap(db: Session, organisation: Organisation, periode: str) -> dict:
             for statut in ("actif", "archive", "annule")
         },
     }
+
+
+def demande_dict(demande) -> dict:
+    """Une demande de document, vue de l'intérieur."""
+    return {
+        "id": demande.id,
+        "nom": demande.nom,
+        "telephone": demande.telephone,
+        "telephone_display": affiche_telephone(demande.telephone),
+        "categorie": demande.categorie,
+        "motif": demande.motif,
+        "statut": demande.statut,
+        "note": demande.note,
+        "cree_le": demande.cree_le.isoformat(timespec="seconds"),
+        "traite_le": demande.traite_le.isoformat(timespec="seconds") if demande.traite_le else None,
+    }
+
+
+def demande_publique_dict(demande) -> dict:
+    """Ce que le citoyen relit après envoi : sa demande, pas le classeur."""
+    return {
+        "reference": demande.id,
+        "statut": demande.statut,
+        "categorie": demande.categorie,
+    }
+
+
+def ajouter_demande(db: Session, organisation: Organisation, entree) -> "Demande":
+    """La demande venue de la page publique : elle entre au registre."""
+    from ..models import Demande
+
+    demande = Demande(
+        organisation_id=organisation.id,
+        nom=entree.nom.strip(),
+        telephone=entree.telephone,
+        categorie=entree.categorie,
+        motif=entree.motif.strip(),
+    )
+    db.add(demande)
+    db.commit()
+    db.refresh(demande)
+    return demande
+
+
+def liste_demandes(db: Session, organisation: Organisation) -> list:
+    from ..models import Demande
+    from sqlalchemy import select
+
+    return list(
+        db.scalars(
+            select(Demande)
+            .where(Demande.organisation_id == organisation.id)
+            .order_by(Demande.id.desc())
+        ).all()
+    )
+
+
+def demande_de(db: Session, organisation: Organisation, demande_id: int):
+    from ..models import Demande
+
+    demande = db.get(Demande, demande_id)
+    if demande is None or demande.organisation_id != organisation.id:
+        from ..messages import refus
+
+        raise refus("demande_inconnue", 404)
+    return demande
+
+
+def traiter_demande(db: Session, organisation: Organisation, demande_id: int, entree) -> "Demande":
+    demande = demande_de(db, organisation, demande_id)
+    if entree.statut is not None:
+        demande.statut = entree.statut
+        demande.traite_le = maintenant() if entree.statut != "demandee" else None
+    if entree.note is not None:
+        demande.note = entree.note.strip()
+    db.commit()
+    db.refresh(demande)
+    return demande

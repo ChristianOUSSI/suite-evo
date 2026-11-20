@@ -4,7 +4,13 @@ from sqlalchemy import select
 from ..deps import CompteCourant, DbSession, OrganisationCourante
 from ..messages import refus
 from ..models import User
-from ..schemas import CompteEntree, DocumentCorrection, DocumentEntree, OrganisationEntree
+from ..schemas import (
+    CompteEntree,
+    DemandeCorrection,
+    DocumentCorrection,
+    DocumentEntree,
+    OrganisationEntree,
+)
 from ..security import hash_password
 from ..services import docs, present
 
@@ -123,3 +129,22 @@ def corriger_document(
         raise refus("saisie")
     document = docs.corriger_document(db, organisation, document_id, patch)
     return present.document_dict(document)
+
+
+@router.get("/demandes")
+def demandes(organisation: OrganisationCourante, db: DbSession) -> dict:
+    """Les demandes de documents venues de la page publique."""
+    lignes = docs.liste_demandes(db, organisation)
+    return {"demandes": [docs.demande_dict(un) for un in lignes]}
+
+
+@router.patch("/demandes/{demande_id}")
+def corriger_demande(
+    demande_id: int,
+    entree: DemandeCorrection,
+    organisation: OrganisationCourante,
+    db: DbSession,
+) -> dict:
+    """L'équipe prépare, remet ou refuse la demande."""
+    demande = docs.traiter_demande(db, organisation, demande_id, entree)
+    return docs.demande_dict(demande)

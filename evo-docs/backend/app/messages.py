@@ -22,6 +22,10 @@ CODES: dict[str, dict[str, str]] = {
         "fr": "Cette référence ne correspond à aucun document.",
         "en": "That reference matches no document.",
     },
+    "demande_inconnue": {
+        "fr": "Cette demande n'existe pas.",
+        "en": "That request does not exist.",
+    },
     "adresse_prise": {
         "fr": "Cette adresse tient déjà un compte.",
         "en": "That address already holds an account.",
@@ -68,6 +72,10 @@ LISTES: dict[str, dict[str, str]] = {
     "statut": {
         "fr": "actif, archive ou annule.",
         "en": "actif, archive or annule.",
+    },
+    "statut_demande": {
+        "fr": "demandee, prete, remise ou refusee.",
+        "en": "demandee, prete, remise or refusee.",
     },
     "role": {"fr": "responsable ou agent.", "en": "responsable or agent."},
     "telephone": {
