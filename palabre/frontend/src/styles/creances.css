@@ -434,7 +434,7 @@
   padding: clamp(1.25rem, 3vw, 2.1rem);
   border: 1px solid var(--ink);
   background: var(--sheet-bright);
-  box-shadow: 5px 5px 0 var(--paper-dark);
+  box-shadow: 6px 6px 0 var(--paper-dark), var(--ombre-levee);
 }
 
 .invoice-sheet.is-closed {
