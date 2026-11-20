@@ -2,7 +2,7 @@ from fastapi import APIRouter, Query
 
 from ..deps import CompteCourant, DbSession, OrganisationCourante
 from ..messages import refus
-from ..schemas import ColisCorrection, ColisEntree
+from ..schemas import DemandeCorrection, ColisCorrection, ColisEntree
 from ..services import log, present
 from ..utils import aujourdhui, periode_de
 
@@ -33,3 +33,30 @@ def recap_mois(
 ) -> dict:
     """Le mois du transporteur : dépôts, distributions, encaissé, par trajet."""
     return log.recap(db, organisation, periode or periode_de(aujourdhui()))
+
+
+@router.get("/demandes")
+def demandes(
+    organisation: OrganisationCourante,
+    db: DbSession,
+    statut: str | None = Query(default=None),
+) -> dict:
+    """Les demandes d'envoi venues de la page publique."""
+    lignes = log.liste_demandes(db, organisation, statut=statut)
+    return {
+        "total": len(lignes),
+        "en_attente": sum(1 for un in lignes if un.statut == "demande"),
+        "demandes": [log.demande_dict(un) for un in lignes],
+    }
+
+
+@router.patch("/demandes/{demande_id}")
+def corriger_demande(
+    demande_id: int,
+    entree: DemandeCorrection,
+    organisation: OrganisationCourante,
+    compte: CompteCourant,
+    db: DbSession,
+) -> dict:
+    demande = log.corriger_demande(db, organisation, demande_id, entree.statut or "")
+    return log.demande_dict(demande)

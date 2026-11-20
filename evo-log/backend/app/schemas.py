@@ -156,3 +156,39 @@ class CompteEntree(BaseModel):
         if valeur not in {"responsable", "agent"}:
             raise ValueError("liste:role")
         return valeur
+
+
+class DemandeEnvoiEntree(BaseModel):
+    """L'expéditeur qui demande un envoi, sans compte."""
+
+    genre: str = Field(default="colis", max_length=20)
+    description: str = Field(default="", max_length=2000)
+    poids_kg: int = Field(default=0, ge=0, le=5000)
+    expediteur_nom: str = Field(min_length=2, max_length=160)
+    expediteur_telephone: str = Field(max_length=24)
+    destinataire_nom: str = Field(min_length=2, max_length=160)
+    destinataire_telephone: str = Field(max_length=24)
+    depart: str = Field(default="Douala", max_length=60)
+    arrivee: str = Field(default="Douala", max_length=60)
+    note: str = Field(default="", max_length=600)
+
+    @field_validator("genre")
+    @classmethod
+    def genre_connu(cls, valeur: str) -> str:
+        if valeur not in GENRES_VALIDES:
+            raise ValueError("liste:genre")
+        return valeur
+
+    @field_validator("expediteur_telephone", "destinataire_telephone")
+    @classmethod
+    def telephones(cls, valeur: str) -> str:
+        return _telephone(valeur)
+
+    @field_validator("depart", "arrivee")
+    @classmethod
+    def ville_connue(cls, valeur: str) -> str:
+        return _ville(valeur)
+
+
+class DemandeCorrection(BaseModel):
+    statut: str | None = Field(default=None, max_length=12)

@@ -20,8 +20,8 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from ..messages import refus
-from ..models import Colis, Organisation, User
-from ..schemas import ColisEntree
+from ..models import Demande, Colis, Organisation, User
+from ..schemas import ColisEntree, DemandeEnvoiEntree
 from ..security import ALPHABET
 from ..utils import aujourdhui, periode_de
 
@@ -226,3 +226,78 @@ def recap(db: Session, organisation: Organisation, periode: str) -> dict:
         "a_percevoir": sum(un.frais for un in du_mois if un.moyen == "a_payer"),
         "poids_mois": sum(un.poids_kg for un in du_mois),
     }
+
+
+
+def demande_dict(demande: Demande) -> dict:
+    """Une demande d'envoi, vue de l'agence."""
+    return {
+        "id": demande.id,
+        "genre": demande.genre,
+        "description": demande.description,
+        "poids_kg": demande.poids_kg,
+        "expediteur_nom": demande.expediteur_nom,
+        "expediteur_telephone": demande.expediteur_telephone,
+        "destinataire_nom": demande.destinataire_nom,
+        "destinataire_telephone": demande.destinataire_telephone,
+        "depart": demande.depart,
+        "arrivee": demande.arrivee,
+        "note": demande.note,
+        "statut": demande.statut,
+        "cree_le": demande.cree_le.isoformat(timespec="seconds"),
+        "traite_le": demande.traite_le.isoformat(timespec="seconds") if demande.traite_le else None,
+    }
+
+
+def ajouter_demande(
+    db: Session, organisation: Organisation, entree: DemandeEnvoiEntree
+) -> Demande:
+    """La demande d'envoi venue de la page publique."""
+    demande = Demande(
+        organisation_id=organisation.id,
+        genre=entree.genre,
+        description=entree.description.strip(),
+        poids_kg=entree.poids_kg,
+        expediteur_nom=entree.expediteur_nom.strip(),
+        expediteur_telephone=entree.expediteur_telephone,
+        destinataire_nom=entree.destinataire_nom.strip(),
+        destinataire_telephone=entree.destinataire_telephone,
+        depart=entree.depart,
+        arrivee=entree.arrivee,
+        note=entree.note.strip(),
+    )
+    db.add(demande)
+    db.commit()
+    db.refresh(demande)
+    return demande
+
+
+def liste_demandes(db: Session, organisation: Organisation, statut: str | None = None) -> list:
+    requete = (
+        select(Demande)
+        .where(Demande.organisation_id == organisation.id)
+        .order_by(Demande.id.desc())
+    )
+    if statut:
+        requete = requete.where(Demande.statut == statut)
+    return list(db.scalars(requete).all())
+
+
+def demande_de(db: Session, organisation: Organisation, demande_id: int) -> Demande:
+    demande = db.get(Demande, demande_id)
+    if demande is None or demande.organisation_id != organisation.id:
+        raise refus("demande_inconnue", 404)
+    return demande
+
+
+def corriger_demande(db: Session, organisation: Organisation, demande_id: int, statut: str) -> Demande:
+    if statut not in ("demande", "acceptee", "refusee"):
+        raise refus("saisie", statut="demande, acceptee ou refusee")
+    demande = demande_de(db, organisation, demande_id)
+    demande.statut = statut
+    from ..utils import maintenant
+
+    demande.traite_le = maintenant() if statut != "demande" else None
+    db.commit()
+    db.refresh(demande)
+    return demande

@@ -19,6 +19,10 @@ compte.
 - **`/suivi` public** : le destinataire tape son numéro - statut, trajet,
   dates, téléphone du transporteur - sans compte. Ne montre ni expéditeur
   ni numéro du destinataire.
+- **`/envoi` public** : l'expéditeur écrit qui envoie, qui reçoit, d'où
+  vers où, quoi - sans compte. La demande arrive « demandée » ; l'agence
+  accepte ou refuse dans `/demandes`, puis dépose le colis comme
+  d'habitude.
 - **Le mois** (`/recap`) : dépôts, distributions, frais encaissés, à
   percevoir, par statut, par trajet, par genre - exports CSV.
 

@@ -112,3 +112,35 @@ class Colis(Base):
     organisation: Mapped[Organisation] = relationship(back_populates="colis")
     agent: Mapped[User] = relationship(foreign_keys=[agent_id])
     auteur: Mapped[User] = relationship(foreign_keys=[cree_par])
+
+
+STATUTS_DEMANDE = ("demande", "acceptee", "refusee")
+
+
+class Demande(Base):
+    """La demande d'envoi venue de la page publique.
+
+    L'expéditeur écrit sans compte : qui envoie, qui reçoit, d'où vers
+    où, quoi. L'agence accepte ou refuse - le colis se dépose ensuite
+    comme d'habitude.
+    """
+
+    __tablename__ = "demandes"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    organisation_id: Mapped[int] = mapped_column(ForeignKey("organisations.id"), index=True)
+    genre: Mapped[str] = mapped_column(String(20), default="colis")
+    description: Mapped[str] = mapped_column(Text, default="")
+    poids_kg: Mapped[int] = mapped_column(Integer, default=0)
+    expediteur_nom: Mapped[str] = mapped_column(String(160), default="")
+    expediteur_telephone: Mapped[str] = mapped_column(String(24), default="")
+    destinataire_nom: Mapped[str] = mapped_column(String(160), default="")
+    destinataire_telephone: Mapped[str] = mapped_column(String(24), default="")
+    depart: Mapped[str] = mapped_column(String(60), default="Douala")
+    arrivee: Mapped[str] = mapped_column(String(60), default="Douala")
+    note: Mapped[str] = mapped_column(Text, default="")
+    statut: Mapped[str] = mapped_column(String(12), default="demande", index=True)
+    cree_le: Mapped[datetime] = mapped_column(DateTime, default=_maintenant_naif)
+    traite_le: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+
+    organisation: Mapped[Organisation] = relationship()

@@ -111,3 +111,39 @@ def test_ville_inconnue_refusee(agent):
         },
     )
     assert reponse.status_code == 422
+
+
+def test_demande_envoi_publique(agent):
+    """L'expéditeur demande un envoi sans compte ; l'agence tranche."""
+    from fastapi.testclient import TestClient
+
+    from app.main import app
+
+    anonyme = TestClient(app)
+    reponse = anonyme.post(
+        "/public/envois",
+        json={
+            "genre": "colis",
+            "description": "Two cartons of clothes",
+            "poids_kg": 12,
+            "expediteur_nom": "Paul Sender",
+            "expediteur_telephone": "690 12 34 56",
+            "destinataire_nom": "Grace Receiver",
+            "destinataire_telephone": "677 44 55 66",
+            "depart": "Douala",
+            "arrivee": "Bafoussam",
+            "note": "Call before delivery",
+        },
+    )
+    assert reponse.status_code == 201, reponse.text
+    corps = reponse.json()
+    assert corps["ok"] and corps["statut"] == "demande"
+
+    liste = agent.get("/demandes").json()
+    demande = next(d for d in liste["demandes"] if d["id"] == corps["id"])
+    assert demande["expediteur_telephone"].startswith("+237")
+    assert demande["statut"] == "demande"
+
+    ok = agent.patch(f"/demandes/{corps['id']}", json={"statut": "acceptee"})
+    assert ok.status_code == 200
+    assert ok.json()["statut"] == "acceptee"

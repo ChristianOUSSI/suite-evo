@@ -135,3 +135,41 @@ export type ColisEntree = {
 };
 
 export type Villes = string[];
+
+export type StatutDemande = "demande" | "acceptee" | "refusee";
+
+export type Demande = {
+  id: number;
+  genre: string;
+  description: string;
+  poids_kg: number;
+  expediteur_nom: string;
+  expediteur_telephone: string;
+  destinataire_nom: string;
+  destinataire_telephone: string;
+  depart: string;
+  arrivee: string;
+  note: string;
+  statut: StatutDemande;
+  cree_le: string;
+  traite_le: string | null;
+};
+
+export type ListeDemandes = {
+  total: number;
+  en_attente: number;
+  demandes: Demande[];
+};
+
+export type DemandeEnvoiEntree = {
+  genre: string;
+  description: string;
+  poids_kg: number;
+  expediteur_nom: string;
+  expediteur_telephone: string;
+  destinataire_nom: string;
+  destinataire_telephone: string;
+  depart: string;
+  arrivee: string;
+  note: string;
+};
