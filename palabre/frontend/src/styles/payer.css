@@ -343,24 +343,28 @@
   align-items: center;
   gap: 0.5rem;
   min-width: 0;
-  padding: 0.58rem 0.52rem;
+  padding: 0.62rem 0.55rem;
   border: 1px solid var(--rule-strong);
+  border-radius: 10px;
   background: var(--sheet-bright);
   cursor: pointer;
   transition:
-    border-color 140ms ease,
-    box-shadow 140ms ease,
-    background-color 140ms ease;
+    border-color var(--transition),
+    box-shadow var(--transition),
+    background-color var(--transition),
+    transform var(--transition);
 }
 
 .payer-method:hover {
   border-color: var(--ink);
+  box-shadow: var(--ombre);
+  transform: translateY(-1px);
 }
 
 .payer-method.is-active {
   border-color: var(--ink);
   background: var(--sheet-bright);
-  box-shadow: inset 0 0 0 1px var(--ink);
+  box-shadow: inset 0 0 0 1px var(--ink), var(--ombre);
 }
 
 .payer-method input {
