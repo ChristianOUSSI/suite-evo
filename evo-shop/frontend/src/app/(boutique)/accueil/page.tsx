@@ -56,6 +56,7 @@ export default async function PageAccueil() {
             </span>
           </span>
           <span className="portail__reste">
+            {etat.commandes > 0 ? `${etat.commandes} ${t("accueil.commandes")} · ` : ""}
             {etat.ruptures} {t("accueil.ruptures")} · {etat.alertes}{" "}
             {t("accueil.alertes")}
           </span>
@@ -68,6 +69,9 @@ export default async function PageAccueil() {
         </Link>
         <Link href="/produits" className="cadc-bouton cadc-bouton--doux">
           {t("nav.produits")}
+        </Link>
+        <Link href="/commander" className="cadc-bouton cadc-bouton--doux" target="_blank">
+          {t("commander.titre")}
         </Link>
       </div>
 

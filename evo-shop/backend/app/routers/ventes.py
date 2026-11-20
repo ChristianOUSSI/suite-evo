@@ -44,7 +44,15 @@ def corriger(
     compte: CompteCourant,
     db: DbSession,
 ) -> dict:
-    """Le seul geste permis : annuler. Le stock remonte, la trace reste."""
+    """Les gestes permis : valider une commande, annuler un ticket.
+
+    Valider descend le stock une fois ; annuler le remonte si le ticket
+    était validé, et garde la trace dans les deux cas.
+    """
+    if entree.statut == "validee":
+        return present.vente_dict(
+            shop.confirmer_commande(db, organisation, vente_id, compte)
+        )
     if entree.statut != "annulee":
         from ..messages import refus
 

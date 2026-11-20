@@ -25,7 +25,17 @@ def compte_dict(compte: User) -> dict:
     return {"id": compte.id, "nom": compte.nom, "email": compte.email, "role": compte.role}
 
 
-def produit_dict(produit: Produit) -> dict:
+def produit_dict(produit: Produit, public: bool = False) -> dict:
+    if public:
+        # La page publique montre le rayon, jamais l'atelier : ni prix
+        # d'achat, ni seuils, ni historique.
+        return {
+            "id": produit.id,
+            "nom": produit.nom,
+            "unite": produit.unite,
+            "prix_vente": produit.prix_vente,
+            "stock": produit.stock,
+        }
     return {
         "id": produit.id,
         "nom": produit.nom,

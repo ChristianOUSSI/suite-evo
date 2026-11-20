@@ -65,7 +65,7 @@ export interface Vente {
   id: number;
   client_nom: string;
   total: number;
-  statut: "validee" | "annulee";
+  statut: "commande" | "validee" | "annulee";
   note: string;
   cree_par: string;
   cree_le: string;
@@ -81,6 +81,7 @@ export interface Etat {
   produits: number;
   ruptures: number;
   alertes: number;
+  commandes: number;
   ventes_du_jour: number;
   ca_du_jour: number;
   ca_total: number;
@@ -115,6 +116,28 @@ export interface VenteEntree {
   lignes: { produit_id: number; quantite: number }[];
   client_nom: string;
   note: string;
+}
+
+export interface ProduitPublic {
+  id: number;
+  nom: string;
+  unite: Unite;
+  prix_vente: number;
+  stock: number;
+}
+
+export interface BoutiquePublique {
+  boutique: Organisation | null;
+  produits: ProduitPublic[];
+  lien?: string;
+}
+
+export interface CommandeEnvoyee {
+  ok: boolean;
+  reference: number;
+  total: number;
+  lignes: number;
+  boutique: Organisation;
 }
 
 export interface OrganisationEntree {

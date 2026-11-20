@@ -96,9 +96,28 @@ class VenteCorrection(BaseModel):
     @field_validator("statut")
     @classmethod
     def statut_connu(cls, valeur: str | None) -> str | None:
-        if valeur is not None and valeur != "annulee":
+        if valeur is not None and valeur not in ("validee", "annulee"):
             raise ValueError("liste:statut")
         return valeur
+
+
+class CommandePublique(BaseModel):
+    """La commande du visiteur : son nom, son numéro, son panier."""
+
+    client_nom: str = Field(min_length=2, max_length=160)
+    client_telephone: str = Field(default="", max_length=24)
+    lignes: list[LigneEntree] = Field(min_length=1, max_length=200)
+    note: str = Field(default="", max_length=600)
+
+    @field_validator("client_telephone")
+    @classmethod
+    def canonise(cls, valeur: str) -> str:
+        if not valeur or not valeur.strip():
+            return ""
+        canonique = canonise_telephone(valeur)
+        if canonique is None:
+            raise ValueError("liste:telephone")
+        return canonique
 
 
 class StockEntree(BaseModel):

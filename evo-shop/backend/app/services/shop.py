@@ -81,15 +81,95 @@ def vendre(db: Session, organisation: Organisation, entree, compte: User) -> Ven
     return vente
 
 
-def annuler_vente(
-    db: Session, organisation: Organisation, vente_id: int, note: str, compte: User
+def commande_publique(db: Session, organisation: Organisation, entree) -> Vente:
+    """La commande venue de la page publique : un ticket en « commande ».
+
+    Le stock ne descend pas encore : la caisse confirme d'abord, et c'est
+    la confirmation qui vérifie et décrémente. Le client laisse son nom
+    et son numéro dans la note - la boutique le rappelle pour payer.
+    """
+    if not entree.lignes:
+        raise refus("saisie")
+
+    total = 0
+    lignes_data = []
+    for ligne in entree.lignes:
+        produit = produit_de(db, organisation, ligne.produit_id)
+        if not produit.actif:
+            raise refus("produit_inconnu", 404)
+        if produit.stock < ligne.quantite:
+            if produit.stock == 0:
+                raise refus("produit_epuise")
+            raise refus("stock_insuffisant")
+        lignes_data.append((produit, ligne.quantite))
+        total += ligne.quantite * produit.prix_vente
+
+    note = "commande en ligne"
+    if entree.client_telephone:
+        note += f" · tel {entree.client_telephone}"
+    if entree.note.strip():
+        note += f" · {entree.note.strip()}"
+
+    vente = Vente(
+        organisation_id=organisation.id,
+        client_nom=entree.client_nom.strip(),
+        note=note[:600],
+        statut="commande",
+        cree_par=None,
+    )
+    db.add(vente)
+    db.flush()
+    for produit, quantite in lignes_data:
+        db.add(
+            LigneVente(
+                vente_id=vente.id,
+                produit_id=produit.id,
+                quantite=quantite,
+                prix_unitaire=produit.prix_vente,
+            )
+        )
+    vente.total = total
+    db.commit()
+    db.refresh(vente)
+    return vente
+
+
+def confirmer_commande(
+    db: Session, organisation: Organisation, vente_id: int, compte: User
 ) -> Vente:
-    """Annuler rend le stock et garde la trace : le ticket ne s'efface pas."""
+    """La caisse valide la commande : le stock descend, le ticket est né."""
     vente = vente_de(db, organisation, vente_id)
+    if vente.statut == "validee":
+        raise refus("vente_deja_validee", 409)
     if vente.statut == "annulee":
         raise refus("vente_deja_annulee", 409)
     for ligne in vente.lignes:
-        ligne.produit.stock += ligne.quantite
+        if ligne.produit.stock < ligne.quantite:
+            if ligne.produit.stock == 0:
+                raise refus("produit_epuise")
+            raise refus("stock_insuffisant")
+    for ligne in vente.lignes:
+        ligne.produit.stock -= ligne.quantite
+    vente.statut = "validee"
+    db.commit()
+    db.refresh(vente)
+    return vente
+
+
+def annuler_vente(
+    db: Session, organisation: Organisation, vente_id: int, note: str, compte: User
+) -> Vente:
+    """Annuler rend le stock et garde la trace : le ticket ne s'efface pas.
+
+    Une commande jamais validée n'a pas descendu de stock : l'annuler ne
+    doit rien remonter.
+    """
+    vente = vente_de(db, organisation, vente_id)
+    if vente.statut == "annulee":
+        raise refus("vente_deja_annulee", 409)
+    if vente.statut == "validee":
+        for ligne in vente.lignes:
+            ligne.produit.stock += ligne.quantite
     vente.statut = "annulee"
     if note.strip():
         vente.note = (vente.note + " · " + note.strip()).strip(" ·")
@@ -134,6 +214,13 @@ def etat(db: Session, organisation: Organisation) -> dict:
         "alertes": sum(
             1 for un in produits if 0 < un.stock <= un.seuil_alerte
         ),
+        "commandes": db.scalar(
+            select(func.count(Vente.id)).where(
+                Vente.organisation_id == organisation.id,
+                Vente.statut == "commande",
+            )
+        )
+        or 0,
         "ventes_du_jour": len(du_jour),
         "ca_du_jour": sum(un.total for un in du_jour),
         "ca_total": sum(un.total for un in ventes),

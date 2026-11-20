@@ -33,14 +33,20 @@ Comptes de démonstration : `ada@quincaillerie.cm` (responsable) et
   trace dans sa note.
 - **Le mois** (`/recap`). CA, quantités vendues, marge estimée - recalculés
   à chaque demande, exportés en CSV avec le catalogue.
-- **La vitre** (`/accueil`). CA du jour, tickets du jour, ruptures et seuils
-  d'alerte qui remontent avant que le client ne demande.
+- **La vitre** (`/accueil`). CA du jour, tickets du jour, commandes en
+  ligne en attente, ruptures et seuils d'alerte.
+- **La commande en ligne** (`/commander`). Le client remplit son panier,
+  laisse son nom et son numéro - sans compte. La boutique le rappelle pour
+  encaisser et retirer. La commande naît en statut « commande » : elle ne
+  touche pas le stock tant que la caisse ne l'a pas validée. Un refus la
+  rend sans décompter.
 
 ## Ce qui est vérifié
 
-- `pytest` backend : 10 tests, dont le stock qui descend à la vente, le
+- `pytest` backend : 13 tests, dont le stock qui descend à la vente, le
   stock qui remonte à l'annulation, le refus de stock insuffisant, le rôle
-  caissier qui ne touche pas aux prix.
+  caissier qui ne touche pas aux prix, la commande publique qui attend la
+  validation de la caisse.
 - `npm run lint`, `tsc --noEmit`, `next build` : verts.
 - Parcours HTTP réel : connexion, les six écrans, `/etat` (41 articles,
   CA total de démonstration), `/recap` (37 tickets, marge calculée).

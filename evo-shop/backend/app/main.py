@@ -9,7 +9,7 @@ from sqlalchemy.exc import IntegrityError, OperationalError
 from .config import settings
 from .database import Base, SessionLocal, engine
 from .messages import refus_de_validation
-from .routers import auth, exports, organisation, ventes
+from .routers import auth, exports, organisation, public, ventes
 from .services.seed import seed_database
 
 Base.metadata.create_all(engine)
@@ -86,6 +86,7 @@ async def validation_422(_: Request, exc: RequestValidationError) -> JSONRespons
 app.include_router(auth.router)
 app.include_router(organisation.router)
 app.include_router(ventes.router)
+app.include_router(public.router)
 app.include_router(exports.router)
 
 

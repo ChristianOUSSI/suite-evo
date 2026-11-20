@@ -27,7 +27,7 @@ def _maintenant_naif() -> datetime:
 # d'un prix. Le prix de vente du jour fait foi, l'historique garde l'instantané.
 
 UNITES = ("piece", "sac", "kg", "litre", "carton", "paquet")
-STATUTS_VENTE = ("validee", "annulee")
+STATUTS_VENTE = ("commande", "validee", "annulee")
 ROLES = ("responsable", "caissier")
 
 

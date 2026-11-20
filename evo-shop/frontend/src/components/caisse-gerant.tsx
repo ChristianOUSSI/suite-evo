@@ -78,13 +78,13 @@ export function CaisseGerant({ ventes, produits, langue }: Props) {
     }
   }
 
-  async function annuler(vente: Vente) {
+  async function changerStatut(vente: Vente, statut: "validee" | "annulee") {
     setEnCours(vente.id);
     setErreur(null);
     try {
       await ecrire<Vente>(`/ventes/${vente.id}`, {
         method: "PATCH",
-        body: { statut: "annulee" },
+        body: { statut },
         langue,
       });
       routeur.refresh();
@@ -92,6 +92,14 @@ export function CaisseGerant({ ventes, produits, langue }: Props) {
       setErreur(e instanceof ErreurChantier ? e.message : t("commun.horsLigne"));
       setEnCours(null);
     }
+  }
+
+  async function annuler(vente: Vente) {
+    await changerStatut(vente, "annulee");
+  }
+
+  async function valider(vente: Vente) {
+    await changerStatut(vente, "validee");
   }
 
   return (
@@ -181,6 +189,7 @@ export function CaisseGerant({ ventes, produits, langue }: Props) {
               <small>
                 {f.date(vente.cree_le)} · {f.heure(vente.cree_le)} · {vente.lignes.length} {t("ventes.lignes")}
                 {vente.client_nom ? ` · ${vente.client_nom}` : ""}
+                {vente.statut === "commande" ? ` · ${t("statut.commande")}` : ""}
               </small>
             </span>
             <span className="cadc-ligne__valeur">
@@ -188,10 +197,31 @@ export function CaisseGerant({ ventes, produits, langue }: Props) {
               <br />
               {vente.statut === "annulee" ? (
                 <span className="cadc-badge cadc-badge--doux">-</span>
+              ) : vente.statut === "commande" ? (
+                <span className="cadc-badge cadc-badge--acier">{t("statut.commande")}</span>
               ) : (
                 <span className="cadc-badge cadc-badge--vert">OK</span>
               )}
-              {vente.statut === "validee" ? (
+              {vente.statut === "commande" ? (
+                <span className="cadc-acts">
+                  <button
+                    type="button"
+                    className="cadc-bouton cadc-bouton--petit cadc-bouton--premier"
+                    disabled={enCours === vente.id}
+                    onClick={() => valider(vente)}
+                  >
+                    {t("statut.valider")}
+                  </button>
+                  <button
+                    type="button"
+                    className="cadc-bouton cadc-bouton--petit cadc-bouton--doux"
+                    disabled={enCours === vente.id}
+                    onClick={() => annuler(vente)}
+                  >
+                    {t("ventes.annuler")}
+                  </button>
+                </span>
+              ) : vente.statut === "validee" ? (
                 <span className="cadc-acts">
                   <button
                     type="button"

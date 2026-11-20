@@ -142,7 +142,24 @@ export const DICTEE: Dictionnaire = {
   "commun.voir": { fr: "Voir", en: "View" },
   "commun.mois": { fr: "mois", en: "month" },
   "commun.jours": { fr: "jours", en: "days" },
-  "commun.reseaux": { fr: "MTN, Orange, Nexttel", en: "MTN, Orange, Nexttel" },
+  "accueil.commandes": { fr: "Commandes en ligne", en: "Online orders" },
+  "statut.commande": { fr: "Commande", en: "Order" },
+  "statut.valider": { fr: "Valider", en: "Validate" },
+
+  "commander.titre": { fr: "Commander à la boutique", en: "Order from the shop" },
+  "commander.chapo": { fr: "Remplis ton panier, on te rappelle pour payer et retirer. Sans compte, sans installation.", en: "Fill your basket, we call you back to pay and pick up. No account, no install." },
+  "commander.nom": { fr: "Ton nom", en: "Your name" },
+  "commander.telephone": { fr: "Ton numéro", en: "Your number" },
+  "commander.note": { fr: "Un mot pour la boutique (à retirer, à livrer…)", en: "A word for the shop (pickup, delivery…)" },
+  "commander.envoyer": { fr: "Envoyer la commande · {total}", en: "Send the order · {total}" },
+  "commander.envoi": { fr: "Envoi…", en: "Sending…" },
+  "commander.stock": { fr: "stock {nombre}", en: "stock {nombre}" },
+  "commander.vide-panier": { fr: "Touche un article pour commencer ton panier.", en: "Tap an item to start your basket." },
+  "commander.ok-titre": { fr: "Commande envoyée !", en: "Order sent!" },
+  "commander.ok-texte": { fr: "Référence n°{reference}, {total} au total. La boutique te rappelle pour confirmer.", en: "Reference n°{reference}, {total} total. The shop calls you back to confirm." },
+  "commander.encore": { fr: "Faire une autre commande", en: "Make another order" },
+  "commander.aide": { fr: "Rien n'est payé ici : la boutique encaisse au comptoir, espèces ou Mobile Money.", en: "Nothing is paid here: the shop collects at the counter, cash or Mobile Money." },
+  "commander.vide": { fr: "La boutique n'a pas encore ouvert sa page de commande.", en: "The shop has not opened its order page yet." },
 };
 
 export function traduire(langue: string) {

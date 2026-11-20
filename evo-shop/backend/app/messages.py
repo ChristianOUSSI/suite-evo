@@ -34,6 +34,10 @@ CODES: dict[str, dict[str, str]] = {
         "fr": "Ce ticket est déjà annulé.",
         "en": "That receipt is already cancelled.",
     },
+    "vente_deja_validee": {
+        "fr": "Ce ticket est déjà validé.",
+        "en": "That receipt is already validated.",
+    },
     "periode_inconnue": {
         "fr": "Mois invalide : format attendu 2026-11.",
         "en": "Invalid month: expected 2026-11.",
@@ -81,8 +85,8 @@ LISTES: dict[str, dict[str, str]] = {
         "en": "piece, sac, kg, litre, carton or paquet.",
     },
     "statut": {
-        "fr": "seul « annulee » se décide ici.",
-        "en": "only « annulee » is decided here.",
+        "fr": "validee ou annulee ; une commande passe d'abord par validée.",
+        "en": "validee or annulee; a commande must be validated first.",
     },
     "role": {"fr": "responsable ou caissier.", "en": "responsable or caissier."},
 }
