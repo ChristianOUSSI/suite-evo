@@ -2,86 +2,174 @@
 
 .portail {
   display: grid;
-  gap: 26px;
-  padding-block: 30px 40px;
+  gap: 28px;
+  padding-block: 34px 48px;
 }
+
+/* ---------- Héros ---------- */
 
 .portail__hero {
   display: grid;
-  gap: 14px;
-  padding-block: 10px;
+  gap: 16px;
+  padding-block: 14px 6px;
 }
 
 .portail__hero h1 {
-  font-size: clamp(2rem, 9vw, 3.2rem);
-  max-width: 22ch;
+  font-size: clamp(2.1rem, 8.5vw, 3.4rem);
+  max-width: 20ch;
+  line-height: 1.08;
+  letter-spacing: -0.015em;
 }
 
 .portail__chapo {
   color: var(--cadc-encre-2);
-  font-size: 1.05rem;
-  max-width: 56ch;
+  font-size: 1.06rem;
+  line-height: 1.6;
+  max-width: 54ch;
 }
 
 .portail__compte {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
+  margin: 0;
 }
+
+/* ---------- Recherche ---------- */
+
+.portail__recherche {
+  position: relative;
+}
+
+.portail__recherche::before {
+  content: "";
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  width: 17px;
+  height: 17px;
+  transform: translateY(-50%);
+  border: 2px solid var(--cadc-encre-3);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.portail__recherche::after {
+  content: "";
+  position: absolute;
+  left: 30px;
+  top: calc(50% + 8px);
+  width: 8px;
+  height: 2px;
+  background: var(--cadc-encre-3);
+  border-radius: 2px;
+  transform: rotate(45deg);
+  pointer-events: none;
+}
+
+.portail__champ {
+  width: 100%;
+  padding: 14px 18px 14px 48px;
+  font: inherit;
+  font-size: 1rem;
+  color: var(--cadc-encre);
+  background: var(--cadc-feuille);
+  border: 1px solid var(--cadc-ligne);
+  border-radius: 999px;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.portail__champ::placeholder {
+  color: var(--cadc-encre-3);
+}
+
+.portail__champ:focus {
+  border-color: var(--cadc-acier);
+  box-shadow: 0 0 0 3px rgb(30 64 120 / 14%);
+}
+
+/* ---------- Grille de cartes ---------- */
 
 .portail__liste {
   display: grid;
-  gap: 12px;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
 .portail__carte {
+  position: relative;
   display: grid;
-  gap: 8px;
+  gap: 10px;
   align-content: start;
   padding: 18px;
   border: 1px solid var(--cadc-ligne);
-  border-left: 5px solid var(--cadc-acier);
-  border-radius: 14px;
+  border-radius: 16px;
   background: var(--cadc-feuille);
   color: inherit;
   text-decoration: none;
+  transition: transform 0.16s ease, border-color 0.16s ease,
+    box-shadow 0.16s ease;
 }
 
 .portail__carte:hover,
 .portail__carte:focus-visible {
+  transform: translateY(-3px);
   border-color: var(--cadc-acier);
-  box-shadow: 0 6px 18px rgb(0 0 0 / 8%);
+  box-shadow: 0 10px 28px rgb(15 40 80 / 12%);
+}
+
+.portail__carte:focus-visible {
+  outline: 2px solid var(--cadc-acier);
+  outline-offset: 2px;
 }
 
 .portail__logo {
-  width: 44px;
-  height: 44px;
-  border-radius: 10px;
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
   object-fit: cover;
   border: 1px solid var(--cadc-ligne);
+  background: #fff;
+}
+
+.portail__haut {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-height: 24px;
 }
 
 .portail__nom {
   font-family: var(--cadc-mono);
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 700;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
   color: var(--cadc-acier);
 }
 
 .portail__titre {
-  font-size: 1.15rem;
-  line-height: 1.25;
+  font-size: 1.14rem;
+  font-weight: 650;
+  line-height: 1.28;
 }
 
 .portail__texte {
   margin: 0;
   color: var(--cadc-encre-2);
-  font-size: 0.92rem;
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.portail__pied-carte {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 4px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--cadc-ligne);
 }
 
 .portail__port {
@@ -91,8 +179,100 @@
   color: var(--cadc-encre-3);
 }
 
+.portail__ouvrir {
+  font-size: 0.85rem;
+  font-weight: 650;
+  color: var(--cadc-acier);
+  transition: transform 0.15s ease;
+}
+
+.portail__carte:hover .portail__ouvrir {
+  transform: translateX(3px);
+}
+
+/* ---------- Pastille de statut ---------- */
+
+.portail__pastille {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.portail__pastille-point {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.portail__pastille--vert {
+  color: #177245;
+  background: #e3f4ea;
+}
+
+.portail__pastille--vert .portail__pastille-point {
+  box-shadow: 0 0 0 3px rgb(23 114 69 / 18%);
+}
+
+.portail__pastille--gris {
+  color: var(--cadc-encre-3);
+  background: var(--cadc-ligne);
+}
+
+.portail__pastille--pulse {
+  color: var(--cadc-acier);
+  background: rgb(30 64 120 / 8%);
+}
+
+.portail__pastille--pulse .portail__pastille-point {
+  animation: portail-pulse 1.1s ease-in-out infinite;
+}
+
+@keyframes portail-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+/* ---------- Divers ---------- */
+
+.portail__vide {
+  color: var(--cadc-encre-3);
+  text-align: center;
+  padding-block: 30px;
+}
+
 .portail__pied {
   color: var(--cadc-encre-3);
   font-size: 0.85rem;
-  max-width: 60ch;
+  line-height: 1.6;
+  max-width: 62ch;
+}
+
+/* ---------- Mobile ---------- */
+
+@media (max-width: 520px) {
+  .portail {
+    gap: 22px;
+    padding-block: 24px 36px;
+  }
+
+  .portail__hero h1 {
+    font-size: 2rem;
+  }
+
+  .portail__liste {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
 }

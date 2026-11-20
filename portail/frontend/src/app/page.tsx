@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { PRODUITS, type Produit } from "@/lib/produits";
 
@@ -9,49 +9,71 @@ const TEXTES = {
     surtitre: "CODE AXIS DIGITAL CAMEROON",
     titre: "La maison des logiciels de comptoir",
     chapo:
-      "Vingt-deux produits, un même socle : chaque métier a son logiciel, chaque logiciel tient sur un téléphone, en français comme en anglais, en FCFA.",
+      "Chaque métier a son logiciel. Chaque logiciel tient sur un téléphone, en français comme en anglais, en FCFA, avec Mobile Money.",
     compte: "produits",
+    chercher: "Chercher un produit…",
     ouvrir: "Ouvrir",
-    pied: "Chaque produit a sa propre adresse : les ports 3500 à 5700. En démo, rien ne quitte la machine - aucun SMS, aucun appel, aucune argent qui part.",
+    statutOuvert: "ouvert",
+    statutFerme: "fermé",
+    statutTest: "test…",
+    pied: "Chaque produit a sa propre adresse. En démo, rien ne quitte la machine : aucun SMS, aucun appel, aucune argent qui part.",
     vide: "aucun produit ne répond pour l'instant",
+    aucunTrouve: "Aucun produit ne correspond à ta recherche.",
   },
   en: {
     surtitre: "CODE AXIS DIGITAL CAMEROON",
     titre: "The house of counter software",
     chapo:
-      "Twenty-two products, one foundation: every trade has its software, every software fits on a phone, in French and English, in FCFA.",
+      "Every trade has its software. Every software fits on a phone, in French and English, in FCFA, with Mobile Money.",
     compte: "products",
+    chercher: "Search a product…",
     ouvrir: "Open",
-    pied: "Every product has its own address: ports 3500 to 5700. In demo, nothing leaves the machine - no SMS, no call, no money leaves.",
+    statutOuvert: "open",
+    statutFerme: "closed",
+    statutTest: "testing…",
+    pied: "Every product has its own address. In demo, nothing leaves the machine: no SMS, no call, no money leaves.",
     vide: "no product is answering yet",
+    aucunTrouve: "No product matches your search.",
   },
 } as const;
 
 type Langue = keyof typeof TEXTES;
+type Joignable = "?" | "oui" | "non";
 
-function Carte({ produit, langue }: { produit: Produit; langue: Langue }) {
-  const [joignable, setJoignable] = useState<"?" | "oui" | "non">("?");
-
+function useJoignable(port: number): Joignable {
+  const [etat, setEtat] = useState<Joignable>("?");
   useEffect(() => {
     const controle = new AbortController();
     const minuteur = setTimeout(() => controle.abort(), 2500);
-    // no-cors : on teste seulement que la porte répond, pas le contenu.
-    fetch(`http://localhost:${produit.port}`, { method: "HEAD", mode: "no-cors", signal: controle.signal })
+    fetch(`http://localhost:${port}`, { method: "HEAD", mode: "no-cors", signal: controle.signal })
       .then(() => {
         clearTimeout(minuteur);
-        setJoignable("oui");
+        setEtat("oui");
       })
       .catch(() => {
         clearTimeout(minuteur);
-        setJoignable("non");
+        setEtat("non");
       });
     return () => {
       clearTimeout(minuteur);
       controle.abort();
     };
-  }, [produit.port]);
+  }, [port]);
+  return etat;
+}
 
+function Carte({ produit, langue }: { produit: Produit; langue: Langue }) {
+  const joignable = useJoignable(produit.port);
   const texte = produit[langue];
+  const t = TEXTES[langue];
+
+  const statut =
+    joignable === "oui"
+      ? { libelle: t.statutOuvert, classe: "portail__pastille--vert" }
+      : joignable === "non"
+        ? { libelle: t.statutFerme, classe: "portail__pastille--gris" }
+        : { libelle: t.statutTest, classe: "portail__pastille--pulse" };
+
   return (
     <li>
       <a className="portail__carte" href={`http://localhost:${produit.port}`}>
@@ -60,22 +82,23 @@ function Carte({ produit, langue }: { produit: Produit; langue: Langue }) {
           src={`http://localhost:${produit.port}/logo.jpg`}
           alt={produit.nom}
           className="portail__logo"
+          loading="lazy"
           onError={(e) => {
             (e.target as HTMLImageElement).style.display = "none";
           }}
         />
-        <span className="portail__nom">{produit.nom}</span>
+        <span className="portail__haut">
+          <span className="portail__nom">{produit.nom}</span>
+          <span className={`portail__pastille ${statut.classe}`}>
+            <span className="portail__pastille-point" />
+            {statut.libelle}
+          </span>
+        </span>
         <span className="portail__titre">{texte.titre}</span>
         <span className="portail__texte">{texte.texte}</span>
-        <span className="portail__port">
-          :{produit.port} ·{" "}
-          {joignable === "oui"
-            ? langue === "en"
-              ? "open"
-              : "ouvert"
-            : joignable === "non"
-              ? TEXTES[langue].vide
-              : "--�"}
+        <span className="portail__pied-carte">
+          <span className="portail__port">:{produit.port}</span>
+          <span className="portail__ouvrir">{t.ouvrir} →</span>
         </span>
       </a>
     </li>
@@ -84,7 +107,17 @@ function Carte({ produit, langue }: { produit: Produit; langue: Langue }) {
 
 export default function Portail() {
   const [langue, setLangue] = useState<Langue>("fr");
+  const [recherche, setRecherche] = useState("");
   const t = TEXTES[langue];
+
+  const filtres = useMemo(() => {
+    const mot = recherche.trim().toLowerCase();
+    if (!mot) return PRODUITS;
+    return PRODUITS.filter((p) => {
+      const texte = `${p.nom} ${p[langue].titre} ${p[langue].texte}`.toLowerCase();
+      return texte.includes(mot);
+    });
+  }, [recherche, langue]);
 
   return (
     <div className="cadc-gabarit portail">
@@ -128,11 +161,26 @@ export default function Portail() {
         </p>
       </section>
 
-      <ul className="portail__liste">
-        {PRODUITS.map((produit) => (
-          <Carte key={produit.nom} produit={produit} langue={langue} />
-        ))}
-      </ul>
+      <div className="portail__recherche">
+        <input
+          type="search"
+          className="portail__champ"
+          placeholder={t.chercher}
+          value={recherche}
+          onChange={(e) => setRecherche(e.target.value)}
+          aria-label={t.chercher}
+        />
+      </div>
+
+      {filtres.length === 0 ? (
+        <p className="portail__vide">{t.aucunTrouve}</p>
+      ) : (
+        <ul className="portail__liste">
+          {filtres.map((produit) => (
+            <Carte key={produit.nom} produit={produit} langue={langue} />
+          ))}
+        </ul>
+      )}
 
       <p className="portail__pied">{t.pied}</p>
 
