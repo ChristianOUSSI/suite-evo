@@ -75,12 +75,14 @@
 }
 
 .produit--alerte {
-  border-left: 5px solid var(--cadc-ocre);
+  border-left: 5px solid var(--cadc-orange);
+  background: var(--cadc-orange-lave);
 }
 
 .produit--rupture {
   border-left: 5px solid var(--cadc-rouge);
-  opacity: 0.85;
+  background: var(--cadc-rouge-lave);
+  opacity: 0.9;
 }
 
 .ticket--annule {
