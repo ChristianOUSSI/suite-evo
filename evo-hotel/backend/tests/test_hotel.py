@@ -255,7 +255,7 @@ def test_reservation_publique(client):
 
 def test_deux_demandes_une_seule_confirmation(responsable, client):
     """Deux demandes en ligne peuvent viser la même chambre : la première
-    confirmation passe, la seconde est refusée — la chambre est prise."""
+    confirmation passe, la seconde est refusée - la chambre est prise."""
     arrivee = (date.today() + timedelta(days=30)).isoformat()
     depart = (date.today() + timedelta(days=31)).isoformat()
     dispo = client.get(f"/public/disponibilite?arrivee={arrivee}&depart={depart}")

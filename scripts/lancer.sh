@@ -8,7 +8,7 @@ PY=/c/Users/Christian/tools/py312/python.exe
 JOURNAL=/tmp/suite-evo
 mkdir -p "$JOURNAL"
 
-# dossier|port_api|port_front — la table fait foi, pas une formule.
+# dossier|port_api|port_front - la table fait foi, pas une formule.
 TABLE="
 evo-tontine|8500|3500
 evo-crm|8600|3600
@@ -44,9 +44,9 @@ echo "$TABLE" | while IFS='|' read -r dossier api front; do
   (cd "$dossier/frontend" && \
     if [ -f .next/BUILD_ID ]; then CMD="npm run start"; else CMD="npm run dev"; fi && \
     nohup $CMD > "$JOURNAL/$dossier-front.log" 2>&1 &)
-  echo "  $dossier → api :$api · front :$front"
+  echo "  $dossier -�� api :$api · front :$front"
 done
 
 (cd portail/frontend && nohup npm run start > "$JOURNAL/portail.log" 2>&1 &)
-echo "  portail → http://localhost:5800"
-echo "Journaux dans $JOURNAL — arrêt : scripts/arreter.sh"
+echo "  portail -�� http://localhost:5800"
+echo "Journaux dans $JOURNAL - arrêt : scripts/arreter.sh"

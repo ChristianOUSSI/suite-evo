@@ -1,4 +1,4 @@
-# PALABRE — Recouvrement commercial
+# PALABRE - Recouvrement commercial
 
 Le logiciel de recouvrement de la maison CADC : factures, relances,
 paiements Mobile Money, tableau de bord. Pensé pour les entreprises
@@ -8,8 +8,8 @@ camerounaises qui courent après leurs créances sans tableur ni paperasse.
 
 - **Factures** : une ligne par créance, client, montant en FCFA, date
   d'échéance, statut (à relancer, partielle, soldée, abandonnée).
-- **Relances** : l'historique des rappels par client — lettre, appel,
-  WhatsApp — pour savoir qui a déjà été relancé et quand.
+- **Relances** : l'historique des rappels par client - lettre, appel,
+  WhatsApp - pour savoir qui a déjà été relancé et quand.
 - **Paiements MoMo** : encaissements MTN/Orange/Nexttel Money rattachés
   à la facture, reste à percevoir calculé.
 - **Tableau de bord** : ce qui rentre ce mois, ce qui stagne, les plus
@@ -29,7 +29,7 @@ En interne, tout est derrière JWT.
 - Front : `npm run dev` depuis `frontend/`, port **3000**
 - Compte démo : `patron@nanafils.cm` / `Palabre2026!`
 
-Mode démo : aucun vrai Mobile Money, aucun SMS — tout reste dans la
+Mode démo : aucun vrai Mobile Money, aucun SMS - tout reste dans la
 machine (`/health` le dit).
 
 ## Vérification

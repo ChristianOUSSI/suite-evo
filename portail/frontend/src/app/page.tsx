@@ -12,7 +12,7 @@ const TEXTES = {
       "Vingt-deux produits, un même socle : chaque métier a son logiciel, chaque logiciel tient sur un téléphone, en français comme en anglais, en FCFA.",
     compte: "produits",
     ouvrir: "Ouvrir",
-    pied: "Chaque produit a sa propre adresse : les ports 3500 à 5700. En démo, rien ne quitte la machine — aucun SMS, aucun appel, aucune argent qui part.",
+    pied: "Chaque produit a sa propre adresse : les ports 3500 à 5700. En démo, rien ne quitte la machine - aucun SMS, aucun appel, aucune argent qui part.",
     vide: "aucun produit ne répond pour l'instant",
   },
   en: {
@@ -22,7 +22,7 @@ const TEXTES = {
       "Twenty-two products, one foundation: every trade has its software, every software fits on a phone, in French and English, in FCFA.",
     compte: "products",
     ouvrir: "Open",
-    pied: "Every product has its own address: ports 3500 to 5700. In demo, nothing leaves the machine — no SMS, no call, no money leaves.",
+    pied: "Every product has its own address: ports 3500 to 5700. In demo, nothing leaves the machine - no SMS, no call, no money leaves.",
     vide: "no product is answering yet",
   },
 } as const;
@@ -75,7 +75,7 @@ function Carte({ produit, langue }: { produit: Produit; langue: Langue }) {
               : "ouvert"
             : joignable === "non"
               ? TEXTES[langue].vide
-              : "…"}
+              : "--�"}
         </span>
       </a>
     </li>
