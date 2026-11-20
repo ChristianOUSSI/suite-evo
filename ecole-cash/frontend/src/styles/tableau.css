@@ -63,8 +63,17 @@
 }
 
 .compte__case {
-  padding: 0.7rem 0.1rem;
-  border-top: 2px solid var(--ink);
+  padding: 0.85rem 0.9rem;
+  border: 1px solid var(--ink);
+  border-top: 3px solid var(--ink);
+  background: var(--feuille);
+  box-shadow: var(--ombre);
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+
+.compte__case:hover {
+  box-shadow: var(--ombre-levee);
+  transform: translateY(-2px);
 }
 
 .compte__valeur {
@@ -141,9 +150,18 @@
   grid-template-columns: 5.2rem 1fr auto auto;
   align-items: baseline;
   gap: 0.9rem;
-  padding-block: 0.6rem;
+  padding-block: 0.62rem;
+  padding-inline: 0.6rem;
+  margin-inline: -0.6rem;
   border-bottom: 1px solid var(--rule);
+  border-radius: 6px;
   font-size: 0.82rem;
+  transition: background-color var(--transition), box-shadow var(--transition);
+}
+
+.recu-ligne:hover {
+  background: rgba(244, 247, 241, 0.7);
+  box-shadow: inset 3px 0 0 var(--moss);
 }
 
 .recu-ligne:last-child {
