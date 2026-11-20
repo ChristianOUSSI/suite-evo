@@ -15,7 +15,7 @@ if TEST_DB.exists():
 os.environ["EVO_MOTO_DATABASE_URL"] = f"sqlite:///{TEST_DB.as_posix()}"
 os.environ["EVO_MOTO_SEED_DEMO"] = "true"
 os.environ["EVO_MOTO_DEMO_MODE"] = "true"
-os.environ["EVO_MOTO_JWT_SECRET"] = "test-secret-moto-pytest"
+os.environ["EVO_MOTO_JWT_SECRET"] = "test-secret-moto-pytest-suite-evo-2026-pad"
 
 from fastapi.testclient import TestClient  # noqa: E402
 

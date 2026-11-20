@@ -15,7 +15,7 @@ if TEST_DB.exists():
 os.environ["EVO_CALL_DATABASE_URL"] = f"sqlite:///{TEST_DB.as_posix()}"
 os.environ["EVO_CALL_SEED_DEMO"] = "true"
 os.environ["EVO_CALL_DEMO_MODE"] = "true"
-os.environ["EVO_CALL_JWT_SECRET"] = "test-secret-call-uniquement-pour-pytest"
+os.environ["EVO_CALL_JWT_SECRET"] = "test-secret-call-uniquement-pour-pytest-suite-evo-2026-pad"
 
 from fastapi.testclient import TestClient  # noqa: E402
 
