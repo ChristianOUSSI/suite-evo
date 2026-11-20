@@ -6,34 +6,42 @@ import { PRODUITS, type Produit } from "@/lib/produits";
 
 const TEXTES = {
   fr: {
-    surtitre: "CODE AXIS DIGITAL CAMEROON",
-    titre: "La maison des logiciels de comptoir",
-    chapo:
-      "Chaque métier a son logiciel. Chaque logiciel tient sur un téléphone, en français comme en anglais, en FCFA, avec Mobile Money.",
-    compte: "produits",
-    chercher: "Chercher un produit…",
-    ouvrir: "Ouvrir",
+    nav: { produits: "Produits", tarifs: "Tarifs", docs: "Documentation", support: "Support" },
+    boutons: { connecter: "Se connecter", demarrer: "Démarrer maintenant" },
+    hero: {
+      titre: "Une idée. 30 produits qui évoluent.",
+      sous: "La suite d'applications professionnelles de CADC. Conçue pour les entreprises camerounaises. Scalable, sécurisée, et interconnectée.",
+      badge1: "30 PRODUITS",
+      badge2: "99.9% UPTIME",
+      badge3: "CAMEROUN",
+      legende1: "Services disponibles",
+      legende2: "Fiabilité & Sécurité",
+      legende3: "Hébergé localement. Conforme",
+    },
+    filtre: { tous: "Tous les produits", tri: "Tri: Populaires", maj: "Mise à jour Nov 2026" },
+    pied: "Chaque produit a sa propre adresse. En démo, rien ne quitte la machine : aucun SMS, aucun appel, aucune argent qui part.",
     statutOuvert: "ouvert",
     statutFerme: "fermé",
     statutTest: "test…",
-    pied: "Chaque produit a sa propre adresse. En démo, rien ne quitte la machine : aucun SMS, aucun appel, aucune argent qui part.",
-    vide: "aucun produit ne répond pour l'instant",
-    aucunTrouve: "Aucun produit ne correspond à ta recherche.",
   },
   en: {
-    surtitre: "CODE AXIS DIGITAL CAMEROON",
-    titre: "The house of counter software",
-    chapo:
-      "Every trade has its software. Every software fits on a phone, in French and English, in FCFA, with Mobile Money.",
-    compte: "products",
-    chercher: "Search a product…",
-    ouvrir: "Open",
+    nav: { produits: "Products", tarifs: "Pricing", docs: "Documentation", support: "Support" },
+    boutons: { connecter: "Sign in", demarrer: "Get started" },
+    hero: {
+      titre: "One idea. 30 evolving products.",
+      sous: "The CADC professional application suite. Designed for Cameroonian businesses. Scalable, secure, and interconnected.",
+      badge1: "30 PRODUCTS",
+      badge2: "99.9% UPTIME",
+      badge3: "CAMEROON",
+      legende1: "Available services",
+      legende2: "Reliability & Security",
+      legende3: "Hosted locally. Compliant",
+    },
+    filtre: { tous: "All products", tri: "Sort: Popular", maj: "Updated Nov 2026" },
+    pied: "Every product has its own address. In demo, nothing leaves the machine: no SMS, no call, no money leaves.",
     statutOuvert: "open",
     statutFerme: "closed",
     statutTest: "testing…",
-    pied: "Every product has its own address. In demo, nothing leaves the machine: no SMS, no call, no money leaves.",
-    vide: "no product is answering yet",
-    aucunTrouve: "No product matches your search.",
   },
 } as const;
 
@@ -77,16 +85,6 @@ function Carte({ produit, langue }: { produit: Produit; langue: Langue }) {
   return (
     <li>
       <a className="portail__carte" href={`http://localhost:${produit.port}`}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={`http://localhost:${produit.port}/logo.jpg`}
-          alt={produit.nom}
-          className="portail__logo"
-          loading="lazy"
-          onError={(e) => {
-            (e.target as HTMLImageElement).style.display = "none";
-          }}
-        />
         <span className="portail__haut">
           <span className="portail__nom">{produit.nom}</span>
           <span className={`portail__pastille ${statut.classe}`}>
@@ -98,7 +96,7 @@ function Carte({ produit, langue }: { produit: Produit; langue: Langue }) {
         <span className="portail__texte">{texte.texte}</span>
         <span className="portail__pied-carte">
           <span className="portail__port">:{produit.port}</span>
-          <span className="portail__ouvrir">{t.ouvrir} →</span>
+          <span className="portail__ouvrir">→</span>
         </span>
       </a>
     </li>
@@ -107,86 +105,91 @@ function Carte({ produit, langue }: { produit: Produit; langue: Langue }) {
 
 export default function Portail() {
   const [langue, setLangue] = useState<Langue>("fr");
-  const [recherche, setRecherche] = useState("");
   const t = TEXTES[langue];
 
-  const filtres = useMemo(() => {
-    const mot = recherche.trim().toLowerCase();
-    if (!mot) return PRODUITS;
-    return PRODUITS.filter((p) => {
-      const texte = `${p.nom} ${p[langue].titre} ${p[langue].texte}`.toLowerCase();
-      return texte.includes(mot);
-    });
-  }, [recherche, langue]);
-
   return (
-    <div className="cadc-gabarit portail">
-      <header className="cadc-bandeau">
-        <div className="cadc-gabarit cadc-bandeau__rangee">
-          <span className="cadc-marque">
-            <span className="cadc-marque__texte">
-              <span className="cadc-marque__nom">suite-evo</span>
-              <span className="cadc-marque__sous">CODE AXIS DIGITAL CAMEROON</span>
-            </span>
-          </span>
-          <div className="cadc-acts" role="group" aria-label="Langue / Language">
-            <button
-              type="button"
-              className={`cadc-bouton cadc-bouton--petit ${langue === "fr" ? "cadc-bouton--premier" : "cadc-bouton--doux"}`}
-              onClick={() => setLangue("fr")}
-              aria-pressed={langue === "fr"}
-            >
-              FR
+    <div className="portail">
+      <header className="portail__bandeau">
+        <div className="portail__rangee">
+          <div className="portail__logo">
+            <span className="portail__logo-nom">CODE AXIS DIGITAL CAMEROON</span>
+            <span className="portail__logo-sous">EVO SUITE</span>
+          </div>
+          <nav className="portail__nav">
+            <a href="#produits">{t.nav.produits}</a>
+            <a href="#tarifs">{t.nav.tarifs}</a>
+            <a href="#docs">{t.nav.docs}</a>
+            <a href="#support">{t.nav.support}</a>
+          </nav>
+          <div className="portail__actions">
+            <button type="button" className="portail__bouton portail__bouton--doux">
+              {t.boutons.connecter}
             </button>
-            <button
-              type="button"
-              className={`cadc-bouton cadc-bouton--petit ${langue === "en" ? "cadc-bouton--premier" : "cadc-bouton--doux"}`}
-              onClick={() => setLangue("en")}
-              aria-pressed={langue === "en"}
-            >
-              EN
+            <button type="button" className="portail__bouton portail__bouton--premier">
+              {t.boutons.demarrer}
             </button>
           </div>
         </div>
       </header>
 
       <section className="portail__hero">
-        <span className="cadc-badge cadc-badge--acier">{t.surtitre}</span>
-        <h1>{t.titre}</h1>
-        <p className="portail__chapo">{t.chapo}</p>
-        <p className="portail__compte">
-          <span className="cadc-badge cadc-badge--doux">
-            {PRODUITS.length} {t.compte}
-          </span>
-        </p>
+        <div className="portail__hero-contenu">
+          <h1>{t.hero.titre}</h1>
+          <p className="portail__hero-sous">{t.hero.sous}</p>
+          <div className="portail__badges">
+            <div className="portail__badge">
+              <span className="portail__badge-valeur">{t.hero.badge1}</span>
+              <span className="portail__badge-legende">{t.hero.legende1}</span>
+            </div>
+            <div className="portail__badge">
+              <span className="portail__badge-valeur">{t.hero.badge2}</span>
+              <span className="portail__badge-legende">{t.hero.legende2}</span>
+            </div>
+            <div className="portail__badge">
+              <span className="portail__badge-valeur">{t.hero.badge3}</span>
+              <span className="portail__badge-legende">{t.hero.legende3}</span>
+            </div>
+          </div>
+        </div>
       </section>
 
-      <div className="portail__recherche">
-        <input
-          type="search"
-          className="portail__champ"
-          placeholder={t.chercher}
-          value={recherche}
-          onChange={(e) => setRecherche(e.target.value)}
-          aria-label={t.chercher}
-        />
-      </div>
-
-      {filtres.length === 0 ? (
-        <p className="portail__vide">{t.aucunTrouve}</p>
-      ) : (
+      <section id="produits" className="portail__produits">
+        <div className="portail__entete">
+          <h2>Suite EVO - {PRODUITS.length} produits</h2>
+          <div className="portail__filtres">
+            <span className="portail__filtre">{t.filtre.tous}</span>
+            <span className="portail__filtre">{t.filtre.tri}</span>
+            <span className="portail__filtre">{t.filtre.maj}</span>
+          </div>
+        </div>
         <ul className="portail__liste">
-          {filtres.map((produit) => (
+          {PRODUITS.map((produit) => (
             <Carte key={produit.nom} produit={produit} langue={langue} />
           ))}
         </ul>
-      )}
+      </section>
 
       <p className="portail__pied">{t.pied}</p>
 
-      <footer className="cadc-pied">
-        <div className="cadc-gabarit cadc-pied__rangee">
+      <footer className="portail__footer">
+        <div className="portail__rangee">
           <span>CODE AXIS DIGITAL CAMEROON · Douala</span>
+          <div className="portail__langues">
+            <button
+              type="button"
+              className={langue === "fr" ? "portail__langue--actif" : ""}
+              onClick={() => setLangue("fr")}
+            >
+              FR
+            </button>
+            <button
+              type="button"
+              className={langue === "en" ? "portail__langue--actif" : ""}
+              onClick={() => setLangue("en")}
+            >
+              EN
+            </button>
+          </div>
         </div>
       </footer>
     </div>
