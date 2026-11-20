@@ -95,7 +95,16 @@
   gap: 0.35rem 1.1rem;
   align-items: baseline;
   padding-block: 0.95rem;
+  padding-inline: 0.7rem;
+  margin-inline: -0.7rem;
   border-bottom: 1px solid var(--rule);
+  border-radius: 6px;
+  transition: background-color var(--transition), box-shadow var(--transition);
+}
+
+.cadence-step:hover {
+  background: rgba(247, 249, 251, 0.6);
+  box-shadow: inset 3px 0 0 var(--gold);
 }
 
 .cadence-step__offset {
