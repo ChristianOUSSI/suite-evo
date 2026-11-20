@@ -46,11 +46,17 @@
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 12px;
   align-items: center;
-  padding: 14px 16px;
+  padding: 16px 18px;
   border: 1px solid var(--cadc-ligne);
   border-left: 5px solid var(--cadc-acier);
-  border-radius: 14px;
+  border-radius: var(--cadc-rayon-grand, 18px);
   background: var(--cadc-feuille);
+  box-shadow: var(--cadc-ombre, 0 1px 2px rgb(16 34 47 / 5%), 0 8px 24px rgb(16 34 47 / 6%));
+  transition: box-shadow var(--cadc-transition, 160ms), transform var(--cadc-transition, 160ms);
+}
+
+.portail:hover {
+  box-shadow: var(--cadc-ombre-levee, 0 4px 12px rgb(16 34 47 / 9%), 0 16px 40px rgb(16 34 47 / 11%));
 }
 
 .portail__reste {
