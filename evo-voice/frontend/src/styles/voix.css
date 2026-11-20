@@ -46,11 +46,18 @@
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 12px;
   align-items: center;
-  padding: 14px 16px;
+  padding: 16px 18px;
   border: 1px solid var(--cadc-ligne);
   border-left: 5px solid var(--cadc-acier);
-  border-radius: 14px;
+  border-radius: var(--cadc-rayon-grand, 18px);
   background: var(--cadc-feuille);
+  box-shadow: var(--cadc-ombre);
+  transition: box-shadow var(--cadc-transition, 160ms), transform var(--cadc-transition, 160ms);
+}
+
+.portail:hover {
+  box-shadow: var(--cadc-ombre-levee);
+  transform: translateY(-2px);
 }
 
 .portail__reste {
@@ -116,10 +123,18 @@
   display: grid;
   gap: 8px;
   align-content: start;
-  padding: 16px;
+  padding: 18px;
   border: 1px solid var(--cadc-ligne);
-  border-radius: 14px;
+  border-radius: var(--cadc-rayon, 12px);
   background: var(--cadc-feuille);
+  box-shadow: var(--cadc-ombre);
+  transition: box-shadow var(--cadc-transition, 160ms), transform var(--cadc-transition, 160ms), border-color var(--cadc-transition, 160ms);
+}
+
+.appel:hover {
+  box-shadow: var(--cadc-ombre-levee);
+  transform: translateY(-3px);
+  border-color: var(--cadc-acier);
 }
 
 .appel__cat {
@@ -158,10 +173,13 @@
 .souche {
   display: grid;
   gap: 6px;
-  padding: 20px;
-  border-radius: 16px;
-  background: var(--cadc-encre);
+  padding: 22px;
+  border-radius: var(--cadc-rayon-grand, 18px);
+  background:
+    radial-gradient(500px 180px at 80% -40px, rgb(46 110 166 / 20%), transparent),
+    var(--cadc-encre);
   color: var(--cadc-papier-2);
+  box-shadow: var(--cadc-ombre-levee);
 }
 
 .souche__legende {
