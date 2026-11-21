@@ -21,7 +21,7 @@ export default async function Presentation() {
     <div className="entree">
       <header className="fronton">
         <div className="gabarit fronton__rangee">
-          <NomComptoir />
+          <NomComptoir langue={langue} />
           <nav className="entree__nav" aria-label={t("landing.aria-nav", langue)}>
             <Link href="/connexion" className="bouton bouton--petit">
               {t("landing.ouvrir", langue)}
@@ -49,7 +49,7 @@ export default async function Presentation() {
                 3&nbsp;000&nbsp;FCFA <small>{t("landing.prix", langue)}</small>
               </span>
             </div>
-            <MentionDemo texte={t("landing.demo", langue)} />
+            <MentionDemo texte={t("landing.demo", langue)} langue={langue} />
           </div>
 
           <div className="entree__carte feuille feuille--decalee" aria-hidden="true">

@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import { t, LANGUE_DEFAUT, type Langue } from "@/lib/langue";
+
 type MarqueProp = {
   titre?: string;
   className?: string;
@@ -36,13 +38,17 @@ type NomProp = {
   sous?: string;
 };
 
-export function NomComptoir({ href = "/", sous }: NomProp) {
+export function NomComptoir({
+  href = "/",
+  sous,
+  langue = LANGUE_DEFAUT,
+}: NomProp & { langue?: Langue }) {
   const contenu = (
     <>
       <KoloMark titre="KOLO BOUTIQUE" className="marque__signe" />
       <span className="marque__texte">
         <span className="marque__nom">KOLO BOUTIQUE</span>
-        <span className="marque__sous">{sous ?? "le cahier du comptoir"}</span>
+        <span className="marque__sous">{sous ?? t("marque.sous", langue)}</span>
       </span>
     </>
   );

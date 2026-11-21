@@ -27,9 +27,11 @@ export default async function ChantierLayout({
   try {
     courante = await seance();
   } catch (erreur) {
+    const langue = await langueServeur();
     return (
       <EcranIncident
         message={erreur instanceof ErreurComptoir ? erreur.message : undefined}
+        langue={langue}
       />
     );
   }
@@ -56,8 +58,8 @@ export default async function ChantierLayout({
 
       <header className="fronton">
         <div className="gabarit fronton__rangee">
-          <NomComptoir href="/comptoir" sous={boutique.enseigne || boutique.nom} />
-          <NavComptoir />
+          <NomComptoir href="/comptoir" sous={boutique.enseigne || boutique.nom} langue={langue} />
+          <NavComptoir langue={langue} />
           <CommutateurLangue langue={langue} />
           <div className="compte">
             <div className="compte__texte">
@@ -67,7 +69,7 @@ export default async function ChantierLayout({
             <span className="avatar" aria-hidden="true">
               {initiales(user.nom)}
             </span>
-            <BoutonSortie />
+            <BoutonSortie langue={langue} />
           </div>
         </div>
       </header>

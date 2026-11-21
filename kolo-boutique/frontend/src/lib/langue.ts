@@ -252,6 +252,28 @@ const D: Record<string, Entree> = {
   "landing.coupe-2": { fr: "Une vente en MoMo est enregistrée comme payée : rien n'est débité chez l'opérateur.", en: "A MoMo sale is recorded as paid: nothing is debited at the operator." },
   "landing.coupe-3": { fr: "Articles, clients et montants du jeu de démonstration sont fictifs.", en: "Items, customers and amounts in the demo set are fictional." },
   "landing.pied-note": { fr: "Édition de démonstration : le stock, les ventes et les bénéfices de cette boutique sont inventés.", en: "Demo edition: this shop's stock, sales and profits are invented." },
+
+  // Le chrome et les composants.
+  "nav.aria": { fr: "Navigation du comptoir", en: "Counter navigation" },
+  "sortie.ranger": { fr: "Ranger", en: "Close up" },
+  "sortie.rangement": { fr: "Rangement", en: "Closing up" },
+  "marque.sous": { fr: "le cahier du comptoir", en: "the counter notebook" },
+  "mention.demo": {
+    fr: "Démo : aucun vocal WhatsApp reçu, aucun débit MoMo. L'écriture reste dans cette machine.",
+    en: "Demo: no WhatsApp voice note received, no MoMo debit. The entry stays on this machine.",
+  },
+  "incident.ferme": { fr: "Comptoir fermé", en: "Counter closed" },
+  "incident.titre": { fr: "Le comptoir ne répond pas.", en: "The counter is not responding." },
+  "incident.texte": {
+    fr: "Le cahier n'a pas pu être ouvert. Vérifie que l'API tourne sur le port attendu, puis repasse par ici.",
+    en: "The notebook could not be opened. Check that the API runs on the expected port, then come back.",
+  },
+  "incident.note": {
+    fr: "Rien n'est perdu : les ventes, les rachats et les dépenses du jour attendent dans le cahier.",
+    en: "Nothing is lost: today's sales, restocks and expenses wait in the notebook.",
+  },
+  "incident.reprendre": { fr: "Reprendre", en: "Resume" },
+  "incident.rouvrir": { fr: "Rouvrir la séance", en: "Reopen the session" },
 };
 
 export function t(

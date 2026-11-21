@@ -3,22 +3,24 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+import { t, type Langue } from "@/lib/langue";
+
 import { Icone } from "./icone";
 
 const LIENS = [
-  { href: "/comptoir", label: "La journée", icone: "comptoir" },
-  { href: "/comptoir/dictee", label: "Dicter", icone: "voix" },
-  { href: "/comptoir/rayon", label: "Le rayon", icone: "rayon" },
-  { href: "/comptoir/sorties", label: "Les ventes", icone: "vente" },
-  { href: "/comptoir/tiroir", label: "Le tiroir", icone: "tiroir" },
-  { href: "/comptoir/reglages", label: "Le comptoir", icone: "reglage" },
+  { href: "/comptoir", cle: "jour.titre", icone: "comptoir" },
+  { href: "/comptoir/dictee", cle: "jour.dicter", icone: "voix" },
+  { href: "/comptoir/rayon", cle: "rayon.titre", icone: "rayon" },
+  { href: "/comptoir/sorties", cle: "sorties.meta", icone: "vente" },
+  { href: "/comptoir/tiroir", cle: "tiroir.meta", icone: "tiroir" },
+  { href: "/comptoir/reglages", cle: "reglages.nav-comptoir", icone: "reglage" },
 ];
 
-export function NavComptoir() {
+export function NavComptoir({ langue = "fr" }: { langue?: Langue }) {
   const chemin = usePathname();
 
   return (
-    <nav className="nav-comptoir" aria-label="Navigation du comptoir">
+    <nav className="nav-comptoir" aria-label={t("nav.aria", langue)}>
       {LIENS.map((lien) => {
         const actif =
           lien.href === "/comptoir"
@@ -32,7 +34,7 @@ export function NavComptoir() {
             aria-current={actif ? "page" : undefined}
           >
             <Icone nom={lien.icone} taille={15} />
-            {lien.label}
+            {t(lien.cle, langue)}
           </Link>
         );
       })}

@@ -23,7 +23,7 @@ export default async function Seance() {
     <div className="entree">
       <header className="fronton">
         <div className="gabarit fronton__rangee">
-          <NomComptoir />
+          <NomComptoir langue={langue} />
           <nav className="entree__nav" aria-label={t("connexion.nav-retour", langue)}>
             <Link href="/" className="bouton bouton--petit bouton--doux">
               {t("connexion.nav-presentation", langue)}
