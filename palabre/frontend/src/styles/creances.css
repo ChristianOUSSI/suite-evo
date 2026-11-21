@@ -881,8 +881,17 @@
   align-items: flex-start;
   justify-content: space-between;
   gap: 1rem;
-  padding-block: 0.68rem;
+  padding-block: 0.72rem;
+  padding-inline: 0.6rem;
+  margin-inline: -0.6rem;
   border-bottom: 1px solid var(--rule);
+  border-radius: 6px;
+  transition: background-color var(--transition), box-shadow var(--transition);
+}
+
+.entry:hover {
+  background: rgba(247, 249, 251, 0.7);
+  box-shadow: inset 3px 0 0 var(--moss);
 }
 
 .entry:last-child {
