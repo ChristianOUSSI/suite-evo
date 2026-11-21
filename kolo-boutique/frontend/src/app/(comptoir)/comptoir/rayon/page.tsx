@@ -100,7 +100,7 @@ export default async function Rayon({
         </div>
       </form>
 
-      <RayonConsole cahier={cahier} />
+      <RayonConsole cahier={cahier} langue={langue} />
 
       <section className="feuille bloc" aria-label={t("rayon.rachats-titre", langue)}>
         <div className="tete-feuille">
