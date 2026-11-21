@@ -5,22 +5,25 @@ import { Icone } from "@/components/icone";
 import { lire } from "@/lib/api";
 import { canoniseTelephone, fcfa, pourcentage } from "@/lib/format";
 import { parametres } from "@/lib/client-api";
+import { t } from "@/lib/langue";
+import { langueServeur } from "@/lib/langue-serveur";
 import type { Classe, ListeEleves } from "@/lib/types";
 
 import "../../../../styles/eleves.css";
 
 export const dynamic = "force-dynamic";
 
-export const metadata: Metadata = {
-  title: "Familles",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const langue = await langueServeur();
+  return { title: t("fam.meta", langue) };
+}
 
 const ETATS = [
-  { cle: "", label: "Tous" },
-  { cle: "retard", label: "En retard" },
-  { cle: "solde", label: "Soldés" },
-  { cle: "suspendu", label: "Suspendus" },
-  { cle: "sans_classe", label: "Sans classe" },
+  { cle: "", cle_label: "fam.etat.tous" },
+  { cle: "retard", cle_label: "fam.etat.retard" },
+  { cle: "solde", cle_label: "fam.etat.solde" },
+  { cle: "suspendu", cle_label: "fam.etat.suspendu" },
+  { cle: "sans_classe", cle_label: "fam.etat.sans_classe" },
 ];
 
 export default async function Familles({
@@ -28,6 +31,7 @@ export default async function Familles({
 }: {
   searchParams: Promise<{ motif?: string; etat?: string; classe?: string; annee?: string }>;
 }) {
+  const langue = await langueServeur();
   const filtre = await searchParams;
   const etat = filtre.etat ?? "";
   const classe = filtre.classe ?? "";
@@ -37,47 +41,57 @@ export default async function Familles({
     `/eleves${parametres({ motif, etat, classe, annee: filtre.annee, limite: 400 })}`,
   );
   const journee = await lire<{ classes: Classe[] }>("/dashboard");
+  const total = rendu.total;
+  const affichees = rendu.eleves.length;
+  const portee =
+    total === affichees
+      ? t("fam.toutes", langue)
+      : t("fam.affichees", langue, { n: affichees });
 
   return (
     <div className="shell vitre">
       <div className="page-head">
         <div className="page-head__main">
           <span className="kicker">
-            <Icone nom="eleve" taille={14} /> {rendu.annee}
+            <Icone nom="eleve" taille={14} /> {t("fam.kicker", langue, { annee: rendu.annee })}
           </span>
-          <h1 className="display">Les familles</h1>
+          <h1 className="display">{t("fam.titre", langue)}</h1>
           <p className="page-head__lede">
-            {rendu.total} fiche{rendu.total > 1 ? "s" : ""} retenue
-            {rendu.total > 1 ? "s" : ""} sur {rendu.total === rendu.eleves.length ? "toutes" : `les ${rendu.eleves.length} affichées`}
-            · {fcfa(rendu.attendu)} attendus, {fcfa(rendu.reste)} encore dus,{" "}
-            {rendu.retards} en retard.
+            {t("fam.lede", langue, {
+              total,
+              s: total > 1 ? "s" : "",
+              portee,
+              attendu: fcfa(rendu.attendu),
+              reste: fcfa(rendu.reste),
+              retards: rendu.retards,
+            })}
           </p>
         </div>
         <div className="page-head__aside">
           <Link href="/app/guichet" className="btn btn--ink">
-            Encaisser
+            {t("fam.encaisser", langue)}
           </Link>
           <Link href="/app/eleves/nouvel" className="btn">
-            Inscrire un élève
+            {t("fam.inscrire", langue)}
           </Link>
         </div>
       </div>
 
       <form className="filtres" action="/app/eleves" method="get">
         <div className="field">
-          <label htmlFor="motif">Nom, prénom, matricule ou parent</label>
+          <label htmlFor="motif">{t("fam.filtre_label", langue)}</label>
           <input
             id="motif"
             name="motif"
             type="search"
             defaultValue={motif}
-            placeholder="Zanga, CP2-2027-004, maman Njoya…"
+            placeholder={t("fam.filtre_placeholder", langue)}
           />
         </div>
         <div className="field field--court">
-          <label htmlFor="classe">Classe</label>
+          <label htmlFor="classe">{t("fam.classe", langue)}</label>
           <select id="classe" name="classe" defaultValue={classe}>
-            <option value="">Toutes</option>
+            <option value="">{t("fam.toutes_classes", langue)}</option>
             {journee.classes.map((une) => (
               <option key={une.id} value={String(une.id)}>
                 {une.label}
@@ -87,16 +101,16 @@ export default async function Familles({
         </div>
         {etat ? <input type="hidden" name="etat" value={etat} /> : null}
         <button type="submit" className="btn btn--ink">
-          Filtrer
+          {t("fam.filtrer", langue)}
         </button>
         {motif || classe || etat ? (
           <Link href="/app/eleves" className="btn btn--quiet">
-            Tout revoir
+            {t("fam.revoir", langue)}
           </Link>
         ) : null}
       </form>
 
-      <nav className="bande-filtre" aria-label="État de compte">
+      <nav className="bande-filtre" aria-label={t("fam.etat.aria", langue)}>
         {ETATS.map((case_) => {
           const href = `/app/eleves${parametres({
             motif,
@@ -112,30 +126,29 @@ export default async function Familles({
               className={actif ? "is-active" : undefined}
               aria-current={actif ? "true" : undefined}
             >
-              {case_.label}
+              {t(case_.cle_label, langue)}
             </Link>
           );
         })}
       </nav>
 
-      <section className="sheet bloc" aria-label="Fiches">
+      <section className="sheet bloc" aria-label={t("fam.ardoises", langue)}>
         <div className="section-head">
-          <h2>Ardoises</h2>
+          <h2>{t("fam.ardoises", langue)}</h2>
           <span className="section-head__aside">
-            {rendu.eleves.length} ligne{rendu.eleves.length > 1 ? "s" : ""}
+            {t("fam.lignes", langue, { n: affichees, s: affichees > 1 ? "s" : "" })}
           </span>
         </div>
 
         <div className="filer" style={{ marginTop: "1.1rem" }}>
-          {rendu.eleves.length === 0 ? (
+          {affichees === 0 ? (
             <div className="empty">
-              <h3>Rien sous ce filtre.</h3>
+              <h3>{t("fam.vide_titre", langue)}</h3>
               <p>
-                Une classe et un état en même temps, ça peut ne laisser personne.
-                Revenez à la liste complète.
+                {t("fam.vide_texte", langue)}
               </p>
               <Link href="/app/eleves" className="text-link">
-                Toutes les familles
+                {t("fam.vide_lien", langue)}
               </Link>
             </div>
           ) : null}
@@ -155,20 +168,20 @@ export default async function Familles({
                 {eleve.nom_complet}
                 <small>
                   {eleve.classe} · {eleve.matricule} ·{" "}
-                  {eleve.tuteur_nom || "parent non noté"}
-                  {canoniseTelephone(eleve.tuteur_telephone) ? "" : " · sans numéro"}
+                  {eleve.tuteur_nom || t("fam.parent_non_note", langue)}
+                  {canoniseTelephone(eleve.tuteur_telephone) ? "" : ` · ${t("fam.sans_numero", langue)}`}
                 </small>
               </span>
               <span className="ardoise-fiche__montants">
-                <span className="mono">{fcfa(eleve.du)} dus</span>
-                <span className="mono">{pourcentage(eleve.du > 0 ? (eleve.rentre / eleve.du) * 100 : 0)} réglé</span>
+                <span className="mono">{t("fam.dus", langue, { montant: fcfa(eleve.du) })}</span>
+                <span className="mono">{t("fam.regle", langue, { pct: pourcentage(eleve.du > 0 ? (eleve.rentre / eleve.du) * 100 : 0) })}</span>
               </span>
               <span
                 className={`ardoise-fiche__reste money${
                   eleve.reste === 0 ? " filer__reste--solde" : eleve.en_retard ? " filer__reste--retard" : ""
                 }`}
               >
-                {eleve.reste === 0 ? "année réglée" : `${fcfa(eleve.reste)} restants`}
+                {eleve.reste === 0 ? t("fam.annee_reglee", langue) : t("fam.restants", langue, { montant: fcfa(eleve.reste) })}
               </span>
             </Link>
           ))}

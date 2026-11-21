@@ -7,14 +7,17 @@ import { Icone } from "@/components/icone";
 import { MentionDemo } from "@/components/mention-demo";
 import { ecrire } from "@/lib/client-api";
 import { ErreurCaisse } from "@/lib/errors";
+import { t, LANGUE_DEFAUT, type Langue } from "@/lib/langue";
 import type { EnvoiTest, Recu, Relance } from "@/lib/types";
 
 export function ApercuEnvoi({
   telephones,
   canal,
+  langue = LANGUE_DEFAUT,
 }: {
   telephones: string[];
   canal: "whatsapp" | "sms";
+  langue?: Langue;
 }) {
   const [canonique, setCanonique] = useState(telephones[0] ?? "");
   const [apercu, setApercu] = useState<EnvoiTest | null>(null);
@@ -34,7 +37,7 @@ export function ApercuEnvoi({
       setMessage(
         erreur instanceof ErreurCaisse
           ? erreur.message
-          : "L'aperçu n'est pas passé.",
+          : t("outils.apercu_refuse", langue),
       );
     } finally {
       setEnCours(false);
@@ -44,21 +47,23 @@ export function ApercuEnvoi({
   return (
     <div className="sheet bloc--serré apercu">
       <div className="section-head">
-        <h2>Vérifier un numéro de parent</h2>
+        <h2>{t("outils.verifier_numero", langue)}</h2>
         <span className="section-head__aside">
-          {telephones.length} numéro{telephones.length > 1 ? "s" : ""} inscrit
-          {telephones.length > 1 ? "s" : ""}
+          {t("outils.numeros_inscrits", langue, {
+            n: telephones.length,
+            s: telephones.length > 1 ? "s" : "",
+          })}
         </span>
       </div>
 
       <div className="field">
-        <label htmlFor="aperu-numero">Numéro à tester</label>
+        <label htmlFor="aperu-numero">{t("outils.numero_tester", langue)}</label>
         <select
           id="aperu-numero"
           value={canonique}
           onChange={(e) => setCanonique(e.target.value)}
         >
-          {telephones.length === 0 ? <option value="">aucun numéro</option> : null}
+          {telephones.length === 0 ? <option value="">{t("outils.aucun_numero", langue)}</option> : null}
           {telephones.map((numero) => (
             <option key={numero} value={numero}>
               {numero}
@@ -66,8 +71,7 @@ export function ApercuEnvoi({
           ))}
         </select>
         <span className="field__aide">
-          Le backend n&apos;accepte que les numéros d&apos;un parent de cette
-          école : c&apos;est le garde-fou contre un avis envoyé au hasard.
+          {t("outils.garde_fou", langue)}
         </span>
       </div>
 
@@ -84,19 +88,25 @@ export function ApercuEnvoi({
         disabled={enCours || canonique === ""}
       >
         <Icone nom="recu" taille={15} />
-        {enCours ? "Lecture…" : "Voir ce que le parent recevrait"}
+        {enCours ? t("outils.lecture", langue) : t("outils.voir_apercu", langue)}
       </button>
 
       {apercu ? (
         <div className="reçu-sortie__corps">{apercu.message}</div>
       ) : null}
 
-      <MentionDemo texte="Démo : le texte est celui d'un reçu standard, en espèces, numéro à venir. Rien n'est expédié." />
+      <MentionDemo texte={t("outils.apercu_demo", langue)} langue={langue} />
     </div>
   );
 }
 
-export function BoutonRenvoi({ recu }: { recu: Recu }) {
+export function BoutonRenvoi({
+  recu,
+  langue = LANGUE_DEFAUT,
+}: {
+  recu: Recu;
+  langue?: Langue;
+}) {
   const routeur = useRouter();
   const [enCours, setEnCours] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
@@ -108,13 +118,13 @@ export function BoutonRenvoi({ recu }: { recu: Recu }) {
       const rendu = await ecrire<Recu>(`/recus/${recu.id}/renvoyer`, {
         method: "POST",
       });
-      setMessage(`Nouvel avis consigné · ${rendu.reference}.`);
+      setMessage(t("outils.renvoi_fait", langue, { ref: rendu.reference }));
       routeur.refresh();
     } catch (erreur) {
       setMessage(
         erreur instanceof ErreurCaisse
           ? erreur.message
-          : "Le renvoi a été refusé.",
+          : t("outils.renvoi_refuse", langue),
       );
     } finally {
       setEnCours(false);
@@ -129,7 +139,7 @@ export function BoutonRenvoi({ recu }: { recu: Recu }) {
         onClick={renvoyer}
         disabled={enCours}
       >
-        {enCours ? "…" : "Renvoyer"}
+        {enCours ? "…" : t("outils.renvoyer", langue)}
       </button>
       {message ? <span className="annulation__note">{message}</span> : null}
     </span>

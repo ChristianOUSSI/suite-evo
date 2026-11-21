@@ -9,6 +9,7 @@ import { MentionDemo } from "@/components/mention-demo";
 import { ecrire } from "@/lib/client-api";
 import { ErreurCaisse } from "@/lib/errors";
 import { canoniseTelephone } from "@/lib/format";
+import { t, LANGUE_DEFAUT, type Langue } from "@/lib/langue";
 import type { Classe, Eleve, EnteteEleve } from "@/lib/types";
 
 const QUARTIERS = [
@@ -24,12 +25,25 @@ const QUARTIERS = [
   "Nkoabang",
 ];
 
+// La valeur stockée reste française (elle part en base) ; l'affichage suit la langue.
+const LIENS: { valeur: string; fr: string; en: string }[] = [
+  { valeur: "mère", fr: "mère", en: "mother" },
+  { valeur: "père", fr: "père", en: "father" },
+  { valeur: "tuteur", fr: "tuteur", en: "guardian" },
+  { valeur: "oncle", fr: "oncle", en: "uncle" },
+  { valeur: "grand-mère", fr: "grand-mère", en: "grandmother" },
+  { valeur: "frère", fr: "frère", en: "brother" },
+  { valeur: "sœur", fr: "sœur", en: "sister" },
+];
+
 export function FormulaireEleve({
   classes,
   annee,
+  langue = LANGUE_DEFAUT,
 }: {
   classes: Classe[];
   annee: string;
+  langue?: Langue;
 }) {
   const routeur = useRouter();
   const [champ, setChamp] = useState({
@@ -77,7 +91,7 @@ export function FormulaireEleve({
       routeur.refresh();
     } catch (erreur) {
       setMessage(
-        erreur instanceof ErreurCaisse ? erreur.message : "La caisse ne répond pas.",
+        erreur instanceof ErreurCaisse ? erreur.message : t("connexion.erreur", langue),
       );
       setCreer(false);
     }
@@ -86,7 +100,7 @@ export function FormulaireEleve({
   return (
     <form className="sheet sheet--offset bloc" onSubmit={inscrire}>
       <div className="section-head">
-        <h2>Nouvelle inscription</h2>
+        <h2>{t("form.nouvelle_inscription", langue)}</h2>
         <span className="section-head__aside">{annee}</span>
       </div>
 
@@ -98,7 +112,7 @@ export function FormulaireEleve({
 
       <div className="form-grid" style={{ marginTop: "1.2rem" }}>
         <div className="field">
-          <label htmlFor="prenoms">Prénoms</label>
+          <label htmlFor="prenoms">{t("form.prenoms", langue)}</label>
           <input
             id="prenoms"
             value={champ.prenoms}
@@ -109,7 +123,7 @@ export function FormulaireEleve({
           />
         </div>
         <div className="field">
-          <label htmlFor="nom">Nom</label>
+          <label htmlFor="nom">{t("form.nom", langue)}</label>
           <input
             id="nom"
             value={champ.nom}
@@ -120,19 +134,19 @@ export function FormulaireEleve({
           />
         </div>
         <div className="field">
-          <label htmlFor="sexe">Sexe</label>
+          <label htmlFor="sexe">{t("form.sexe", langue)}</label>
           <select id="sexe" value={champ.sexe} onChange={change("sexe")}>
-            <option value="F">Fille</option>
-            <option value="M">Garçon</option>
+            <option value="F">{t("form.fille", langue)}</option>
+            <option value="M">{t("form.garcon", langue)}</option>
           </select>
         </div>
       </div>
 
       <div className="form-grid form-grid--pair" style={{ marginTop: "1rem" }}>
         <div className="field">
-          <label htmlFor="classe">Classe</label>
+          <label htmlFor="classe">{t("form.classe", langue)}</label>
           <select id="classe" value={champ.classe_id} onChange={change("classe_id")}>
-            {classes.length === 0 ? <option value="">Aucune classe ouverte</option> : null}
+            {classes.length === 0 ? <option value="">{t("form.aucune_classe", langue)}</option> : null}
             {classes.map((une) => (
               <option key={une.id} value={String(une.id)}>
                 {une.label} · {fcfaInline(une.total)}
@@ -140,12 +154,11 @@ export function FormulaireEleve({
             ))}
           </select>
           <span className="field__aide">
-            Avec une classe, l&apos;ardoise de l&apos;année se pose toute seule au
-            barème de la classe.
+            {t("form.ardoise_auto", langue)}
           </span>
         </div>
         <div className="field">
-          <label htmlFor="quartier">Quartier</label>
+          <label htmlFor="quartier">{t("form.quartier", langue)}</label>
           <select id="quartier" value={champ.quartier} onChange={change("quartier")}>
             {QUARTIERS.map((quartier) => (
               <option key={quartier} value={quartier}>
@@ -160,21 +173,21 @@ export function FormulaireEleve({
 
       <div className="form-grid form-grid--pair">
         <div className="field">
-          <label htmlFor="tuteur">Parent ou tuteur</label>
+          <label htmlFor="tuteur">{t("form.tuteur", langue)}</label>
           <input
             id="tuteur"
             value={champ.tuteur_nom}
             onChange={change("tuteur_nom")}
-            placeholder="madame Njoya"
+            placeholder={t("form.tuteur_placeholder", langue)}
             maxLength={140}
           />
         </div>
         <div className="field">
-          <label htmlFor="lien">Lien</label>
+          <label htmlFor="lien">{t("form.lien", langue)}</label>
           <select id="lien" value={champ.tuteur_lien} onChange={change("tuteur_lien")}>
-            {["mère", "père", "tuteur", "oncle", "grand-mère", "frère", "sœur"].map((lien) => (
-              <option key={lien} value={lien}>
-                {lien}
+            {LIENS.map((lien) => (
+              <option key={lien.valeur} value={lien.valeur}>
+                {langue === "en" ? lien.en : lien.fr}
               </option>
             ))}
           </select>
@@ -184,32 +197,34 @@ export function FormulaireEleve({
       <div className="form-grid form-grid--pair" style={{ marginTop: "1rem" }}>
         <ChampTelephone
           id="premier"
-          label="Premier numéro"
+          label={t("form.premier_numero", langue)}
           value={premier}
           onChange={setPremier}
           requis
+          langue={langue}
           aide={
             erreurTelephone
               ? undefined
-              : "C'est ce numéro qui reçoit le reçu et les relances."
+              : t("form.numero_recu", langue)
           }
         />
         <ChampTelephone
           id="second"
-          label="Second numéro"
+          label={t("form.second_numero", langue)}
           value={second}
           onChange={setSecond}
-          aide="Optionnel : le parent de secours."
+          langue={langue}
+          aide={t("form.second_aide", langue)}
         />
       </div>
 
       <div className="field" style={{ marginTop: "1rem" }}>
-        <label htmlFor="note">Observation</label>
+        <label htmlFor="note">{t("form.observation", langue)}</label>
         <textarea
           id="note"
           value={champ.note}
           onChange={change("note")}
-          placeholder="Fratrie déjà inscrite, payer au guichet le samedi…"
+          placeholder={t("form.ph_note", langue)}
           maxLength={600}
         />
       </div>
@@ -220,14 +235,14 @@ export function FormulaireEleve({
           className="btn btn--ink"
           disabled={creer || erreurTelephone || champ.prenoms.length < 2 || champ.nom.length < 2}
         >
-          {creer ? "Inscription…" : "Inscrire l'élève"}
+          {creer ? t("form.inscription", langue) : t("form.inscrire", langue)}
         </button>
         <Link href="/app/eleves" className="btn btn--quiet">
-          Annuler
+          {t("form.annuler", langue)}
         </Link>
       </div>
 
-      <MentionDemo texte="Démo : l'élève est écrit dans une école fictive. Aucun parent n'est notifié à l'inscription." />
+      <MentionDemo texte={t("form.demo", langue)} langue={langue} />
     </form>
   );
 }

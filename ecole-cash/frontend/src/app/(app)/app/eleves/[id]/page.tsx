@@ -8,6 +8,8 @@ import { EtiquetteEcheance, EtiquetteRecu } from "@/components/etiquettes";
 import { Icone } from "@/components/icone";
 import { lireOuRien } from "@/lib/api";
 import { fcfa, pourcentage, telephoneLocal } from "@/lib/format";
+import { t } from "@/lib/langue";
+import { langueServeur } from "@/lib/langue-serveur";
 import { seanceObligatoire } from "@/lib/session";
 import type { FicheEleve } from "@/lib/types";
 
@@ -15,15 +17,17 @@ import "../../../../../styles/eleves.css";
 
 export const dynamic = "force-dynamic";
 
-export const metadata: Metadata = {
-  title: "Famille",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const langue = await langueServeur();
+  return { title: t("fiche.meta", langue) };
+}
 
 export default async function Fiche({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
+  const langue = await langueServeur();
   const { id } = await params;
   const numero = Number.parseInt(id, 10);
   if (Number.isNaN(numero)) {
@@ -48,9 +52,9 @@ export default async function Fiche({
           <h1 className="display">{eleve.nom_complet}</h1>
           <p className="page-head__lede">
             <span className="mono">{eleve.matricule}</span> ·{" "}
-            {eleve.tuteur_nom || "aucun parent noté"}
+            {eleve.tuteur_nom || t("fiche.parent_non_note", langue)}
             {eleve.tuteur_lien ? ` (${eleve.tuteur_lien})` : ""} ·{" "}
-            {eleve.quartier || "quartier non noté"} · inscrit le{" "}
+            {eleve.quartier || t("fiche.quartier_non_note", langue)} · {t("fiche.inscrit_le", langue)}{" "}
             {eleve.date_entree}
           </p>
         </div>
@@ -69,17 +73,17 @@ export default async function Fiche({
             {eleve.statut_label}
           </span>
           <Link href="/app/eleves" className="btn btn--quiet">
-            Toutes les familles
+            {t("fiche.toutes", langue)}
           </Link>
         </div>
       </div>
 
       <div className="fiche-eleve">
-        <section className="sheet bloc" aria-label="Ardoise et paiements">
+        <section className="sheet bloc" aria-label={t("fiche.ardoise", langue)}>
           <div className="section-head">
-            <h2>L&apos;ardoise</h2>
+            <h2>{t("fiche.ardoise", langue)}</h2>
             <span className="section-head__aside">
-              {pourcentage(eleve.du > 0 ? (eleve.rentre / eleve.du) * 100 : 0)} réglé
+              {t("fiche.regle", langue, { pct: pourcentage(eleve.du > 0 ? (eleve.rentre / eleve.du) * 100 : 0) })}
             </span>
           </div>
 
@@ -107,17 +111,17 @@ export default async function Fiche({
                   <small>{terme.due_label}</small>
                 </span>
                 <span className="ardoise__montant money">
-                  {terme.impute > 0 ? `${fcfa(terme.impute)} posés · ` : ""}
+                  {terme.impute > 0 ? t("fiche.posés", langue, { montant: fcfa(terme.impute) }) : ""}
                   {fcfa(terme.montant)}
                 </span>
-                <EtiquetteEcheance statut={terme.statut} />
+                <EtiquetteEcheance statut={terme.statut} langue={langue} />
               </div>
             ))}
             {eleve.echeances.length === 0 ? (
               <p className="vide-note">
                 {eleve.engagement_id === null
-                  ? `Aucune ardoise ouverte pour ${eleve.annee}. Engagez la classe ou posez un engagement.`
-                  : "Ardoise ouverte mais non coupée en termes."}
+                  ? t("fiche.aucune_ardoise", langue, { annee: eleve.annee })
+                  : t("fiche.ardoise_non_coupee", langue)}
               </p>
             ) : null}
           </div>
@@ -125,32 +129,35 @@ export default async function Fiche({
           <div className="compte" style={{ marginTop: "1.4rem" }}>
             <div className="compte__case">
               <p className="compte__valeur money">{fcfa(eleve.du)}</p>
-              <span className="compte__legende">dus sur l&apos;année</span>
+              <span className="compte__legende">{t("fiche.dus_annee", langue)}</span>
             </div>
             <div className="compte__case">
               <p className="compte__valeur money">{fcfa(eleve.rentre)}</p>
-              <span className="compte__legende">rentrés</span>
+              <span className="compte__legende">{t("fiche.rentres", langue)}</span>
             </div>
             <div className="compte__case">
               <p className={`compte__valeur money${eleve.reste > 0 ? " compte__valeur--alerte" : ""}`}>
                 {fcfa(eleve.reste)}
               </p>
-              <span className="compte__legende">reste dû</span>
+              <span className="compte__legende">{t("fiche.reste_du", langue)}</span>
             </div>
             <div className="compte__case">
               <p className="compte__valeur money">
-                {eleve.remise > 0 ? fcfa(eleve.remise) : "aucune"}
+                {eleve.remise > 0 ? fcfa(eleve.remise) : t("fiche.aucune_remise", langue)}
               </p>
               <span className="compte__legende">
-                {eleve.remise > 0 ? eleve.motif_remise || "remise accordée" : "remise"}
+                {eleve.remise > 0 ? eleve.motif_remise || t("fiche.remise_accordee", langue) : t("fiche.remise", langue)}
               </span>
             </div>
           </div>
 
           {eleve.en_retard ? (
             <p className="tiroir__ecart">
-              {fcfa(eleve.retard_montant)} en retard depuis {eleve.jours_retard}{" "}
-              jour{eleve.jours_retard > 1 ? "s" : ""}.
+              {t("fiche.en_retard", langue, {
+                montant: fcfa(eleve.retard_montant),
+                n: eleve.jours_retard,
+                s: eleve.jours_retard > 1 ? "s" : "",
+              })}
               {eleve.motif_statut ? ` ${eleve.motif_statut}.` : ""}
             </p>
           ) : null}
@@ -158,16 +165,16 @@ export default async function Fiche({
           <hr className="divider divider--ink" style={{ marginBlock: "1.6rem" }} />
 
           <div className="section-head">
-            <h2>Caisse de cette famille</h2>
+            <h2>{t("fiche.caisse_famille", langue)}</h2>
             <span className="section-head__aside">
-              {paiements.length} écriture{paiements.length > 1 ? "s" : ""}
+              {t("fiche.ecritures", langue, { n: paiements.length, s: paiements.length > 1 ? "s" : "" })}
             </span>
           </div>
 
           <div className="history">
             {paiements.length === 0 ? (
               <p className="vide-note">
-                Rien n&apos;a encore été encaissé pour cette famille.
+                {t("fiche.rien_encaisse", langue)}
               </p>
             ) : null}
             {paiements.map((paiement) => (
@@ -185,8 +192,8 @@ export default async function Fiche({
                   <small>
                     {paiement.imputations.length > 0
                       ? paymentImputations(paiement)
-                      : "sans imputation"}
-                    {paiement.encaisse_par ? ` · tenu par ${paiement.encaisse_par}` : ""}
+                      : t("fiche.sans_imputation", langue)}
+                    {paiement.encaisse_par ? ` · ${t("fiche.tenu_par", langue, { nom: paiement.encaisse_par })}` : ""}
                     {paiement.reference ? ` · ${paiement.reference}` : ""}
                     {paiement.note ? ` · ${paiement.note}` : ""}
                   </small>
@@ -196,7 +203,7 @@ export default async function Fiche({
                 </span>
                 {paiement.annule ? (
                   <span className="tag tag--quiet">
-                    annulé : {paiement.motif_annulation}
+                    {t("fiche.annule", langue, { motif: paiement.motif_annulation })}
                   </span>
                 ) : paiement.recu ? (
                   <span className="history__outils">
@@ -207,28 +214,28 @@ export default async function Fiche({
                     >
                       {paiement.recu.numero}
                     </Link>
-                    <EtiquetteRecu statut={paiement.recu.statut} />
-                    <BoutonAnnulation paiement={paiement} />
+                    <EtiquetteRecu statut={paiement.recu.statut} langue={langue} />
+                    <BoutonAnnulation paiement={paiement} langue={langue} />
                   </span>
                 ) : (
-                  <BoutonAnnulation paiement={paiement} />
+                  <BoutonAnnulation paiement={paiement} langue={langue} />
                 )}
               </div>
             ))}
           </div>
         </section>
 
-        <aside className="sheet bloc" aria-label="Le parent">
+        <aside className="sheet bloc" aria-label={t("fiche.le_parent", langue)}>
           <div className="section-head">
-            <h2>Le parent</h2>
+            <h2>{t("fiche.le_parent", langue)}</h2>
             <span className="section-head__aside">
-              {eleve.contactable ? "joignable" : "aucun numéro"}
+              {eleve.contactable ? t("fiche.joignable", langue) : t("guichet.aucun_numero", langue)}
             </span>
           </div>
 
           <div className="contact-bloc">
             <div className="contact-bloc__ligne">
-              <span>{eleve.tuteur_nom || "non noté"}</span>
+              <span>{eleve.tuteur_nom || t("fiche.non_note", langue)}</span>
               {eleve.tuteur_telephone ? (
                 <a
                   className="money text-link"
@@ -238,12 +245,12 @@ export default async function Fiche({
                     telephoneLocal(eleve.tuteur_telephone)}
                 </a>
               ) : (
-                <span className="vide-note">à noter</span>
+                <span className="vide-note">{t("fiche.a_noter", langue)}</span>
               )}
             </div>
             {eleve.tuteur_second ? (
               <div className="contact-bloc__ligne">
-                <span>secours</span>
+                <span>{t("fiche.secours", langue)}</span>
                 <a
                   className="money text-link"
                   href={`tel:${eleve.tuteur_second.replace(/\D/g, "")}`}
@@ -257,7 +264,7 @@ export default async function Fiche({
           {eleve.prochaine ? (
             <>
               <hr className="divider" style={{ marginBlock: "1.2rem" }} />
-              <span className="eyebrow">Prochain terme</span>
+              <span className="eyebrow">{t("fiche.prochain_terme", langue)}</span>
               <p style={{ marginTop: "0.5rem", fontSize: "0.88rem", fontWeight: 600 }}>
                 {eleve.prochaine.libelle} · {fcfa(eleve.prochaine.reste)}
               </p>
@@ -269,6 +276,7 @@ export default async function Fiche({
 
           <ActionsEleve
             fiche={fiche}
+            langue={langue}
             canaux={{
               whatsapp: session.ecole.whatsapp_actif,
               sms: session.ecole.sms_actif,
@@ -278,7 +286,7 @@ export default async function Fiche({
           {eleve.note ? (
             <>
               <hr className="divider" style={{ marginBlock: "1.4rem" }} />
-              <span className="eyebrow">Observation</span>
+              <span className="eyebrow">{t("fiche.observation", langue)}</span>
               <p className="vide-note" style={{ marginTop: "0.5rem" }}>
                 {eleve.note}
               </p>
