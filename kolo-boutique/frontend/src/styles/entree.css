@@ -217,19 +217,25 @@
 .comptes-demo__bouton {
   display: grid;
   gap: 0.15rem;
-  padding: 0.55rem 0.65rem;
+  padding: 0.65rem 0.7rem;
   border: 1px solid var(--regrais-fort);
+  border-radius: 10px;
   background: var(--feuille-nette);
   text-align: left;
   cursor: pointer;
+  box-shadow: var(--ombre);
   transition:
-    border-color 140ms ease,
-    background-color 140ms ease;
+    border-color var(--transition),
+    background-color var(--transition),
+    box-shadow var(--transition),
+    transform var(--transition);
 }
 
 .comptes-demo__bouton:hover {
   border-color: var(--encre);
   background: var(--sable-clair);
+  box-shadow: var(--ombre-levee);
+  transform: translateY(-1px);
 }
 
 .comptes-demo__role {
