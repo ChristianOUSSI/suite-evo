@@ -33,7 +33,7 @@
   padding: clamp(1.1rem, 2.4vw, 1.5rem);
   border: 1px solid var(--ink);
   background: var(--sheet);
-  box-shadow: 5px 5px 0 var(--paper-dark);
+  box-shadow: 6px 6px 0 var(--paper-dark), var(--ombre-levee);
 }
 
 .entry-form__head {
