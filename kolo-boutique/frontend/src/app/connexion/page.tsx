@@ -46,7 +46,7 @@ export default async function Seance() {
           </div>
         </div>
 
-        <FormulaireSeance />
+        <FormulaireSeance langue={langue} />
       </main>
     </div>
   );

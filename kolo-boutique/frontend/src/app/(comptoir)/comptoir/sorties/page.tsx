@@ -123,7 +123,7 @@ export default async function Sorties({
                     {vente.annule ? (
                       <span className="etiquette etiquette--douce">{t("sorties.rayee", langue)}</span>
                     ) : (
-                      <BoutonRayure vente={vente} />
+                      <BoutonRayure vente={vente} langue={langue} />
                     )}
                   </span>
                 </li>

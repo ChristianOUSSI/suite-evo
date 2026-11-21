@@ -6,9 +6,16 @@ import { useState } from "react";
 import { Icone } from "./icone";
 import { ecrire } from "@/lib/client-api";
 import { ErreurComptoir } from "@/lib/errors";
+import { t, LANGUE_DEFAUT, type Langue } from "@/lib/langue";
 import type { Vente } from "@/lib/types";
 
-export function BoutonRayure({ vente }: { vente: Vente }) {
+export function BoutonRayure({
+  vente,
+  langue = LANGUE_DEFAUT,
+}: {
+  vente: Vente;
+  langue?: Langue;
+}) {
   const routeur = useRouter();
   const [ouvert, setOuvert] = useState(false);
   const [motif, setMotif] = useState("");
@@ -19,7 +26,7 @@ export function BoutonRayure({ vente }: { vente: Vente }) {
 
   async function rayer() {
     if (!assezLong) {
-      setIncident("Le motif demande quatre caractères au moins.");
+      setIncident(t("rayure.incident-motif", langue));
       return;
     }
     setEnCours(true);
@@ -36,7 +43,7 @@ export function BoutonRayure({ vente }: { vente: Vente }) {
       setIncident(
         erreur instanceof ErreurComptoir
           ? erreur.message
-          : "La rayure n'est pas passée au cahier.",
+          : t("rayure.incident", langue),
       );
     } finally {
       setEnCours(false);
@@ -50,7 +57,7 @@ export function BoutonRayure({ vente }: { vente: Vente }) {
         className="bouton bouton--petit bouton--doux"
         onClick={() => setOuvert(true)}
       >
-        Rayer
+        {t("rayure.bouton", langue)}
       </button>
     );
   }
@@ -58,18 +65,16 @@ export function BoutonRayure({ vente }: { vente: Vente }) {
   return (
     <div className="rang-pile">
       <div className="champ">
-        <label htmlFor={`rayure-${vente.id}`}>Motif de la rayure</label>
+        <label htmlFor={`rayure-${vente.id}`}>{t("rayure.label", langue)}</label>
         <input
           id={`rayure-${vente.id}`}
           value={motif}
           onChange={(e) => setMotif(e.target.value)}
           maxLength={160}
-          placeholder="le client a repris la marchandise"
+          placeholder={t("rayure.ph", langue)}
           autoFocus
         />
-        <span className="champ__aide">
-          La marchandise revient en réserve. La ligne reste au journal, barrée.
-        </span>
+        <span className="champ__aide">{t("rayure.aide", langue)}</span>
       </div>
       {incident ? (
         <p className="note-bas note-bas--tard" role="alert">
@@ -83,7 +88,7 @@ export function BoutonRayure({ vente }: { vente: Vente }) {
           onClick={rayer}
           disabled={enCours || !assezLong}
         >
-          {enCours ? "Rayure" : "Rayer la vente"}
+          {enCours ? t("rayure.encours", langue) : t("rayure.confirmer", langue)}
           <span className="bouton__fleche">
             <Icone nom="croix" taille={14} />
           </span>
@@ -96,7 +101,7 @@ export function BoutonRayure({ vente }: { vente: Vente }) {
             setIncident(null);
           }}
         >
-          Laisser la ligne
+          {t("rayure.garder", langue)}
         </button>
       </div>
     </div>

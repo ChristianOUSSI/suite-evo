@@ -6,22 +6,23 @@ import { useState } from "react";
 import { Icone } from "./icone";
 import { ecrire } from "@/lib/client-api";
 import { ErreurComptoir } from "@/lib/errors";
+import { t, LANGUE_DEFAUT, type Langue } from "@/lib/langue";
 import type { Connexion } from "@/lib/types";
 
 const COMPTES = [
   {
-    role: "Tenancière",
+    roleCle: "seance.role-tenanciere",
     email: "tenanciere@tchuentecahier.cm",
     mot: "Kolodo2026!",
   },
   {
-    role: "Vendeuse",
+    roleCle: "seance.role-vendeuse",
     email: "vendeuse@tchuentecahier.cm",
     mot: "Kolodo2026!",
   },
 ];
 
-export function FormulaireSeance() {
+export function FormulaireSeance({ langue = LANGUE_DEFAUT }: { langue?: Langue }) {
   const routeur = useRouter();
   const [email, setEmail] = useState(COMPTES[0].email);
   const [mot, setMot] = useState(COMPTES[0].mot);
@@ -42,7 +43,7 @@ export function FormulaireSeance() {
       setIncident(
         erreur instanceof ErreurComptoir
           ? erreur.message
-          : "La séance ne s'est pas ouverte.",
+          : t("seance.incident", langue),
       );
       setEnCours(false);
     }
@@ -52,7 +53,7 @@ export function FormulaireSeance() {
     <form className="feuille bloc seance__form" onSubmit={ouvrir}>
       <div className="pile-champs">
         <div className="champ">
-          <label htmlFor="email">Adresse du comptoir</label>
+          <label htmlFor="email">{t("seance.adresse", langue)}</label>
           <input
             id="email"
             type="email"
@@ -63,7 +64,7 @@ export function FormulaireSeance() {
           />
         </div>
         <div className="champ">
-          <label htmlFor="mot">Mot de passe</label>
+          <label htmlFor="mot">{t("seance.mot", langue)}</label>
           <input
             id="mot"
             type="password"
@@ -75,7 +76,7 @@ export function FormulaireSeance() {
         </div>
 
         <div className="champ">
-          <span className="champ__titre">Deux mains de la même boutique</span>
+          <span className="champ__titre">{t("seance.deux-mains", langue)}</span>
           <div className="comptes-demo">
             {COMPTES.map((compte) => (
               <button
@@ -87,15 +88,12 @@ export function FormulaireSeance() {
                   setMot(compte.mot);
                 }}
               >
-                <span className="comptes-demo__role">{compte.role}</span>
+                <span className="comptes-demo__role">{t(compte.roleCle, langue)}</span>
                 <span className="comptes-demo__adresse mono">{compte.email}</span>
               </button>
             ))}
           </div>
-          <span className="champ__aide">
-            Un clic remplit les deux champs. La séance dure douze heures et
-            tient dans un cookie que le téléphone ne voit jamais.
-          </span>
+          <span className="champ__aide">{t("seance.aide", langue)}</span>
         </div>
 
         {incident ? (
@@ -106,7 +104,7 @@ export function FormulaireSeance() {
 
         <div className="acts">
           <button type="submit" className="bouton bouton--encre" disabled={enCours}>
-            {enCours ? "Ouverture" : "Ouvrir le comptoir"}
+            {enCours ? t("seance.ouverture", langue) : t("landing.ouvrir", langue)}
             <span className="bouton__fleche">
               <Icone nom="fleche" taille={15} />
             </span>
@@ -115,8 +113,7 @@ export function FormulaireSeance() {
 
         <p className="mention-demo">
           <Icone nom="alerte" taille={13} />
-          Démo : ces deux comptes ouvrent une boutique inventée, sans écriture
-          hors de la machine.
+          {t("seance.demo", langue)}
         </p>
       </div>
     </form>

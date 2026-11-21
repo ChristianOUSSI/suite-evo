@@ -74,6 +74,7 @@ export default async function Dictee() {
 
       <ConsoleDictee
         ecoutes={ecoutes}
+        langue={langue}
         rails={{
           momo: session.boutique.momo_actif,
           orange: session.boutique.orange_actif,
