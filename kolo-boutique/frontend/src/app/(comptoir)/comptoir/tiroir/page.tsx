@@ -5,40 +5,28 @@ import { ComptageTiroir } from "@/components/comptage-tiroir";
 import { Icone } from "@/components/icone";
 import { lire } from "@/lib/api";
 import { fcfaCourt, pourcentage } from "@/lib/format";
+import { t } from "@/lib/langue";
+import { langueServeur } from "@/lib/langue-serveur";
 import type { Caisse, Journees } from "@/lib/types";
 
 import "../../../../styles/comptoir.css";
 
 export const dynamic = "force-dynamic";
 
-export const metadata: Metadata = {
-  title: "Le tiroir",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const langue = await langueServeur();
+  return { title: t("tiroir.meta", langue) };
+}
 
 const FEUILLES = [
-  {
-    href: "/api/exports/ventes.csv?jours=30",
-    titre: "Les ventes",
-    texte: "Chaque ligne : article, quantité, prix cédé, coût, bénéfice, rail.",
-  },
-  {
-    href: "/api/exports/stock.csv",
-    titre: "Le rayon",
-    texte: "Coût moyen, prix vendu, stock, seuil d'alerte et valeur dormante.",
-  },
-  {
-    href: "/api/exports/journees.csv?jours=30",
-    titre: "Les journées",
-    texte: "Un jour par ligne : chiffre, coût, bénéfice net, marge, espèces.",
-  },
-  {
-    href: "/api/exports/depenses.csv?jours=30",
-    titre: "Les sorties",
-    texte: "Transport, loyer, salaire, facture, avec leur date.",
-  },
+  { href: "/api/exports/ventes.csv?jours=30", titre: "feuille.ventes-titre", texte: "feuille.ventes-texte" },
+  { href: "/api/exports/stock.csv", titre: "feuille.rayon-titre", texte: "feuille.rayon-texte" },
+  { href: "/api/exports/journees.csv?jours=30", titre: "feuille.journees-titre", texte: "feuille.journees-texte" },
+  { href: "/api/exports/depenses.csv?jours=30", titre: "feuille.sorties-titre", texte: "feuille.sorties-texte" },
 ];
 
 export default async function Tiroir() {
+  const langue = await langueServeur();
   const [caisse, feuilles] = await Promise.all([
     lire<Caisse>("/caisse"),
     lire<Journees>("/journees?jours=14"),
@@ -51,22 +39,24 @@ export default async function Tiroir() {
           <span className="sur-titre">
             <Icone nom="tiroir" taille={13} /> {caisse.jour_label}
           </span>
-          <h1 className="display">Le tiroir du soir</h1>
+          <h1 className="display">{t("tiroir.titre", langue)}</h1>
           <p className="tete-page__entree">
-            {caisse.ventes} écriture{caisse.ventes > 1 ? "s" : ""} au cahier
-            aujourd&apos;hui, {fcfaCourt(caisse.chiffre)} de chiffre à{" "}
-            {pourcentage(caisse.marge)} de marge. Le tiroir doit contenir{" "}
-            {caisse.attendu_label}.
+            {t("tiroir.chapo", langue, {
+              ecritures: caisse.ventes,
+              chiffre: fcfaCourt(caisse.chiffre),
+              marge: pourcentage(caisse.marge),
+              attendu: caisse.attendu_label,
+            })}
           </p>
         </div>
       </div>
 
       <div className="pilees-deux">
-        <section className="feuille bloc" aria-label="Compter le tiroir">
+        <section className="feuille bloc" aria-label={t("tiroir.aria-compter", langue)}>
           <div className="tete-feuille">
-            <h2>Compter</h2>
+            <h2>{t("tiroir.compter", langue)}</h2>
             <span className="tete-feuille__cote">
-              {caisse.comptage ? "déjà déclaré" : "rien déclaré"}
+              {caisse.comptage ? t("tiroir.deja-declare", langue) : t("tiroir.rien-declare", langue)}
             </span>
           </div>
           <div style={{ marginTop: "1rem" }}>
@@ -75,54 +65,56 @@ export default async function Tiroir() {
         </section>
 
         <div className="vitre-serre">
-          <section className="feuille bloc" aria-label="Ce que la journée a rendu">
+          <section className="feuille bloc" aria-label={t("tiroir.aria-journee", langue)}>
             <div className="tete-feuille">
-              <h2>La journée en chiffres</h2>
-              <span className="tete-feuille__cote">lu au cahier</span>
+              <h2>{t("tiroir.journee-titre", langue)}</h2>
+              <span className="tete-feuille__cote">{t("tiroir.journee-cote", langue)}</span>
             </div>
             <dl className="tiroir-lignes">
               <div className="ligne-reglure">
-                <dt className="ligne-reglure__nom">Chiffre du jour</dt>
+                <dt className="ligne-reglure__nom">{t("tiroir.chiffre-jour", langue)}</dt>
                 <dd className="ligne-reglure__valeur">{caisse.chiffre_label}</dd>
               </div>
               <div className="ligne-reglure">
-                <dt className="ligne-reglure__nom">dont espèces</dt>
+                <dt className="ligne-reglure__nom">{t("tiroir.especes", langue)}</dt>
                 <dd className="ligne-reglure__valeur">{caisse.especes_label}</dd>
               </div>
               <div className="ligne-reglure">
-                <dt className="ligne-reglure__nom">Bénéfice brut</dt>
+                <dt className="ligne-reglure__nom">{t("tiroir.brut", langue)}</dt>
                 <dd className="ligne-reglure__valeur">{caisse.benefice_label}</dd>
               </div>
               <div className="ligne-reglure">
-                <dt className="ligne-reglure__nom">Dépenses du jour</dt>
+                <dt className="ligne-reglure__nom">{t("tiroir.depenses-jour", langue)}</dt>
                 <dd className="ligne-reglure__valeur">{caisse.depenses_label}</dd>
               </div>
               <div className="ligne-reglure">
-                <dt className="ligne-reglure__nom">Bénéfice net</dt>
+                <dt className="ligne-reglure__nom">{t("tiroir.net", langue)}</dt>
                 <dd className="ligne-reglure__valeur">
                   {caisse.benefice_net_label}
                 </dd>
               </div>
               <div className="ligne-reglure">
-                <dt className="ligne-reglure__nom">Attendu au tiroir</dt>
+                <dt className="ligne-reglure__nom">{t("tiroir.attendu", langue)}</dt>
                 <dd className="ligne-reglure__valeur">{caisse.attendu_label}</dd>
               </div>
             </dl>
 
             {caisse.comptage ? (
               <p className="note-bas note-bas--tenu" style={{ marginTop: "0.9rem" }}>
-                Compté {caisse.comptage.compte_label} par{" "}
-                {caisse.comptage.tenu_par} · écart{" "}
-                {caisse.comptage.ecart_label}
-                {caisse.comptage.tenu ? " (au franc près)" : ""}
+                {t("tiroir.compte-note", langue, {
+                  compte: caisse.comptage.compte_label,
+                  par: caisse.comptage.tenu_par,
+                  ecart: caisse.comptage.ecart_label,
+                })}
+                {caisse.comptage.tenu ? t("tiroir.au-franc", langue) : ""}
               </p>
             ) : null}
           </section>
 
-          <section className="feuille bloc" aria-label="Les quatorze derniers jours">
+          <section className="feuille bloc" aria-label={t("tiroir.aria-14j", langue)}>
             <div className="tete-feuille">
-              <h2>Quatorze jours</h2>
-              <span className="tete-feuille__cote">du plus récent</span>
+              <h2>{t("tiroir.14j-titre", langue)}</h2>
+              <span className="tete-feuille__cote">{t("tiroir.14j-cote", langue)}</span>
             </div>
             <ul className="ventes-liste">
               {feuilles.journees.map((feuille) => (
@@ -130,8 +122,8 @@ export default async function Tiroir() {
                   <span className="vente-ligne__qui">
                     {feuille.jour}
                     <small>
-                      {feuille.ventes} vente{feuille.ventes > 1 ? "s" : ""} ·{" "}
-                      {feuille.ticket_moyen_label} de ticket
+                      {t("tiroir.ventes-petites", langue, { n: feuille.ventes })} ·{" "}
+                      {t("tiroir.ticket", langue, { montant: feuille.ticket_moyen_label })}
                     </small>
                   </span>
                   <span className="vente-ligne__quantite">
@@ -148,7 +140,7 @@ export default async function Tiroir() {
                           : "etiquette--alerte"
                       }`}
                     >
-                      {fcfaCourt(feuille.benefice_net)} net
+                      {t("tiroir.net-tag", langue, { montant: fcfaCourt(feuille.benefice_net) })}
                     </span>
                   </span>
                 </li>
@@ -158,29 +150,26 @@ export default async function Tiroir() {
         </div>
       </div>
 
-      <section className="feuille bloc" id="feuilles" aria-label="Les feuilles à emporter">
+      <section className="feuille bloc" id="feuilles" aria-label={t("tiroir.aria-feuilles", langue)}>
         <div className="tete-feuille">
-          <h2>Les feuilles à emporter</h2>
+          <h2>{t("tiroir.feuilles-titre", langue)}</h2>
           <span className="tete-feuille__cote">
-            <Icone nom="feuille" taille={13} /> quatre exports
+            <Icone nom="feuille" taille={13} /> {t("tiroir.feuilles-cote", langue)}
           </span>
         </div>
-        <p className="champ__aide">
-          Chaque feuille s&apos;ouvre dans Excel ou LibreOffice, en français,
-          séparée par des points-virgules. Rien ne quitte cette machine.
-        </p>
+        <p className="champ__aide">{t("tiroir.feuilles-aide", langue)}</p>
         <ul className="feuilles-export">
           {FEUILLES.map((feuille) => (
             <li key={feuille.href}>
               <a href={feuille.href} download>
-                <Icone nom="feuille" taille={15} /> {feuille.titre}
+                <Icone nom="feuille" taille={15} /> {t(feuille.titre, langue)}
               </a>
-              <span>{feuille.texte}</span>
+              <span>{t(feuille.texte, langue)}</span>
             </li>
           ))}
         </ul>
         <Link href="/comptoir" className="lien-simple">
-          Revenir à la journée
+          {t("tiroir.retour", langue)}
         </Link>
       </section>
     </div>

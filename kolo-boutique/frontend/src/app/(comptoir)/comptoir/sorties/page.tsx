@@ -7,6 +7,8 @@ import { Icone } from "@/components/icone";
 import { lire } from "@/lib/api";
 import { parametres } from "@/lib/client-api";
 import { fcfaCourt } from "@/lib/format";
+import { t } from "@/lib/langue";
+import { langueServeur } from "@/lib/langue-serveur";
 import { seanceObligatoire } from "@/lib/session";
 import type { Cahier, JournalDepenses, JournalVentes } from "@/lib/types";
 
@@ -14,9 +16,10 @@ import "../../../../styles/comptoir.css";
 
 export const dynamic = "force-dynamic";
 
-export const metadata: Metadata = {
-  title: "Les ventes",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const langue = await langueServeur();
+  return { title: t("sorties.meta", langue) };
+}
 
 const JOURS = [1, 3, 7, 30];
 
@@ -29,6 +32,7 @@ export default async function Sorties({
   const jours = JOURS.includes(Number(filtre.jours)) ? Number(filtre.jours) : 7;
 
   const session = await seanceObligatoire();
+  const langue = await langueServeur();
   const [journal, cahier, depenses] = await Promise.all([
     lire<JournalVentes>(`/ventes${parametres({ jours, limite: 200 })}`),
     lire<Cahier>("/produits"),
@@ -43,15 +47,16 @@ export default async function Sorties({
       <div className="tete-page">
         <div className="tete-page__principal">
           <span className="sur-titre">
-            <Icone nom="vente" taille={13} /> {journal.jours} derniers jours
+            <Icone nom="vente" taille={13} /> {t("sorties.derniers-jours", langue, { jours: journal.jours })}
           </span>
-          <h1 className="display">Les ventes du comptoir</h1>
+          <h1 className="display">{t("sorties.titre", langue)}</h1>
           <p className="tete-page__entree">
-            {tenues.length} vente{tenues.length > 1 ? "s" : ""} tenue
-            {tenues.length > 1 ? "s" : ""} pour {fcfaCourt(journal.chiffre)} de
-            chiffre et {fcfaCourt(journal.benefice)} de marge.{" "}
-            {rayees} ligne{rayees > 1 ? "s" : ""} rayée
-            {rayees > 1 ? "s" : ""}, la marchandise est revenue en réserve.
+            {t("sorties.chapo", langue, {
+              ventes: tenues.length,
+              chiffre: fcfaCourt(journal.chiffre),
+              marge: fcfaCourt(journal.benefice),
+              rayees,
+            })}
           </p>
         </div>
         <div className="tete-page__cote">
@@ -60,36 +65,36 @@ export default async function Sorties({
             className="bouton"
             download
           >
-            <Icone nom="feuille" taille={15} /> Feuille des ventes
+            <Icone nom="feuille" taille={15} /> {t("sorties.exporter", langue)}
           </a>
         </div>
       </div>
 
-      <nav className="bande-ancre" aria-label="Période">
+      <nav className="bande-ancre" aria-label={t("sorties.aria-periode", langue)}>
         {JOURS.map((un) => (
           <Link
             key={un}
             href={`/comptoir/sorties${parametres({ jours: un })}`}
             className={un === jours ? "est-active" : undefined}
           >
-            {un} jour{un > 1 ? "s" : ""}
+            {t("sorties.jour", langue, { n: un })}
           </Link>
         ))}
       </nav>
 
       <div className="pilees-deux">
-        <section className="feuille bloc" aria-label="Le journal des ventes">
+        <section className="feuille bloc" aria-label={t("sorties.aria-journal", langue)}>
           <div className="tete-feuille">
-            <h2>Le journal</h2>
-            <span className="tete-feuille__cote">du plus récent</span>
+            <h2>{t("sorties.journal-titre", langue)}</h2>
+            <span className="tete-feuille__cote">{t("sorties.journal-cote", langue)}</span>
           </div>
 
           {journal.ventes.length === 0 ? (
             <div className="vide">
-              <h3>Rien sur cette période.</h3>
-              <p>Une vente naît d&apos;une dictée ou du comptoir, jamais d&apos;un import.</p>
+              <h3>{t("sorties.vide-titre", langue)}</h3>
+              <p>{t("sorties.vide-texte", langue)}</p>
               <Link href="/comptoir/dictee" className="bouton bouton--encre">
-                Dicter
+                {t("jour.dicter", langue)}
               </Link>
             </div>
           ) : (
@@ -104,10 +109,10 @@ export default async function Sorties({
                     <small>
                       {vente.jour_court} · {vente.heure} · {vente.mode_label} ·{" "}
                       {vente.tenu_par}
-                      {vente.dictee ? " · dictée" : ""}
+                      {vente.dictee ? ` · ${t("jour.dictation", langue)}` : ""}
                     </small>
                     {vente.annule && vente.motif_annulation ? (
-                      <small>rayée : {vente.motif_annulation}</small>
+                      <small>{t("sorties.rayee-motif", langue, { motif: vente.motif_annulation })}</small>
                     ) : null}
                   </span>
                   <span className="vente-ligne__quantite">
@@ -116,7 +121,7 @@ export default async function Sorties({
                   <span className="vente-ligne__montant">{vente.chiffre_label}</span>
                   <span className="vente-ligne__outils">
                     {vente.annule ? (
-                      <span className="etiquette etiquette--douce">rayée</span>
+                      <span className="etiquette etiquette--douce">{t("sorties.rayee", langue)}</span>
                     ) : (
                       <BoutonRayure vente={vente} />
                     )}
@@ -128,22 +133,22 @@ export default async function Sorties({
         </section>
 
         <div className="vitre-serre">
-          <section className="feuille bloc" aria-label="Vendre au comptoir">
+          <section className="feuille bloc" aria-label={t("sorties.aria-vendre", langue)}>
             <div className="tete-feuille">
-              <h2>Vendre sans dicter</h2>
-              <span className="tete-feuille__cote">la même écriture</span>
+              <h2>{t("sorties.vendre-titre", langue)}</h2>
+              <span className="tete-feuille__cote">{t("sorties.vendre-cote", langue)}</span>
             </div>
             <ConsoleVente cahier={cahier} boutique={session.boutique} />
           </section>
 
-          <section className="feuille bloc" aria-label="Les dépenses">
+          <section className="feuille bloc" aria-label={t("sorties.aria-depenses", langue)}>
             <div className="tete-feuille">
-              <h2>Les sorties d&apos;argent</h2>
+              <h2>{t("sorties.depenses-titre", langue)}</h2>
               <span className="tete-feuille__cote">{depenses.total_label}</span>
             </div>
             {depenses.depenses.length === 0 ? (
               <p className="champ__aide">
-                Aucune dépense sur {depenses.jours} jours.
+                {t("sorties.depenses-vide", langue, { jours: depenses.jours })}
               </p>
             ) : (
               <ul className="ventes-liste">
@@ -160,7 +165,7 @@ export default async function Sorties({
                       {ligne.montant_label}
                     </span>
                     <span className="vente-ligne__outils">
-                      <span className="etiquette etiquette--alerte">sortie</span>
+                      <span className="etiquette etiquette--alerte">{t("sorties.sortie", langue)}</span>
                     </span>
                   </li>
                 ))}
