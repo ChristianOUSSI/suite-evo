@@ -371,8 +371,16 @@
   font-weight: 700;
 }
 
+.tableau tbody tr {
+  transition: background var(--transition);
+}
+
 .tableau tbody tr:hover {
   background: #131a20;
+}
+
+.tableau tbody tr:hover td:first-child {
+  box-shadow: inset 3px 0 0 var(--ambre);
 }
 
 .tableau .mono {
@@ -388,8 +396,8 @@
 .pastille {
   font-family: var(--mono);
   font-size: 11px;
-  padding: 2px 7px;
-  border-radius: 2px;
+  padding: 3px 9px;
+  border-radius: 999px;
   border: 1px solid var(--rule);
   color: var(--encre-douce);
   white-space: nowrap;
