@@ -82,14 +82,17 @@
   display: flex;
   flex-direction: column;
   gap: 0.22rem;
-  padding: 0.7rem 0.75rem 0.78rem;
+  padding: 0.8rem 0.85rem 0.9rem;
   border: 1px solid var(--rule-strong);
+  border-radius: 10px;
   background: var(--sheet-bright);
   cursor: pointer;
+  box-shadow: var(--ombre);
   transition:
-    border-color 140ms ease,
-    background-color 140ms ease,
-    box-shadow 140ms ease;
+    border-color var(--transition),
+    background-color var(--transition),
+    box-shadow var(--transition),
+    transform var(--transition);
 }
 
 .tone-choice input {
@@ -102,6 +105,8 @@
 
 .tone-choice:hover {
   border-color: var(--ink);
+  box-shadow: var(--ombre-levee);
+  transform: translateY(-1px);
 }
 
 .tone-choice.is-active {
@@ -234,8 +239,17 @@
   grid-template-columns: 0.45rem minmax(0, 1fr) auto;
   gap: 0.6rem;
   align-items: center;
-  padding-block: 0.68rem;
+  padding-block: 0.72rem;
+  padding-inline: 0.6rem;
+  margin-inline: -0.6rem;
   border-bottom: 1px solid var(--rule);
+  border-radius: 6px;
+  transition: background-color var(--transition), box-shadow var(--transition);
+}
+
+.channel-choice:hover {
+  background: rgba(247, 249, 251, 0.65);
+  box-shadow: inset 3px 0 0 var(--moss);
 }
 
 .channel-choice:last-child {
