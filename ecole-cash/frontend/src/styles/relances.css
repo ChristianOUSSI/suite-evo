@@ -23,9 +23,17 @@
   grid-template-columns: 2rem 1.6fr 1fr auto auto;
   align-items: center;
   gap: 1rem;
-  padding: 0.85rem;
+  padding: 0.9rem;
   border: 1px solid var(--rule);
+  border-radius: 10px;
   background: var(--sheet-bright);
+  box-shadow: var(--ombre);
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+
+.relance-ligne:hover {
+  box-shadow: var(--ombre-levee);
+  transform: translateY(-1px);
 }
 
 .relance-ligne--due {
