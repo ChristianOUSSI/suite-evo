@@ -9,19 +9,20 @@ import { MentionDemo } from "@/components/mention-demo";
 import { ecrire } from "@/lib/client-api";
 import { ErreurCaisse } from "@/lib/errors";
 import { canoniseTelephone, fcfa, pourcentage } from "@/lib/format";
+import { t, LANGUE_DEFAUT, type Langue } from "@/lib/langue";
 import type { Classe, Ecole, Eleve, Encaissement, Mode, Recu } from "@/lib/types";
 
-const MODES: { cle: Mode; libelle: string; aide: string; rails: keyof Ecole | null }[] = [
-  { cle: "especes", libelle: "Espèces", aide: "tiroir", rails: "especes_actifs" },
-  { cle: "momo_mtn", libelle: "MoMo MTN", aide: "référence opérateur", rails: "momo_actif" },
-  {
-    cle: "momo_orange",
-    libelle: "Orange Money",
-    aide: "référence opérateur",
-    rails: "orange_actif",
-  },
-  { cle: "cheque", libelle: "Chèque", aide: "n° de chéquier", rails: null },
-  { cle: "virement", libelle: "Virement", aide: "banque", rails: null },
+const MODES: {
+  cle: Mode;
+  cle_libelle: string;
+  cle_aide: string;
+  rails: keyof Ecole | null;
+}[] = [
+  { cle: "especes", cle_libelle: "guichet.mode.especes", cle_aide: "guichet.mode.especes_aide", rails: "especes_actifs" },
+  { cle: "momo_mtn", cle_libelle: "guichet.mode.momo_mtn", cle_aide: "guichet.mode_ref_aide", rails: "momo_actif" },
+  { cle: "momo_orange", cle_libelle: "guichet.mode.momo_orange", cle_aide: "guichet.mode_ref_aide", rails: "orange_actif" },
+  { cle: "cheque", cle_libelle: "guichet.mode.cheque", cle_aide: "guichet.mode.cheque_aide", rails: null },
+  { cle: "virement", cle_libelle: "guichet.mode.virement", cle_aide: "guichet.mode.virement_aide", rails: null },
 ];
 
 const AUCUNE_REFERENCE: Mode[] = ["especes", "virement"];
@@ -30,10 +31,12 @@ export function Guichet({
   eleves,
   classes,
   ecole,
+  langue = LANGUE_DEFAUT,
 }: {
   eleves: Eleve[];
   classes: Classe[];
   ecole: Ecole;
+  langue?: Langue;
 }) {
   const [recherche, setRecherche] = useState("");
   const [classeActive, setClasseActive] = useState<string>("");
@@ -63,36 +66,36 @@ export function Guichet({
 
   return (
     <div className="guichet">
-      <section className="sheet bloc" aria-label="Familles à encaisser">
+      <section className="sheet bloc" aria-label={t("guichet.aria_familles", langue)}>
         <div className="section-head">
-          <h2>Qui passe au guichet ?</h2>
+          <h2>{t("guichet.titre_familles", langue)}</h2>
           <span className="section-head__aside">
-            {filtres.length} famille{filtres.length > 1 ? "s" : ""}
+            {t(filtres.length > 1 ? "guichet.nb_familles" : "guichet.nb_famille", langue, { n: filtres.length })}
           </span>
         </div>
 
         <div className="form-grid form-grid--pair" style={{ marginTop: "1.1rem" }}>
           <div className="field">
-            <label htmlFor="guichet-recherche">Nom, prénom ou matricule</label>
+            <label htmlFor="guichet-recherche">{t("guichet.recherche", langue)}</label>
             <input
               id="guichet-recherche"
               type="search"
               value={recherche}
-              placeholder="Ngo Bell, CP2-2027-004…"
+              placeholder={t("guichet.placeholder_recherche", langue)}
               onChange={(e) => setRecherche(e.target.value)}
             />
           </div>
           <div className="field">
-            <label htmlFor="guichet-classe">Classe</label>
+            <label htmlFor="guichet-classe">{t("guichet.classe", langue)}</label>
             <select
               id="guichet-classe"
               value={classeActive}
               onChange={(e) => setClasseActive(e.target.value)}
             >
-              <option value="">Toutes les classes</option>
+              <option value="">{t("guichet.toutes_classes", langue)}</option>
               {classes.map((classe) => (
                 <option key={classe.id} value={String(classe.id)}>
-                  {classe.label} · {classe.effectif} élèves
+                  {t("guichet.classe_option", langue, { classe: classe.label, n: classe.effectif })}
                 </option>
               ))}
             </select>
@@ -102,8 +105,7 @@ export function Guichet({
         <div className="filer" style={{ marginTop: "1.1rem" }}>
           {filtres.length === 0 ? (
             <p className="vide-note">
-              Personne ne correspond. Une faute dans le nom, ou l&apos;élève
-              n&apos;est pas encore engagé pour {ecole.annee}.
+              {t("guichet.aucun", langue, { annee: ecole.annee })}
             </p>
           ) : null}
           {filtres.slice(0, 40).map((carte) => (
@@ -130,35 +132,33 @@ export function Guichet({
                       : ""
                 }`}
               >
-                {carte.reste === 0 ? "solde" : fcfa(carte.reste)}
+                {carte.reste === 0 ? t("guichet.solde", langue) : fcfa(carte.reste)}
                 <small>
                   {carte.reste === 0
-                    ? "année réglée"
-                    : `${pourcentage(carte.du > 0 ? (carte.rentre / carte.du) * 100 : 0)} réglé`}
+                    ? t("guichet.annee_reglee", langue)
+                    : t("guichet.pct_regle", langue, { pct: pourcentage(carte.du > 0 ? (carte.rentre / carte.du) * 100 : 0) })}
                 </small>
               </span>
             </button>
           ))}
           {filtres.length > 40 ? (
             <p className="vide-note">
-              Les 40 premières sur {filtres.length}. Précisez la classe ou le
-              nom.
+              {t("guichet.plus_40", langue, { n: filtres.length })}
             </p>
           ) : null}
         </div>
       </section>
 
       {!eleve ? (
-        <section className="sheet bloc" aria-label="Ardoise">
+        <section className="sheet bloc" aria-label={t("guichet.vide_titre", langue)}>
           <div className="empty">
             <Icone nom="monnaie" taille={26} />
-            <h3>Choisissez une famille</h3>
+            <h3>{t("guichet.vide_titre", langue)}</h3>
             <p>
-              L&apos;ardoise s&apos;ouvre à droite : ce qui est dû, ce qui est
-              réglé, terme par terme. Puis on encaisse.
+              {t("guichet.vide_texte", langue)}
             </p>
             <Link href="/app/eleves" className="text-link">
-              Voir toutes les familles
+              {t("guichet.toutes_familles", langue)}
             </Link>
           </div>
         </section>
@@ -167,6 +167,7 @@ export function Guichet({
           key={`${eleve.id}-${eleve.reste}`}
           eleve={eleve}
           ecole={ecole}
+          langue={langue}
           surReçu={(mis) => {
             setCartes((actuel) => ({ ...actuel, [mis.id]: mis }));
           }}
@@ -179,10 +180,12 @@ export function Guichet({
 function FormulaireEncaissement({
   eleve,
   ecole,
+  langue,
   surReçu,
 }: {
   eleve: Eleve;
   ecole: Ecole;
+  langue: Langue;
   surReçu: (eleve: Eleve) => void;
 }) {
   const premiere = eleve.echeances.find((e) => e.statut !== "solde") ?? null;
@@ -224,7 +227,7 @@ function FormulaireEncaissement({
       setMessage(
         erreur instanceof ErreurCaisse
           ? erreur.message
-          : "La caisse ne répond pas.",
+          : t("connexion.erreur", langue),
       );
     } finally {
       setEnCours(false);
@@ -232,11 +235,11 @@ function FormulaireEncaissement({
   }
 
   if (recu) {
-    return <SortieDeReçu recu={recu} eleve={eleve} ecole={ecole} suite={() => setRecu(null)} />;
+    return <SortieDeReçu recu={recu} eleve={eleve} ecole={ecole} langue={langue} suite={() => setRecu(null)} />;
   }
 
   return (
-    <section className="sheet bloc" aria-label="Ardoise et encaissement">
+    <section className="sheet bloc" aria-label={t("guichet.aria_encaissement", langue)}>
       <div className="section-head">
         <h2>{eleve.nom_complet}</h2>
         <span className="section-head__aside">{eleve.classe}</span>
@@ -244,7 +247,7 @@ function FormulaireEncaissement({
 
       <div className="ligne-ecolee" style={{ marginTop: "1rem" }}>
         <span className="ligne-ecolee__nom mono">{eleve.matricule}</span>
-        <span className="ligne-ecolee__valeur">{eleve.tuteur_telephone_display || "aucun numéro"}</span>
+        <span className="ligne-ecolee__valeur">{eleve.tuteur_telephone_display || t("guichet.aucun_numero", langue)}</span>
       </div>
 
       <div className="ardoise">
@@ -266,13 +269,12 @@ function FormulaireEncaissement({
             <span className="ardoise__montant money">
               {fcfa(terme.impute)} / {fcfa(terme.montant)}
             </span>
-            <EtiquetteEcheance statut={terme.statut} />
+            <EtiquetteEcheance statut={terme.statut} langue={langue} />
           </div>
         ))}
         {eleve.echeances.length === 0 ? (
           <p className="vide-note">
-            Aucune ardoise posée pour {eleve.annee}. Engagement ou classe à
-            traiter d&apos;abord.
+            {t("guichet.aucune_ardoise", langue, { annee: eleve.annee })}
           </p>
         ) : null}
       </div>
@@ -281,13 +283,12 @@ function FormulaireEncaissement({
 
       {eleve.reste === 0 ? (
         <div className="notice notice--success">
-          L&apos;année est réglée, {fcfa(eleve.du)} encaissés. Rien à encaisser
-          de plus : le backend refuserait tout versement.
+          {t("guichet.annee_reglee_notice", langue, { montant: fcfa(eleve.du) })}
         </div>
       ) : (
         <form onSubmit={encaisser}>
           <fieldset style={{ border: 0, padding: 0, margin: "0 0 1rem" }}>
-            <legend className="field__label">Mode de règlement</legend>
+            <legend className="field__label">{t("guichet.mode_reglement", langue)}</legend>
             <div className="paire-boutons">
               {MODES.map((carte) => {
                 const coupe = carte.rails !== null && ecole[carte.rails] === false;
@@ -298,10 +299,10 @@ function FormulaireEncaissement({
                     className={`bouton-mode${mode === carte.cle ? " is-choisi" : ""}`}
                     onClick={() => setMode(carte.cle)}
                     disabled={coupe}
-                    title={coupe ? "Ce rail est coupé dans les réglages" : undefined}
+                    title={coupe ? t("guichet.rail_cope", langue) : undefined}
                   >
-                    {carte.libelle}
-                    <small>{coupe ? "coupé" : carte.aide}</small>
+                    {t(carte.cle_libelle, langue)}
+                    <small>{coupe ? t("guichet.cope", langue) : t(carte.cle_aide, langue)}</small>
                   </button>
                 );
               })}
@@ -315,7 +316,7 @@ function FormulaireEncaissement({
           ) : null}
 
           <div className="field aide-chiffre">
-            <label htmlFor="montant">Montant encaissé</label>
+            <label htmlFor="montant">{t("guichet.montant", langue)}</label>
             <input
               id="montant"
               type="text"
@@ -327,8 +328,8 @@ function FormulaireEncaissement({
             />
             <span className="aide-chiffre__unite">FCFA</span>
             <span className="field__aide">
-              Reste dû : {fcfa(eleve.reste)}.
-              {trop ? " Ce versement dépasse ce qui est dû." : ""}
+              {t("guichet.reste_du", langue, { montant: fcfa(eleve.reste) })}
+              {trop ? t("guichet.trop", langue) : ""}
             </span>
           </div>
 
@@ -345,10 +346,10 @@ function FormulaireEncaissement({
                   onClick={() => setMontant(String(preset.valeur))}
                 >
                   {preset.cle === "terme"
-                    ? `terme · ${fcfa(preset.valeur)}`
+                    ? `${t("guichet.preset_terme", langue)} · ${fcfa(preset.valeur)}`
                     : preset.cle === "tout"
-                      ? `tout · ${fcfa(preset.valeur)}`
-                      : `demi · ${fcfa(preset.valeur)}`}
+                      ? `${t("guichet.preset_tout", langue)} · ${fcfa(preset.valeur)}`
+                      : `${t("guichet.preset_demi", langue)} · ${fcfa(preset.valeur)}`}
                 </button>
               ) : null,
             )}
@@ -357,26 +358,26 @@ function FormulaireEncaissement({
           {!AUCUNE_REFERENCE.includes(mode) ? (
             <div className="field" style={{ marginTop: "1rem" }}>
               <label htmlFor="reference">
-                Référence {mode === "cheque" ? "du chèque" : "Mobile Money"}
+                {mode === "cheque" ? t("guichet.reference_cheque", langue) : t("guichet.reference_momo", langue)}
               </label>
               <input
                 id="reference"
                 type="text"
                 value={reference}
                 onChange={(e) => setReference(e.target.value)}
-                placeholder={mode === "cheque" ? "n° 04128 du chéquier" : "MTN6F2C19A0…"}
+                placeholder={mode === "cheque" ? t("guichet.ph_cheque", langue) : t("guichet.ph_momo", langue)}
                 maxLength={40}
               />
             </div>
           ) : null}
 
           <div className="field" style={{ marginTop: "1rem" }}>
-            <label htmlFor="note">Observation de caisse</label>
+            <label htmlFor="note">{t("guichet.note", langue)}</label>
             <textarea
               id="note"
               value={note}
               onChange={(e) => setNote(e.target.value)}
-              placeholder="Payé par le grand-frère, billet de 10 000 rendu…"
+              placeholder={t("guichet.ph_note", langue)}
               maxLength={400}
             />
           </div>
@@ -387,14 +388,16 @@ function FormulaireEncaissement({
               className="btn btn--ink"
               disabled={enCours || valeur <= 0 || trop || eleve.echeances.length === 0}
             >
-              {enCours ? "Écriture…" : `Encaisser ${valeur > 0 ? fcfa(valeur) : ""}`}
+              {enCours
+                ? t("guichet.ecriture", langue)
+                : t("guichet.encaisser", langue, { montant: valeur > 0 ? fcfa(valeur) : "" })}
             </button>
             <Link href={`/app/eleves/${eleve.id}`} className="btn btn--quiet">
-              Fiche de l&apos;élève
+              {t("guichet.fiche_eleve", langue)}
             </Link>
           </div>
 
-          <MentionDemo />
+          <MentionDemo langue={langue} />
         </form>
       )}
     </section>
@@ -405,20 +408,22 @@ function SortieDeReçu({
   recu,
   eleve,
   ecole,
+  langue,
   suite,
 }: {
   recu: Recu;
   eleve: Eleve;
   ecole: Ecole;
+  langue: Langue;
   suite: () => void;
 }) {
   const numero = canoniseTelephone(recu.destinataire);
   return (
-    <section className="sheet bloc" aria-label="Reçu remis">
+    <section className="sheet bloc" aria-label={t("guichet.aria_recu", langue)}>
       <div className="reçu-sortie">
         <div className="reçu-sortie__entete">
           <span className="stamp stamp--moss stamp--straight">
-            Reçu consigné
+            {t("guichet.recu_consigne", langue)}
           </span>
           <span className="mono">{recu.numero}</span>
         </div>
@@ -434,22 +439,25 @@ function SortieDeReçu({
         <div className="reçu-sortie__corps">{recu.corps}</div>
 
         <p className="field__aide" style={{ marginTop: "0.9rem" }}>
-          Écrit sur {recu.destinataire_display || "le carnet"}
-          {numero ? " · canal prévu" : " · aucun numéro valide, rien à envoyer"}.
-          Le parent peut faire vérifier ce reçu avec le code{" "}
+          {t("guichet.ecrit_sur", langue, { dest: recu.destinataire_display || t("guichet.le_carnet", langue) })}
+          {numero ? t("guichet.canal_prevu", langue) : t("guichet.rien_envoyer", langue)}.
+          {t("guichet.parent_verifie", langue)}
           <span className="mono">{recu.jeton}</span>.
         </p>
 
         <div className="form-actions" style={{ marginTop: "1.1rem" }}>
           <button type="button" className="btn btn--ink" onClick={suite}>
-            Encaisser la famille suivante
+            {t("guichet.suivant", langue)}
           </button>
           <Link href={recu.verif_url} className="btn btn--quiet">
-            Voir la page de vérification
+            {t("guichet.voir_verif", langue)}
           </Link>
         </div>
 
-        <MentionDemo texte={`Démo : le message ci-dessus n'a pas quitté cette machine. ${ecole.sigle || ecole.nom} n'a envoyé aucun WhatsApp.`} />
+        <MentionDemo
+          langue={langue}
+          texte={t("guichet.demo_sortie", langue, { ecole: ecole.sigle || ecole.nom })}
+        />
       </div>
     </section>
   );
