@@ -517,15 +517,22 @@
   background: #0f1418;
   border: 0;
   color: var(--encre-douce);
-  padding: 10px 13px;
+  padding: 12px 14px;
   font-size: 14px;
   font-family: var(--texte);
   cursor: pointer;
+  transition: background var(--transition), color var(--transition), box-shadow var(--transition);
 }
 
 .touche-menu button:hover:not(:disabled) {
-  background: #131a20;
+  background: #16202a;
   color: var(--encre);
+  box-shadow: inset 3px 0 0 var(--ambre);
+}
+
+.touche-menu button:active:not(:disabled) {
+  background: #1c2833;
+  transform: scale(0.99);
 }
 
 .touche-menu button:disabled {
