@@ -1,6 +1,7 @@
 "use client";
 
 import { canoniseTelephone } from "@/lib/format";
+import { t, LANGUE_DEFAUT, type Langue } from "@/lib/langue";
 
 // Le +237 est hors champ : la caissière ne tape que les neuf chiffres.
 export function ChampTelephone({
@@ -10,6 +11,7 @@ export function ChampTelephone({
   onChange,
   aide,
   requis = false,
+  langue = LANGUE_DEFAUT,
 }: {
   id: string;
   label: string;
@@ -17,6 +19,7 @@ export function ChampTelephone({
   onChange: (canonique: string) => void;
   aide?: string;
   requis?: boolean;
+  langue?: Langue;
 }) {
   const invalide = value.trim() !== "" && canoniseTelephone(value) === null;
   return (
@@ -40,7 +43,7 @@ export function ChampTelephone({
       {aide || invalide ? (
         <span className="field__aide" id={aide ? `${id}-aide` : undefined}>
           {invalide
-            ? "Neuf chiffres commençant par 2, 6 ou 7."
+            ? t("tel.aide", langue)
             : aide}
         </span>
       ) : null}

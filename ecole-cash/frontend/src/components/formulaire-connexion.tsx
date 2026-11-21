@@ -6,16 +6,17 @@ import { useState } from "react";
 import { MentionDemo } from "@/components/mention-demo";
 import { ecrire } from "@/lib/client-api";
 import { ErreurCaisse } from "@/lib/errors";
+import { t, LANGUE_DEFAUT, type Langue } from "@/lib/langue";
 import type { Connexion } from "@/lib/types";
 
 const DEMO = [
-  { email: "direction@tilleuls.cm", role: "Directrice" },
-  { email: "caisse@tilleuls.cm", role: "Comptable" },
+  { email: "direction@tilleuls.cm", cle_role: "connexion.role.directrice" },
+  { email: "caisse@tilleuls.cm", cle_role: "connexion.role.comptable" },
 ];
 
 const MOT_DE_PASSE_DEMO = "Caisse2026!";
 
-export function FormulaireConnexion() {
+export function FormulaireConnexion({ langue = LANGUE_DEFAUT }: { langue?: Langue }) {
   const routeur = useRouter();
   const [email, setEmail] = useState(DEMO[1].email);
   const [motDePasse, setMotDePasse] = useState(MOT_DE_PASSE_DEMO);
@@ -37,7 +38,7 @@ export function FormulaireConnexion() {
       setMessage(
         erreur instanceof ErreurCaisse
           ? erreur.message
-          : "La caisse ne répond pas.",
+          : t("connexion.erreur", langue),
       );
       setEnCours(false);
     }
@@ -53,7 +54,7 @@ export function FormulaireConnexion() {
         ) : null}
 
         <div className="field">
-          <label htmlFor="email">Adresse de la caisse</label>
+          <label htmlFor="email">{t("connexion.email", langue)}</label>
           <input
             id="email"
             type="email"
@@ -65,7 +66,7 @@ export function FormulaireConnexion() {
         </div>
 
         <div className="field">
-          <label htmlFor="mdp">Mot de passe</label>
+          <label htmlFor="mdp">{t("connexion.mdp", langue)}</label>
           <input
             id="mdp"
             type="password"
@@ -82,11 +83,16 @@ export function FormulaireConnexion() {
             className="btn btn--ink btn--block"
             disabled={enCours}
           >
-            {enCours ? "Ouverture…" : "Ouvrir la caisse"}
+            {enCours
+              ? t("connexion.ouverture", langue)
+              : t("connexion.ouvrir", langue)}
           </button>
         </div>
 
-        <MentionDemo texte="Démo : les deux comptes ci-dessous ouvrent un groupe scolaire fictif. Aucun parent n'est contacté." />
+        <MentionDemo
+          texte={t("connexion.demo_mention", langue)}
+          langue={langue}
+        />
 
         <ul className="comptes-demo">
           {DEMO.map((compte) => (
@@ -99,7 +105,9 @@ export function FormulaireConnexion() {
                   setMotDePasse(MOT_DE_PASSE_DEMO);
                 }}
               >
-                <span className="comptes-demo__role">{compte.role}</span>
+                <span className="comptes-demo__role">
+                  {t(compte.cle_role, langue)}
+                </span>
                 <span className="mono">{compte.email}</span>
               </button>
             </li>
