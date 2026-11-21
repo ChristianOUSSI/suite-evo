@@ -4,8 +4,9 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import { ecrire } from "@/lib/client-api";
+import { t, type Langue } from "@/lib/langue";
 
-export function BoutonSortie() {
+export function BoutonSortie({ langue = "fr" }: { langue?: Langue }) {
   const routeur = useRouter();
   const [enCours, setEnCours] = useState(false);
 
@@ -27,7 +28,7 @@ export function BoutonSortie() {
       onClick={fermer}
       disabled={enCours}
     >
-      {enCours ? "Fermeture" : "Fermer la caisse"}
+      {enCours ? t("sortie.fermeture", langue) : t("sortie.fermer", langue)}
     </button>
   );
 }

@@ -3,24 +3,26 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+import { t, type Langue } from "@/lib/langue";
+
 import { Icone } from "./icone";
 
 const LIENS = [
-  { href: "/app", label: "Tableau", icone: "caisse" },
-  { href: "/app/guichet", label: "Guichet", icone: "monnaie" },
-  { href: "/app/eleves", label: "Élèves", icone: "eleve" },
-  { href: "/app/classes", label: "Classes", icone: "classe" },
-  { href: "/app/relances", label: "Relances", icone: "relance" },
-  { href: "/app/recus", label: "Reçus", icone: "recu" },
-  { href: "/app/journal", label: "Journal", icone: "journal" },
-  { href: "/app/reglages", label: "Réglages", icone: "reglage" },
+  { href: "/app", cle: "nav.tableau", icone: "caisse" },
+  { href: "/app/guichet", cle: "nav.guichet", icone: "monnaie" },
+  { href: "/app/eleves", cle: "nav.eleves", icone: "eleve" },
+  { href: "/app/classes", cle: "nav.classes", icone: "classe" },
+  { href: "/app/relances", cle: "nav.relances", icone: "relance" },
+  { href: "/app/recus", cle: "nav.recus", icone: "recu" },
+  { href: "/app/journal", cle: "nav.journal", icone: "journal" },
+  { href: "/app/reglages", cle: "nav.reglages", icone: "reglage" },
 ];
 
-export function AppNav() {
+export function AppNav({ langue = "fr" }: { langue?: Langue }) {
   const pathname = usePathname();
 
   return (
-    <nav className="app-nav" aria-label="Navigation de la caisse">
+    <nav className="app-nav" aria-label={t("nav.aria", langue)}>
       {LIENS.map((lien) => {
         const actif =
           lien.href === "/app"
@@ -34,7 +36,7 @@ export function AppNav() {
             aria-current={actif ? "page" : undefined}
           >
             <Icone nom={lien.icone} taille={16} />
-            {lien.label}
+            {t(lien.cle, langue)}
           </Link>
         );
       })}

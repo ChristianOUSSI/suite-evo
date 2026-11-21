@@ -4,9 +4,12 @@ import type { ReactNode } from "react";
 import { AppNav } from "@/components/app-nav";
 import { BoutonSortie } from "@/components/bouton-sortie";
 import { Wordmark } from "@/components/brand";
+import { CommutateurLangue } from "@/components/commutateur-langue";
 import { EcranIncident } from "@/components/ecran-incident";
 import { ErreurCaisse } from "@/lib/errors";
 import { initiales, isoToday, weekdayAndDate } from "@/lib/format";
+import { t } from "@/lib/langue";
+import { langueServeur } from "@/lib/langue-serveur";
 import { seance } from "@/lib/session";
 import type { Seance } from "@/lib/types";
 
@@ -25,9 +28,11 @@ export default async function EspaceLayout({
   try {
     session = await seance();
   } catch (erreur) {
+    const langue = await langueServeur();
     return (
       <EcranIncident
         message={erreur instanceof ErreurCaisse ? erreur.message : undefined}
+        langue={langue}
       />
     );
   }
@@ -37,13 +42,14 @@ export default async function EspaceLayout({
   }
 
   const { user, ecole } = session;
+  const langue = await langueServeur();
 
   return (
     <div className="workspace">
       <div className="dateline">
         <div className="shell">
           <span>
-            {weekdayAndDate(isoToday())} · {ecole.ville}
+            {weekdayAndDate(isoToday(), langue)} · {ecole.ville}
           </span>
           <span className="dateline__side dateline__side--right">
             <span className="dateline__dot" aria-hidden="true" />
@@ -54,8 +60,9 @@ export default async function EspaceLayout({
 
       <header className="masthead">
         <div className="shell masthead__row">
-          <Wordmark href="/app" sous={ecole.nom} />
-          <AppNav />
+          <Wordmark href="/app" sous={ecole.nom} langue={langue} />
+          <AppNav langue={langue} />
+          <CommutateurLangue langue={langue} />
           <div className="account">
             <div className="account__text">
               <span className="account__name">{user.nom}</span>
@@ -64,7 +71,7 @@ export default async function EspaceLayout({
             <span className="avatar" aria-hidden="true">
               {initiales(user.nom)}
             </span>
-            <BoutonSortie />
+            <BoutonSortie langue={langue} />
           </div>
         </div>
       </header>
@@ -75,11 +82,11 @@ export default async function EspaceLayout({
 
       <footer className="app-footer">
         <div className="shell app-footer__row">
-          <span>ÉCOLE CASH · abonnement {ecole.abonnement_label}/mois</span>
+          <span>ÉCOLE CASH · {t("pied.abonnement", langue, { label: ecole.abonnement_label })}</span>
           <span>
             {ecole.quartier}, {ecole.ville} · {ecole.telephone_display}
           </span>
-          <span>Démo : aucun SMS, aucun débit MoMo</span>
+          <span>{t("pied.demo", langue)}</span>
         </div>
       </footer>
     </div>

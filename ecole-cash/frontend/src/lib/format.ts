@@ -1,6 +1,22 @@
+import type { Langue } from "@/lib/langue";
+
 const montant = new Intl.NumberFormat("fr-FR", {
   maximumFractionDigits: 0,
 });
+
+const MOIS_EN = [
+  "January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December",
+];
+
+const MOIS_COURT_EN = [
+  "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+];
+
+const JOURS_EN = [
+  "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday",
+];
 
 const MOIS = [
   "janvier",
@@ -64,22 +80,25 @@ function jourSeul(value: string): Date {
   return new Date(annee, mois - 1, jour);
 }
 
-export function longDate(value: string): string {
+export function longDate(value: string, langue: Langue = "fr"): string {
   const date = jourSeul(value);
-  return `${date.getDate()} ${MOIS[date.getMonth()]} ${date.getFullYear()}`;
+  const mois = langue === "en" ? MOIS_EN[date.getMonth()] : MOIS[date.getMonth()];
+  return `${date.getDate()} ${mois} ${date.getFullYear()}`;
 }
 
-export function shortDate(value: string): string {
+export function shortDate(value: string, langue: Langue = "fr"): string {
   const date = jourSeul(value);
-  return `${String(date.getDate()).padStart(2, "0")} ${MOIS_COURT[date.getMonth()]} ${date.getFullYear()}`;
+  const mois = langue === "en" ? MOIS_COURT_EN[date.getMonth()] : MOIS_COURT[date.getMonth()];
+  return `${String(date.getDate()).padStart(2, "0")} ${mois} ${date.getFullYear()}`;
 }
 
-export function weekday(value: string): string {
-  return JOURS[jourSeul(value).getDay()];
+export function weekday(value: string, langue: Langue = "fr"): string {
+  const jours = langue === "en" ? JOURS_EN : JOURS;
+  return jours[jourSeul(value).getDay()];
 }
 
-export function weekdayAndDate(value: string): string {
-  return `${weekday(value)} ${longDate(value)}`;
+export function weekdayAndDate(value: string, langue: Langue = "fr"): string {
+  return `${weekday(value, langue)} ${longDate(value, langue)}`;
 }
 
 export function isoToday(): string {

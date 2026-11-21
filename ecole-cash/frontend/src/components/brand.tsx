@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import { t, LANGUE_DEFAUT, type Langue } from "@/lib/langue";
+
 type MarqueProps = {
   title?: string;
   className?: string;
@@ -34,13 +36,17 @@ type WordmarkProps = {
   sous?: string;
 };
 
-export function Wordmark({ href = "/", sous }: WordmarkProps) {
+export function Wordmark({
+  href = "/",
+  sous,
+  langue = LANGUE_DEFAUT,
+}: WordmarkProps & { langue?: Langue }) {
   const contenu = (
     <>
       <EcoleCashMark title="ÉCOLE CASH" className="brand__mark" />
       <span className="brand__text">
         <span className="brand__name">ÉCOLE CASH</span>
-        <span className="brand__sub">{sous ?? "la caisse de l'école"}</span>
+        <span className="brand__sub">{sous ?? t("marque.sous", langue)}</span>
       </span>
     </>
   );
