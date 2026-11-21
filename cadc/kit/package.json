@@ -4,6 +4,9 @@
   "private": true,
   "description": "Le socle partagé des produits CODE AXIS DIGITAL CAMEROON : thème, langues, règles du Cameroun.",
   "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.js"
+  },
   "main": "./index.js",
   "exports": {
     ".": { "types": "./index.d.ts", "default": "./index.js" },
