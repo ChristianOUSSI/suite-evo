@@ -8,19 +8,25 @@ import { MentionDemo } from "./mention-demo";
 import { ecrire } from "@/lib/client-api";
 import { ErreurComptoir } from "@/lib/errors";
 import { canoniseTelephone, telephoneLocal } from "@/lib/format";
+import { t, LANGUE_DEFAUT, type Langue } from "@/lib/langue";
 import type { Boutique, BoutiqueEntree, Main, Role } from "@/lib/types";
 
 const RAILS = [
-  { cle: "especes_actifs" as const, label: "Espèces", aide: "la main à la main au comptoir" },
-  { cle: "momo_actif" as const, label: "MTN MoMo", aide: "le repère de la vente est noté" },
-  { cle: "orange_actif" as const, label: "Orange Money", aide: "même caisse, autre réseau" },
-  { cle: "credit_accorde" as const, label: "À crédit", aide: "à n'ouvrir que si tu sais qui doit" },
+  { cle: "especes_actifs" as const, labelCle: "vente.rail-especes", aideCle: "reglages-form.rail-especes-aide" },
+  { cle: "momo_actif" as const, labelCle: null, aideCle: "reglages-form.rail-momo-aide" },
+  { cle: "orange_actif" as const, labelCle: null, aideCle: "reglages-form.rail-orange-aide" },
+  { cle: "credit_accorde" as const, labelCle: "vente.rail-credit", aideCle: "reglages-form.rail-credit-aide" },
 ];
 
+const LABEL_RAIL: Record<string, string> = {
+  momo_actif: "MTN MoMo",
+  orange_actif: "Orange Money",
+};
+
 const ROLES = [
-  { cle: "tenancier" as const, label: "Tenancier", texte: "tient le cahier et les réglages" },
-  { cle: "vendeur" as const, label: "Vendeur", texte: "écrit les ventes, ne touche pas aux rails" },
-  { cle: "livreur" as const, label: "Livreur", texte: "note les sorties et les transports" },
+  { cle: "tenancier" as const, labelCle: "reglages-form.role-tenancier", texteCle: "reglages-form.role-tenancier-texte" },
+  { cle: "vendeur" as const, labelCle: "reglages-form.role-vendeur", texteCle: "reglages-form.role-vendeur-texte" },
+  { cle: "livreur" as const, labelCle: "reglages-form.role-livreur", texteCle: "reglages-form.role-livreur-texte" },
 ];
 
 function entreeDepuis(boutique: Boutique): BoutiqueEntree {
@@ -44,10 +50,12 @@ export function FormulaireComptoir({
   boutique,
   mains,
   autoriseEquipe,
+  langue = LANGUE_DEFAUT,
 }: {
   boutique: Boutique;
   mains: Main[];
   autoriseEquipe: boolean;
+  langue?: Langue;
 }) {
   const routeur = useRouter();
   const [champ, setChamp] = useState<BoutiqueEntree>(() => entreeDepuis(boutique));
@@ -88,11 +96,11 @@ export function FormulaireComptoir({
     const canonique =
       champ.telephone.trim() === "" ? "" : canoniseTelephone(champ.telephone);
     if (champ.telephone.trim() !== "" && canonique === null) {
-      setIncident("Le numéro du comptoir n'est pas valide : neuf chiffres après +237.");
+      setIncident(t("reglages-form.incident-tel", langue));
       return;
     }
     if (champ.nom.trim().length < 2) {
-      setIncident("Le nom du comptoir fait au moins deux lettres.");
+      setIncident(t("reglages-form.incident-nom", langue));
       return;
     }
     setEnCours(true);
@@ -103,13 +111,13 @@ export function FormulaireComptoir({
         method: "PUT",
         body: { ...champ, telephone: canonique },
       });
-      setMessage("Les mots du comptoir sont enregistrés.");
+      setMessage(t("reglages-form.message", langue));
       routeur.refresh();
     } catch (erreur) {
       setIncident(
         erreur instanceof ErreurComptoir
           ? erreur.message
-          : "Le cahier n'a pas accepté ces réglages.",
+          : t("reglages-form.incident", langue),
       );
     } finally {
       setEnCours(false);
@@ -121,8 +129,8 @@ export function FormulaireComptoir({
     if (main.nom.trim().length < 2 || main.email.trim() === "" || main.mot.length < 6) {
       setIncidentEquipe(
         main.mot.length < 6
-          ? "Six caractères au minimum pour le mot de passe."
-          : "Le nom, l'adresse et le mot de passe sont nécessaires.",
+          ? t("reglages-form.incident-mot", langue)
+          : t("reglages-form.incident-champs", langue),
       );
       return;
     }
@@ -138,7 +146,7 @@ export function FormulaireComptoir({
           role: main.role,
         },
       });
-      setMessageEquipe(`${creee.nom} tient le comptoir sous ${creee.role_label}.`);
+      setMessageEquipe(t("reglages-form.message-equipe", langue, { nom: creee.nom, role: creee.role_label }));
       setMain({ nom: "", email: "", mot: "", role: "vendeur" });
       setNouvelle(false);
       routeur.refresh();
@@ -146,7 +154,7 @@ export function FormulaireComptoir({
       setIncidentEquipe(
         erreur instanceof ErreurComptoir
           ? erreur.message
-          : "Le cahier n'a pas retenu ce nom.",
+          : t("reglages-form.incident-equipe", langue),
       );
     } finally {
       setEnCoursEquipe(false);
@@ -157,10 +165,10 @@ export function FormulaireComptoir({
     <div className="vitre">
       <form className="reglages-form" onSubmit={enregistrer}>
         <fieldset className="jeu-regle" id="comptoir">
-          <legend>Le comptoir tel qu&apos;il apparaît sur les feuilles</legend>
+          <legend>{t("reglages-form.legend-comptoir", langue)}</legend>
           <div className="grille-champs">
             <div className="champ champ--plein">
-              <label htmlFor="boutique-nom">Nom du comptoir</label>
+              <label htmlFor="boutique-nom">{t("reglages-form.nom", langue)}</label>
               <input
                 id="boutique-nom"
                 value={champ.nom}
@@ -170,7 +178,7 @@ export function FormulaireComptoir({
               />
             </div>
             <div className="champ">
-              <label htmlFor="boutique-enseigne">Enseigne</label>
+              <label htmlFor="boutique-enseigne">{t("reglages-form.enseigne", langue)}</label>
               <input
                 id="boutique-enseigne"
                 value={champ.enseigne}
@@ -178,10 +186,10 @@ export function FormulaireComptoir({
                 maxLength={40}
                 placeholder="Tchuenté"
               />
-              <span className="champ__aide">Elle tient dans le bandeau du haut.</span>
+              <span className="champ__aide">{t("reglages-form.enseigne-aide", langue)}</span>
             </div>
             <div className="champ">
-              <label htmlFor="boutique-ville">Ville</label>
+              <label htmlFor="boutique-ville">{t("reglages-form.ville", langue)}</label>
               <input
                 id="boutique-ville"
                 value={champ.ville}
@@ -190,7 +198,7 @@ export function FormulaireComptoir({
               />
             </div>
             <div className="champ">
-              <label htmlFor="boutique-quartier">Quartier</label>
+              <label htmlFor="boutique-quartier">{t("reglages-form.quartier", langue)}</label>
               <input
                 id="boutique-quartier"
                 value={champ.quartier}
@@ -200,17 +208,17 @@ export function FormulaireComptoir({
               />
             </div>
             <div className="champ">
-              <label htmlFor="boutique-tenancier">Tenancier</label>
+              <label htmlFor="boutique-tenancier">{t("reglages-form.tenancier", langue)}</label>
               <input
                 id="boutique-tenancier"
                 value={champ.tenancier}
                 onChange={texte("tenancier")}
                 maxLength={80}
               />
-              <span className="champ__aide">Le nom qui signe les feuilles.</span>
+              <span className="champ__aide">{t("reglages-form.tenancier-aide", langue)}</span>
             </div>
             <div className="champ">
-              <label htmlFor="boutique-tel">Numéro du comptoir</label>
+              <label htmlFor="boutique-tel">{t("reglages-form.tel", langue)}</label>
               <span className="champ__prefixe">
                 <span aria-hidden="true">+237</span>
                 <input
@@ -229,12 +237,12 @@ export function FormulaireComptoir({
               </span>
               <span className="champ__aide">
                 {numeroInvalide
-                  ? "Neuf chiffres commençant par 2, 6 ou 7."
-                  : "Le numéro que le client rappellera."}
+                  ? t("reglages-form.tel-invalide", langue)
+                  : t("reglages-form.tel-valide", langue)}
               </span>
             </div>
             <div className="champ">
-              <label htmlFor="boutique-abo">Abonnement hebdomadaire</label>
+              <label htmlFor="boutique-abo">{t("reglages-form.abo", langue)}</label>
               <input
                 id="boutique-abo"
                 inputMode="numeric"
@@ -248,12 +256,11 @@ export function FormulaireComptoir({
                 }
               />
               <span className="champ__aide">
-                Affiché en pied de page. {boutique.abonnement_hebdo_label} par
-                semaine, à régler au bureau de l&apos;agence.
+                {t("reglages-form.abo-aide", langue, { label: boutique.abonnement_hebdo_label })}
               </span>
             </div>
             <div className="champ champ--plein">
-              <label htmlFor="boutique-note">Note du comptoir</label>
+              <label htmlFor="boutique-note">{t("reglages-form.note", langue)}</label>
               <textarea
                 id="boutique-note"
                 value={champ.note}
@@ -262,18 +269,15 @@ export function FormulaireComptoir({
                 rows={2}
               />
               <span className="champ__aide">
-                {champ.note.length} / 400 caractères.
+                {t("reglages-form.note-compte", langue, { n: champ.note.length })}
               </span>
             </div>
           </div>
         </fieldset>
 
         <fieldset className="jeu-regle" id="rails">
-          <legend>Les rails ouverts à la caisse</legend>
-          <p className="champ__aide">
-            Un rail fermé disparaît des écritures du comptoir. Les ventes déjà
-            consignées ne changent pas.
-          </p>
+          <legend>{t("reglages-form.legend-rails", langue)}</legend>
+          <p className="champ__aide">{t("reglages-form.rails-aide", langue)}</p>
           <div className="rails">
             {RAILS.map((rail) => (
               <label className="cochet" key={rail.cle}>
@@ -284,18 +288,18 @@ export function FormulaireComptoir({
                 />
                 <span className="cochet__box" aria-hidden="true" />
                 <span className="cochet__texte">
-                  {rail.label}
-                  <small>{rail.aide}</small>
+                  {rail.labelCle ? t(rail.labelCle, langue) : LABEL_RAIL[rail.cle]}
+                  <small>{t(rail.aideCle, langue)}</small>
                 </span>
               </label>
             ))}
           </div>
-          <MentionDemo />
+          <MentionDemo langue={langue} />
         </fieldset>
 
         <div className="acts">
           <button type="submit" className="bouton bouton--encre" disabled={enCours}>
-            {enCours ? "Écriture" : "Enregistrer les réglages"}
+            {enCours ? t("rayon-console.ecriture", langue) : t("reglages-form.enregistrer", langue)}
             <span className="bouton__fleche">
               <Icone nom="check" taille={15} />
             </span>
@@ -311,7 +315,7 @@ export function FormulaireComptoir({
             }}
             disabled={enCours}
           >
-            Revenir à la version tenue
+            {t("reglages-form.revenir", langue)}
           </button>
         </div>
 
@@ -327,11 +331,11 @@ export function FormulaireComptoir({
         ) : null}
       </form>
 
-      <section className="feuille bloc" id="mains" aria-label="Les mains du comptoir">
+      <section className="feuille bloc" id="mains" aria-label={t("reglages-form.aria-mains", langue)}>
         <div className="tete-feuille">
-          <h2>Qui tient le comptoir</h2>
+          <h2>{t("reglages-form.mains-titre", langue)}</h2>
           <span className="tete-feuille__cote">
-            {mains.length} main{mains.length > 1 ? "s" : ""}
+            {t("reglages-form.mains-cote", langue, { n: mains.length })}
           </span>
         </div>
 
@@ -362,15 +366,11 @@ export function FormulaireComptoir({
         ) : null}
 
         {!autoriseEquipe ? (
-          <p className="champ__aide">
-            Seul le tenancier ajoute une main au comptoir. Cette séance est
-            ouverte sous un autre rôle : le rayon se lit, l&apos;équipe se
-            regarde, rien ne se touche ici.
-          </p>
+          <p className="champ__aide">{t("reglages-form.equipe-aide", langue)}</p>
         ) : nouvelle ? (
           <form className="mains-form" onSubmit={inscrire}>
             <div className="champ">
-              <label htmlFor="main-nom">Nom</label>
+              <label htmlFor="main-nom">{t("reglages-form.nom-main", langue)}</label>
               <input
                 id="main-nom"
                 value={main.nom}
@@ -380,7 +380,7 @@ export function FormulaireComptoir({
               />
             </div>
             <div className="champ">
-              <label htmlFor="main-email">Adresse</label>
+              <label htmlFor="main-email">{t("reglages-form.adresse", langue)}</label>
               <input
                 id="main-email"
                 type="email"
@@ -392,10 +392,10 @@ export function FormulaireComptoir({
                 maxLength={160}
                 required
               />
-              <span className="champ__aide">Elle sert seule de connexion.</span>
+              <span className="champ__aide">{t("reglages-form.adresse-aide", langue)}</span>
             </div>
             <div className="champ">
-              <label htmlFor="main-mot">Mot de passe</label>
+              <label htmlFor="main-mot">{t("reglages-form.mot-main", langue)}</label>
               <input
                 id="main-mot"
                 type="password"
@@ -408,7 +408,7 @@ export function FormulaireComptoir({
               />
             </div>
             <div className="champ">
-              <span className="champ__titre">Rôle</span>
+              <span className="champ__titre">{t("reglages-form.role", langue)}</span>
               <div className="dictee__exemples">
                 {ROLES.map((role) => (
                   <button
@@ -424,14 +424,14 @@ export function FormulaireComptoir({
                       setMain((actuel) => ({ ...actuel, role: role.cle }))
                     }
                   >
-                    {role.label}
+                    {t(role.labelCle, langue)}
                   </button>
                 ))}
               </div>
             </div>
             <div className="acts champ--plein">
               <button type="submit" className="bouton bouton--encre" disabled={enCoursEquipe}>
-                {enCoursEquipe ? "Inscription" : "Inscrire cette main"}
+                {enCoursEquipe ? t("reglages-form.inscription", langue) : t("reglages-form.inscrire", langue)}
                 <span className="bouton__fleche">
                   <Icone nom="rond" taille={15} />
                 </span>
@@ -444,7 +444,7 @@ export function FormulaireComptoir({
                   setIncidentEquipe(null);
                 }}
               >
-                Annuler
+                {t("reglages-form.annuler", langue)}
               </button>
             </div>
           </form>
@@ -457,13 +457,12 @@ export function FormulaireComptoir({
               setIncidentEquipe(null);
             }}
           >
-            Ajouter une main au comptoir
+            {t("reglages-form.ajouter-main", langue)}
           </button>
         )}
 
         <p className="champ__aide" style={{ marginTop: "1rem" }}>
-          Le mot de passe oublié se règle pour l&apos;instant au bureau de
-          l&apos;agence : la réinitialisation par SMS n&apos;est pas branchée.
+          {t("reglages-form.mot-aide", langue)}
         </p>
       </section>
     </div>

@@ -57,6 +57,7 @@ export default async function Reglages() {
         boutique={session.boutique}
         mains={mains}
         autoriseEquipe={session.user.role === "tenancier"}
+        langue={langue}
       />
 
       <section className="feuille bloc" id="bilan" aria-label={t("reglages.bilan-aria", langue)}>
