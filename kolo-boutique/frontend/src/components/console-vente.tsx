@@ -7,21 +7,29 @@ import { Icone } from "./icone";
 import { MentionDemo } from "./mention-demo";
 import { ecrire } from "@/lib/client-api";
 import { ErreurComptoir } from "@/lib/errors";
+import { t, LANGUE_DEFAUT, type Langue } from "@/lib/langue";
 import type { Cahier } from "@/lib/types";
 
 const RAILS = [
-  { cle: "especes", label: "Espèces" },
-  { cle: "momo_mtn", label: "MTN MoMo" },
-  { cle: "momo_orange", label: "Orange Money" },
-  { cle: "credit", label: "À crédit" },
+  { cle: "especes", cleLabel: "vente.rail-especes" },
+  { cle: "momo_mtn", cleLabel: null },
+  { cle: "momo_orange", cleLabel: null },
+  { cle: "credit", cleLabel: "vente.rail-credit" },
 ];
+
+const LABEL_RAIL: Record<string, string> = {
+  momo_mtn: "MTN MoMo",
+  momo_orange: "Orange Money",
+};
 
 export function ConsoleVente({
   cahier,
   boutique,
+  langue = LANGUE_DEFAUT,
 }: {
   cahier: Cahier;
   boutique: { especes_actifs: boolean; momo_actif: boolean; orange_actif: boolean; credit_accorde: boolean };
+  langue?: Langue;
 }) {
   const routeur = useRouter();
   const [produitId, setProduitId] = useState<string>("");
@@ -44,7 +52,7 @@ export function ConsoleVente({
 
   async function vendre() {
     if (!produit || nombre <= 0) {
-      setIncident("Choisis un article et une quantité.");
+      setIncident(t("vente.incident-choix", langue));
       return;
     }
     setEnCours(true);
@@ -58,14 +66,22 @@ export function ConsoleVente({
         body: { produit_id: produit.id, quantite: nombre, mode },
       });
       setMessage(
-        `${nombre} ${produit.unite} de ${produit.nom} · ${rendu.vente.chiffre_label}, bénéfice ${rendu.vente.benefice_label}. Il reste ${rendu.produit.stock} ${rendu.produit.unite}.`,
+        t("vente.message", langue, {
+          quantite: nombre,
+          unite: produit.unite,
+          produit: produit.nom,
+          chiffre: rendu.vente.chiffre_label,
+          benefice: rendu.vente.benefice_label,
+          stock: rendu.produit.stock,
+          unite2: rendu.produit.unite,
+        }),
       );
       routeur.refresh();
     } catch (erreur) {
       setIncident(
         erreur instanceof ErreurComptoir
           ? erreur.message
-          : "La vente n'est pas entrée au cahier.",
+          : t("vente.incident-echec", langue),
       );
     } finally {
       setEnCours(false);
@@ -75,16 +91,16 @@ export function ConsoleVente({
   return (
     <div className="pile-champs">
       <div className="champ">
-        <label htmlFor="vente-produit">Article</label>
+        <label htmlFor="vente-produit">{t("vente.article", langue)}</label>
         <select
           id="vente-produit"
           value={produitId}
           onChange={(e) => setProduitId(e.target.value)}
         >
-          <option value="">Choisir au rayon</option>
+          <option value="">{t("vente.choisir", langue)}</option>
           {cahier.produits.map((un) => (
             <option key={un.id} value={un.id}>
-              {un.nom} · {un.prix_vente_label} · reste {un.stock}
+              {un.nom} · {un.prix_vente_label} · {t("vente.reste", langue, { stock: un.stock })}
             </option>
           ))}
         </select>
@@ -92,7 +108,7 @@ export function ConsoleVente({
 
       <div className="grille-champs">
         <div className="champ">
-          <label htmlFor="vente-quantite">Quantité</label>
+          <label htmlFor="vente-quantite">{t("vente.quantite", langue)}</label>
           <input
             id="vente-quantite"
             inputMode="numeric"
@@ -101,21 +117,21 @@ export function ConsoleVente({
           />
         </div>
         <div className="champ">
-          <label htmlFor="vente-prix">Prix cédé</label>
+          <label htmlFor="vente-prix">{t("vente.prix-cede", langue)}</label>
           <input
             id="vente-prix"
-            value={produit ? produit.prix_vente_label : "prix du rayon"}
+            value={produit ? produit.prix_vente_label : t("vente.prix-rayon", langue)}
             readOnly
           />
         </div>
         <div className="champ">
-          <label htmlFor="vente-total">Total</label>
+          <label htmlFor="vente-total">{t("vente.total", langue)}</label>
           <input
             id="vente-total"
             value={
               produit && nombre > 0
                 ? `${(produit.prix_vente * nombre).toLocaleString("fr-FR")} FCFA`
-                : "rien encore choisi"
+                : t("vente.rien", langue)
             }
             readOnly
           />
@@ -123,7 +139,7 @@ export function ConsoleVente({
       </div>
 
       <div className="champ">
-        <span className="champ__titre">Rail</span>
+        <span className="champ__titre">{t("vente.rail", langue)}</span>
         <div className="dictee__exemples">
           {railsOuverts.map((rail) => (
             <button
@@ -137,14 +153,11 @@ export function ConsoleVente({
               }
               onClick={() => setMode(rail.cle)}
             >
-              {rail.label}
+              {rail.cleLabel ? t(rail.cleLabel, langue) : LABEL_RAIL[rail.cle]}
             </button>
           ))}
           {railsOuverts.length === 0 ? (
-            <span className="champ__aide">
-              Tous les rails sont coupés au comptoir. Ouvre-en un dans les
-              réglages.
-            </span>
+            <span className="champ__aide">{t("vente.rails-coupes", langue)}</span>
           ) : null}
         </div>
       </div>
@@ -156,7 +169,7 @@ export function ConsoleVente({
           onClick={vendre}
           disabled={enCours || !assez}
         >
-          Écrire la vente
+          {t("vente.ecrire", langue)}
           <span className="bouton__fleche">
             <Icone nom="vente" taille={15} />
           </span>
@@ -174,7 +187,7 @@ export function ConsoleVente({
         </p>
       ) : null}
 
-      <MentionDemo texte="Démo : la vente est consignée et le stock bouge. Aucun débit n'est demandé à un opérateur." />
+      <MentionDemo texte={t("vente.demo", langue)} langue={langue} />
     </div>
   );
 }

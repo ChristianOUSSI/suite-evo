@@ -8,13 +8,20 @@ import { MentionDemo } from "./mention-demo";
 import { ecrire } from "@/lib/client-api";
 import { ErreurComptoir } from "@/lib/errors";
 import { fcfa } from "@/lib/format";
+import { t, LANGUE_DEFAUT, type Langue } from "@/lib/langue";
 import type { Caisse, Comptage } from "@/lib/types";
 
 function chiffre(valeur: string): number {
   return Number.parseInt(valeur.replace(/\D/g, ""), 10) || 0;
 }
 
-export function ComptageTiroir({ caisse }: { caisse: Caisse }) {
+export function ComptageTiroir({
+  caisse,
+  langue = LANGUE_DEFAUT,
+}: {
+  caisse: Caisse;
+  langue?: Langue;
+}) {
   const routeur = useRouter();
   const [fond, setFond] = useState(
     String(caisse.comptage?.fond ?? 5_000),
@@ -44,15 +51,15 @@ export function ComptageTiroir({ caisse }: { caisse: Caisse }) {
       });
       setMessage(
         rendu.tenu
-          ? "Tiroir tenu au franc près."
-          : `Tiroir déclaré, écart de ${fcfa(rendu.ecart)} écrit au journal.`,
+          ? t("comptage.tenu", langue)
+          : t("comptage.declare", langue, { ecart: fcfa(rendu.ecart) }),
       );
       routeur.refresh();
     } catch (erreur) {
       setIncident(
         erreur instanceof ErreurComptoir
           ? erreur.message
-          : "Le comptage n'est pas passé au cahier.",
+          : t("comptage.incident", langue),
       );
     } finally {
       setEnCours(false);
@@ -63,7 +70,7 @@ export function ComptageTiroir({ caisse }: { caisse: Caisse }) {
     <div className="pile-champs">
       <div className="grille-champs">
         <div className="champ">
-          <label htmlFor="tiroir-fond">Fond du matin</label>
+          <label htmlFor="tiroir-fond">{t("comptage.fond", langue)}</label>
           <input
             id="tiroir-fond"
             inputMode="numeric"
@@ -72,15 +79,17 @@ export function ComptageTiroir({ caisse }: { caisse: Caisse }) {
           />
         </div>
         <div className="champ">
-          <label htmlFor="tiroir-attendu">Attendu au soir</label>
+          <label htmlFor="tiroir-attendu">{t("comptage.attendu-soir", langue)}</label>
           <input id="tiroir-attendu" value={caisse.attendu_label} readOnly />
           <span className="champ__aide">
-            fond + {fcfa(caisse.especes)} d&apos;espèces − {fcfa(caisse.depenses)}{" "}
-            de sorties
+            {t("comptage.formule", langue, {
+              especes: fcfa(caisse.especes),
+              depenses: fcfa(caisse.depenses),
+            })}
           </span>
         </div>
         <div className="champ">
-          <label htmlFor="tiroir-compte">Compté dans le tiroir</label>
+          <label htmlFor="tiroir-compte">{t("comptage.compte", langue)}</label>
           <input
             id="tiroir-compte"
             inputMode="numeric"
@@ -99,29 +108,29 @@ export function ComptageTiroir({ caisse }: { caisse: Caisse }) {
           !touche ? "" : ecart === 0 ? "compteur--tenu" : "compteur--tard"
         }`}
       >
-        <span className="compteur__legende">Écart</span>
+        <span className="compteur__legende">{t("comptage.ecart", langue)}</span>
         <span className="compteur__valeur">
           {!touche
-            ? "à compter"
+            ? t("comptage.a-compter", langue)
             : ecart === 0
-              ? "au franc près"
+              ? t("comptage.au-franc", langue)
               : `${ecart > 0 ? "+" : "-"}${fcfa(Math.abs(ecart))}`}
         </span>
         <span className="compteur__aide">
           {caisse.comptage
-            ? `dernier comptage tenu par ${caisse.comptage.tenu_par}`
-            : "le tiroir attend ton comptage"}
+            ? t("comptage.dernier", langue, { par: caisse.comptage.tenu_par })
+            : t("comptage.attend", langue)}
         </span>
       </div>
 
       <div className="champ">
-        <label htmlFor="tiroir-note">Ce qui explique l’écart</label>
+        <label htmlFor="tiroir-note">{t("comptage.note-label", langue)}</label>
         <textarea
           id="tiroir-note"
           value={note}
           onChange={(e) => setNote(e.target.value)}
           maxLength={400}
-          placeholder="une monnaie rendue sur une vente de 500, notée ici"
+          placeholder={t("comptage.note-ph", langue)}
         />
       </div>
 
@@ -132,7 +141,7 @@ export function ComptageTiroir({ caisse }: { caisse: Caisse }) {
           onClick={declarer}
           disabled={enCours || compte === ""}
         >
-          {enCours ? "Comptage" : "Déclarer le tiroir"}
+          {enCours ? t("comptage.encours", langue) : t("comptage.bouton", langue)}
           <span className="bouton__fleche">
             <Icone nom="tiroir" taille={15} />
           </span>
@@ -150,7 +159,7 @@ export function ComptageTiroir({ caisse }: { caisse: Caisse }) {
         </p>
       ) : null}
 
-      <MentionDemo texte="Démo : le comptage s'écrit dans le journal. Le tiroir reste virtuel." />
+      <MentionDemo texte={t("comptage.demo", langue)} langue={langue} />
     </div>
   );
 }

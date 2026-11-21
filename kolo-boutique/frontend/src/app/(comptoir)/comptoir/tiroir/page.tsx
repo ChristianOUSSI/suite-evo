@@ -60,7 +60,7 @@ export default async function Tiroir() {
             </span>
           </div>
           <div style={{ marginTop: "1rem" }}>
-            <ComptageTiroir caisse={caisse} />
+            <ComptageTiroir caisse={caisse} langue={langue} />
           </div>
         </section>
 

@@ -138,7 +138,7 @@ export default async function Sorties({
               <h2>{t("sorties.vendre-titre", langue)}</h2>
               <span className="tete-feuille__cote">{t("sorties.vendre-cote", langue)}</span>
             </div>
-            <ConsoleVente cahier={cahier} boutique={session.boutique} />
+            <ConsoleVente cahier={cahier} boutique={session.boutique} langue={langue} />
           </section>
 
           <section className="feuille bloc" aria-label={t("sorties.aria-depenses", langue)}>
