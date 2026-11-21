@@ -1,10 +1,13 @@
 import { Icone } from "@/components/icone";
+import { t } from "@/lib/langue";
+import { langueServeur } from "@/lib/langue-serveur";
 
-export default function Chargement() {
+export default async function Chargement() {
+  const langue = await langueServeur();
   return (
     <div className="chargement">
       <Icone nom="comptoir" taille={26} />
-      <p className="chargement__note">Le comptoir ouvre, un instant</p>
+      <p className="chargement__note">{t("chargement.note", langue)}</p>
     </div>
   );
 }

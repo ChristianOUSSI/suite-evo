@@ -1,32 +1,33 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 import { Icone } from "@/components/icone";
+import { langueDepuisCookie, t, type Langue } from "@/lib/langue";
 
 // Aucune borne n’affiche le message technique : un digest ou une erreur
 // compressée de React ne dit rien à un tenancier. Le détail part dans la console.
 export default function Incident({ reset }: { reset: () => void }) {
+  const [langue, setLangue] = useState<Langue>("fr");
+  useEffect(() => setLangue(langueDepuisCookie()), []);
+
   return (
     <div className="gabarit incident">
       <span className="sur-titre">
-        <Icone nom="alerte" taille={13} /> Lecture impossible
+        <Icone nom="alerte" taille={13} /> {t("erreur.lecture", langue)}
       </span>
-      <h1 className="display">Cette feuille n’a pas pu se poser.</h1>
-      <p>
-        Le cahier du comptoir n’a pas rendu cette page. Vérifie que l’API tourne
-        sur le port attendu, puis repasse. Les écritures déjà consignées tiennent
-        dans la base.
-      </p>
+      <h1 className="display">{t("erreur.titre", langue)}</h1>
+      <p>{t("erreur.texte", langue)}</p>
       <div className="acts">
         <button type="button" className="bouton bouton--encre" onClick={reset}>
-          Repasser
+          {t("erreur.repasser", langue)}
           <span className="bouton__fleche">
             <Icone nom="fleche" taille={15} />
           </span>
         </button>
         <Link href="/" className="lien-simple">
-          Retour à la présentation
+          {t("erreur.retour", langue)}
         </Link>
       </div>
     </div>

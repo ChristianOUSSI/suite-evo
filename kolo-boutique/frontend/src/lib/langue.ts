@@ -461,7 +461,31 @@ const D: Record<string, Entree> = {
   "reglages-form.annuler": { fr: "Annuler", en: "Cancel" },
   "reglages-form.ajouter-main": { fr: "Ajouter une main au comptoir", en: "Add a hand to the counter" },
   "reglages-form.mot-aide": { fr: "Le mot de passe oublié se règle pour l'instant au bureau de l'agence : la réinitialisation par SMS n'est pas branchée.", en: "A forgotten password is currently reset at the agency office: SMS reset is not wired." },
+
+  // Les écrans d'erreur.
+  "erreur.lecture": { fr: "Lecture impossible", en: "Read failed" },
+  "erreur.titre": { fr: "Cette feuille n'a pas pu se poser.", en: "This sheet could not be laid down." },
+  "erreur.texte": { fr: "Le cahier du comptoir n'a pas rendu cette page. Vérifie que l'API tourne sur le port attendu, puis repasse. Les écritures déjà consignées tiennent dans la base.", en: "The counter notebook did not render this page. Check the API runs on the expected port, then come back. Recorded entries stay in the database." },
+  "erreur.repasser": { fr: "Repasser", en: "Try again" },
+  "erreur.retour": { fr: "Retour à la présentation", en: "Back to the presentation" },
+  "introuvable.sur-titre": { fr: "Page hors du cahier", en: "Page outside the notebook" },
+  "introuvable.titre": { fr: "Cette page n'est écrite nulle part.", en: "This page is written nowhere." },
+  "introuvable.texte": { fr: "Le comptoir ne connaît qu'une journée, une dictée, un rayon, des ventes, un tiroir et ses réglages. Rien de plus.", en: "The counter only knows a day, a dictation, a shelf, sales, a drawer and its settings. Nothing more." },
+  "introuvable.reprendre": { fr: "Reprendre la journée", en: "Resume the day" },
+  "introuvable.voir": { fr: "Voir la boutique présentée", en: "See the presented shop" },
+  "chargement.note": { fr: "Le comptoir ouvre, un instant", en: "The counter is opening, one moment" },
 };
+
+// Lecture côté client (composants "use client" sans parent serveur) :
+// le cookie posé par le commutateur. Absent ou illisible → français.
+export function langueDepuisCookie(): Langue {
+  if (typeof document === "undefined") return LANGUE_DEFAUT;
+  const brut = document.cookie
+    .split("; ")
+    .find((une) => une.startsWith(`${NOM_COOKIE}=`))
+    ?.split("=")[1];
+  return normaliserLangue(brut ? decodeURIComponent(brut) : null);
+}
 
 export function t(
   cle: string,

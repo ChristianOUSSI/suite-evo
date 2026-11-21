@@ -2,34 +2,34 @@ import Link from "next/link";
 
 import { Icone } from "@/components/icone";
 import { NomComptoir } from "@/components/marque";
+import { t } from "@/lib/langue";
+import { langueServeur } from "@/lib/langue-serveur";
 
-export default function Introuvable() {
+export default async function Introuvable() {
+  const langue = await langueServeur();
   return (
     <div className="comptoir-chantier">
       <header className="fronton">
         <div className="gabarit fronton__rangee">
-          <NomComptoir href="/comptoir" />
+          <NomComptoir href="/comptoir" langue={langue} />
         </div>
       </header>
       <main id="contenu" className="chantier">
         <div className="gabarit incident">
           <span className="sur-titre">
-            <Icone nom="croix" taille={13} /> Page hors du cahier
+            <Icone nom="croix" taille={13} /> {t("introuvable.sur-titre", langue)}
           </span>
-          <h1 className="display">Cette page n’est écrite nulle part.</h1>
-          <p>
-            Le comptoir ne connaît qu’une journée, une dictée, un rayon, des
-            ventes, un tiroir et ses réglages. Rien de plus.
-          </p>
+          <h1 className="display">{t("introuvable.titre", langue)}</h1>
+          <p>{t("introuvable.texte", langue)}</p>
           <div className="acts">
             <Link href="/comptoir" className="bouton bouton--encre">
-              Reprendre la journée
+              {t("introuvable.reprendre", langue)}
               <span className="bouton__fleche">
                 <Icone nom="fleche" taille={15} />
               </span>
             </Link>
             <Link href="/" className="lien-simple">
-              Voir la boutique présentée
+              {t("introuvable.voir", langue)}
             </Link>
           </div>
         </div>
