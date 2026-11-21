@@ -216,6 +216,42 @@ const D: Record<string, Entree> = {
     fr: "Une adresse suffit. Le cahier retrouve la journée en cours, le rayon, les dictées déjà écrites et le tiroir compté la veille.",
     en: "One address is enough. The notebook finds the current day, the shelf, the dictations already written and yesterday's counted drawer.",
   },
+
+  // La présentation.
+  "landing.aria-nav": { fr: "Sorties de la présentation", en: "Presentation exits" },
+  "landing.ouvrir": { fr: "Ouvrir le comptoir", en: "Open the counter" },
+  "landing.aria-promesse": { fr: "La promesse", en: "The promise" },
+  "landing.sur-titre": { fr: "Le cahier qui tient debout", en: "The notebook that stands" },
+  "landing.titre": { fr: "Une phrase de dix secondes remplace la feuille du comptoir.", en: "A ten-second sentence replaces the counter sheet." },
+  "landing.chapo": {
+    fr: "KOLO BOUTIQUE tient le stock, les ventes, les dépenses et le bénéfice d'une alimentation générale de Douala. Le tenancier dicte, le cahier écrit. Personne ne ressort une calculette le dimanche soir.",
+    en: "KOLO BOUTIQUE keeps the stock, sales, expenses and profit of a general store in Douala. The shopkeeper dictates, the notebook writes. Nobody pulls out a calculator on Sunday evening.",
+  },
+  "landing.prix": { fr: "par semaine et par boutique", en: "per week per shop" },
+  "landing.demo": {
+    fr: "Démo : une boutique inventée, un rayon garni de faux articles, aucun vocal WhatsApp reçu.",
+    en: "Demo: an invented shop, a shelf stocked with fake items, no WhatsApp voice note received.",
+  },
+  "landing.carte-tete": { fr: "Cahier du jour", en: "Today's notebook" },
+  "landing.carte-pied": { fr: "Bénéfice du jour", en: "Day's profit" },
+  "landing.aria-gestes": { fr: "Les quatre gestes du comptoir", en: "The counter's four gestures" },
+  "landing.gestes-titre": { fr: "Quatre gestes, pas un de plus", en: "Four gestures, not one more" },
+  "landing.gestes-cote": { fr: "Tenu par une seule main", en: "Held by a single hand" },
+  "geste.1-titre": { fr: "Dicter la vente", en: "Dictate the sale" },
+  "geste.1-texte": { fr: "« 2 fanta 900 momo ». L'article est reconnu dans le rayon, la quantité sort du stock, le bénéfice se fige au coût du jour.", en: "\"2 fanta 900 momo\". The item is found on the shelf, quantity leaves stock, profit freezes at today's cost." },
+  "geste.2-titre": { fr: "Racheter", en: "Restock" },
+  "geste.2-texte": { fr: "« rachat 10 spaghetti 520 ». Le nouveau prix remélange le stock déjà là : le coût moyen se recalcule tout seul.", en: "\"restock 10 spaghetti 520\". The new price re-mixes the existing stock: average cost recalculates itself." },
+  "geste.3-titre": { fr: "Payer une sortie", en: "Pay an outflow" },
+  "geste.3-texte": { fr: "« dépense taxi Bonanjo 1500 ». Transport, loyer, salaire ou facture : la journée garde sa part de sorties.", en: "\"expense taxi Bonanjo 1500\". Transport, rent, salary or bill: the day keeps its share of outflows." },
+  "geste.4-titre": { fr: "Compter le tiroir", en: "Count the drawer" },
+  "geste.4-texte": { fr: "Le soir, le fond, le comptage et l'écart. L'écart reste écrit, même quand il fâche.", en: "In the evening, the base, the count and the gap. The gap stays written, even when it stings." },
+  "landing.aria-coupe": { fr: "Ce qui est coupé", en: "What's cut" },
+  "landing.coupe-titre": { fr: "Ce que la démo ne fait pas", en: "What the demo doesn't do" },
+  "landing.coupe-cote": { fr: "Assumé à l'écran", en: "Owned on screen" },
+  "landing.coupe-1": { fr: "Aucun vocal n'est reçu d'un WhatsApp, aucune audio n'est transcrite.", en: "No voice note is received from WhatsApp, no audio is transcribed." },
+  "landing.coupe-2": { fr: "Une vente en MoMo est enregistrée comme payée : rien n'est débité chez l'opérateur.", en: "A MoMo sale is recorded as paid: nothing is debited at the operator." },
+  "landing.coupe-3": { fr: "Articles, clients et montants du jeu de démonstration sont fictifs.", en: "Items, customers and amounts in the demo set are fictional." },
+  "landing.pied-note": { fr: "Édition de démonstration : le stock, les ventes et les bénéfices de cette boutique sont inventés.", en: "Demo edition: this shop's stock, sales and profits are invented." },
 };
 
 export function t(
