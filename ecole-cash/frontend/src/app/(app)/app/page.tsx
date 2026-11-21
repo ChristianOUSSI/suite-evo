@@ -6,6 +6,8 @@ import { Icone } from "@/components/icone";
 import { Semaine } from "@/components/semaine";
 import { lire } from "@/lib/api";
 import { fcfa, fcfaCompact, pourcentage } from "@/lib/format";
+import { t } from "@/lib/langue";
+import { langueServeur } from "@/lib/langue-serveur";
 import { seanceObligatoire } from "@/lib/session";
 import type { Eleve, Tableau } from "@/lib/types";
 
@@ -13,17 +15,21 @@ import "../../../styles/tableau.css";
 
 export const dynamic = "force-dynamic";
 
-export const metadata: Metadata = {
-  title: "La journée",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const langue = await langueServeur();
+  return { title: t("app.meta", langue) };
+}
 
 export default async function Journee() {
+  const langue = await langueServeur();
   const [tableau, session] = await Promise.all([
     lire<Tableau>("/dashboard"),
     seanceObligatoire(),
   ]);
   const caisse = tableau.caisse;
   const recouvrement = tableau.recouvrement;
+  const nb = caisse.nb_entries;
+  const relances = tableau.relances_dues;
 
   return (
     <div className="shell vitre">
@@ -36,35 +42,37 @@ export default async function Journee() {
             {tableau.ecole.nom}
           </h1>
           <p className="page-head__lede">
-            {session.user.nom}, {session.user.role_label.toLowerCase()} ·{" "}
-            {tableau.effectif} élèves suivis cette année.{" "}
-            {caisse.nb_entries > 0
-              ? `${caisse.nb_entries} versement${caisse.nb_entries > 1 ? "s" : ""} encaissé${caisse.nb_entries > 1 ? "s" : ""} aujourd'hui.`
-              : "Rien n'a encore été encaissé aujourd'hui."}
+            {t("dash.lede", langue, {
+              nom: session.user.nom,
+              role: session.user.role_label.toLowerCase(),
+              effectif: tableau.effectif,
+            })}{" "}
+            {nb > 0
+              ? t("dash.encaisse", langue, { n: nb, s: nb > 1 ? "s" : "" })
+              : t("dash.rien", langue)}
           </p>
         </div>
         <div className="page-head__aside">
           <Link href="/app/guichet" className="btn btn--ink">
-            Encaisser au guichet
+            {t("dash.encaisser", langue)}
             <span className="btn__fleche" aria-hidden="true">
               <Icone nom="fleche" taille={15} />
             </span>
           </Link>
-          {tableau.relances_dues > 0 ? (
+          {relances > 0 ? (
             <Link href="/app/relances" className="btn btn--stamp">
-              {tableau.relances_dues} relance
-              {tableau.relances_dues > 1 ? "s" : ""} à envoyer
+              {t("dash.relances", langue, { n: relances, s: relances > 1 ? "s" : "" })}
             </Link>
           ) : null}
         </div>
       </div>
 
-      <section className="jumelee" aria-label="La caisse et le recouvrement">
+      <section className="jumelee" aria-label={t("dash.caisse", langue)}>
         <div className="sheet bloc">
           <div className="section-head">
-            <h2>Caisse du jour</h2>
+            <h2>{t("dash.caisse", langue)}</h2>
             <span className="section-head__aside">
-              {caisse.declaree ? "comptée" : "tiroir ouvert"}
+              {caisse.declaree ? t("dash.comptee", langue) : t("dash.tiroir_ouvert", langue)}
             </span>
           </div>
 
@@ -79,9 +87,9 @@ export default async function Journee() {
                 <span className="ligne-ecolee__valeur">{fcfa(montant)}</span>
               </div>
             ))}
-            {caisse.nb_entries === 0 ? (
+            {nb === 0 ? (
               <p className="vide-note">
-                Aucune entrée au tiroir depuis ce matin.
+                {t("dash.vide_tiroir", langue)}
               </p>
             ) : null}
           </div>
@@ -89,27 +97,27 @@ export default async function Journee() {
           <hr className="divider divider--ink" style={{ marginBlock: "1.2rem" }} />
 
           <div className="ligne-ecolee">
-            <span className="ligne-ecolee__nom">Fond du tiroir</span>
+            <span className="ligne-ecolee__nom">{t("dash.fond", langue)}</span>
             <span className="ligne-ecolee__valeur">{fcfa(caisse.fond)}</span>
           </div>
           <div className="ligne-ecolee">
-            <span className="ligne-ecolee__nom">La caisse annonce</span>
+            <span className="ligne-ecolee__nom">{t("dash.annonce", langue)}</span>
             <span className="ligne-ecolee__valeur">{fcfa(caisse.attendu)}</span>
           </div>
           <div className="ligne-ecolee">
-            <span className="ligne-ecolee__nom">Comptage du soir</span>
+            <span className="ligne-ecolee__nom">{t("dash.comptage", langue)}</span>
             <span className="ligne-ecolee__valeur">
-              {caisse.comptage === null ? "pas encore compté" : fcfa(caisse.comptage)}
+              {caisse.comptage === null ? t("dash.pas_compte", langue) : fcfa(caisse.comptage)}
             </span>
           </div>
 
           {caisse.ecart === null ? (
             <p className="tiroir__ferme">
               {caisse.tenu_par
-                ? `Tenu par ${caisse.tenu_par} · `
-                : "Le comptage du soir reste à faire. "}
+                ? t("dash.tenu_par", langue, { nom: caisse.tenu_par })
+                : t("dash.reste_a_compter", langue)}
               <Link href="/app/journal" className="text-link">
-                Compter le tiroir
+                {t("dash.compter", langue)}
               </Link>
             </p>
           ) : (
@@ -117,15 +125,18 @@ export default async function Journee() {
               className={`tiroir__ecart${caisse.ecart === 0 ? " tiroir__ecart--net" : ""}`}
             >
               {caisse.ecart === 0
-                ? "Rien à redire : le tiroir rend exactement ce qu'il annonçait."
-                : `Écart de ${fcfa(Math.abs(caisse.ecart))} ${caisse.ecart > 0 ? "en trop" : "manquant"}. La journée reste ouverte tant que ce n'est pas expliqué.`}
+                ? t("dash.ecart_net", langue)
+                : t("dash.ecart", langue, {
+                    montant: fcfa(Math.abs(caisse.ecart)),
+                    sens: caisse.ecart > 0 ? t("dash.en_trop", langue) : t("dash.manquant", langue),
+                  })}
             </p>
           )}
         </div>
 
         <div className="sheet bloc">
           <div className="section-head">
-            <h2>Recouvrement</h2>
+            <h2>{t("dash.recouvrement", langue)}</h2>
             <span className="section-head__aside">{tableau.annee}</span>
           </div>
 
@@ -138,34 +149,33 @@ export default async function Journee() {
 
           <div className="recus" style={{ marginTop: "1.2rem" }}>
             <div className="ligne-ecolee">
-              <span className="ligne-ecolee__nom">Attendu sur l'année</span>
+              <span className="ligne-ecolee__nom">{t("dash.attendu_annee", langue)}</span>
               <span className="ligne-ecolee__valeur">{fcfa(recouvrement.attendu)}</span>
             </div>
             <div className="ligne-ecolee">
-              <span className="ligne-ecolee__nom">Déjà rentré</span>
+              <span className="ligne-ecolee__nom">{t("dash.deja_rentre", langue)}</span>
               <span className="ligne-ecolee__valeur">{fcfa(recouvrement.rentre)}</span>
             </div>
             <div className="ligne-ecolee">
-              <span className="ligne-ecolee__nom">Ce qui reste dû</span>
+              <span className="ligne-ecolee__nom">{t("dash.reste_du", langue)}</span>
               <span className="ligne-ecolee__valeur">{fcfa(recouvrement.reste)}</span>
             </div>
           </div>
 
-          <Semaine serie={tableau.serie} />
+          <Semaine serie={tableau.serie} langue={langue} />
           <p className="field__aide" style={{ marginTop: "1.6rem" }}>
-            La partie sombre des barres, ce sont les espèces : ce que le tiroir
-            doit rendre le soir.
+            {t("dash.serie_aide", langue)}
           </p>
         </div>
 
         <div className="sheet bloc">
           <div className="section-head">
-            <h2>Familles</h2>
+            <h2>{t("dash.familles", langue)}</h2>
           </div>
           <div className="compte" style={{ marginTop: "1rem" }}>
             <div className="compte__case">
               <p className="compte__valeur">{tableau.effectif}</p>
-              <span className="compte__legende">élèves suivis</span>
+              <span className="compte__legende">{t("dash.eleves_suivis", langue)}</span>
             </div>
             <div className="compte__case">
               <p
@@ -173,48 +183,48 @@ export default async function Journee() {
               >
                 {tableau.en_retard}
               </p>
-              <span className="compte__legende">en retard</span>
+              <span className="compte__legende">{t("dash.en_retard", langue)}</span>
             </div>
             <div className="compte__case">
               <p className="compte__valeur">{tableau.suspendus}</p>
-              <span className="compte__legende">suspendus</span>
+              <span className="compte__legende">{t("dash.suspendus", langue)}</span>
             </div>
             <div className="compte__case">
               <p className="compte__valeur">{tableau.relances_dues}</p>
-              <span className="compte__legende">relances dues</span>
+              <span className="compte__legende">{t("dash.relances_dues", langue)}</span>
             </div>
           </div>
           <div className="form-stack" style={{ marginTop: "1.2rem" }}>
             <Link href="/app/eleves" className="btn btn--small btn--block">
-              Ouvrir les familles
+              {t("dash.ouvrir_familles", langue)}
             </Link>
             <Link
               href="/app/reglages#feuilles"
               className="btn btn--small btn--block btn--quiet"
             >
-              Sortir une feuille CSV
+              {t("dash.sortir_csv", langue)}
             </Link>
           </div>
         </div>
       </section>
 
-      <section className="sheet bloc" aria-label="Classes de l'année">
+      <section className="sheet bloc" aria-label={t("dash.classes_aria", langue)}>
         <div className="section-head">
-          <h2>Les classes</h2>
+          <h2>{t("dash.classes", langue)}</h2>
           <span className="section-head__aside">
-            {tableau.classes.length} classes · {tableau.annee}
+            {t("dash.classes_aside", langue, { n: tableau.classes.length, annee: tableau.annee })}
           </span>
         </div>
         <table className="tableau-ecole">
           <thead>
             <tr>
-              <th scope="col">Classe</th>
-              <th scope="col">Titulaire</th>
-              <th scope="col">Effectif</th>
-              <th scope="col">Par élève</th>
-              <th scope="col">Rentré</th>
-              <th scope="col">Reste</th>
-              <th scope="col">Recouvrement</th>
+              <th scope="col">{t("th.classe", langue)}</th>
+              <th scope="col">{t("th.titulaire", langue)}</th>
+              <th scope="col">{t("th.effectif", langue)}</th>
+              <th scope="col">{t("th.par_eleve", langue)}</th>
+              <th scope="col">{t("th.rentre", langue)}</th>
+              <th scope="col">{t("th.reste", langue)}</th>
+              <th scope="col">{t("th.recouvrement", langue)}</th>
             </tr>
           </thead>
           <tbody>
@@ -225,7 +235,7 @@ export default async function Journee() {
                     {classe.label}
                   </Link>
                 </th>
-                <td>{classe.titulaire || "non attribué"}</td>
+                <td>{classe.titulaire || t("dash.non_attribue", langue)}</td>
                 <td className="chiffre">
                   {classe.effectif}/{classe.effectif_max}
                 </td>
@@ -239,17 +249,17 @@ export default async function Journee() {
         </table>
       </section>
 
-      <section className="grille-asso" aria-label="Reçus, retards et termes à venir">
+      <section className="grille-asso" aria-label={t("dash.aria_sections", langue)}>
         <div className="sheet bloc">
           <div className="section-head">
-            <h2>Retards à traiter</h2>
+            <h2>{t("dash.retards", langue)}</h2>
             <Link href="/app/relances" className="section-head__aside text-link">
-              Relancer
+              {t("dash.relancer", langue)}
             </Link>
           </div>
           <div className="retards">
             {tableau.fiches_en_retard.length === 0 ? (
-              <p className="vide-note">Aucune échéance en retard. La caisse respire.</p>
+              <p className="vide-note">{t("dash.aucun_retard", langue)}</p>
             ) : null}
             {tableau.fiches_en_retard.map((eleve: Eleve) => (
               <div className="recu-ligne" key={eleve.id}>
@@ -259,8 +269,8 @@ export default async function Journee() {
                     {eleve.nom_complet}
                   </Link>
                   <small>
-                    {eleve.tuteur_nom || "parent non noté"} ·{" "}
-                    {eleve.jours_retard} jours de retard
+                    {eleve.tuteur_nom || t("dash.parent_non_note", langue)} ·{" "}
+                    {eleve.jours_retard} {t("dash.jours_retard", langue)}
                   </small>
                 </span>
                 <span className="ligne-ecolee__valeur money">
@@ -276,13 +286,13 @@ export default async function Journee() {
 
         <div className="sheet bloc">
           <div className="section-head">
-            <h2>Termes à venir</h2>
-            <span className="section-head__aside">six plus proches</span>
+            <h2>{t("dash.termes", langue)}</h2>
+            <span className="section-head__aside">{t("dash.six_proches", langue)}</span>
           </div>
           <div className="echeances-a-suivre">
             {tableau.prochaines_echeances.length === 0 ? (
               <p className="vide-note">
-                Aucun engagement posé cette année. Engagez d'abord les classes.
+                {t("dash.aucun_terme", langue)}
               </p>
             ) : null}
             {tableau.prochaines_echeances.map((echeance) => (
@@ -297,7 +307,7 @@ export default async function Journee() {
                 <span className="ligne-ecolee__valeur money">
                   {fcfaCompact(echeance.reste)}
                 </span>
-                <EtiquetteEcheance statut={echeance.statut} />
+                <EtiquetteEcheance statut={echeance.statut} langue={langue} />
               </div>
             ))}
           </div>
@@ -305,14 +315,14 @@ export default async function Journee() {
 
         <div className="sheet bloc">
           <div className="section-head">
-            <h2>Derniers reçus</h2>
+            <h2>{t("dash.derniers_recus", langue)}</h2>
             <Link href="/app/recus" className="section-head__aside text-link">
-              Tous les reçus
+              {t("dash.tous_recus", langue)}
             </Link>
           </div>
           <div className="recus">
             {tableau.derniers_recus.length === 0 ? (
-              <p className="vide-note">Rien n'a été encaissé pour l'instant.</p>
+              <p className="vide-note">{t("dash.aucun_recu", langue)}</p>
             ) : null}
             {tableau.derniers_recus.map((recu) => (
               <div className="recu-ligne" key={recu.id}>
@@ -326,7 +336,7 @@ export default async function Journee() {
                 <span className="ligne-ecolee__valeur money">
                   {fcfaCompact(recu.montant)}
                 </span>
-                <EtiquetteRecu statut={recu.statut} />
+                <EtiquetteRecu statut={recu.statut} langue={langue} />
               </div>
             ))}
           </div>

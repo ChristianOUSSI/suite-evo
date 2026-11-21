@@ -1,12 +1,22 @@
 import { fcfaCompact } from "@/lib/format";
+import { t, LANGUE_DEFAUT, type Langue } from "@/lib/langue";
 import type { SerieJour } from "@/lib/types";
 
-export function Semaine({ serie }: { serie: SerieJour[] }) {
+const JOURS_FR = ["D", "L", "M", "M", "J", "V", "S"];
+const JOURS_EN = ["S", "M", "T", "W", "T", "F", "S"];
+
+export function Semaine({
+  serie,
+  langue = LANGUE_DEFAUT,
+}: {
+  serie: SerieJour[];
+  langue?: Langue;
+}) {
   const plafond = Math.max(...serie.map((jour) => jour.total), 1);
-  const journee = ["D", "L", "M", "M", "J", "V", "S"];
+  const journee = langue === "en" ? JOURS_EN : JOURS_FR;
 
   return (
-    <div className="semaine" role="img" aria-label="Sept derniers jours d'encaissement">
+    <div className="semaine" role="img" aria-label={t("semaine.aria", langue)}>
       {serie.map((jour) => {
         const d = new Date(`${jour.day}T12:00:00`);
         const instable = Number.isNaN(d.getTime());
