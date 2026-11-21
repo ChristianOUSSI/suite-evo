@@ -4,9 +4,12 @@ import { redirect } from "next/navigation";
 import { EcranIncident } from "@/components/ecran-incident";
 import { NavComptoir } from "@/components/nav-comptoir";
 import { BoutonSortie } from "@/components/bouton-sortie";
+import { CommutateurLangue } from "@/components/commutateur-langue";
 import { NomComptoir } from "@/components/marque";
 import { ErreurComptoir } from "@/lib/errors";
 import { initiales, jourLong, aujourdhui } from "@/lib/format";
+import { t, type Langue } from "@/lib/langue";
+import { langueServeur } from "@/lib/langue-serveur";
 import { seance } from "@/lib/session";
 import type { Seance } from "@/lib/types";
 
@@ -36,6 +39,7 @@ export default async function ChantierLayout({
   }
 
   const { user, boutique } = courante;
+  const langue = await langueServeur();
 
   return (
     <div className="comptoir-chantier">
@@ -45,7 +49,7 @@ export default async function ChantierLayout({
           <span>
             <span className="dateau__pastille" aria-hidden="true" />
             {boutique.quartier || boutique.ville} ·{" "}
-            {boutique.credit_accorde ? "crédit ouvert" : "comptant seul"}
+            {boutique.credit_accorde ? t("dateau.ouvert", langue) : t("dateau.comptant", langue)}
           </span>
         </div>
       </div>
@@ -54,6 +58,7 @@ export default async function ChantierLayout({
         <div className="gabarit fronton__rangee">
           <NomComptoir href="/comptoir" sous={boutique.enseigne || boutique.nom} />
           <NavComptoir />
+          <CommutateurLangue langue={langue} />
           <div className="compte">
             <div className="compte__texte">
               <span className="compte__nom">{user.nom}</span>
@@ -74,13 +79,12 @@ export default async function ChantierLayout({
       <footer className="pied-comptoir">
         <div className="gabarit pied-comptoir__rangee">
           <span>
-            KOLO BOUTIQUE · abonnement {boutique.abonnement_hebdo_label} par
-            semaine
+            KOLO BOUTIQUE · {boutique.abonnement_hebdo_label} {t("pied.abonnement", langue)}
           </span>
           <span>
-            {boutique.nom} · {boutique.telephone_display || "numéro non noté"}
+            {boutique.nom} · {boutique.telephone_display || t("pied.numero", langue)}
           </span>
-          <span>Démo : aucun vocal reçu, aucun débit MoMo</span>
+          <span>{t("pied.demo", langue)}</span>
         </div>
       </footer>
     </div>

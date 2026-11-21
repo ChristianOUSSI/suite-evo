@@ -287,3 +287,42 @@
     font-size: 0.5rem;
   }
 }
+
+/* Le sélecteur de langue, discret dans le fronton. */
+.commutateur-langue {
+  display: inline-flex;
+  gap: 0;
+  margin-left: 0.5rem;
+  border: 1px solid var(--regrais-fort);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.commutateur-langue button {
+  min-width: 2.2rem;
+  min-height: 2rem;
+  padding: 0.2rem 0.55rem;
+  border: 0;
+  background: transparent;
+  color: var(--encre-lointaine);
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition);
+}
+
+.commutateur-langue button + button {
+  border-left: 1px solid var(--regrais-fort);
+}
+
+.commutateur-langue button.est-actif {
+  background: var(--encre);
+  color: var(--feuille);
+}
+
+.commutateur-langue button:hover:not(.est-actif) {
+  background: var(--sable-clair);
+  color: var(--encre);
+}
