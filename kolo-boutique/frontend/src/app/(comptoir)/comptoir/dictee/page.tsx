@@ -4,6 +4,8 @@ import { ConsoleDictee } from "@/components/console-dictee";
 import { Icone } from "@/components/icone";
 import { lire } from "@/lib/api";
 import { heure } from "@/lib/format";
+import { t } from "@/lib/langue";
+import { langueServeur } from "@/lib/langue-serveur";
 import { seanceObligatoire } from "@/lib/session";
 import type {
   JournalDepenses,
@@ -15,12 +17,14 @@ import "../../../../styles/comptoir.css";
 
 export const dynamic = "force-dynamic";
 
-export const metadata: Metadata = {
-  title: "Dicter",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const langue = await langueServeur();
+  return { title: t("dictee.meta", langue) };
+}
 
 export default async function Dictee() {
   const session = await seanceObligatoire();
+  const langue = await langueServeur();
   const [ventes, entrees, depenses] = await Promise.all([
     lire<JournalVentes>("/ventes?jours=1&limite=40"),
     lire<JournalEntrees>("/entrees?jours=7&limite=20"),
@@ -34,7 +38,9 @@ export default async function Dictee() {
         id: `v-${un.id}`,
         phrase: un.brut,
         moment: un.heure,
-        etat: un.annule ? "rayée" : `sortie · ${un.chiffre_label}`,
+        etat: un.annule
+          ? t("dictee.etat-rayee", langue)
+          : `${t("dictee.etat-sortie", langue)} · ${un.chiffre_label}`,
       })),
     ...entrees.entrees
       .filter((un) => un.dictee && un.brut)
@@ -42,7 +48,7 @@ export default async function Dictee() {
         id: `e-${un.id}`,
         phrase: un.brut,
         moment: heure(un.jour),
-        etat: `rachat · ${un.total_label}`,
+        etat: `${t("dictee.etat-rachat", langue)} · ${un.total_label}`,
       })),
     ...depenses.depenses
       .filter((un) => un.note)
@@ -50,7 +56,7 @@ export default async function Dictee() {
         id: `d-${un.id}`,
         phrase: un.note,
         moment: heure(un.jour),
-        etat: `dépense · ${un.montant_label}`,
+        etat: `${t("dictee.etat-depense", langue)} · ${un.montant_label}`,
       })),
   ].slice(0, 12);
 
@@ -59,14 +65,10 @@ export default async function Dictee() {
       <div className="tete-page">
         <div className="tete-page__principal">
           <span className="sur-titre">
-            <Icone nom="voix" taille={13} /> {session.boutique.enseigne || "Le comptoir"}
+            <Icone nom="voix" taille={13} /> {session.boutique.enseigne || t("comptoir.defaut", langue)}
           </span>
-          <h1 className="display">Dicter au lieu d’écrire</h1>
-          <p className="tete-page__entree">
-            La promesse du produit tient dans un champ de texte : une phrase
-            courte, écoutée, relue avant d’entrer au cahier. Rien n’est écrit
-            sans que l’article, la quantité et le prix soient affichés d’abord.
-          </p>
+          <h1 className="display">{t("dictee.titre", langue)}</h1>
+          <p className="tete-page__entree">{t("dictee.chapo", langue)}</p>
         </div>
       </div>
 

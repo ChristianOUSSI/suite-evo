@@ -6,15 +6,18 @@ import { RayonConsole } from "@/components/rayon-console";
 import { lire } from "@/lib/api";
 import { parametres } from "@/lib/client-api";
 import { fcfaCourt } from "@/lib/format";
+import { t } from "@/lib/langue";
+import { langueServeur } from "@/lib/langue-serveur";
 import type { Cahier, JournalEntrees } from "@/lib/types";
 
 import "../../../../styles/comptoir.css";
 
 export const dynamic = "force-dynamic";
 
-export const metadata: Metadata = {
-  title: "Le rayon",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const langue = await langueServeur();
+  return { title: t("rayon.meta", langue) };
+}
 
 export default async function Rayon({
   searchParams,
@@ -22,6 +25,7 @@ export default async function Rayon({
   searchParams: Promise<{ motif?: string; categorie?: string; alertes?: string }>;
 }) {
   const filtre = await searchParams;
+  const langue = await langueServeur();
   const cahier = await lire<Cahier>(
     `/produits${parametres({
       motif: filtre.motif,
@@ -36,26 +40,27 @@ export default async function Rayon({
       <div className="tete-page">
         <div className="tete-page__principal">
           <span className="sur-titre">
-            <Icone nom="rayon" taille={13} /> {cahier.total} ligne
-            {cahier.total > 1 ? "s" : ""} tenues
+            <Icone nom="rayon" taille={13} /> {cahier.total}{" "}
+            {t("rayon.lignes-tenues", langue)}
           </span>
-          <h1 className="display">Le rayon</h1>
+          <h1 className="display">{t("rayon.titre", langue)}</h1>
           <p className="tete-page__entree">
-            La réserve vaut {fcfaCourt(cahier.reserve)} de marchandise au coût
-            moyen. {cahier.en_alerte} ligne
-            {cahier.en_alerte > 1 ? "s" : ""} sous le seuil d&apos;alerte.
+            {t("rayon.chapo", langue, {
+              reserve: fcfaCourt(cahier.reserve),
+              alertes: cahier.en_alerte,
+            })}
           </p>
         </div>
         <div className="tete-page__cote">
           <a href="/api/exports/stock.csv" className="bouton" download>
-            <Icone nom="feuille" taille={15} /> Feuille du rayon
+            <Icone nom="feuille" taille={15} /> {t("rayon.exporter", langue)}
           </a>
         </div>
       </div>
 
       <form className="filtres" action="/comptoir/rayon" method="get">
         <div className="champ">
-          <label htmlFor="filtre-motif">Chercher un article</label>
+          <label htmlFor="filtre-motif">{t("rayon.chercher", langue)}</label>
           <input
             id="filtre-motif"
             name="motif"
@@ -64,12 +69,12 @@ export default async function Rayon({
           />
         </div>
         <div className="champ">
-          <label htmlFor="filtre-cat">Catégorie</label>
+          <label htmlFor="filtre-cat">{t("rayon.categorie", langue)}</label>
           <input
             id="filtre-cat"
             name="categorie"
             defaultValue={filtre.categorie ?? ""}
-            placeholder="épicerie"
+            placeholder={t("rayon.ph-cat", langue)}
           />
         </div>
         <label className="cochet">
@@ -81,34 +86,34 @@ export default async function Rayon({
           />
           <span className="cochet__box" aria-hidden="true" />
           <span className="cochet__texte">
-            Seulement ce qui baisse
-            <small>sous le seuil d&apos;alerte de la ligne</small>
+            {t("rayon.seulement-baisse", langue)}
+            <small>{t("rayon.sous-seuil", langue)}</small>
           </span>
         </label>
         <div className="acts">
           <button type="submit" className="bouton bouton--encre bouton--petit">
-            Filtrer
+            {t("rayon.filtrer", langue)}
           </button>
           <Link href="/comptoir/rayon" className="bouton bouton--doux bouton--petit">
-            Tout revoir
+            {t("rayon.tout-revoir", langue)}
           </Link>
         </div>
       </form>
 
       <RayonConsole cahier={cahier} />
 
-      <section className="feuille bloc" aria-label="Les derniers rachats">
+      <section className="feuille bloc" aria-label={t("rayon.rachats-titre", langue)}>
         <div className="tete-feuille">
-          <h2>Les derniers rachats</h2>
+          <h2>{t("rayon.rachats-titre", langue)}</h2>
           <span className="tete-feuille__cote">
-            {rachats.debourse_label} déboursés sur {rachats.jours} jours
+            {t("rayon.rachats-cote", langue, {
+              montant: rachats.debourse_label,
+              jours: rachats.jours,
+            })}
           </span>
         </div>
         {rachats.entrees.length === 0 ? (
-          <p className="champ__aide">
-            Aucun rachat consigné. Le rayon se garnit par la dictée ou par la
-            fiche d&apos;un article.
-          </p>
+          <p className="champ__aide">{t("rayon.rachats-vide", langue)}</p>
         ) : (
           <ul className="ventes-liste">
             {rachats.entrees.map((ligne) => (
@@ -116,9 +121,9 @@ export default async function Rayon({
                 <span className="vente-ligne__qui">
                   {ligne.produit}
                   <small>
-                    {ligne.fournisseur || "fournisseur non noté"} ·{" "}
+                    {ligne.fournisseur || t("rayon.fournisseur-inconnu", langue)} ·{" "}
                     {ligne.jour_label}
-                    {ligne.dictee ? " · dictée" : ""}
+                    {ligne.dictee ? ` · ${t("jour.dictation", langue)}` : ""}
                   </small>
                 </span>
                 <span className="vente-ligne__quantite">

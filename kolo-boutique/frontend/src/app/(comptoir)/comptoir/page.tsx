@@ -4,6 +4,8 @@ import Link from "next/link";
 import { Icone } from "@/components/icone";
 import { lire } from "@/lib/api";
 import { fcfaCourt, lettreJour, pourcentage } from "@/lib/format";
+import { t } from "@/lib/langue";
+import { langueServeur } from "@/lib/langue-serveur";
 import { seanceObligatoire } from "@/lib/session";
 import type { Cahier, JournalVentes, Tableau } from "@/lib/types";
 
@@ -11,12 +13,14 @@ import "../../../styles/comptoir.css";
 
 export const dynamic = "force-dynamic";
 
-export const metadata: Metadata = {
-  title: "La journée",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const langue = await langueServeur();
+  return { title: t("jour.meta", langue) };
+}
 
 export default async function Journee() {
   const session = await seanceObligatoire();
+  const langue = await langueServeur();
   const [tableau, ventes, cahier] = await Promise.all([
     lire<Tableau>("/tableau"),
     lire<JournalVentes>("/ventes?jours=1&limite=12"),
@@ -36,15 +40,17 @@ export default async function Journee() {
             {session.boutique.enseigne || session.boutique.nom}
           </h1>
           <p className="tete-page__entree">
-            {tableau.ventes} vente{tableau.ventes > 1 ? "s" : ""} consignées
-            aujourd’hui, {fcfaCourt(tableau.chiffre)} de chiffre et{" "}
-            {pourcentage(tableau.marge)} de marge. La réserve vaut{" "}
-            {fcfaCourt(tableau.reserve)} de marchandise.
+            {t("jour.chapo", langue, {
+              ventes: tableau.ventes,
+              chiffre: fcfaCourt(tableau.chiffre),
+              marge: pourcentage(tableau.marge),
+              reserve: fcfaCourt(tableau.reserve),
+            })}
           </p>
         </div>
         <div className="tete-page__cote">
           <Link href="/comptoir/dictee" className="bouton bouton--brique">
-            Dicter une écriture
+            {t("jour.ouvrir-dictee", langue)}
             <span className="bouton__fleche">
               <Icone nom="voix" taille={15} />
             </span>
@@ -53,39 +59,41 @@ export default async function Journee() {
       </div>
 
       <div className="jumellees">
-        <section className="feuille bloc" aria-label="Ce que la journée a rapporté">
+        <section className="feuille bloc" aria-label={t("jour.aria-journee", langue)}>
           <div className="tete-feuille">
-            <h2>La journée</h2>
+            <h2>{t("jour.titre", langue)}</h2>
             <span className="tete-feuille__cote">
-              {tableau.ventes} écritures
+              {tableau.ventes} {t("jour.ecritures", langue)}
             </span>
           </div>
           <div className="compteurs">
             <div className="compteur">
-              <span className="compteur__legende">Chiffre d’affaires</span>
+              <span className="compteur__legende">{t("jour.chiffre", langue)}</span>
               <span className="compteur__valeur">
                 {fcfaCourt(tableau.chiffre)}
               </span>
               <span className="compteur__aide">
                 {tableau.ventes > 0
-                  ? `${fcfaCourt(Math.round(tableau.chiffre / tableau.ventes))} par vente`
-                  : "rien vendu pour l'instant"}
+                  ? t("jour.par-vente", langue, { montant: fcfaCourt(Math.round(tableau.chiffre / tableau.ventes)) })
+                  : t("jour.rien-vendu", langue)}
               </span>
             </div>
             <div className={`compteur ${tableau.benefice >= 0 ? "compteur--tenu" : "compteur--tard"}`}>
-              <span className="compteur__legende">Bénéfice net</span>
+              <span className="compteur__legende">{t("jour.benefice", langue)}</span>
               <span className="compteur__valeur">
                 {fcfaCourt(tableau.benefice_net)}
               </span>
               <span className="compteur__aide">
-                {pourcentage(tableau.marge)} de marge, après{" "}
-                {fcfaCourt(tableau.benefice - tableau.benefice_net)} de dépenses
+                {t("jour.marge-apres", langue, {
+                  marge: pourcentage(tableau.marge),
+                  depenses: fcfaCourt(tableau.benefice - tableau.benefice_net),
+                })}
               </span>
             </div>
             <div className="compteur">
-              <span className="compteur__legende">À racheter</span>
+              <span className="compteur__legende">{t("jour.a-racheter", langue)}</span>
               <span className="compteur__valeur">{tableau.article_alerte}</span>
-              <span className="compteur__aide">sous le seuil du rayon</span>
+              <span className="compteur__aide">{t("jour.seuil-rayon", langue)}</span>
             </div>
           </div>
 
@@ -109,29 +117,28 @@ export default async function Journee() {
               ))}
           </div>
           <p className="champ__aide">
-            Sept jours d’affilée, la semaine en cours à{" "}
-            {fcfaCourt(tableau.semaine.chiffre)} de chiffre et{" "}
-            {fcfaCourt(tableau.semaine.benefice_net)} nets.
+            {t("jour.semaine-aide", langue, {
+              chiffre: fcfaCourt(tableau.semaine.chiffre),
+              benefice: fcfaCourt(tableau.semaine.benefice_net),
+            })}
           </p>
         </section>
 
-        <section className="feuille bloc" aria-label="Ce qui s'est vendu aujourd’hui">
+        <section className="feuille bloc" aria-label={t("jour.aria-ventes", langue)}>
           <div className="tete-feuille">
-            <h2>Les dernières ventes</h2>
+            <h2>{t("jour.ventes-titre", langue)}</h2>
             <span className="tete-feuille__cote">
               <Link href="/comptoir/sorties" className="lien-simple">
-                tout le journal
+                {t("jour.tout-journal", langue)}
               </Link>
             </span>
           </div>
           {ventes.ventes.length === 0 ? (
             <div className="vide">
-              <h3>Rien au cahier aujourd’hui.</h3>
-              <p>
-                Une phrase de cinq secondes suffit : « 2 fanta 900 ».
-              </p>
+              <h3>{t("jour.vide-titre", langue)}</h3>
+              <p>{t("jour.vide-texte", langue)}</p>
               <Link href="/comptoir/dictee" className="bouton bouton--encre">
-                Dicter
+                {t("jour.dicter", langue)}
               </Link>
             </div>
           ) : (
@@ -145,7 +152,7 @@ export default async function Journee() {
                     {vente.produit}
                     <small>
                       {vente.heure} · {vente.mode_label}
-                      {vente.dictee ? " · dictée" : ""}
+                      {vente.dictee ? ` · ${t("jour.dictation", langue)}` : ""}
                     </small>
                   </span>
                   <span className="vente-ligne__quantite">
@@ -166,18 +173,15 @@ export default async function Journee() {
           )}
         </section>
 
-        <section className="feuille bloc" aria-label="Le rayon qui baisse">
+        <section className="feuille bloc" aria-label={t("jour.aria-rayon", langue)}>
           <div className="tete-feuille">
-            <h2>À racheter</h2>
+            <h2>{t("jour.a-racheter", langue)}</h2>
             <span className="tete-feuille__cote">
-              {cahier.en_alerte} ligne{cahier.en_alerte > 1 ? "s" : ""}
+              {cahier.en_alerte} {t("jour.lignes", langue)}
             </span>
           </div>
           {cahier.produits.length === 0 ? (
-            <p className="champ__aide">
-              Tout le rayon est au-dessus de son seuil. Rien à commander
-              demain matin.
-            </p>
+            <p className="champ__aide">{t("jour.tout-au-dessus", langue)}</p>
           ) : (
             <ul className="ventes-liste">
               {cahier.produits.slice(0, 8).map((produit) => (
@@ -185,14 +189,17 @@ export default async function Journee() {
                   <span className="vente-ligne__qui">
                     {produit.nom}
                     <small>
-                      seuil {produit.alerte_stock} · reste{" "}
-                      {produit.stock} {produit.unite}
+                      {t("jour.seuil-reste", langue, {
+                        seuil: produit.alerte_stock,
+                        reste: produit.stock,
+                        unite: produit.unite,
+                      })}
                     </small>
                   </span>
                   <span className="vente-ligne__quantite" />
                   <span className="vente-ligne__montant">{produit.marge_label}</span>
                   <span className="vente-ligne__outils">
-                    <span className="etiquette etiquette--alerte">alerte</span>
+                    <span className="etiquette etiquette--alerte">{t("jour.alerte", langue)}</span>
                   </span>
                 </li>
               ))}
@@ -200,22 +207,19 @@ export default async function Journee() {
           )}
           <div className="acts">
             <Link href="/comptoir/rayon" className="lien-simple">
-              Ouvrir le rayon
+              {t("jour.ouvrir-rayon", langue)}
             </Link>
           </div>
         </section>
       </div>
 
-      <section className="feuille bloc" aria-label="Ce qui part le mieux">
+      <section className="feuille bloc" aria-label={t("jour.aria-meilleures", langue)}>
         <div className="tete-feuille">
-          <h2>Les articles qui tirent la journée</h2>
-          <span className="tete-feuille__cote">par chiffre</span>
+          <h2>{t("jour.meilleures-titre", langue)}</h2>
+          <span className="tete-feuille__cote">{t("jour.par-chiffre", langue)}</span>
         </div>
         {tableau.meilleures.length === 0 ? (
-          <p className="champ__aide">
-            Pas encore de vente aujourd’hui. Le classement se fait tout seul
-            dès la première.
-          </p>
+          <p className="champ__aide">{t("jour.meilleures-vide", langue)}</p>
         ) : (
           <ul className="ventes-liste">
             {tableau.meilleures.map((ligne) => (
