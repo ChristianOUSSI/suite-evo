@@ -229,8 +229,17 @@
   align-items: baseline;
   justify-content: space-between;
   gap: 0.8rem;
-  padding-block: 0.5rem;
+  padding-block: 0.55rem;
+  padding-inline: 0.6rem;
+  margin-inline: -0.6rem;
   border-bottom: 1px solid var(--rule);
+  border-radius: 6px;
+  transition: background-color var(--transition), box-shadow var(--transition);
+}
+
+.ligne-ecolee:hover {
+  background: rgba(244, 247, 241, 0.7);
+  box-shadow: inset 3px 0 0 var(--moss);
 }
 
 .ligne-ecolee:last-child {
