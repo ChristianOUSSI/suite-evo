@@ -13,6 +13,12 @@
 .geste {
   background: var(--sheet);
   padding: 1.3rem 1.2rem 1.6rem;
+  transition: background-color var(--transition), box-shadow var(--transition);
+}
+
+.geste:hover {
+  background: var(--feuille);
+  box-shadow: inset 0 0 0 1px var(--moss);
 }
 
 .geste__num {
@@ -59,6 +65,8 @@
 .recu-public__carte {
   margin-top: 1.4rem;
   padding: 1.6rem 1.5rem 1.8rem;
+  border: 1px solid var(--ink);
+  box-shadow: var(--ombre-levee);
 }
 
 .recu-public__montant {
